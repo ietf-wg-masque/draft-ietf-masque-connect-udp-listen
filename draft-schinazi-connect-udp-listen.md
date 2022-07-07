@@ -216,7 +216,7 @@ HTTP back to the client.
                          :status = 200
                          capsule-protocol = ?1
 
- /* Wait for STUN server to respond to UDP packet. */
+/* Wait for STUN server to respond to UDP packet. */
 
             <--------  DATAGRAM
                          Quarter Stream ID = 11
@@ -226,8 +226,9 @@ HTTP back to the client.
                          UDP Port = 1234
                          UDP Payload = Encapsulated UDP Payload
 
- /* Wait for STUN server to send the proxy's IP and port to the other browser. */
- /* Wait for the other browser to send a UDP packet to the proxy. */
+/* Wait for the STUN server to send the proxy's IP and */
+/* port to the other browser and for the other browser */
+/* to send a UDP packet to the proxy. */
 
             <--------  DATAGRAM
                          Quarter Stream ID = 11
