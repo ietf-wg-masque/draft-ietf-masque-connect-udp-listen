@@ -84,4 +84,5 @@ This document has no IANA actions.
 # Acknowledgments
 {:numbered="false"}
 
-TODO acknowledge.
+This proposal is the result of many conversations with MASQUE working group
+participants.
