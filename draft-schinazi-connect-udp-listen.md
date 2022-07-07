@@ -8,15 +8,15 @@ number:
 date:
 consensus: true
 v: 3
-area: AREA
+# area: AREA
 wg: MASQUE
 venue:
-  group: "MASQUE"
-  type: "Working Group"
-  mail: "masque@ietf.org"
-  arch: "https://mailarchive.ietf.org/arch/browse/masque/"
+#  group: "MASQUE"
+#  type: "Working Group"
+#  mail: "masque@ietf.org"
+#  arch: "https://mailarchive.ietf.org/arch/browse/masque/"
   github: "DavidSchinazi/draft-schinazi-connect-udp-listen"
-  latest: "https://davidschinazi.github.io/draft-schinazi-connect-udp-listen/draft-schinazi-connect-udp-listen.html"
+  latest: "https://DavidSchinazi.github.io/draft-schinazi-connect-udp-listen/draft-schinazi-connect-udp-listen.html"
 keyword:
   - quic
   - http
