@@ -131,10 +131,10 @@ Version field value is 4, and 128 when the IP Version is 6.
 
 UDP Port:
 
-: The UDP Port of this proxied UDP packet. When sent from client to proxy, this
-is target port that the proxy will send this UDP payload to. When sent from
-proxy to client, this represents the source UDP port of the UDP packet received
-by the proxy.
+: The UDP Port of this proxied UDP packet in network byte order. When sent from
+client to proxy, this is target port that the proxy will send this UDP payload
+to. When sent from proxy to client, this represents the source UDP port of the
+UDP packet received by the proxy.
 
 UDP Payload:
 
