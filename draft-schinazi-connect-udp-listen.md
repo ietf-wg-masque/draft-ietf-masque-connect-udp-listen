@@ -61,32 +61,32 @@ informative:
 
 --- abstract
 
-The mechanism to proxy UDP in HTTP only allows each proxying request to transmit
-to a specific host and port. This is well suited for UDP client-server protocols
-such as HTTP/3, but is not sufficient for some UDP peer-to-peer protocols like
-WebRTC. This document proposes an extension to UDP Proxying in HTTP that enables
-such use-cases.
+The mechanism to proxy UDP in HTTP only allows each UDP Proxying request to
+transmit to a specific host and port. This is well suited for UDP client-server
+protocols such as HTTP/3, but is not sufficient for some UDP peer-to-peer
+protocols like WebRTC. This document proposes an extension to UDP Proxying in
+HTTP that enables such use-cases.
 
 --- middle
 
 # Introduction {#intro}
 
-The mechanism to proxy UDP in HTTP {{!CONNECT-UDP=RFC9298}} allows proxying UDP
-payloads {{!UDP=RFC0768}} to a fixed host and port. Combined with the HTTP
-CONNECT method (see {{Section 9.3.6 of !HTTP=RFC9110}}), it allows proxying the
-majority of a Web Browser's HTTP traffic. However WebRTC {{WebRTC}} relies on
-ICE {{?ICE=RFC8445}} to provide connectivity between two Web browsers, and ICE
-relies on the ability to send and receive UDP packets to multiple hosts. While
-in theory it might be possible to accomplish this using multiple UDP proxying
-HTTP requests, HTTP semantics {{HTTP}} do not guarantee that distinct requests
-will be handled by the same server. This can lead to the UDP packets being sent
-from distinct IP addresses, thereby preventing ICE from operating correctly.
-Consequently, UDP Proxying requests cannot enable WebRTC connectivity between
-peers.
+The mechanism to proxy UDP in HTTP {{!CONNECT-UDP=RFC9298}} allows creating
+tunnels for communicating UDP payloads {{!UDP=RFC0768}} to a fixed host and
+port. Combined with the HTTP CONNECT method (see {{Section 9.3.6 of
+!HTTP=RFC9110}}), it allows proxying the majority of a Web Browser's HTTP
+traffic. However WebRTC {{WebRTC}} relies on ICE {{?ICE=RFC8445}} to provide
+connectivity between two Web browsers, and ICE relies on the ability to send and
+receive UDP packets to multiple hosts. While in theory it might be possible to
+accomplish this using multiple UDP Proxying HTTP requests, HTTP semantics
+{{HTTP}} do not guarantee that distinct requests will be handled by the same
+server. This can lead to the UDP packets being sent from distinct IP addresses,
+thereby preventing ICE from operating correctly. Consequently, UDP Proxying
+requests cannot enable WebRTC connectivity between peers.
 
 This document describes an extension to UDP Proxying in HTTP that allows sending
 and receiving UDP payloads to multiple hosts within the scope of a single UDP
-proxying HTTP request.
+Proxying HTTP request.
 
 ## Conventions and Definitions
 
@@ -100,22 +100,22 @@ from {{!QUIC=RFC9000}}. This document uses the terms Integer and List from
 # Proxied UDP Listener Mechanism
 
 In unextended UDP Proxying requests, the target host is encoded in the HTTP
-request path or query. For listener UDP proxying, it is instead conveyed in each
+request path or query. For Listener UDP Proxying, it is instead conveyed in each
 HTTP Datagram, see {{format}}.
 
-When performing URI Template Expansion of the UDP proxying template (see
+When performing URI Template Expansion of the UDP Proxying template (see
 {{Section 3 of CONNECT-UDP}}), the client sets both the target_host and the
 target_port variables to the '*' character (ASCII character 0x2A).
 
 Before sending its UDP Proxying request to the proxy, the client allocates an
 even-numbered context ID, see {{Section 4 of CONNECT-UDP}}. The client then adds
-the "connect-udp-listen" header field to its proxying request, with its value
-set as the allocated context ID, see {{hdr}}.
+the "connect-udp-listen" header field to its UDP Proxying request, with its
+value set as the allocated context ID, see {{hdr}}.
 
 # HTTP Datagram Payload Format {#format}
 
-When HTTP Datagrams {{!HTTP-DGRAM=RFC9297}} associated with this listener UDP
-proxying request contain the context ID in the connect-udp-listen header field,
+When HTTP Datagrams {{!HTTP-DGRAM=RFC9297}} associated with this Listener UDP
+Proxying request contain the context ID in the connect-udp-listen header field,
 the format of their UDP Proxying Payload field (see {{Section 5 of
 CONNECT-UDP}}) is defined by {{dgram-format}}:
 
@@ -197,7 +197,7 @@ Comments:
 
 In the example below, the client is configured with URI Template
 "https://example.org/.well-known/masque/udp/{target_host}/{target_port}/" and
-wishes to use WebRTC with another browser over a listener UDP proxying tunnel.
+wishes to use WebRTC with another browser over a listener UDP Proxying tunnel.
 It contacts a STUN server at 192.0.2.42. The STUN server, in response, sends the
 proxy's IP address to the other browser at 203.0.113.33. Using this information,
 the other browser sends a UDP packet to the proxy, which is proxied over HTTP
