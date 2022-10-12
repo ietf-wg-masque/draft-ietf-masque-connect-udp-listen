@@ -97,7 +97,8 @@ target_port variables to the '*' character (ASCII character 0x2A).
 
 Before sending its UDP Proxying request to the proxy, the client allocates an
 even-numbered context ID, see {{Section 4 of CONNECT-UDP}}. The client then adds
-the "connect-udp-listen" header field to its proxying request, with its value set as the allocated context ID, see {{hdr}}.
+the "connect-udp-listen" header field to its proxying request, with its value
+set as the allocated context ID, see {{hdr}}.
 
 ## HTTP Datagram Payload Format {#format}
 
