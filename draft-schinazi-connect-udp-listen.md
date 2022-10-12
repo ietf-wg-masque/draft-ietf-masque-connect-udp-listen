@@ -166,7 +166,8 @@ documents might define parameters. Receivers MUST ignore unknown parameters.
 # Security Considerations
 
 The security considerations described in {{Section 7 of CONNECT-UDP}} also apply
-here.
+here. Since TURN can be run over this mechanism, implementors should review the
+security considerations in {{Section 21 of ?TURN=RFC8656}}.
 
 Since unextended UDP Proxying requests carry the target as part of the request,
 the proxy can protect unauthorized targets by rejecting requests before creating
