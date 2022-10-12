@@ -66,7 +66,7 @@ allows proxying UDP payloads {{!UDP=RFC0768}} to a fixed host and port. Combined
 with the HTTP CONNECT method (see {{Section 9.3.6 of !HTTP=RFC9110}}), it allows
 proxying the majority of a Web Browser's HTTP traffic. However WebRTC {{WebRTC}}
 relies on ICE {{?ICE=RFC8445}} to provide connectivity between two Web browsers,
-and that relies on the ability to send and receive UDP packets to
+which relies on the ability to send and receive UDP packets to
 multiple hosts. While in theory it might be possible to accomplish this using
 multiple UDP proxying HTTP requests, HTTP semantics {{HTTP}} do not guarantee
 that distinct requests will be handled by the same server. This can lead
