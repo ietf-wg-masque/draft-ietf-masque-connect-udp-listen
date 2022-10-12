@@ -69,7 +69,7 @@ relies on ICE {{?ICE=RFC8445}} to provide connectivity between two Web browsers,
 and that relies on the ability to send and receive UDP packets to
 multiple hosts. While in theory it might be possible to accomplish this using
 multiple UDP proxying HTTP requests, HTTP semantics {{HTTP}} do not guarantee
-that such distinct requests will be handled by the same server. This can lead
+that distinct requests will be handled by the same server. This can lead
 to the UDP packets being sent from distinct IP addresses, thereby preventing
 ICE from operating correctly. Consequently, UDP Proxying requests cannot
 enable WebRTC connectivity between peers.
