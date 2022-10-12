@@ -168,6 +168,14 @@ documents might define parameters. Receivers MUST ignore unknown parameters.
 The security considerations described in {{Section 7 of CONNECT-UDP}} also apply
 here.
 
+Since unextended UDP Proxying requests carry the target as part of the request,
+the proxy can protect unauthorized targets by rejecting requests before creating
+the tunnel, and communicate the rejection reason in response header fields.
+Listener UDP Proxying requests do not have this ability. Therefore, proxies MUST
+validate the target on every datagram and MUST NOT forward individual datagrams
+with unauthorized targets. Proxies can either silently discard such datagrams or
+abort the corresponding request stream.
+
 # IANA Considerations
 
 This document will request IANA to register the following entry in the "HTTP
