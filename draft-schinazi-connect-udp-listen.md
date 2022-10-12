@@ -97,7 +97,7 @@ from {{!QUIC=RFC9000}}. This document uses the terms Integer and List from
 {{Section 3 of !STRUCTURED-FIELDS=RFC8941}} to specify syntax and parsing.
 
 
-# Proxied UDP Listener Mechanism
+# Proxied UDP Listener Mechanism {#mechanism}
 
 In unextended UDP Proxying requests, the target host is encoded in the HTTP
 request path or query. For Listener UDP Proxying, it is instead conveyed in each
@@ -157,11 +157,12 @@ octets" in {{UDP}}).
 # The connect-udp-listen Header Field {#hdr}
 
 The "connect-udp-listen" header field’s value is an Integer. It is set as the
-Context ID. Any other value type MUST be handled as if the field were not
-present by the recipients (for example, if this field is defined multiple times,
-its type becomes a List and therefore is to be ignored). This document does not
-define any parameters for the connect-udp-listen header field value, but future
-documents might define parameters. Receivers MUST ignore unknown parameters.
+Context ID allocated for Listener UDP Proxying; see {{mechanism}}. Any other
+value type MUST be handled as if the field were not present by the recipients
+(for example, if this field is defined multiple times, its type becomes a List
+and therefore is to be ignored). This document does not define any parameters
+for the connect-udp-listen header field value, but future documents might define
+parameters. Receivers MUST ignore unknown parameters.
 
 # Security Considerations
 
