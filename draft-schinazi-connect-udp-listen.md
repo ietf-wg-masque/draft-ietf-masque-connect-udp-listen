@@ -166,7 +166,13 @@ parameters. Receivers MUST ignore unknown parameters.
 
 # Proxy behavior
 
-After accepting the Connect-UDP Listener proxying request, the proxy uses a UDP port to transmit UDP payloads received from the client to the target IP Address and UDP Port specified in each Listener Datagram Payload received from the client. The proxy uses the same port to listen for UDP packets from any authorized target and encapsulates the packets in the Listener Datagram Payload format, specifying the IP and port of the target and forwards it to the client.
+After accepting the Connect-UDP Listener proxying request, the proxy uses a UDP
+port to transmit UDP payloads received from the client to the target IP Address
+and UDP Port specified in each Listener Datagram Payload received from the
+client. The proxy uses the same port to listen for UDP packets from any
+authorized target and encapsulates the packets in the Listener Datagram
+Payload format, specifying the IP and port of the target and forwards it to
+the client.
 
 # Security Considerations
 
