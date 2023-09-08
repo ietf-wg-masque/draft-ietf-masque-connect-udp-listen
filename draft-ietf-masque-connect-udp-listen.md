@@ -15,8 +15,8 @@ venue:
   type: "Working Group"
   mail: "masque@ietf.org"
   arch: "https://mailarchive.ietf.org/arch/browse/masque/"
-  github: "DavidSchinazi/draft-schinazi-connect-udp-listen"
-  latest: "https://DavidSchinazi.github.io/draft-schinazi-connect-udp-listen/draft-ietf-masque-connect-udp-listen.html"
+  github: "ietf-wg-masque/draft-ietf-masque-connect-udp-listen"
+  latest: "https://ietf-wg-masque.github.io/draft-ietf-masque-connect-udp-listen/draft-ietf-masque-connect-udp-listen.html"
 keyword:
   - quic
   - http
