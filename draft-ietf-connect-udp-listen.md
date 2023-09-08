@@ -2,7 +2,7 @@
 title: "Proxying Listener UDP in HTTP"
 abbrev: "CONNECT-UDP Listen"
 category: std
-docname: draft-schinazi-connect-udp-listen-latest
+docname: draft-ietf-connect-udp-listen-latest
 submissiontype: IETF
 number:
 date:
@@ -16,7 +16,7 @@ venue:
   mail: "masque@ietf.org"
   arch: "https://mailarchive.ietf.org/arch/browse/masque/"
   github: "DavidSchinazi/draft-schinazi-connect-udp-listen"
-  latest: "https://DavidSchinazi.github.io/draft-schinazi-connect-udp-listen/draft-schinazi-connect-udp-listen.html"
+  latest: "https://DavidSchinazi.github.io/draft-schinazi-connect-udp-listen/draft-ietf-connect-udp-listen.html"
 keyword:
   - quic
   - http
