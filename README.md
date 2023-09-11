@@ -4,8 +4,8 @@ This is the working area for the MASQUE WG Internet-Draft, "Proxying Listener UD
 
 * [Editor's Copy](https://ietf-wg-masque.github.io/draft-ietf-masque-connect-udp-listen/draft-ietf-masque-connect-udp-listen.html)
 * [Datatracker Page](https://datatracker.ietf.org/doc/draft-ietf-masque-connect-udp-listen)
-* [Individual Draft](https://datatracker.ietf.org/doc/html/draft-ietf-masque-connect-udp-listen)
-* [Compare Editor's Copy to Individual Draft](https://ietf-wg-masque.github.io/draft-ietf-masque-connect-udp-listen/#go.draft-ietf-masque-connect-udp-listen.diff)
+* [Working Group Draft](https://datatracker.ietf.org/doc/html/draft-ietf-masque-connect-udp-listen)
+* [Compare Editor's Copy to Working Group Draft](https://ietf-wg-masque.github.io/draft-ietf-masque-connect-udp-listen/#go.draft-ietf-masque-connect-udp-listen.diff)
 
 
 ## Contributing
