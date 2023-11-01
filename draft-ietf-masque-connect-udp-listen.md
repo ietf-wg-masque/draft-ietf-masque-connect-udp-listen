@@ -188,6 +188,10 @@ validate the target on every datagram and MUST NOT forward individual datagrams
 with unauthorized targets. Proxies can either silently discard such datagrams or
 abort the corresponding request stream.
 
+In addition, Proxies SHOULD consider restricting the IPs allowed to connect
+to the client via the proxy and reject any unauthorized connections on the
+target side, in order to prevent the misuse of the proxy.
+
 # IANA Considerations
 
 This document will request IANA to register the following entry in the "HTTP
