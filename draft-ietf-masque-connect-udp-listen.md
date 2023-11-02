@@ -117,7 +117,7 @@ value set as the allocated context ID, see {{hdr}}.
 When HTTP Datagrams {{!HTTP-DGRAM=RFC9297}} associated with this Listener UDP
 Proxying request contain the context ID in the connect-udp-listen header field,
 the format of their UDP Proxying Payload field (see {{Section 5 of
-CONNECT-UDP}}) is defined by {{dgram-format}}:
+CONNECT-UDP}}), is defined by {{dgram-format}}
 
 ~~~ ascii-art
 Listener UDP Proxying Payload {
@@ -131,7 +131,10 @@ Listener UDP Proxying Payload {
 
 IP Version:
 
-: The IP Version of the following IP Address field. MUST be 4 or 6.
+: The IP Version of the following IP Address field. MUST be 4 or 6. 
+MAY be omitted if the latest previously transmitted Target IP Address and Port
+for the Context ID are the same as the current target IP Address and Port.
+If Omitted, the IP Address and UDP Port fields MUST also be omitted.
 
 IP Address:
 
@@ -140,13 +143,19 @@ this is the target host to which the proxy will send this UDP payload. When sent
 from proxy to client, this represents the source IP address of the UDP packet
 received by the proxy. This field has a length of 32 bits when the corresponding
 IP Version field value is 4, and 128 when the IP Version is 6.
+MAY be omitted if the latest previously transmitted Target IP Address and
+Port for the Context ID are the same as the current target IP Address and Port.
+If Omitted, the UDP Port and IP Version fields MUST also be omitted.
 
 UDP Port:
 
 : The UDP Port of this proxied UDP packet in network byte order. When sent from
 client to proxy, this is the target port to which the proxy will send this UDP
 payload. When sent from proxy to client, this represents the source UDP port of
-the UDP packet received by the proxy.
+the UDP packet received by the proxy. MAY be omitted if the latest previously
+transmitted Target IP Address and Port for the Context ID are the same as the 
+current target IP Address and Port. If Omitted, the IP Address and IP Version
+fields MUST also be omitted.
 
 UDP Payload:
 
@@ -172,7 +181,13 @@ and UDP Port specified in each Listener Datagram Payload received from the
 client. The proxy uses the same port to listen for UDP packets from any
 authorized target and encapsulates the packets in the Listener Datagram
 Payload format, specifying the IP and port of the target and forwards it to
-the client.
+the client. The proxy MUST keep a mapping of Context-IDs to IP Addresses and UDP
+Ports. If the client sends a payload defined in {#format} with the IP Version,
+IP Address and UDP Port fields, the proxy MUST update its mapping of the context
+ID to the provided IP Address and UDP Port. If the client sends a UDP datagram 
+without the IP Version, IP Address and UDP Port fields, the proxy MUST use the
+mapping to identify the target in order to transmit UDP Payloads
+on behalf of the client.
 
 # Security Considerations
 
