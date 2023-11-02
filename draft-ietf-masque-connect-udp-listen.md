@@ -131,7 +131,7 @@ Listener UDP Proxying Payload {
 
 IP Version:
 
-: The IP Version of the following IP Address field. MUST be 4 or 6. 
+: The IP Version of the following IP Address field. MUST be 4 or 6.
 MAY be omitted if the latest previously transmitted Target IP Address and Port
 for the Context ID are the same as the current target IP Address and Port.
 If Omitted, the IP Address and UDP Port fields MUST also be omitted.
@@ -153,7 +153,7 @@ UDP Port:
 client to proxy, this is the target port to which the proxy will send this UDP
 payload. When sent from proxy to client, this represents the source UDP port of
 the UDP packet received by the proxy. MAY be omitted if the latest previously
-transmitted Target IP Address and Port for the Context ID are the same as the 
+transmitted Target IP Address and Port for the Context ID are the same as the
 current target IP Address and Port. If Omitted, the IP Address and IP Version
 fields MUST also be omitted.
 
@@ -184,10 +184,15 @@ Payload format, specifying the IP and port of the target and forwards it to
 the client. The proxy MUST keep a mapping of Context-IDs to IP Addresses and UDP
 Ports. If the client sends a payload defined in {#format} with the IP Version,
 IP Address and UDP Port fields, the proxy MUST update its mapping of the context
-ID to the provided IP Address and UDP Port. If the client sends a UDP datagram 
+ID to the provided IP Address and UDP Port. If the client sends a datagram
 without the IP Version, IP Address and UDP Port fields, the proxy MUST use the
 mapping to identify the target in order to transmit UDP Payloads
 on behalf of the client.
+Similarly, if the server sends a payload with the IP Version, IP Address
+,and UDP Port fields, the client MUST update its mapping of the context ID to the
+provided IP Address and UDP Port. If the proxy, sends a datagram without the IP
+Version, IP Address and UDP Port fields, the client must use the mapping to 
+identify which target it is receiving from.
 
 # Security Considerations
 
@@ -283,6 +288,45 @@ back to the client.
                          IP Address = 203.0.113.33
                          UDP Port = 4321
                          UDP Payload = Encapsulated UDP Payload
+                         
+/* Omit IP and Port info from future payloads from */ 
+/* 203.0.113.33:4321 until, another target sends a packet */
+            <--------  DATAGRAM
+                         Quarter Stream ID = 11
+                         Context ID = 2
+                         UDP Payload = Encapsulated UDP Payload
+
+/* Mention IP and port in the first packet intended for */ 
+/* 203.0.113.33:1234 */
+ DATAGRAM                       -------->
+   Quarter Stream ID = 11
+   Context ID = 2
+   IP Version = 4
+   IP Address = 203.0.113.33
+   UDP Port = 1234
+   UDP Payload = Encapsulated UDP Payload
+
+/* Omit IP and Port for future packets intended for*/
+/*203.0.113.33:1234 hereon */
+ DATAGRAM                       -------->
+   Quarter Stream ID = 11
+   Context ID = 2
+   UDP Payload = Encapsulated UDP Payload
+
+/* Re-add IP and Port in the first packet intended for 192.0.2.42:1234*/
+  DATAGRAM                       -------->
+   Quarter Stream ID = 11
+   Context ID = 2
+   IP Version = 4
+   IP Address = 192.0.2.42
+   UDP Port = 1234
+   UDP Payload = Encapsulated UDP Payload
+/* Remove IP and Port for packets intended for 192.0.2.42:1234 hereon */
+ DATAGRAM                       -------->
+   Quarter Stream ID = 11
+   Context ID = 2
+   UDP Payload = Encapsulated UDP Payload
+
 ~~~
 
 # Comparison with CONNECT-IP
