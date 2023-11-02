@@ -110,7 +110,9 @@ target_port variables to the '*' character (ASCII character 0x2A).
 Before sending its UDP Proxying request to the proxy, the client allocates an
 even-numbered context ID, see {{Section 4 of CONNECT-UDP}}. The client then adds
 the "connect-udp-listen" header field to its UDP Proxying request, with its
-value set as the allocated context ID, see {{hdr}}.
+value set as the allocated context ID, see {{hdr}}. If the proxy accepts the
+CONNECT UDP Listener request, it adds the allocated public IP and target for the
+client to the response, see {{response}}.
 
 # HTTP Datagram Payload Format {#format}
 
@@ -163,6 +165,12 @@ value type MUST be handled as if the field were not present by the recipients
 and therefore is to be ignored). This document does not define any parameters
 for the connect-udp-listen header field value, but future documents might define
 parameters. Receivers MUST ignore unknown parameters.
+
+
+# The proxy-public-address Response Header Field {#response}
+Upon accepting the request, the "proxy-public-address" response header,
+MUST contain the IP and the UDP port which are allocated to the client by the
+proxy in the format {IP-Address}:{UDP-Port}
 
 # Proxy behavior
 
@@ -246,6 +254,7 @@ back to the client.
             <--------  STREAM(44): HEADERS
                          :status = 200
                          capsule-protocol = ?1
+                         proxy-public-address = 192.10.11.45:3030
 
 /* Wait for STUN server to respond to UDP packet. */
 
