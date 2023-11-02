@@ -191,7 +191,7 @@ on behalf of the client.
 Similarly, if the server sends a payload with the IP Version, IP Address
 ,and UDP Port fields, the client MUST update its mapping of the context ID to the
 provided IP Address and UDP Port. If the proxy, sends a datagram without the IP
-Version, IP Address and UDP Port fields, the client must use the mapping to 
+Version, IP Address and UDP Port fields, the client must use the mapping to
 identify which target it is receiving from.
 
 # Security Considerations
@@ -288,15 +288,15 @@ back to the client.
                          IP Address = 203.0.113.33
                          UDP Port = 4321
                          UDP Payload = Encapsulated UDP Payload
-                         
-/* Omit IP and Port info from future payloads from */ 
+
+/* Omit IP and Port info from future payloads from */
 /* 203.0.113.33:4321 until, another target sends a packet */
             <--------  DATAGRAM
                          Quarter Stream ID = 11
                          Context ID = 2
                          UDP Payload = Encapsulated UDP Payload
 
-/* Mention IP and port in the first packet intended for */ 
+/* Mention IP and port in the first packet intended for */
 /* 203.0.113.33:1234 */
  DATAGRAM                       -------->
    Quarter Stream ID = 11
