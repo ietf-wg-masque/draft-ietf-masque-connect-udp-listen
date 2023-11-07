@@ -100,8 +100,8 @@ from {{!QUIC=RFC9000}}. This document uses the terms Integer and List from
 # Proxied UDP Listener Mechanism {#mechanism}
 
 In unextended UDP Proxying requests, the target host is encoded in the HTTP
-request path or query. For Listener UDP Proxying, it is instead conveyed in each
-HTTP Datagram, see {{format}}.
+request path or query. For Listener UDP Proxying, it is either conveyed in each
+HTTP Datagram, see {{format}} or registered via DATAGRAM capsules and then compressed, see {{contextid}}.
 
 When performing URI Template Expansion of the UDP Proxying template (see
 {{Section 3 of CONNECT-UDP}}), the client sets both the target_host and the
@@ -110,14 +110,14 @@ target_port variables to the '*' character (ASCII character 0x2A).
 Before sending its UDP Proxying request to the proxy, the client allocates an
 even-numbered context ID, see {{Section 4 of CONNECT-UDP}}. The client then adds
 the "connect-udp-listen" header field to its UDP Proxying request, with its
-value set as the allocated context ID, see {{hdr}}.
+value set as the allocated context ID, see {{contextid}}.
 
 # HTTP Datagram Payload Format {#format}
 
 When HTTP Datagrams {{!HTTP-DGRAM=RFC9297}} associated with this Listener UDP
 Proxying request contain the context ID in the connect-udp-listen header field,
 the format of their UDP Proxying Payload field (see {{Section 5 of
-CONNECT-UDP}}), is defined by {{dgram-format}}
+CONNECT-UDP}}) is defined by {{dgram-format}}:
 
 ~~~ ascii-art
 Listener UDP Proxying Payload {
@@ -132,9 +132,7 @@ Listener UDP Proxying Payload {
 IP Version:
 
 : The IP Version of the following IP Address field. MUST be 4 or 6.
-MAY be omitted if the latest previously transmitted Target IP Address and Port
-for the Context ID are the same as the current target IP Address and Port.
-If Omitted, the IP Address and UDP Port fields MUST also be omitted.
+It MUST be omitted Context ID is non zero.
 
 IP Address:
 
@@ -143,19 +141,14 @@ this is the target host to which the proxy will send this UDP payload. When sent
 from proxy to client, this represents the source IP address of the UDP packet
 received by the proxy. This field has a length of 32 bits when the corresponding
 IP Version field value is 4, and 128 when the IP Version is 6.
-MAY be omitted if the latest previously transmitted Target IP Address and
-Port for the Context ID are the same as the current target IP Address and Port.
-If Omitted, the UDP Port and IP Version fields MUST also be omitted.
+It MUST be omitted if Context ID is non zero.
 
 UDP Port:
 
 : The UDP Port of this proxied UDP packet in network byte order. When sent from
 client to proxy, this is the target port to which the proxy will send this UDP
 payload. When sent from proxy to client, this represents the source UDP port of
-the UDP packet received by the proxy. MAY be omitted if the latest previously
-transmitted Target IP Address and Port for the Context ID are the same as the
-current target IP Address and Port. If Omitted, the IP Address and IP Version
-fields MUST also be omitted.
+the UDP packet received by the proxy. It MUST be omitted if Context ID is non zero.
 
 UDP Payload:
 
@@ -163,10 +156,49 @@ UDP Payload:
 octets" in {{UDP}}).
 
 
+# Context ID and Header Compression {#contextid}
+The context ID is a 62 bit, variable length integer and MUST be specified in each UDP Payload carrying datagram. Context ID of value 0 represents no compression. The client must specify the IP version, IP and port of the target per datagram, see {{format}}.
+
+If the client intends to compress the IP and port information of the target, it must first register a new Context ID with the proxy, and specify a target IP and port via a Compression request Capsule, and the proxy confirms by responding with a Compression Assign CAPSULE see {{capsules}}. Hereon, both the client and the server MAY use that Context ID in its datagrams to suppress all IP/Port information to or from said target respectively.
+
+The IP Length, Address and Port fields are the same as those defined in {{format}}.
+
+# Capsules {#capsules}
+This document defines two new capsule types to enable registering target compression information, see {{capsulerequestformat}}:
+
+~~~ ascii-art
+Capsule {
+  Type COMPRESSION_REQUEST (0x04),
+  Length (i),
+  Target Mapping,
+}
+~~~
+{: #capsulerequestformat title="Compression Request Capsule Format"}
+
+~~~ ascii-art
+Capsule {
+  Type COMPRESSION_ASSIGN (0x05),
+  Length (i),
+  Target Mapping,
+}
+~~~
+{: #capsuleresponseformat title="Compression Assign Capsule Format"}
+
+~~~ ascii-art
+Target Map {
+  Quarter Stream ID (i),
+  Context ID (i),
+  IP Version (8),
+  IP Address (32..128),
+  UDP Port (16),
+}
+~~~
+{: #targetmappingformat title="Target Mapping Format"}
+
 # The connect-udp-listen Header Field {#hdr}
 
 The "connect-udp-listen" header field’s value is an Integer. It is set as the
-Context ID allocated for Listener UDP Proxying; see {{mechanism}}. Any other
+Context ID allocated for Listener UDP Proxying; see {{contextid}}. Any other
 value type MUST be handled as if the field were not present by the recipients
 (for example, if this field is defined multiple times, its type becomes a List
 and therefore is to be ignored). This document does not define any parameters
@@ -181,18 +213,19 @@ and UDP Port specified in each Listener Datagram Payload received from the
 client. The proxy uses the same port to listen for UDP packets from any
 authorized target and encapsulates the packets in the Listener Datagram
 Payload format, specifying the IP and port of the target and forwards it to
-the client. The proxy MUST keep a mapping of Context-IDs to IP Addresses and UDP
-Ports. If the client sends a payload defined in {#format} with the IP Version,
-IP Address and UDP Port fields, the proxy MUST update its mapping of the context
-ID to the provided IP Address and UDP Port. If the client sends a datagram
-without the IP Version, IP Address and UDP Port fields, the proxy MUST use the
-mapping to identify the target in order to transmit UDP Payloads
-on behalf of the client.
-Similarly, if the server sends a payload with the IP Version, IP Address
-,and UDP Port fields, the client MUST update its mapping of the context ID to the
-provided IP Address and UDP Port. If the proxy, sends a datagram without the IP
-Version, IP Address and UDP Port fields, the client must use the mapping to
-identify which target it is receiving from.
+the client.
+When a client sends a compression request capsule, the proxy registeres a mapping
+from Context ID to the provided target and port as long as the context ID in
+the Compression request is non-zero.
+
+When the proxy receives Datagram payloads from clients:
+
+If context is non-zero, it looks up the registered
+Context ID to target IP and Port information and sends to that target.
+
+If the Context ID is set to zero in a datagram, it parses IP and Port information
+and forwards UDP payload to that target.
+
 
 # Security Considerations
 
@@ -231,7 +264,46 @@ Comments:
 : None
 {: spacing="compact"}
 
+
+This document also requests IANA to register the following new "HTTP Capsule Types" maintained at
+<[](https://www.iana.org/assignments/masque)>:
+
+Value:
+: 0x04
+
+Capsule Type:
+: COMPRESSION_REQUEST
+
+Status:
+: provisional (permanent if this document is approved)
+
+Reference:
+: This document
+
+Comments:
+
+: None
+{: spacing="compact"}
+
+
+Value:
+: 0x05
+
+Capsule Type:
+: COMPRESSION_ASSIGN
+
+Status:
+: provisional (permanent if this document is approved)
+
+Reference:
+: This document
+
+Comments:
+
+: None
+{: spacing="compact"}
 --- back
+
 
 # Example
 
@@ -257,7 +329,7 @@ back to the client.
 
  DATAGRAM                       -------->
    Quarter Stream ID = 11
-   Context ID = 2
+   Context ID = 0
    IP Version = 4
    IP Address = 192.0.2.42
    UDP Port = 1234
@@ -271,7 +343,7 @@ back to the client.
 
             <--------  DATAGRAM
                          Quarter Stream ID = 11
-                         Context ID = 2
+                         Context ID = 0
                          IP Version = 4
                          IP Address = 192.0.2.42
                          UDP Port = 1234
@@ -283,28 +355,30 @@ back to the client.
 
             <--------  DATAGRAM
                          Quarter Stream ID = 11
-                         Context ID = 2
+                         Context ID = 0
                          IP Version = 4
                          IP Address = 203.0.113.33
                          UDP Port = 4321
                          UDP Payload = Encapsulated UDP Payload
 
-/* Omit IP and Port info from future payloads from */
-/* 203.0.113.33:4321 until, another target sends a packet */
-            <--------  DATAGRAM
-                         Quarter Stream ID = 11
-                         Context ID = 2
-                         UDP Payload = Encapsulated UDP Payload
-
-/* Mention IP and port in the first packet intended for */
-/* 203.0.113.33:1234 */
- DATAGRAM                       -------->
+/* Register 203.0.113.33:1234 to compress it in the future*/
+ CAPSULE                       -------->
+   Type = COMPRESSION_REQUEST (0x04)
    Quarter Stream ID = 11
    Context ID = 2
    IP Version = 4
    IP Address = 203.0.113.33
    UDP Port = 1234
-   UDP Payload = Encapsulated UDP Payload
+
+
+/*Proxy confirms registration.*/
+            <-------- CAPSULE
+                        Type = COMPRESSION_ASSIGN (0x05)
+                        Quarter Stream ID = 11
+                        Context ID = 2
+                        IP Version = 4
+                        IP Address = 203.0.113.33
+                        UDP Port = 1234
 
 /* Omit IP and Port for future packets intended for*/
 /*203.0.113.33:1234 hereon */
@@ -313,20 +387,10 @@ back to the client.
    Context ID = 2
    UDP Payload = Encapsulated UDP Payload
 
-/* Re-add IP and Port in the first packet intended for 192.0.2.42:1234*/
-  DATAGRAM                       -------->
-   Quarter Stream ID = 11
-   Context ID = 2
-   IP Version = 4
-   IP Address = 192.0.2.42
-   UDP Port = 1234
-   UDP Payload = Encapsulated UDP Payload
-/* Remove IP and Port for packets intended for 192.0.2.42:1234 hereon */
- DATAGRAM                       -------->
-   Quarter Stream ID = 11
-   Context ID = 2
-   UDP Payload = Encapsulated UDP Payload
-
+            <--------  DATAGRAM
+                        Quarter Stream ID = 11
+                        Context ID = 2
+                        UDP Payload = Encapsulated UDP Payload
 ~~~
 
 # Comparison with CONNECT-IP
