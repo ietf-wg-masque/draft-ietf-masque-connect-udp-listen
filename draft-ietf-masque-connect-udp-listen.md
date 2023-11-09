@@ -101,7 +101,7 @@ from {{!QUIC=RFC9000}}. This document uses the terms Integer and List from
 
 In unextended UDP Proxying requests, the target host is encoded in the HTTP
 request path or query. For Listener UDP Proxying, it is either conveyed in each
-HTTP Datagram, see {{format}} or registered via DATAGRAM capsules and then compressed, see {{contextid}}.
+HTTP Datagram, see {{format}} or registered via capsules and then compressed, see {{contextid}}.
 
 When performing URI Template Expansion of the UDP Proxying template (see
 {{Section 3 of CONNECT-UDP}}), the client sets both the target_host and the
