@@ -188,7 +188,7 @@ validate the target on every datagram and MUST NOT forward individual datagrams
 with unauthorized targets. Proxies can either silently discard such datagrams or
 abort the corresponding request stream.
 
-Unlike non binding CONNECT-UDP, since the proxies tunnel datagrams from any
+Unlike non-binding CONNECT-UDP, since the proxy tunnels datagrams from any
 target to clients bound to their respective public IP and ports, the clients
 SHOULD be ready to handle potential unwanted traffic from unknown destinations.
 
