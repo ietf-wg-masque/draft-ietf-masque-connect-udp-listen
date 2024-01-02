@@ -156,21 +156,38 @@ UDP Payload:
 octets" in {{UDP}}).
 
 
-# Context ID and Header Compression {#contextid}
-The context ID is a 62 bit, variable length integer and MUST be specified in each UDP Payload carrying datagram. Context ID of value 0 represents no compression. The client must specify the IP version, IP and port of the target per datagram, see {{format}}.
+# Context ID {#contextid}
+The context ID is a 62 bit, variable length integer and MUST be specified in each UDP Payload carrying datagram. Context ID of value 0 represents no compression. When using context ID 0, the client and server must specify the IP version, IP and port of the target per datagram, see {{format}}. Context ID 0 is enabled by default, but may be disabled using  {{disableuncompressedforwarding}}
 
-If the client intends to compress the IP and port information of the target, it must first register a new Context ID with the proxy, and specify a target IP and port via a Compression request Capsule, and the proxy confirms by responding with a Compression Assign CAPSULE see {{capsules}}. Hereon, both the client and the server MAY use that Context ID in its datagrams to suppress all IP/Port information to or from said target respectively.
+The client can compress IP and port information using Context IDs as defined under {{compression}}. The client may suppress traffic coming from uncompressed IPs using
 
-The IP Length, Address and Port fields are the same as those defined in {{format}}.
+## Header Compression {#compression}
+The client MAY choose to map IP and port information per datagram against the Context ID defined in {{contextid}}. In such a case, the client MUST send a COMPRESSION_REQUEST capsule (see {{capsulerequestformat}}) with the target information (see {{targetmappingformat}}) it wishes to compress and the proxy MUST respond with a COMPRESSION_RESPONSE (see {{capsuleresponseformat}}) capsule.
 
-# Capsules {#capsules}
-This document defines two new capsule types to enable registering target compression information, see {{capsulerequestformat}}:
+Once the response is received by client, both the proxy and the client MUST send each other packets corresponding to a target using the unique Context ID assigned to the given target, while omitting IP and port information.
+
+The proxy MUST maintain a Target Map to Context ID and update this mapping when new COMPRESSION_REQUEST and COMPRESSION_RESPONSE capsules are exchanged. The COMPRESSION_REQUEST capsule contains an optional disable-uncompressed-forwarding field that may be set to block uncompressed traffic, see {{disableuncompressedforwarding}}.
+
+## disable-uncompressed-forwarding Field {#disableuncompressedforwarding}
+By default, the proxy and client MUST send uncompressed packets to each other and use context ID 0. The disable-uncompressed-forwarding field is an optional boolean field which MAY be used by the client to block any targets that haven't been registered using the Header Compression Mechanism in {{compression}}.
+
+The field MAY optionally be added to the COMPRESSION_REQUEST Capsule. When set, the server's COMPRESSION_RESPONSE MUST contain the disable-uncompressed-forwarding field with the same boolean value, confirming the user's request.
+
+If the value was set to true, the proxy MUST NOT forward packets using Context ID 0 for the given stream ID and MUST block any packets received from targets not found in the proxy's Target to Context ID mapping.
+If it was set to false, the proxy MUST forward any future Uncompressed Context 0 packets.
+
+When using the disable-uncompressed-forwarding field, the Target information (in {{targetmappingformat}}) may be omitted from the request. In such a case the response MUST also omit the Target Information.
+
+## Capsules {#capsules}
+The capsule types are defined in {{capsulerequestformat}}:
 
 ~~~ ascii-art
 Capsule {
   Type COMPRESSION_REQUEST (0x04),
   Length (i),
-  Target Mapping,
+  Quarter Stream ID (i),
+  Target Information,
+  disable-uncompressed-forwarding (1),
 }
 ~~~
 {: #capsulerequestformat title="Compression Request Capsule Format"}
@@ -179,21 +196,25 @@ Capsule {
 Capsule {
   Type COMPRESSION_ASSIGN (0x05),
   Length (i),
-  Target Mapping,
+  Quarter Stream ID (i),
+  Target Information,
+  disable-uncompressed-forwarding (1),
 }
 ~~~
 {: #capsuleresponseformat title="Compression Assign Capsule Format"}
 
 ~~~ ascii-art
-Target Map {
-  Quarter Stream ID (i),
+Target Info {
   Context ID (i),
   IP Version (8),
   IP Address (32..128),
   UDP Port (16),
 }
 ~~~
-{: #targetmappingformat title="Target Mapping Format"}
+{: #targetmappingformat title="Target Information Format"}
+
+The IP Length, Address and Port fields in {{targetmappingformat}} are the same as those defined in {{format}}.
+
 
 # The connect-udp-listen Header Field {#hdr}
 
