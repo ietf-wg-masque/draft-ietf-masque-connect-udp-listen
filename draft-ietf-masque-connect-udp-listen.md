@@ -190,7 +190,7 @@ abort the corresponding request stream.
 
 Unlike non-binding CONNECT-UDP, since the proxy tunnels datagrams from any
 target to clients bound to their respective public IP and ports, the clients
-SHOULD be ready to handle potential unwanted traffic from unknown destinations.
+MUST be ready to handle potential unwanted traffic from unknown destinations.
 
 # IANA Considerations
 
