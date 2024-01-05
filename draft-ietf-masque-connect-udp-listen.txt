@@ -5,7 +5,7 @@
 MASQUE                                                       D. Schinazi
 Internet-Draft                                                  A. Singh
 Intended status: Standards Track                              Google LLC
-Expires: 11 March 2024                                  8 September 2023
+Expires: 8 July 2024                                      5 January 2024
 
 
                      Proxying Listener UDP in HTTP
@@ -54,11 +54,11 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 11 March 2024.
+   This Internet-Draft will expire on 8 July 2024.
 
 Copyright Notice
 
-   Copyright (c) 2023 IETF Trust and the persons identified as the
+   Copyright (c) 2024 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
    This document is subject to BCP 78 and the IETF Trust's Legal
@@ -210,6 +210,11 @@ Table of Contents
    on every datagram and MUST NOT forward individual datagrams with
    unauthorized targets.  Proxies can either silently discard such
    datagrams or abort the corresponding request stream.
+
+   Unlike non-binding CONNECT-UDP, since the proxy tunnels datagrams
+   from any target to clients bound to their respective public IP and
+   ports, the clients MUST be ready to handle potential unwanted traffic
+   from unknown destinations.
 
 7.  IANA Considerations
 
