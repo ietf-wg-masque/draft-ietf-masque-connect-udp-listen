@@ -170,7 +170,7 @@ client and server must specify the IP version, IP and port of the target per
 datagram, see {{format}}. The client can compress IP and port information using
 non zero Context IDs as defined under {{compression}}.
 Receiving and forwarding from Context ID 0 is enabled by default, but may be
-disabled using {{restrictingips}}.
+disabled; see {{restrictingips}}.
 
 ## Header Compression {#compression}
 
