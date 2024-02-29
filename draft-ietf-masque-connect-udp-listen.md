@@ -168,9 +168,17 @@ parameters. Receivers MUST ignore unknown parameters.
 
 
 # The proxy-public-address Response Header Field {#response}
-Upon accepting the request, the "proxy-public-address" response header,
-MUST contain the IP and the UDP port which are allocated to the client by the
-proxy in the format {IP-Address}:{UDP-Port}
+
+Upon accepting the request, the proxy MUST allocate either one or both of IPv4address to port and IPv6address to port pairings. IPv4address, IPv6address and port are defined in {{!URI=RFC3986}}
+
+The proxy must then respond with the allocated IP and port pairings using the "proxy-public-address" response header defined as follows:
+
+~~~ ascii-art
+proxy-public-address = IP-port-pairing (, IP-port-pairing)
+IP-port-pairing = IPv4address:port / IPv6address:port
+~~~
+{: #target-format title="Proxy Address Format"}
+
 
 # Proxy behavior
 
