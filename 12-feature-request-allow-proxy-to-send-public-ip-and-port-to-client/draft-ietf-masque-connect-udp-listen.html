@@ -1336,7 +1336,8 @@ parameters. Receivers <span class="bcp14">MUST</span> ignore unknown parameters.
 <a href="#section-5" class="section-number selfRef">5. </a><a href="#name-the-proxy-public-address-re" class="section-name selfRef">The Proxy-Public-Address Response Header Field</a>
       </h2>
 <p id="section-5-1">Upon accepting the request, the proxy <span class="bcp14">MUST</span> select at least one public IP
-address to bind. For each selected address, it <span class="bcp14">MUST</span> select an open port to
+address to bind. The proxy <span class="bcp14">MAY</span> also select a second address from a different address
+family. For each selected address, it <span class="bcp14">MUST</span> select an open port to
 bind to this request. From then and until the tunnel is closed, the proxy
 <span class="bcp14">SHALL</span> send packets received on these IP-port tuples to the client. The proxy
 then <span class="bcp14">MUST</span> communicate the selected addresses and ports to the client using
