@@ -14,7 +14,7 @@ protocols such as HTTP/3, but is not sufficient for some UDP peer-to-peer
 protocols like WebRTC. This document proposes an extension to UDP Proxying in
 HTTP that enables such use-cases. 
     " name="description">
-<meta content="xml2rfc 3.19.0" name="generator">
+<meta content="xml2rfc 3.19.4" name="generator">
 <meta content="quic" name="keyword">
 <meta content="http" name="keyword">
 <meta content="datagram" name="keyword">
@@ -28,20 +28,20 @@ HTTP that enables such use-cases.
 <meta content="listen" name="keyword">
 <meta content="draft-ietf-masque-connect-udp-listen-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.19.0
+  xml2rfc 3.19.4
     Python 3.11.6
     ConfigArgParse 1.7
     google-i18n-address 3.1.0
     intervaltree 3.1.0
     Jinja2 3.1.2
     lxml 4.9.3
-    platformdirs 4.1.0
+    platformdirs 4.2.0
     pycountry 22.3.5
     PyYAML 6.0.1
     requests 2.31.0
     setuptools 68.2.2
     six 1.16.0
-    wcwidth 0.2.12
+    wcwidth 0.2.13
 -->
 <link href="draft-ietf-masque-connect-udp-listen.xml" rel="alternate" type="application/rfc+xml">
 <link href="#copyright" rel="license">
@@ -1040,11 +1040,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">CONNECT-UDP Listen</td>
-<td class="right">January 2024</td>
+<td class="right">February 2024</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Schinazi &amp; Singh</td>
-<td class="center">Expires 5 July 2024</td>
+<td class="center">Expires 1 September 2024</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1057,12 +1057,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-masque-connect-udp-listen-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2024-01-02" class="published">2 January 2024</time>
+<time datetime="2024-02-29" class="published">29 February 2024</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2024-07-05">5 July 2024</time></dd>
+<dd class="expires"><time datetime="2024-09-01">1 September 2024</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1120,7 +1120,7 @@ HTTP that enables such use-cases.<a href="#section-abstract-1" class="pilcrow">�
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 5 July 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 1 September 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1164,53 +1164,39 @@ HTTP that enables such use-cases.<a href="#section-abstract-1" class="pilcrow">�
             <p id="section-toc.1-1.3.1"><a href="#section-3" class="auto internal xref">3</a>.  <a href="#name-http-datagram-payload-forma" class="internal xref">HTTP Datagram Payload Format</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4">
-            <p id="section-toc.1-1.4.1"><a href="#section-4" class="auto internal xref">4</a>.  <a href="#name-context-id" class="internal xref">Context ID</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.1">
-                <p id="section-toc.1-1.4.2.1.1"><a href="#section-4.1" class="auto internal xref">4.1</a>.  <a href="#name-header-compression" class="internal xref">Header Compression</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.2">
-                <p id="section-toc.1-1.4.2.2.1"><a href="#section-4.2" class="auto internal xref">4.2</a>.  <a href="#name-disable-uncompressed-forwar" class="internal xref">disable-uncompressed-forwarding Field</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.3">
-                <p id="section-toc.1-1.4.2.3.1"><a href="#section-4.3" class="auto internal xref">4.3</a>.  <a href="#name-capsules" class="internal xref">Capsules</a></p>
-</li>
-            </ul>
+            <p id="section-toc.1-1.4.1"><a href="#section-4" class="auto internal xref">4</a>.  <a href="#name-the-connect-udp-listen-head" class="internal xref">The Connect-UDP-Listen Header Field</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5">
-            <p id="section-toc.1-1.5.1"><a href="#section-5" class="auto internal xref">5</a>.  <a href="#name-the-connect-udp-listen-head" class="internal xref">The connect-udp-listen Header Field</a></p>
+            <p id="section-toc.1-1.5.1"><a href="#section-5" class="auto internal xref">5</a>.  <a href="#name-proxy-behavior" class="internal xref">Proxy behavior</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6">
-            <p id="section-toc.1-1.6.1"><a href="#section-6" class="auto internal xref">6</a>.  <a href="#name-proxy-behavior" class="internal xref">Proxy behavior</a></p>
+            <p id="section-toc.1-1.6.1"><a href="#section-6" class="auto internal xref">6</a>.  <a href="#name-security-considerations" class="internal xref">Security Considerations</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7">
-            <p id="section-toc.1-1.7.1"><a href="#section-7" class="auto internal xref">7</a>.  <a href="#name-security-considerations" class="internal xref">Security Considerations</a></p>
+            <p id="section-toc.1-1.7.1"><a href="#section-7" class="auto internal xref">7</a>.  <a href="#name-iana-considerations" class="internal xref">IANA Considerations</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8">
-            <p id="section-toc.1-1.8.1"><a href="#section-8" class="auto internal xref">8</a>.  <a href="#name-iana-considerations" class="internal xref">IANA Considerations</a></p>
-</li>
-          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9">
-            <p id="section-toc.1-1.9.1"><a href="#section-9" class="auto internal xref">9</a>.  <a href="#name-references" class="internal xref">References</a></p>
+            <p id="section-toc.1-1.8.1"><a href="#section-8" class="auto internal xref">8</a>.  <a href="#name-references" class="internal xref">References</a></p>
 <ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.1">
-                <p id="section-toc.1-1.9.2.1.1"><a href="#section-9.1" class="auto internal xref">9.1</a>.  <a href="#name-normative-references" class="internal xref">Normative References</a></p>
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.1">
+                <p id="section-toc.1-1.8.2.1.1"><a href="#section-8.1" class="auto internal xref">8.1</a>.  <a href="#name-normative-references" class="internal xref">Normative References</a></p>
 </li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.2">
-                <p id="section-toc.1-1.9.2.2.1"><a href="#section-9.2" class="auto internal xref">9.2</a>.  <a href="#name-informative-references" class="internal xref">Informative References</a></p>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.2">
+                <p id="section-toc.1-1.8.2.2.1"><a href="#section-8.2" class="auto internal xref">8.2</a>.  <a href="#name-informative-references" class="internal xref">Informative References</a></p>
 </li>
             </ul>
 </li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9">
+            <p id="section-toc.1-1.9.1"><a href="#appendix-A" class="auto internal xref">Appendix A</a>.  <a href="#name-example" class="internal xref">Example</a></p>
+</li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10">
-            <p id="section-toc.1-1.10.1"><a href="#appendix-A" class="auto internal xref">Appendix A</a>.  <a href="#name-example" class="internal xref">Example</a></p>
+            <p id="section-toc.1-1.10.1"><a href="#appendix-B" class="auto internal xref">Appendix B</a>.  <a href="#name-comparison-with-connect-ip" class="internal xref">Comparison with CONNECT-IP</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11">
-            <p id="section-toc.1-1.11.1"><a href="#appendix-B" class="auto internal xref">Appendix B</a>.  <a href="#name-comparison-with-connect-ip" class="internal xref">Comparison with CONNECT-IP</a></p>
+            <p id="section-toc.1-1.11.1"><a href="#appendix-C" class="auto internal xref"></a><a href="#name-acknowledgments" class="internal xref">Acknowledgments</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.12">
-            <p id="section-toc.1-1.12.1"><a href="#appendix-C" class="auto internal xref"></a><a href="#name-acknowledgments" class="internal xref">Acknowledgments</a></p>
-</li>
-          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.13">
-            <p id="section-toc.1-1.13.1"><a href="#appendix-D" class="auto internal xref"></a><a href="#name-authors-addresses" class="internal xref">Authors' Addresses</a></p>
+            <p id="section-toc.1-1.12.1"><a href="#appendix-D" class="auto internal xref"></a><a href="#name-authors-addresses" class="internal xref">Authors' Addresses</a></p>
 </li>
         </ul>
 </nav>
@@ -1257,15 +1243,15 @@ from <span>[<a href="#QUIC" class="cite xref">QUIC</a>]</span>. This document us
 <a href="#section-2" class="section-number selfRef">2. </a><a href="#name-proxied-udp-listener-mechan" class="section-name selfRef">Proxied UDP Listener Mechanism</a>
       </h2>
 <p id="section-2-1">In unextended UDP Proxying requests, the target host is encoded in the HTTP
-request path or query. For Listener UDP Proxying, it is either conveyed in each
-HTTP Datagram, see <a href="#format" class="auto internal xref">Section 3</a> or registered via capsules and then compressed, see <a href="#contextid" class="auto internal xref">Section 4</a>.<a href="#section-2-1" class="pilcrow">¶</a></p>
+request path or query. For Listener UDP Proxying, it is instead conveyed in each
+HTTP Datagram, see <a href="#format" class="auto internal xref">Section 3</a>.<a href="#section-2-1" class="pilcrow">¶</a></p>
 <p id="section-2-2">When performing URI Template Expansion of the UDP Proxying template (see
 <span><a href="https://rfc-editor.org/rfc/rfc9298#section-3" class="relref">Section 3</a> of [<a href="#CONNECT-UDP" class="cite xref">CONNECT-UDP</a>]</span>), the client sets both the target_host and the
 target_port variables to the '*' character (ASCII character 0x2A).<a href="#section-2-2" class="pilcrow">¶</a></p>
 <p id="section-2-3">Before sending its UDP Proxying request to the proxy, the client allocates an
 even-numbered context ID, see <span><a href="https://rfc-editor.org/rfc/rfc9298#section-4" class="relref">Section 4</a> of [<a href="#CONNECT-UDP" class="cite xref">CONNECT-UDP</a>]</span>. The client then adds
-the "connect-udp-listen" header field to its UDP Proxying request, with its
-value set as the allocated context ID, see <a href="#contextid" class="auto internal xref">Section 4</a>.<a href="#section-2-3" class="pilcrow">¶</a></p>
+the "Connect-UDP-Listen" header field to its UDP Proxying request, with its
+value set as the allocated context ID, see <a href="#hdr" class="auto internal xref">Section 4</a>.<a href="#section-2-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="format">
@@ -1274,7 +1260,7 @@ value set as the allocated context ID, see <a href="#contextid" class="auto inte
 <a href="#section-3" class="section-number selfRef">3. </a><a href="#name-http-datagram-payload-forma" class="section-name selfRef">HTTP Datagram Payload Format</a>
       </h2>
 <p id="section-3-1">When HTTP Datagrams <span>[<a href="#HTTP-DGRAM" class="cite xref">HTTP-DGRAM</a>]</span> associated with this Listener UDP
-Proxying request contain the context ID in the connect-udp-listen header field,
+Proxying request contain the context ID in the Connect-UDP-Listen header field,
 the format of their UDP Proxying Payload field (see <span><a href="https://rfc-editor.org/rfc/rfc9298#section-5" class="relref">Section 5</a> of [<a href="#CONNECT-UDP" class="cite xref">CONNECT-UDP</a>]</span>) is defined by <a href="#dgram-format" class="auto internal xref">Figure 1</a>:<a href="#section-3-1" class="pilcrow">¶</a></p>
 <span id="name-listener-udp-proxying-http-"></span><div id="dgram-format">
 <figure id="figure-1">
@@ -1295,8 +1281,7 @@ Listener UDP Proxying Payload {
 <span class="break"></span><dl class="dlParallel" id="section-3-3">
         <dt id="section-3-3.1">IP Version:</dt>
         <dd style="margin-left: 1.5em" id="section-3-3.2">
-          <p id="section-3-3.2.1">The IP Version of the following IP Address field. <span class="bcp14">MUST</span> be 4 or 6.
-It <span class="bcp14">MUST</span> be omitted Context ID is non zero.<a href="#section-3-3.2.1" class="pilcrow">¶</a></p>
+          <p id="section-3-3.2.1">The IP Version of the following IP Address field. <span class="bcp14">MUST</span> be 4 or 6.<a href="#section-3-3.2.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
 <dt id="section-3-3.3">IP Address:</dt>
@@ -1305,8 +1290,7 @@ It <span class="bcp14">MUST</span> be omitted Context ID is non zero.<a href="#s
 this is the target host to which the proxy will send this UDP payload. When sent
 from proxy to client, this represents the source IP address of the UDP packet
 received by the proxy. This field has a length of 32 bits when the corresponding
-IP Version field value is 4, and 128 when the IP Version is 6.
-It <span class="bcp14">MUST</span> be omitted if Context ID is non zero.<a href="#section-3-3.4.1" class="pilcrow">¶</a></p>
+IP Version field value is 4, and 128 when the IP Version is 6.<a href="#section-3-3.4.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
 <dt id="section-3-3.5">UDP Port:</dt>
@@ -1314,7 +1298,7 @@ It <span class="bcp14">MUST</span> be omitted if Context ID is non zero.<a href=
           <p id="section-3-3.6.1">The UDP Port of this proxied UDP packet in network byte order. When sent from
 client to proxy, this is the target port to which the proxy will send this UDP
 payload. When sent from proxy to client, this represents the source UDP port of
-the UDP packet received by the proxy. It <span class="bcp14">MUST</span> be omitted if Context ID is non zero.<a href="#section-3-3.6.1" class="pilcrow">¶</a></p>
+the UDP packet received by the proxy.<a href="#section-3-3.6.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
 <dt id="section-3-3.7">UDP Payload:</dt>
@@ -1326,250 +1310,99 @@ octets" in <span>[<a href="#UDP" class="cite xref">UDP</a>]</span>).<a href="#se
 </dl>
 </section>
 </div>
-<div id="contextid">
-<section id="section-4">
-      <h2 id="name-context-id">
-<a href="#section-4" class="section-number selfRef">4. </a><a href="#name-context-id" class="section-name selfRef">Context ID</a>
-      </h2>
-<p id="section-4-1">The context ID is a 62 bit, variable length integer and <span class="bcp14">MUST</span> be specified in each UDP Payload carrying datagram. Context ID of value 0 represents no compression. When using context ID 0, the client and server must specify the IP version, IP and port of the target per datagram, see <a href="#format" class="auto internal xref">Section 3</a>. Context ID 0 is enabled by default, but may be disabled using  <a href="#disableuncompressedforwarding" class="auto internal xref">Section 4.2</a><a href="#section-4-1" class="pilcrow">¶</a></p>
-<p id="section-4-2">The client can compress IP and port information using Context IDs as defined under <a href="#compression" class="auto internal xref">Section 4.1</a>. The client may suppress traffic coming from uncompressed IPs using<a href="#section-4-2" class="pilcrow">¶</a></p>
-<div id="compression">
-<section id="section-4.1">
-        <h3 id="name-header-compression">
-<a href="#section-4.1" class="section-number selfRef">4.1. </a><a href="#name-header-compression" class="section-name selfRef">Header Compression</a>
-        </h3>
-<p id="section-4.1-1">The client <span class="bcp14">MAY</span> choose to map IP and port information per datagram against the Context ID defined in <a href="#contextid" class="auto internal xref">Section 4</a>. In such a case, the client <span class="bcp14">MUST</span> send a COMPRESSION_REQUEST capsule (see <a href="#capsulerequestformat" class="auto internal xref">Figure 2</a>) with the target information (see <a href="#targetmappingformat" class="auto internal xref">Figure 4</a>) it wishes to compress and the proxy <span class="bcp14">MUST</span> respond with a COMPRESSION_RESPONSE (see <a href="#capsuleresponseformat" class="auto internal xref">Figure 3</a>) capsule.<a href="#section-4.1-1" class="pilcrow">¶</a></p>
-<p id="section-4.1-2">Once the response is received by client, both the proxy and the client <span class="bcp14">MUST</span> send each other packets corresponding to a target using the unique Context ID assigned to the given target, while omitting IP and port information.<a href="#section-4.1-2" class="pilcrow">¶</a></p>
-<p id="section-4.1-3">The proxy <span class="bcp14">MUST</span> maintain a Target Map to Context ID and update this mapping when new COMPRESSION_REQUEST and COMPRESSION_RESPONSE capsules are exchanged. The COMPRESSION_REQUEST capsule contains an optional disable-uncompressed-forwarding field that may be set to block uncompressed traffic, see <a href="#disableuncompressedforwarding" class="auto internal xref">Section 4.2</a>.<a href="#section-4.1-3" class="pilcrow">¶</a></p>
-</section>
-</div>
-<div id="disableuncompressedforwarding">
-<section id="section-4.2">
-        <h3 id="name-disable-uncompressed-forwar">
-<a href="#section-4.2" class="section-number selfRef">4.2. </a><a href="#name-disable-uncompressed-forwar" class="section-name selfRef">disable-uncompressed-forwarding Field</a>
-        </h3>
-<p id="section-4.2-1">By default, the proxy and client <span class="bcp14">MUST</span> send uncompressed packets to each other and use context ID 0. The disable-uncompressed-forwarding field is an optional boolean field which <span class="bcp14">MAY</span> be used by the client to block any targets that haven't been registered using the Header Compression Mechanism in <a href="#compression" class="auto internal xref">Section 4.1</a>.<a href="#section-4.2-1" class="pilcrow">¶</a></p>
-<p id="section-4.2-2">The field <span class="bcp14">MAY</span> optionally be added to the COMPRESSION_REQUEST Capsule. When set, the server's COMPRESSION_RESPONSE <span class="bcp14">MUST</span> contain the disable-uncompressed-forwarding field with the same boolean value, confirming the user's request.<a href="#section-4.2-2" class="pilcrow">¶</a></p>
-<p id="section-4.2-3">If the value was set to true, the proxy <span class="bcp14">MUST NOT</span> forward packets using Context ID 0 for the given stream ID and <span class="bcp14">MUST</span> block any packets received from targets not found in the proxy's Target to Context ID mapping.
-If it was set to false, the proxy <span class="bcp14">MUST</span> forward any future Uncompressed Context 0 packets.<a href="#section-4.2-3" class="pilcrow">¶</a></p>
-<p id="section-4.2-4">When using the disable-uncompressed-forwarding field, the Target information (in <a href="#targetmappingformat" class="auto internal xref">Figure 4</a>) may be omitted from the request. In such a case the response <span class="bcp14">MUST</span> also omit the Target Information.<a href="#section-4.2-4" class="pilcrow">¶</a></p>
-</section>
-</div>
-<div id="capsules">
-<section id="section-4.3">
-        <h3 id="name-capsules">
-<a href="#section-4.3" class="section-number selfRef">4.3. </a><a href="#name-capsules" class="section-name selfRef">Capsules</a>
-        </h3>
-<p id="section-4.3-1">The capsule types are defined in <a href="#capsulerequestformat" class="auto internal xref">Figure 2</a>:<a href="#section-4.3-1" class="pilcrow">¶</a></p>
-<span id="name-compression-request-capsule"></span><div id="capsulerequestformat">
-<figure id="figure-2">
-          <div class="alignLeft art-ascii-art art-text artwork" id="section-4.3-2.1">
-<pre>
-Capsule {
-  Type COMPRESSION_REQUEST (0x04),
-  Length (i),
-  Quarter Stream ID (i),
-  Target Information,
-  disable-uncompressed-forwarding (1),
-}
-</pre>
-</div>
-<figcaption><a href="#figure-2" class="selfRef">Figure 2</a>:
-<a href="#name-compression-request-capsule" class="selfRef">Compression Request Capsule Format</a>
-          </figcaption></figure>
-</div>
-<span id="name-compression-assign-capsule-"></span><div id="capsuleresponseformat">
-<figure id="figure-3">
-          <div class="alignLeft art-ascii-art art-text artwork" id="section-4.3-3.1">
-<pre>
-Capsule {
-  Type COMPRESSION_ASSIGN (0x05),
-  Length (i),
-  Quarter Stream ID (i),
-  Target Information,
-  disable-uncompressed-forwarding (1),
-}
-</pre>
-</div>
-<figcaption><a href="#figure-3" class="selfRef">Figure 3</a>:
-<a href="#name-compression-assign-capsule-" class="selfRef">Compression Assign Capsule Format</a>
-          </figcaption></figure>
-</div>
-<span id="name-target-information-format"></span><div id="targetmappingformat">
-<figure id="figure-4">
-          <div class="alignLeft art-ascii-art art-text artwork" id="section-4.3-4.1">
-<pre>
-Target Info {
-  Context ID (i),
-  IP Version (8),
-  IP Address (32..128),
-  UDP Port (16),
-}
-</pre>
-</div>
-<figcaption><a href="#figure-4" class="selfRef">Figure 4</a>:
-<a href="#name-target-information-format" class="selfRef">Target Information Format</a>
-          </figcaption></figure>
-</div>
-<p id="section-4.3-5">The IP Length, Address and Port fields in <a href="#targetmappingformat" class="auto internal xref">Figure 4</a> are the same as those defined in <a href="#format" class="auto internal xref">Section 3</a>.<a href="#section-4.3-5" class="pilcrow">¶</a></p>
-</section>
-</div>
-</section>
-</div>
 <div id="hdr">
-<section id="section-5">
+<section id="section-4">
       <h2 id="name-the-connect-udp-listen-head">
-<a href="#section-5" class="section-number selfRef">5. </a><a href="#name-the-connect-udp-listen-head" class="section-name selfRef">The connect-udp-listen Header Field</a>
+<a href="#section-4" class="section-number selfRef">4. </a><a href="#name-the-connect-udp-listen-head" class="section-name selfRef">The Connect-UDP-Listen Header Field</a>
       </h2>
-<p id="section-5-1">The "connect-udp-listen" header field’s value is an Integer. It is set as the
-Context ID allocated for Listener UDP Proxying; see <a href="#contextid" class="auto internal xref">Section 4</a>. Any other
+<p id="section-4-1">The "Connect-UDP-Listen" header field’s value is an Integer. It is set as the
+Context ID allocated for Listener UDP Proxying; see <a href="#mechanism" class="auto internal xref">Section 2</a>. Any other
 value type <span class="bcp14">MUST</span> be handled as if the field were not present by the recipients
 (for example, if this field is defined multiple times, its type becomes a List
 and therefore is to be ignored). This document does not define any parameters
-for the connect-udp-listen header field value, but future documents might define
-parameters. Receivers <span class="bcp14">MUST</span> ignore unknown parameters.<a href="#section-5-1" class="pilcrow">¶</a></p>
+for the Connect-UDP-Listen header field value, but future documents might define
+parameters. Receivers <span class="bcp14">MUST</span> ignore unknown parameters.<a href="#section-4-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="proxy-behavior">
-<section id="section-6">
+<section id="section-5">
       <h2 id="name-proxy-behavior">
-<a href="#section-6" class="section-number selfRef">6. </a><a href="#name-proxy-behavior" class="section-name selfRef">Proxy behavior</a>
+<a href="#section-5" class="section-number selfRef">5. </a><a href="#name-proxy-behavior" class="section-name selfRef">Proxy behavior</a>
       </h2>
-<p id="section-6-1">After accepting the Connect-UDP Listener proxying request, the proxy uses a UDP
+<p id="section-5-1">After accepting the Connect-UDP Listener proxying request, the proxy uses a UDP
 port to transmit UDP payloads received from the client to the target IP Address
 and UDP Port specified in each Listener Datagram Payload received from the
 client. The proxy uses the same port to listen for UDP packets from any
 authorized target and encapsulates the packets in the Listener Datagram
 Payload format, specifying the IP and port of the target and forwards it to
-the client.
-When a client sends a compression request capsule, the proxy registeres a mapping
-from Context ID to the provided target and port as long as the context ID in
-the Compression request is non-zero.<a href="#section-6-1" class="pilcrow">¶</a></p>
-<p id="section-6-2">When the proxy receives Datagram payloads from clients:<a href="#section-6-2" class="pilcrow">¶</a></p>
-<p id="section-6-3">If context is non-zero, it looks up the registered
-Context ID to target IP and Port information and sends to that target.<a href="#section-6-3" class="pilcrow">¶</a></p>
-<p id="section-6-4">If the Context ID is set to zero in a datagram, it parses IP and Port information
-and forwards UDP payload to that target.<a href="#section-6-4" class="pilcrow">¶</a></p>
+the client.<a href="#section-5-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="security-considerations">
-<section id="section-7">
+<section id="section-6">
       <h2 id="name-security-considerations">
-<a href="#section-7" class="section-number selfRef">7. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
+<a href="#section-6" class="section-number selfRef">6. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
       </h2>
-<p id="section-7-1">The security considerations described in <span><a href="https://rfc-editor.org/rfc/rfc9298#section-7" class="relref">Section 7</a> of [<a href="#CONNECT-UDP" class="cite xref">CONNECT-UDP</a>]</span> also apply
+<p id="section-6-1">The security considerations described in <span><a href="https://rfc-editor.org/rfc/rfc9298#section-7" class="relref">Section 7</a> of [<a href="#CONNECT-UDP" class="cite xref">CONNECT-UDP</a>]</span> also apply
 here. Since TURN can be run over this mechanism, implementors should review the
-security considerations in <span><a href="https://rfc-editor.org/rfc/rfc8656#section-21" class="relref">Section 21</a> of [<a href="#TURN" class="cite xref">TURN</a>]</span>.<a href="#section-7-1" class="pilcrow">¶</a></p>
-<p id="section-7-2">Since unextended UDP Proxying requests carry the target as part of the request,
+security considerations in <span><a href="https://rfc-editor.org/rfc/rfc8656#section-21" class="relref">Section 21</a> of [<a href="#TURN" class="cite xref">TURN</a>]</span>.<a href="#section-6-1" class="pilcrow">¶</a></p>
+<p id="section-6-2">Since unextended UDP Proxying requests carry the target as part of the request,
 the proxy can protect unauthorized targets by rejecting requests before creating
 the tunnel, and communicate the rejection reason in response header fields.
 Listener UDP Proxying requests do not have this ability. Therefore, proxies <span class="bcp14">MUST</span>
 validate the target on every datagram and <span class="bcp14">MUST NOT</span> forward individual datagrams
 with unauthorized targets. Proxies can either silently discard such datagrams or
-abort the corresponding request stream.<a href="#section-7-2" class="pilcrow">¶</a></p>
+abort the corresponding request stream.<a href="#section-6-2" class="pilcrow">¶</a></p>
+<p id="section-6-3">Unlike non-binding CONNECT-UDP, since the proxy tunnels datagrams from any
+target to clients bound to their respective public IP and ports, the clients
+<span class="bcp14">MUST</span> be ready to handle potential unwanted traffic from unknown destinations.<a href="#section-6-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="iana-considerations">
-<section id="section-8">
+<section id="section-7">
       <h2 id="name-iana-considerations">
-<a href="#section-8" class="section-number selfRef">8. </a><a href="#name-iana-considerations" class="section-name selfRef">IANA Considerations</a>
+<a href="#section-7" class="section-number selfRef">7. </a><a href="#name-iana-considerations" class="section-name selfRef">IANA Considerations</a>
       </h2>
-<p id="section-8-1">This document will request IANA to register the following entry in the "HTTP
+<p id="section-7-1">This document will request IANA to register the following entry in the "HTTP
 Field Name" registry maintained at
-&lt;<span><a href="https://www.iana.org/assignments/http-fields">https://www.iana.org/assignments/http-fields</a></span>&gt;:<a href="#section-8-1" class="pilcrow">¶</a></p>
-<span class="break"></span><dl class="dlCompact dlParallel" id="section-8-2">
-        <dt id="section-8-2.1">Field Name:</dt>
-        <dd style="margin-left: 1.5em" id="section-8-2.2">
-          <p id="section-8-2.2.1">connect-udp-listen<a href="#section-8-2.2.1" class="pilcrow">¶</a></p>
+&lt;<span><a href="https://www.iana.org/assignments/http-fields">https://www.iana.org/assignments/http-fields</a></span>&gt;:<a href="#section-7-1" class="pilcrow">¶</a></p>
+<span class="break"></span><dl class="dlCompact dlParallel" id="section-7-2">
+        <dt id="section-7-2.1">Field Name:</dt>
+        <dd style="margin-left: 1.5em" id="section-7-2.2">
+          <p id="section-7-2.2.1">Connect-UDP-Listen<a href="#section-7-2.2.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
-<dt id="section-8-2.3">Template:</dt>
-        <dd style="margin-left: 1.5em" id="section-8-2.4">
-          <p id="section-8-2.4.1">None<a href="#section-8-2.4.1" class="pilcrow">¶</a></p>
+<dt id="section-7-2.3">Template:</dt>
+        <dd style="margin-left: 1.5em" id="section-7-2.4">
+          <p id="section-7-2.4.1">None<a href="#section-7-2.4.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
-<dt id="section-8-2.5">Status:</dt>
-        <dd style="margin-left: 1.5em" id="section-8-2.6">
-          <p id="section-8-2.6.1">provisional (permanent if this document is approved)<a href="#section-8-2.6.1" class="pilcrow">¶</a></p>
+<dt id="section-7-2.5">Status:</dt>
+        <dd style="margin-left: 1.5em" id="section-7-2.6">
+          <p id="section-7-2.6.1">provisional (permanent if this document is approved)<a href="#section-7-2.6.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
-<dt id="section-8-2.7">Reference:</dt>
-        <dd style="margin-left: 1.5em" id="section-8-2.8">
-          <p id="section-8-2.8.1">This document<a href="#section-8-2.8.1" class="pilcrow">¶</a></p>
+<dt id="section-7-2.7">Reference:</dt>
+        <dd style="margin-left: 1.5em" id="section-7-2.8">
+          <p id="section-7-2.8.1">This document<a href="#section-7-2.8.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
-<dt id="section-8-2.9">Comments:</dt>
-        <dd style="margin-left: 1.5em" id="section-8-2.10">
-          <p id="section-8-2.10.1">None<a href="#section-8-2.10.1" class="pilcrow">¶</a></p>
-</dd>
-      <dd class="break"></dd>
-</dl>
-<p id="section-8-3">This document also requests IANA to register the following new "HTTP Capsule Types" maintained at
-&lt;<span><a href="https://www.iana.org/assignments/masque">https://www.iana.org/assignments/masque</a></span>&gt;:<a href="#section-8-3" class="pilcrow">¶</a></p>
-<span class="break"></span><dl class="dlCompact dlParallel" id="section-8-4">
-        <dt id="section-8-4.1">Value:</dt>
-        <dd style="margin-left: 1.5em" id="section-8-4.2">
-          <p id="section-8-4.2.1">0x04<a href="#section-8-4.2.1" class="pilcrow">¶</a></p>
-</dd>
-        <dd class="break"></dd>
-<dt id="section-8-4.3">Capsule Type:</dt>
-        <dd style="margin-left: 1.5em" id="section-8-4.4">
-          <p id="section-8-4.4.1">COMPRESSION_REQUEST<a href="#section-8-4.4.1" class="pilcrow">¶</a></p>
-</dd>
-        <dd class="break"></dd>
-<dt id="section-8-4.5">Status:</dt>
-        <dd style="margin-left: 1.5em" id="section-8-4.6">
-          <p id="section-8-4.6.1">provisional (permanent if this document is approved)<a href="#section-8-4.6.1" class="pilcrow">¶</a></p>
-</dd>
-        <dd class="break"></dd>
-<dt id="section-8-4.7">Reference:</dt>
-        <dd style="margin-left: 1.5em" id="section-8-4.8">
-          <p id="section-8-4.8.1">This document<a href="#section-8-4.8.1" class="pilcrow">¶</a></p>
-</dd>
-        <dd class="break"></dd>
-<dt id="section-8-4.9">Comments:</dt>
-        <dd style="margin-left: 1.5em" id="section-8-4.10">
-          <p id="section-8-4.10.1">None<a href="#section-8-4.10.1" class="pilcrow">¶</a></p>
-</dd>
-      <dd class="break"></dd>
-</dl>
-<span class="break"></span><dl class="dlCompact dlParallel" id="section-8-5">
-        <dt id="section-8-5.1">Value:</dt>
-        <dd style="margin-left: 1.5em" id="section-8-5.2">
-          <p id="section-8-5.2.1">0x05<a href="#section-8-5.2.1" class="pilcrow">¶</a></p>
-</dd>
-        <dd class="break"></dd>
-<dt id="section-8-5.3">Capsule Type:</dt>
-        <dd style="margin-left: 1.5em" id="section-8-5.4">
-          <p id="section-8-5.4.1">COMPRESSION_ASSIGN<a href="#section-8-5.4.1" class="pilcrow">¶</a></p>
-</dd>
-        <dd class="break"></dd>
-<dt id="section-8-5.5">Status:</dt>
-        <dd style="margin-left: 1.5em" id="section-8-5.6">
-          <p id="section-8-5.6.1">provisional (permanent if this document is approved)<a href="#section-8-5.6.1" class="pilcrow">¶</a></p>
-</dd>
-        <dd class="break"></dd>
-<dt id="section-8-5.7">Reference:</dt>
-        <dd style="margin-left: 1.5em" id="section-8-5.8">
-          <p id="section-8-5.8.1">This document<a href="#section-8-5.8.1" class="pilcrow">¶</a></p>
-</dd>
-        <dd class="break"></dd>
-<dt id="section-8-5.9">Comments:</dt>
-        <dd style="margin-left: 1.5em" id="section-8-5.10">
-          <p id="section-8-5.10.1">None<a href="#section-8-5.10.1" class="pilcrow">¶</a></p>
+<dt id="section-7-2.9">Comments:</dt>
+        <dd style="margin-left: 1.5em" id="section-7-2.10">
+          <p id="section-7-2.10.1">None<a href="#section-7-2.10.1" class="pilcrow">¶</a></p>
 </dd>
       <dd class="break"></dd>
 </dl>
 </section>
 </div>
-<section id="section-9">
+<section id="section-8">
       <h2 id="name-references">
-<a href="#section-9" class="section-number selfRef">9. </a><a href="#name-references" class="section-name selfRef">References</a>
+<a href="#section-8" class="section-number selfRef">8. </a><a href="#name-references" class="section-name selfRef">References</a>
       </h2>
 <div id="sec-normative-references">
-<section id="section-9.1">
+<section id="section-8.1">
         <h3 id="name-normative-references">
-<a href="#section-9.1" class="section-number selfRef">9.1. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
+<a href="#section-8.1" class="section-number selfRef">8.1. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
         </h3>
 <dl class="references">
 <dt id="CONNECT-UDP">[CONNECT-UDP]</dt>
@@ -1608,9 +1441,9 @@ Field Name" registry maintained at
 </section>
 </div>
 <div id="sec-informative-references">
-<section id="section-9.2">
+<section id="section-8.2">
         <h3 id="name-informative-references">
-<a href="#section-9.2" class="section-number selfRef">9.2. </a><a href="#name-informative-references" class="section-name selfRef">Informative References</a>
+<a href="#section-8.2" class="section-number selfRef">8.2. </a><a href="#name-informative-references" class="section-name selfRef">Informative References</a>
         </h3>
 <dl class="references">
 <dt id="CONNECT-IP">[CONNECT-IP]</dt>
@@ -1655,12 +1488,12 @@ back to the client.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
    :scheme = https
    :path = /.well-known/masque/udp/*/*/
    :authority = proxy.example.org
-   connect-udp-listen = 2
+   Connect-UDP-Listen = 2
    capsule-protocol = ?1
 
  DATAGRAM                       --------&gt;
    Quarter Stream ID = 11
-   Context ID = 0
+   Context ID = 2
    IP Version = 4
    IP Address = 192.0.2.42
    UDP Port = 1234
@@ -1674,7 +1507,7 @@ back to the client.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
 
             &lt;--------  DATAGRAM
                          Quarter Stream ID = 11
-                         Context ID = 0
+                         Context ID = 2
                          IP Version = 4
                          IP Address = 192.0.2.42
                          UDP Port = 1234
@@ -1686,42 +1519,11 @@ back to the client.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
 
             &lt;--------  DATAGRAM
                          Quarter Stream ID = 11
-                         Context ID = 0
+                         Context ID = 2
                          IP Version = 4
                          IP Address = 203.0.113.33
                          UDP Port = 4321
                          UDP Payload = Encapsulated UDP Payload
-
-/* Register 203.0.113.33:1234 to compress it in the future*/
- CAPSULE                       --------&gt;
-   Type = COMPRESSION_REQUEST (0x04)
-   Quarter Stream ID = 11
-   Context ID = 2
-   IP Version = 4
-   IP Address = 203.0.113.33
-   UDP Port = 1234
-
-
-/*Proxy confirms registration.*/
-            &lt;-------- CAPSULE
-                        Type = COMPRESSION_ASSIGN (0x05)
-                        Quarter Stream ID = 11
-                        Context ID = 2
-                        IP Version = 4
-                        IP Address = 203.0.113.33
-                        UDP Port = 1234
-
-/* Omit IP and Port for future packets intended for*/
-/*203.0.113.33:1234 hereon */
- DATAGRAM                       --------&gt;
-   Quarter Stream ID = 11
-   Context ID = 2
-   UDP Payload = Encapsulated UDP Payload
-
-            &lt;--------  DATAGRAM
-                        Quarter Stream ID = 11
-                        Context ID = 2
-                        UDP Payload = Encapsulated UDP Payload
 </pre><a href="#appendix-A-2" class="pilcrow">¶</a>
 </div>
 </section>
