@@ -169,7 +169,7 @@ parameters. Receivers MUST ignore unknown parameters.
 
 # The proxy-public-address Response Header Field {#response}
 
-Upon accepting the request, the proxy MUST allocate either one or both of IPv4address to port and IPv6address to port pairings. IPv4address, IPv6address and port are defined in {{!URI=RFC3986}}
+Upon accepting the request, the proxy MUST select at least one public IP address to bind. For each selected address, it MUST select an open port to bind to this request. From then and until the tunnel is closed, the proxy SHALL send packets received on these IP-port tuples to the client. The proxy then MUST communicate the selected addresses and ports to the client using the "Proxy-Public-Address" header. The format of that header is defined below using IPv4address, IPv6address and port from {{Section 3.2 of !URI=RFC3986}}.
 
 The proxy must then respond with the allocated IP and port pairings using the "proxy-public-address" response header defined as follows:
 
