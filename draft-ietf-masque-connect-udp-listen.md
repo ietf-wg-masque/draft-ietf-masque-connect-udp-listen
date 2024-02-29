@@ -2,7 +2,7 @@
 title: "Proxying Binding UDP in HTTP"
 abbrev: "CONNECT-UDP Bind"
 category: std
-docname: draft-ietf-masque-connect-udp-bind-latest
+docname: draft-ietf-masque-connect-udp-listen-latest
 submissiontype: IETF
 number:
 date:
