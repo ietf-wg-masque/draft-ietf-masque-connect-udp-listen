@@ -101,7 +101,8 @@ from {{!QUIC=RFC9000}}. This document uses the terms Integer and List from
 
 In unextended UDP Proxying requests, the target host is encoded in the HTTP
 request path or query. For Listener UDP Proxying, it is either conveyed in each
-HTTP Datagram, see {{format}} or registered via capsules and then compressed, see {{contextid}}.
+HTTP Datagram, see {{format}} or registered via capsules and then compressed,
+see {{contextid}}.
 
 When performing URI Template Expansion of the UDP Proxying template (see
 {{Section 3 of CONNECT-UDP}}), the client sets both the target_host and the
@@ -117,7 +118,8 @@ value set as the allocated context ID, see {{contextid}}.
 When HTTP Datagrams {{!HTTP-DGRAM=RFC9297}} associated with this Listener UDP
 Proxying request contain the context ID in the connect-udp-listen header field,
 the format of their UDP Proxying Payload field (see {{Section 5 of
-CONNECT-UDP}}) is defined by {{dgram-format}}:
+CONNECT-UDP}}) is defined by {{dgram-format}} when context ID is 0 and
+{{dgram-format-compressed}} when context ID is non zero. (See {{contextid}})
 
 ~~~ ascii-art
 Listener UDP Proxying Payload {
@@ -127,12 +129,19 @@ Listener UDP Proxying Payload {
   UDP Payload (..),
 }
 ~~~
-{: #dgram-format title="Listener UDP Proxying HTTP Datagram Format"}
+{: #dgram-format title="Uncompressed Listener UDP Proxying HTTP Datagram Format"}
+
+~~~ ascii-art
+Listener UDP Proxying Compressed Payload {
+  UDP Payload (..),
+}
+~~~
+{: #dgram-format-compressed title="Compressed Listener UDP Proxying HTTP Datagram Format"}
+
 
 IP Version:
 
 : The IP Version of the following IP Address field. MUST be 4 or 6.
-It MUST be omitted Context ID is non zero.
 
 IP Address:
 
@@ -141,53 +150,78 @@ this is the target host to which the proxy will send this UDP payload. When sent
 from proxy to client, this represents the source IP address of the UDP packet
 received by the proxy. This field has a length of 32 bits when the corresponding
 IP Version field value is 4, and 128 when the IP Version is 6.
-It MUST be omitted if Context ID is non zero.
 
 UDP Port:
 
 : The UDP Port of this proxied UDP packet in network byte order. When sent from
 client to proxy, this is the target port to which the proxy will send this UDP
 payload. When sent from proxy to client, this represents the source UDP port of
-the UDP packet received by the proxy. It MUST be omitted if Context ID is non zero.
+the UDP packet received by the proxy.
 
 UDP Payload:
 
 : The unmodified UDP Payload of this proxied UDP packet (referred to as "data
 octets" in {{UDP}}).
 
-
 # Context ID {#contextid}
-The context ID is a 62 bit, variable length integer and MUST be specified in each UDP Payload carrying datagram. Context ID of value 0 represents no compression. When using context ID 0, the client and server must specify the IP version, IP and port of the target per datagram, see {{format}}. Context ID 0 is enabled by default, but may be disabled using  {{disableuncompressedforwarding}}
 
-The client can compress IP and port information using Context IDs as defined under {{compression}}. The client may suppress traffic coming from uncompressed IPs using
+A Context ID of value 0 represents no compression. When using context ID 0, the
+client and server must specify the IP version, IP and port of the target per
+datagram, see {{format}}. The client can compress IP and port information using
+non zero Context IDs as defined under {{compression}}.
+Receiving and forwarding from Context ID 0 is enabled by default, but may be
+disabled using {{restrictingips}}.
 
 ## Header Compression {#compression}
-The client MAY choose to map IP and port information per datagram against the Context ID defined in {{contextid}}. In such a case, the client MUST send a COMPRESSION_REQUEST capsule (see {{capsulerequestformat}}) with the target information (see {{targetmappingformat}}) it wishes to compress and the proxy MUST respond with a COMPRESSION_RESPONSE (see {{capsuleresponseformat}}) capsule.
 
-Once the response is received by client, both the proxy and the client MUST send each other packets corresponding to a target using the unique Context ID assigned to the given target, while omitting IP and port information.
+The client MAY choose to map IP and port information per datagram against the
+Context ID defined in {{contextid}}. In such a case, the client MUST send a
+COMPRESSION_REQUEST capsule (see {{capsulerequestformat}}) with the target
+information (see {{targetmappingformat}}) it wishes to compress and the proxy
+MUST respond with either a COMPRESSION_ASSIGN (see {{capsuleresponseformat}})
+capsule if it accepts the compression request, or a COMPRESSION_REJECT
+(see {{capsulerejectformat}}) if it doesn't wish to support compression
+(For example, due to considerable memory requirements of establishing a list
+of mappings per target per client). If the compression was rejected,
+the client and server MUST continue to use uncompressed, Context ID 0 Datagrams
+for the requested target.
+Otherwise, they must exchange compressed datagrams for the given datagram as
+described in {{mappings}}.
 
-The proxy MUST maintain a Target Map to Context ID and update this mapping when new COMPRESSION_REQUEST and COMPRESSION_RESPONSE capsules are exchanged. The COMPRESSION_REQUEST capsule contains an optional disable-uncompressed-forwarding field that may be set to block uncompressed traffic, see {{disableuncompressedforwarding}}.
+### Compression Mapping {#mappings}
 
-## disable-uncompressed-forwarding Field {#disableuncompressedforwarding}
-By default, the proxy and client MUST send uncompressed packets to each other and use context ID 0. The disable-uncompressed-forwarding field is an optional boolean field which MAY be used by the client to block any targets that haven't been registered using the Header Compression Mechanism in {{compression}}.
+If a COMPRESSION_ASSIGN is received by client, the proxy and client MUST
+maintain a compression mapping from Target to Context ID and update this
+mapping whenever new COMPRESSION_REQUEST and COMPRESSION_ASSIGN capsules
+are exchanged between the two. Upon completing this exchange, the proxy and
+the client MUST send each other packets corresponding to a target using the
+unique Context ID assigned to the given target, while omitting IP and port
+information.
 
-The field MAY optionally be added to the COMPRESSION_REQUEST Capsule. When set, the server's COMPRESSION_RESPONSE MUST contain the disable-uncompressed-forwarding field with the same boolean value, confirming the user's request.
 
-If the value was set to true, the proxy MUST NOT forward packets using Context ID 0 for the given stream ID and MUST block any packets received from targets not found in the proxy's Target to Context ID mapping.
-If it was set to false, the proxy MUST forward any future Uncompressed Context 0 packets.
+## Restricting IPs {#restrictingips}
 
-When using the disable-uncompressed-forwarding field, the Target information (in {{targetmappingformat}}) may be omitted from the request. In such a case the response MUST also omit the Target Information.
+The client MAY request the proxy reject any uncompressed targets by sending
+it the COMPRESSION_CLOSE (see {{compressioncloseformat}}) capsule with the
+enable field set to true. Upon receiving the request, the proxy MUST echo
+back the COMPRESSION_CLOSE with the enable field set to true. Hereon, the
+proxy MUST not forward any packets from uncommpressed targets to the client
+and MUST drop any UDP  payloads received from unregistered targets.
+
+Likewise, the client MAY choose to re-enable traffic from uncompressed
+targets, by sending the COMPRESSION_CLOSE capsule with the enable field
+set to false and the proxy MUST respond with COMPRESSION_CLOSE with enable
+set to false and MUST re-start forwarding uncompressed context ID 0 payloads.
+
 
 ## Capsules {#capsules}
-The capsule types are defined in {{capsulerequestformat}}:
+The Listener capsule types are defined below:
 
 ~~~ ascii-art
 Capsule {
   Type COMPRESSION_REQUEST (0x04),
   Length (i),
-  Quarter Stream ID (i),
   Target Information,
-  disable-uncompressed-forwarding (1),
 }
 ~~~
 {: #capsulerequestformat title="Compression Request Capsule Format"}
@@ -196,15 +230,32 @@ Capsule {
 Capsule {
   Type COMPRESSION_ASSIGN (0x05),
   Length (i),
-  Quarter Stream ID (i),
   Target Information,
-  disable-uncompressed-forwarding (1),
 }
 ~~~
 {: #capsuleresponseformat title="Compression Assign Capsule Format"}
 
+
 ~~~ ascii-art
-Target Info {
+Capsule {
+  Type COMPRESSION_REJECT (0x06),
+  Length (i),
+  Target Information,
+}
+~~~
+{: #capsulerejectformat title="Compression Reject Capsule Format"}
+
+
+~~~ ascii-art
+Capsule {
+  Type COMPRESSION_CLOSE (0x07),
+  enable (1),
+}
+~~~
+{: #compressioncloseformat title="Compression Close Capsule Format"}
+
+~~~ ascii-art
+Target Information {
   Context ID (i),
   IP Version (8),
   IP Address (32..128),
@@ -241,11 +292,14 @@ the Compression request is non-zero.
 
 When the proxy receives Datagram payloads from clients:
 
-If context is non-zero, it looks up the registered
-Context ID to target IP and Port information and sends to that target.
+If context is non-zero, it looks up the registered Context ID to target IP and
+Port in the compression mapping and sends the payload to that target.
 
 If the Context ID is set to zero in a datagram, it parses IP and Port information
 and forwards UDP payload to that target.
+
+When IP restriction via COMPRESSION_CLOSE has been enabled, the proxy rejects
+any IPs that haven't been registered in the compression mapping.
 
 
 # Security Considerations
@@ -323,8 +377,41 @@ Comments:
 
 : None
 {: spacing="compact"}
---- back
 
+Value:
+: 0x06
+
+Capsule Type:
+: COMPRESSION_REJECT
+
+Status:
+: provisional (permanent if this document is approved)
+
+Reference:
+: This document
+
+Comments:
+
+: None
+{: spacing="compact"}
+
+Value:
+: 0x07
+
+Capsule Type:
+: COMPRESSION_CLOSE
+
+Status:
+: provisional (permanent if this document is approved)
+
+Reference:
+: This document
+
+Comments:
+
+: None
+{: spacing="compact"}
+--- back
 
 # Example
 
@@ -385,7 +472,6 @@ back to the client.
 /* Register 203.0.113.33:1234 to compress it in the future*/
  CAPSULE                       -------->
    Type = COMPRESSION_REQUEST (0x04)
-   Quarter Stream ID = 11
    Context ID = 2
    IP Version = 4
    IP Address = 203.0.113.33
@@ -395,7 +481,6 @@ back to the client.
 /*Proxy confirms registration.*/
             <-------- CAPSULE
                         Type = COMPRESSION_ASSIGN (0x05)
-                        Quarter Stream ID = 11
                         Context ID = 2
                         IP Version = 4
                         IP Address = 203.0.113.33
@@ -404,14 +489,25 @@ back to the client.
 /* Omit IP and Port for future packets intended for*/
 /*203.0.113.33:1234 hereon */
  DATAGRAM                       -------->
-   Quarter Stream ID = 11
    Context ID = 2
    UDP Payload = Encapsulated UDP Payload
 
             <--------  DATAGRAM
-                        Quarter Stream ID = 11
                         Context ID = 2
                         UDP Payload = Encapsulated UDP Payload
+
+/* Request unregistered packets to be dropped*/
+ CAPSULE                       -------->
+   Type = COMPRESSION_CLOSE (0x07)
+   enable = true
+
+
+/* Proxy confirms unmapped IP rejection. */
+            <-------- CAPSULE
+                        Type = COMPRESSION_CLOSE (0x07)
+                        enable = true
+/* Proxy drops any unregistered packets received on the
+bound IP:Port(s) */
 ~~~
 
 # Comparison with CONNECT-IP
