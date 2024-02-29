@@ -186,8 +186,12 @@ IP-port-pairing = ( IPv4address / "[" IPv6address "]" ) ":" port
 ~~~
 {: #target-format title="Proxy Address Format"}
 
-The proxy MUST use one each of IPv4address and IPv6address when
-proxy-public-address is defined as two IP-port-pairings.
+If the proxy sends two IP-port pairings, they MUST be of different
+address families. If the client receives a Proxy-Public-Address field
+with two IP-port pairings of the same address family, it MUST treat
+the response as malformed. Similarly, if the field is missing or
+contains a number of pairings different from one or two, it MUST
+treat the response as malformed.
 Note that since the addresses are conveyed in HTTP response headers,
 a subsequent change of addresses on the proxy cannot be conveyed to the client.
 
