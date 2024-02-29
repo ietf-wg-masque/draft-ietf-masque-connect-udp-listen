@@ -1167,7 +1167,7 @@ HTTP that enables such use-cases.<a href="#section-abstract-1" class="pilcrow">�
             <p id="section-toc.1-1.4.1"><a href="#section-4" class="auto internal xref">4</a>.  <a href="#name-the-connect-udp-listen-head" class="internal xref">The connect-udp-listen Header Field</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5">
-            <p id="section-toc.1-1.5.1"><a href="#section-5" class="auto internal xref">5</a>.  <a href="#name-the-proxy-public-address-re" class="internal xref">The proxy-public-address Response Header Field</a></p>
+            <p id="section-toc.1-1.5.1"><a href="#section-5" class="auto internal xref">5</a>.  <a href="#name-the-proxy-public-address-re" class="internal xref">The Proxy-Public-Address Response Header Field</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6">
             <p id="section-toc.1-1.6.1"><a href="#section-6" class="auto internal xref">6</a>.  <a href="#name-proxy-behavior" class="internal xref">Proxy behavior</a></p>
@@ -1332,10 +1332,17 @@ parameters. Receivers <span class="bcp14">MUST</span> ignore unknown parameters.
 <div id="response">
 <section id="section-5">
       <h2 id="name-the-proxy-public-address-re">
-<a href="#section-5" class="section-number selfRef">5. </a><a href="#name-the-proxy-public-address-re" class="section-name selfRef">The proxy-public-address Response Header Field</a>
+<a href="#section-5" class="section-number selfRef">5. </a><a href="#name-the-proxy-public-address-re" class="section-name selfRef">The Proxy-Public-Address Response Header Field</a>
       </h2>
-<p id="section-5-1">Upon accepting the request, the proxy <span class="bcp14">MUST</span> select at least one public IP address to bind. For each selected address, it <span class="bcp14">MUST</span> select an open port to bind to this request. From then and until the tunnel is closed, the proxy <span class="bcp14">SHALL</span> send packets received on these IP-port tuples to the client. The proxy then <span class="bcp14">MUST</span> communicate the selected addresses and ports to the client using the "Proxy-Public-Address" header. The format of that header is defined below using IPv4address, IPv6address and port from <span><a href="https://rfc-editor.org/rfc/rfc3986#section-3.2" class="relref">Section 3.2</a> of [<a href="#URI" class="cite xref">URI</a>]</span>.<a href="#section-5-1" class="pilcrow">¶</a></p>
-<p id="section-5-2">The proxy must then respond with the allocated IP and port pairings using the "proxy-public-address" response header defined as follows:<a href="#section-5-2" class="pilcrow">¶</a></p>
+<p id="section-5-1">Upon accepting the request, the proxy <span class="bcp14">MUST</span> select at least one public IP
+address to bind. For each selected address, it <span class="bcp14">MUST</span> select an open port to
+bind to this request. From then and until the tunnel is closed, the proxy
+<span class="bcp14">SHALL</span> send packets received on these IP-port tuples to the client. The proxy
+then <span class="bcp14">MUST</span> communicate the selected addresses and ports to the client using
+the "Proxy-Public-Address" header. The format of that header is defined below
+using IPv4address, IPv6address and port from <span><a href="https://rfc-editor.org/rfc/rfc3986#section-3.2" class="relref">Section 3.2</a> of [<a href="#URI" class="cite xref">URI</a>]</span>.<a href="#section-5-1" class="pilcrow">¶</a></p>
+<p id="section-5-2">The proxy <span class="bcp14">MUST</span> then respond with the allocated IP and port pairings using the
+Proxy-Public-Address response header defined as follows:<a href="#section-5-2" class="pilcrow">¶</a></p>
 <span id="name-proxy-address-format"></span><div id="target-format">
 <figure id="figure-2">
         <div class="alignLeft art-ascii-art art-text artwork" id="section-5-3.1">
@@ -1348,6 +1355,7 @@ IP-port-pairing = IPv4address:port / IPv6address:port
 <a href="#name-proxy-address-format" class="selfRef">Proxy Address Format</a>
         </figcaption></figure>
 </div>
+<p id="section-5-4">Once assigned, the allocated IP and ports cannot be updated mid-stream.<a href="#section-5-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="proxy-behavior">
@@ -1529,7 +1537,8 @@ back to the client.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
             &lt;--------  STREAM(44): HEADERS
                          :status = 200
                          capsule-protocol = ?1
-                         proxy-public-address = 192.0.2.45:54321,[2001:db8::1234]:54321
+                         proxy-public-address = 192.0.2.45:54321,
+                                           [2001:db8::1234]:54321
 
 /* Wait for STUN server to respond to UDP packet. */
 
