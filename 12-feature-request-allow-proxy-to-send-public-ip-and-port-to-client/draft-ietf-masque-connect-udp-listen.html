@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta content="Common,Latin" name="scripts">
 <meta content="initial-scale=1.0" name="viewport">
-<title>Proxying Listener UDP in HTTP</title>
+<title>Proxying Bound UDP in HTTP</title>
 <meta content="David Schinazi" name="author">
 <meta content="Abhi Singh" name="author">
 <meta content="
@@ -26,6 +26,7 @@ HTTP that enables such use-cases.
 <meta content="masque" name="keyword">
 <meta content="http-ng" name="keyword">
 <meta content="listen" name="keyword">
+<meta content="bind" name="keyword">
 <meta content="draft-ietf-masque-connect-udp-listen-latest" name="ietf.draft">
 <!-- Generator version information:
   xml2rfc 3.19.4
@@ -1039,7 +1040,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <table class="ears">
 <thead><tr>
 <td class="left">Internet-Draft</td>
-<td class="center">CONNECT-UDP Listen</td>
+<td class="center">CONNECT-UDP Bind</td>
 <td class="right">February 2024</td>
 </tr></thead>
 <tfoot><tr>
@@ -1076,7 +1077,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </dd>
 </dl>
 </div>
-<h1 id="title">Proxying Listener UDP in HTTP</h1>
+<h1 id="title">Proxying Bound UDP in HTTP</h1>
 <section id="section-abstract">
       <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
 <p id="section-abstract-1">The mechanism to proxy UDP in HTTP only allows each UDP Proxying request to
@@ -1158,13 +1159,13 @@ HTTP that enables such use-cases.<a href="#section-abstract-1" class="pilcrow">�
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2">
-            <p id="section-toc.1-1.2.1" class="keepWithNext"><a href="#section-2" class="auto internal xref">2</a>.  <a href="#name-proxied-udp-listener-mechan" class="internal xref">Proxied UDP Listener Mechanism</a></p>
+            <p id="section-toc.1-1.2.1" class="keepWithNext"><a href="#section-2" class="auto internal xref">2</a>.  <a href="#name-proxied-udp-binding-mechani" class="internal xref">Proxied UDP Binding Mechanism</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3">
             <p id="section-toc.1-1.3.1"><a href="#section-3" class="auto internal xref">3</a>.  <a href="#name-http-datagram-payload-forma" class="internal xref">HTTP Datagram Payload Format</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4">
-            <p id="section-toc.1-1.4.1"><a href="#section-4" class="auto internal xref">4</a>.  <a href="#name-the-connect-udp-listen-head" class="internal xref">The Connect-UDP-Listen Header Field</a></p>
+            <p id="section-toc.1-1.4.1"><a href="#section-4" class="auto internal xref">4</a>.  <a href="#name-the-connect-udp-bind-header" class="internal xref">The Connect-UDP-Bind Header Field</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5">
             <p id="section-toc.1-1.5.1"><a href="#section-5" class="auto internal xref">5</a>.  <a href="#name-the-proxy-public-address-re" class="internal xref">The Proxy-Public-Address Response Header Field</a></p>
@@ -1242,20 +1243,20 @@ from <span>[<a href="#QUIC" class="cite xref">QUIC</a>]</span>. This document us
 </div>
 <div id="mechanism">
 <section id="section-2">
-      <h2 id="name-proxied-udp-listener-mechan">
-<a href="#section-2" class="section-number selfRef">2. </a><a href="#name-proxied-udp-listener-mechan" class="section-name selfRef">Proxied UDP Listener Mechanism</a>
+      <h2 id="name-proxied-udp-binding-mechani">
+<a href="#section-2" class="section-number selfRef">2. </a><a href="#name-proxied-udp-binding-mechani" class="section-name selfRef">Proxied UDP Binding Mechanism</a>
       </h2>
 <p id="section-2-1">In unextended UDP Proxying requests, the target host is encoded in the HTTP
-request path or query. For Listener UDP Proxying, it is instead conveyed in each
+request path or query. For Bound UDP Proxying, it is instead conveyed in each
 HTTP Datagram, see <a href="#format" class="auto internal xref">Section 3</a>.<a href="#section-2-1" class="pilcrow">¶</a></p>
 <p id="section-2-2">When performing URI Template Expansion of the UDP Proxying template (see
 <span><a href="https://rfc-editor.org/rfc/rfc9298#section-3" class="relref">Section 3</a> of [<a href="#CONNECT-UDP" class="cite xref">CONNECT-UDP</a>]</span>), the client sets both the target_host and the
 target_port variables to the '*' character (ASCII character 0x2A).<a href="#section-2-2" class="pilcrow">¶</a></p>
 <p id="section-2-3">Before sending its UDP Proxying request to the proxy, the client allocates an
 even-numbered context ID, see <span><a href="https://rfc-editor.org/rfc/rfc9298#section-4" class="relref">Section 4</a> of [<a href="#CONNECT-UDP" class="cite xref">CONNECT-UDP</a>]</span>. The client then adds
-the "Connect-UDP-Listen" header field to its UDP Proxying request, with its
+the "Connect-UDP-Bind" header field to its UDP Proxying request, with its
 value set as the allocated context ID, see <a href="#hdr" class="auto internal xref">Section 4</a>. If the proxy accepts the
-CONNECT UDP Listener request, it adds the allocated public IP and target for the
+CONNECT UDP Bind request, it adds the allocated public IP and target for the
 client to the response, see <a href="#response" class="auto internal xref">Section 5</a>.<a href="#section-2-3" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -1264,14 +1265,14 @@ client to the response, see <a href="#response" class="auto internal xref">Secti
       <h2 id="name-http-datagram-payload-forma">
 <a href="#section-3" class="section-number selfRef">3. </a><a href="#name-http-datagram-payload-forma" class="section-name selfRef">HTTP Datagram Payload Format</a>
       </h2>
-<p id="section-3-1">When HTTP Datagrams <span>[<a href="#HTTP-DGRAM" class="cite xref">HTTP-DGRAM</a>]</span> associated with this Listener UDP
-Proxying request contain the context ID in the Connect-UDP-Listen header field,
+<p id="section-3-1">When HTTP Datagrams <span>[<a href="#HTTP-DGRAM" class="cite xref">HTTP-DGRAM</a>]</span> associated with this Bound UDP
+Proxying request contain the context ID in the Connect-UDP-Bind header field,
 the format of their UDP Proxying Payload field (see <span><a href="https://rfc-editor.org/rfc/rfc9298#section-5" class="relref">Section 5</a> of [<a href="#CONNECT-UDP" class="cite xref">CONNECT-UDP</a>]</span>) is defined by <a href="#dgram-format" class="auto internal xref">Figure 1</a>:<a href="#section-3-1" class="pilcrow">¶</a></p>
-<span id="name-listener-udp-proxying-http-"></span><div id="dgram-format">
+<span id="name-bound-udp-proxying-http-dat"></span><div id="dgram-format">
 <figure id="figure-1">
         <div class="alignLeft art-ascii-art art-text artwork" id="section-3-2.1">
 <pre>
-Listener UDP Proxying Payload {
+Bound UDP Proxying Payload {
   IP Version (8),
   IP Address (32..128),
   UDP Port (16),
@@ -1280,7 +1281,7 @@ Listener UDP Proxying Payload {
 </pre>
 </div>
 <figcaption><a href="#figure-1" class="selfRef">Figure 1</a>:
-<a href="#name-listener-udp-proxying-http-" class="selfRef">Listener UDP Proxying HTTP Datagram Format</a>
+<a href="#name-bound-udp-proxying-http-dat" class="selfRef">Bound UDP Proxying HTTP Datagram Format</a>
         </figcaption></figure>
 </div>
 <span class="break"></span><dl class="dlParallel" id="section-3-3">
@@ -1317,15 +1318,15 @@ octets" in <span>[<a href="#UDP" class="cite xref">UDP</a>]</span>).<a href="#se
 </div>
 <div id="hdr">
 <section id="section-4">
-      <h2 id="name-the-connect-udp-listen-head">
-<a href="#section-4" class="section-number selfRef">4. </a><a href="#name-the-connect-udp-listen-head" class="section-name selfRef">The Connect-UDP-Listen Header Field</a>
+      <h2 id="name-the-connect-udp-bind-header">
+<a href="#section-4" class="section-number selfRef">4. </a><a href="#name-the-connect-udp-bind-header" class="section-name selfRef">The Connect-UDP-Bind Header Field</a>
       </h2>
-<p id="section-4-1">The "Connect-UDP-Listen" header field’s value is an Integer. It is set as the
-Context ID allocated for Listener UDP Proxying; see <a href="#mechanism" class="auto internal xref">Section 2</a>. Any other
+<p id="section-4-1">The "Connect-UDP-Bind" header field’s value is an Integer. It is set as the
+Context ID allocated for Bound UDP Proxying; see <a href="#mechanism" class="auto internal xref">Section 2</a>. Any other
 value type <span class="bcp14">MUST</span> be handled as if the field were not present by the recipients
 (for example, if this field is defined multiple times, its type becomes a List
 and therefore is to be ignored). This document does not define any parameters
-for the Connect-UDP-Listen header field value, but future documents might define
+for the Connect-UDP-Bind header field value, but future documents might define
 parameters. Receivers <span class="bcp14">MUST</span> ignore unknown parameters.<a href="#section-4-1" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -1370,11 +1371,11 @@ a subsequent change of addresses on the proxy cannot be conveyed to the client.<
       <h2 id="name-proxy-behavior">
 <a href="#section-6" class="section-number selfRef">6. </a><a href="#name-proxy-behavior" class="section-name selfRef">Proxy behavior</a>
       </h2>
-<p id="section-6-1">After accepting the Connect-UDP Listener proxying request, the proxy uses a UDP
+<p id="section-6-1">After accepting the Connect-UDP Binding proxying request, the proxy uses a UDP
 port to transmit UDP payloads received from the client to the target IP Address
-and UDP Port specified in each Listener Datagram Payload received from the
+and UDP Port specified in each binding Datagram Payload received from the
 client. The proxy uses the same port to listen for UDP packets from any
-authorized target and encapsulates the packets in the Listener Datagram
+authorized target and encapsulates the packets in the Binding Datagram
 Payload format, specifying the IP and port of the target and forwards it to
 the client.<a href="#section-6-1" class="pilcrow">¶</a></p>
 </section>
@@ -1390,7 +1391,7 @@ security considerations in <span><a href="https://rfc-editor.org/rfc/rfc8656#sec
 <p id="section-7-2">Since unextended UDP Proxying requests carry the target as part of the request,
 the proxy can protect unauthorized targets by rejecting requests before creating
 the tunnel, and communicate the rejection reason in response header fields.
-Listener UDP Proxying requests do not have this ability. Therefore, proxies <span class="bcp14">MUST</span>
+Bound UDP Proxying requests do not have this ability. Therefore, proxies <span class="bcp14">MUST</span>
 validate the target on every datagram and <span class="bcp14">MUST NOT</span> forward individual datagrams
 with unauthorized targets. Proxies can either silently discard such datagrams or
 abort the corresponding request stream.<a href="#section-7-2" class="pilcrow">¶</a></p>
@@ -1404,33 +1405,40 @@ target to clients bound to their respective public IP and ports, the clients
       <h2 id="name-iana-considerations">
 <a href="#section-8" class="section-number selfRef">8. </a><a href="#name-iana-considerations" class="section-name selfRef">IANA Considerations</a>
       </h2>
-<p id="section-8-1">This document will request IANA to register the following entry in the "HTTP
-Field Name" registry maintained at
-&lt;<span><a href="https://www.iana.org/assignments/http-fields">https://www.iana.org/assignments/http-fields</a></span>&gt;:<a href="#section-8-1" class="pilcrow">¶</a></p>
-<span class="break"></span><dl class="dlCompact dlParallel" id="section-8-2">
-        <dt id="section-8-2.1">Field Name:</dt>
-        <dd style="margin-left: 1.5em" id="section-8-2.2">
-          <p id="section-8-2.2.1">Connect-UDP-Listen<a href="#section-8-2.2.1" class="pilcrow">¶</a></p>
+<span class="break"></span><dl class="dlCompact dlParallel" id="section-8-1">
+        <dt id="section-8-1.1">This document will request IANA to register the following entry in the "HTTP</dt>
+        <dd style="margin-left: 1.5em" id="section-8-1.2">
+          <p id="section-8-1.2.1"></p><a href="#section-8-1.2" class="pilcrow">¶</a>
 </dd>
         <dd class="break"></dd>
-<dt id="section-8-2.3">Template:</dt>
-        <dd style="margin-left: 1.5em" id="section-8-2.4">
-          <p id="section-8-2.4.1">None<a href="#section-8-2.4.1" class="pilcrow">¶</a></p>
+<dt id="section-8-1.3">Field Name" registry maintained at</dt>
+        <dd style="margin-left: 1.5em" id="section-8-1.4">
+          <p id="section-8-1.4.1"></p><a href="#section-8-1.4" class="pilcrow">¶</a>
 </dd>
         <dd class="break"></dd>
-<dt id="section-8-2.5">Status:</dt>
-        <dd style="margin-left: 1.5em" id="section-8-2.6">
-          <p id="section-8-2.6.1">provisional (permanent if this document is approved)<a href="#section-8-2.6.1" class="pilcrow">¶</a></p>
+<dt id="section-8-1.5">&lt;<span><a href="https://www.iana.org/assignments/http-fields">https://www.iana.org/assignments/http-fields</a></span>&gt;:</dt>
+        <dd style="margin-left: 1.5em" id="section-8-1.6">
+          <p id="section-8-1.6.1">Connect-UDP-Bind<a href="#section-8-1.6.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
-<dt id="section-8-2.7">Reference:</dt>
-        <dd style="margin-left: 1.5em" id="section-8-2.8">
-          <p id="section-8-2.8.1">This document<a href="#section-8-2.8.1" class="pilcrow">¶</a></p>
+<dt id="section-8-1.7">Template:</dt>
+        <dd style="margin-left: 1.5em" id="section-8-1.8">
+          <p id="section-8-1.8.1">None<a href="#section-8-1.8.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
-<dt id="section-8-2.9">Comments:</dt>
-        <dd style="margin-left: 1.5em" id="section-8-2.10">
-          <p id="section-8-2.10.1">None<a href="#section-8-2.10.1" class="pilcrow">¶</a></p>
+<dt id="section-8-1.9">Status:</dt>
+        <dd style="margin-left: 1.5em" id="section-8-1.10">
+          <p id="section-8-1.10.1">provisional (permanent if this document is approved)<a href="#section-8-1.10.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-8-1.11">Reference:</dt>
+        <dd style="margin-left: 1.5em" id="section-8-1.12">
+          <p id="section-8-1.12.1">This document<a href="#section-8-1.12.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-8-1.13">Comments:</dt>
+        <dd style="margin-left: 1.5em" id="section-8-1.14">
+          <p id="section-8-1.14.1">None<a href="#section-8-1.14.1" class="pilcrow">¶</a></p>
 </dd>
       <dd class="break"></dd>
 </dl>
@@ -1518,7 +1526,7 @@ Field Name" registry maintained at
       </h2>
 <p id="appendix-A-1">In the example below, the client is configured with URI Template
 "https://example.org/.well-known/masque/udp/{target_host}/{target_port}/" and
-wishes to use WebRTC with another browser over a listener UDP Proxying tunnel.
+wishes to use WebRTC with another browser over a Bound UDP Proxying tunnel.
 It contacts a STUN server at 192.0.2.42. The STUN server, in response, sends the
 proxy's IP address to the other browser at 203.0.113.33. Using this information,
 the other browser sends a UDP packet to the proxy, which is proxied over HTTP
@@ -1533,7 +1541,7 @@ back to the client.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
    :scheme = https
    :path = /.well-known/masque/udp/*/*/
    :authority = proxy.example.org
-   connect-udp-listen = 2
+   connect-udp-bind = 2
    capsule-protocol = ?1
 
  DATAGRAM                       --------&gt;
