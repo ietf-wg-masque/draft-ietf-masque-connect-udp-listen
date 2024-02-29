@@ -172,7 +172,7 @@ non zero Context IDs as defined under {{compression}}.
 Receiving and forwarding from Context ID 0 is enabled by default, but may be
 disabled; see {{restrictingips}}.
 
-## Header Compression {#compression}
+## Address Compression {#compression}
 
 The client MAY choose to map IP and port information per datagram against the
 Context ID defined in {{contextid}}. In such a case, the client MUST send a
