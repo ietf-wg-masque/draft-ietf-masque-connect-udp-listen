@@ -5,7 +5,7 @@
 MASQUE                                                       D. Schinazi
 Internet-Draft                                                  A. Singh
 Intended status: Standards Track                              Google LLC
-Expires: 8 July 2024                                      5 January 2024
+Expires: 1 September 2024                               29 February 2024
 
 
                      Proxying Listener UDP in HTTP
@@ -54,7 +54,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 8 July 2024.
+   This Internet-Draft will expire on 1 September 2024.
 
 Copyright Notice
 
@@ -76,7 +76,7 @@ Table of Contents
      1.1.  Conventions and Definitions
    2.  Proxied UDP Listener Mechanism
    3.  HTTP Datagram Payload Format
-   4.  The connect-udp-listen Header Field
+   4.  The Connect-UDP-Listen Header Field
    5.  Proxy behavior
    6.  Security Considerations
    7.  IANA Considerations
@@ -134,14 +134,14 @@ Table of Contents
 
    Before sending its UDP Proxying request to the proxy, the client
    allocates an even-numbered context ID, see Section 4 of
-   [CONNECT-UDP].  The client then adds the "connect-udp-listen" header
+   [CONNECT-UDP].  The client then adds the "Connect-UDP-Listen" header
    field to its UDP Proxying request, with its value set as the
    allocated context ID, see Section 4.
 
 3.  HTTP Datagram Payload Format
 
    When HTTP Datagrams [HTTP-DGRAM] associated with this Listener UDP
-   Proxying request contain the context ID in the connect-udp-listen
+   Proxying request contain the context ID in the Connect-UDP-Listen
    header field, the format of their UDP Proxying Payload field (see
    Section 5 of [CONNECT-UDP]) is defined by Figure 1:
 
@@ -173,15 +173,15 @@ Table of Contents
    UDP Payload:  The unmodified UDP Payload of this proxied UDP packet
       (referred to as "data octets" in [UDP]).
 
-4.  The connect-udp-listen Header Field
+4.  The Connect-UDP-Listen Header Field
 
-   The "connect-udp-listen" header field’s value is an Integer.  It is
+   The "Connect-UDP-Listen" header field’s value is an Integer.  It is
    set as the Context ID allocated for Listener UDP Proxying; see
    Section 2.  Any other value type MUST be handled as if the field were
    not present by the recipients (for example, if this field is defined
    multiple times, its type becomes a List and therefore is to be
    ignored).  This document does not define any parameters for the
-   connect-udp-listen header field value, but future documents might
+   Connect-UDP-Listen header field value, but future documents might
    define parameters.  Receivers MUST ignore unknown parameters.
 
 5.  Proxy behavior
@@ -222,7 +222,7 @@ Table of Contents
    the "HTTP Field Name" registry maintained at
    <https://www.iana.org/assignments/http-fields>:
 
-   Field Name:  connect-udp-listen
+   Field Name:  Connect-UDP-Listen
    Template:  None
    Status:  provisional (permanent if this document is approved)
    Reference:  This document
