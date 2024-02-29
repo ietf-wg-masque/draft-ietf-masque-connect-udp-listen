@@ -167,11 +167,18 @@ for the connect-udp-listen header field value, but future documents might define
 parameters. Receivers MUST ignore unknown parameters.
 
 
-# The proxy-public-address Response Header Field {#response}
+# The Proxy-Public-Address Response Header Field {#response}
 
-Upon accepting the request, the proxy MUST select at least one public IP address to bind. For each selected address, it MUST select an open port to bind to this request. From then and until the tunnel is closed, the proxy SHALL send packets received on these IP-port tuples to the client. The proxy then MUST communicate the selected addresses and ports to the client using the "Proxy-Public-Address" header. The format of that header is defined below using IPv4address, IPv6address and port from {{Section 3.2 of !URI=RFC3986}}.
+Upon accepting the request, the proxy MUST select at least one public IP
+address to bind. For each selected address, it MUST select an open port to
+bind to this request. From then and until the tunnel is closed, the proxy
+SHALL send packets received on these IP-port tuples to the client. The proxy
+then MUST communicate the selected addresses and ports to the client using
+the "Proxy-Public-Address" header. The format of that header is defined below
+using IPv4address, IPv6address and port from {{Section 3.2 of !URI=RFC3986}}.
 
-The proxy must then respond with the allocated IP and port pairings using the "proxy-public-address" response header defined as follows:
+The proxy MUST then respond with the allocated IP and port pairings using the
+Proxy-Public-Address response header defined as follows:
 
 ~~~ ascii-art
 proxy-public-address = IP-port-pairing (, IP-port-pairing)
@@ -179,6 +186,7 @@ IP-port-pairing = IPv4address:port / IPv6address:port
 ~~~
 {: #target-format title="Proxy Address Format"}
 
+Once assigned, the allocated IP and ports cannot be updated mid-stream.
 
 # Proxy behavior
 
@@ -262,7 +270,8 @@ back to the client.
             <--------  STREAM(44): HEADERS
                          :status = 200
                          capsule-protocol = ?1
-                         proxy-public-address = 192.0.2.45:54321,[2001:db8::1234]:54321
+                         proxy-public-address = 192.0.2.45:54321,
+                         		   [2001:db8::1234]:54321
 
 /* Wait for STUN server to respond to UDP packet. */
 
