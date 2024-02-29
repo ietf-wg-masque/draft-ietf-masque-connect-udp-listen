@@ -236,7 +236,7 @@ back to the client.
    :scheme = https
    :path = /.well-known/masque/udp/*/*/
    :authority = proxy.example.org
-   Connect-UDP-Listen = 2
+   connect-udp-listen = 2
    capsule-protocol = ?1
 
  DATAGRAM                       -------->
