@@ -109,13 +109,13 @@ target_port variables to the '*' character (ASCII character 0x2A).
 
 Before sending its UDP Proxying request to the proxy, the client allocates an
 even-numbered context ID, see {{Section 4 of CONNECT-UDP}}. The client then adds
-the "connect-udp-listen" header field to its UDP Proxying request, with its
+the "Connect-UDP-Listen" header field to its UDP Proxying request, with its
 value set as the allocated context ID, see {{hdr}}.
 
 # HTTP Datagram Payload Format {#format}
 
 When HTTP Datagrams {{!HTTP-DGRAM=RFC9297}} associated with this Listener UDP
-Proxying request contain the context ID in the connect-udp-listen header field,
+Proxying request contain the context ID in the Connect-UDP-Listen header field,
 the format of their UDP Proxying Payload field (see {{Section 5 of
 CONNECT-UDP}}) is defined by {{dgram-format}}:
 
@@ -154,14 +154,14 @@ UDP Payload:
 octets" in {{UDP}}).
 
 
-# The connect-udp-listen Header Field {#hdr}
+# The Connect-UDP-Listen Header Field {#hdr}
 
-The "connect-udp-listen" header field’s value is an Integer. It is set as the
+The "Connect-UDP-Listen" header field’s value is an Integer. It is set as the
 Context ID allocated for Listener UDP Proxying; see {{mechanism}}. Any other
 value type MUST be handled as if the field were not present by the recipients
 (for example, if this field is defined multiple times, its type becomes a List
 and therefore is to be ignored). This document does not define any parameters
-for the connect-udp-listen header field value, but future documents might define
+for the Connect-UDP-Listen header field value, but future documents might define
 parameters. Receivers MUST ignore unknown parameters.
 
 # Proxy behavior
@@ -199,7 +199,7 @@ Field Name" registry maintained at
 <[](https://www.iana.org/assignments/http-fields)>:
 
 Field Name:
-: connect-udp-listen
+: Connect-UDP-Listen
 
 Template:
 : None
