@@ -202,7 +202,7 @@ Table of Contents
    using the Proxy-Public-Address response header defined as follows:
 
    proxy-public-address = IP-port-pairing (, IP-port-pairing)
-   IP-port-pairing = IPv4address:port / IPv6address:port
+   IP-port-pairing = ( IPv4address / "[" IPv6address "]" ) ":" port
 
                        Figure 2: Proxy Address Format
 
