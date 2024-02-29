@@ -130,8 +130,8 @@ Table of Contents
 
    In unextended UDP Proxying requests, the target host is encoded in
    the HTTP request path or query.  For Listener UDP Proxying, it is
-   either conveyed in each HTTP Datagram, see Section 3 or registered
-   via capsules and then compressed, see Section 4.
+   either conveyed in each HTTP Datagram (see Section 3), or registered
+   via capsules and then compressed (see Section 4).
 
    When performing URI Template Expansion of the UDP Proxying template
    (see Section 3 of [CONNECT-UDP]), the client sets both the
