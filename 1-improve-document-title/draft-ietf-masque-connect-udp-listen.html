@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta content="Common,Latin" name="scripts">
 <meta content="initial-scale=1.0" name="viewport">
-<title>Proxying Binding UDP in HTTP</title>
+<title>Proxying Bound UDP in HTTP</title>
 <meta content="David Schinazi" name="author">
 <meta content="Abhi Singh" name="author">
 <meta content="
@@ -1077,7 +1077,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </dd>
 </dl>
 </div>
-<h1 id="title">Proxying Binding UDP in HTTP</h1>
+<h1 id="title">Proxying Bound UDP in HTTP</h1>
 <section id="section-abstract">
       <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
 <p id="section-abstract-1">The mechanism to proxy UDP in HTTP only allows each UDP Proxying request to
@@ -1244,7 +1244,7 @@ from <span>[<a href="#QUIC" class="cite xref">QUIC</a>]</span>. This document us
 <a href="#section-2" class="section-number selfRef">2. </a><a href="#name-proxied-udp-binding-mechani" class="section-name selfRef">Proxied UDP Binding Mechanism</a>
       </h2>
 <p id="section-2-1">In unextended UDP Proxying requests, the target host is encoded in the HTTP
-request path or query. For Binding UDP Proxying, it is instead conveyed in each
+request path or query. For Bound UDP Proxying, it is instead conveyed in each
 HTTP Datagram, see <a href="#format" class="auto internal xref">Section 3</a>.<a href="#section-2-1" class="pilcrow">¶</a></p>
 <p id="section-2-2">When performing URI Template Expansion of the UDP Proxying template (see
 <span><a href="https://rfc-editor.org/rfc/rfc9298#section-3" class="relref">Section 3</a> of [<a href="#CONNECT-UDP" class="cite xref">CONNECT-UDP</a>]</span>), the client sets both the target_host and the
@@ -1263,11 +1263,11 @@ value set as the allocated context ID, see <a href="#hdr" class="auto internal x
 <p id="section-3-1">When HTTP Datagrams <span>[<a href="#HTTP-DGRAM" class="cite xref">HTTP-DGRAM</a>]</span> associated with this Bound UDP
 Proxying request contain the context ID in the Connect-UDP-Bind header field,
 the format of their UDP Proxying Payload field (see <span><a href="https://rfc-editor.org/rfc/rfc9298#section-5" class="relref">Section 5</a> of [<a href="#CONNECT-UDP" class="cite xref">CONNECT-UDP</a>]</span>) is defined by <a href="#dgram-format" class="auto internal xref">Figure 1</a>:<a href="#section-3-1" class="pilcrow">¶</a></p>
-<span id="name-binding-udp-proxying-http-d"></span><div id="dgram-format">
+<span id="name-bound-udp-proxying-http-dat"></span><div id="dgram-format">
 <figure id="figure-1">
         <div class="alignLeft art-ascii-art art-text artwork" id="section-3-2.1">
 <pre>
-Binding UDP Proxying Payload {
+Bound UDP Proxying Payload {
   IP Version (8),
   IP Address (32..128),
   UDP Port (16),
@@ -1276,7 +1276,7 @@ Binding UDP Proxying Payload {
 </pre>
 </div>
 <figcaption><a href="#figure-1" class="selfRef">Figure 1</a>:
-<a href="#name-binding-udp-proxying-http-d" class="selfRef">Binding UDP Proxying HTTP Datagram Format</a>
+<a href="#name-bound-udp-proxying-http-dat" class="selfRef">Bound UDP Proxying HTTP Datagram Format</a>
         </figcaption></figure>
 </div>
 <span class="break"></span><dl class="dlParallel" id="section-3-3">
@@ -1350,7 +1350,7 @@ security considerations in <span><a href="https://rfc-editor.org/rfc/rfc8656#sec
 <p id="section-6-2">Since unextended UDP Proxying requests carry the target as part of the request,
 the proxy can protect unauthorized targets by rejecting requests before creating
 the tunnel, and communicate the rejection reason in response header fields.
-Binding UDP Proxying requests do not have this ability. Therefore, proxies <span class="bcp14">MUST</span>
+Bound UDP Proxying requests do not have this ability. Therefore, proxies <span class="bcp14">MUST</span>
 validate the target on every datagram and <span class="bcp14">MUST NOT</span> forward individual datagrams
 with unauthorized targets. Proxies can either silently discard such datagrams or
 abort the corresponding request stream.<a href="#section-6-2" class="pilcrow">¶</a></p>
@@ -1481,7 +1481,7 @@ target to clients bound to their respective public IP and ports, the clients
       </h2>
 <p id="appendix-A-1">In the example below, the client is configured with URI Template
 "https://example.org/.well-known/masque/udp/{target_host}/{target_port}/" and
-wishes to use WebRTC with another browser over a Binding UDP Proxying tunnel.
+wishes to use WebRTC with another browser over a Bound UDP Proxying tunnel.
 It contacts a STUN server at 192.0.2.42. The STUN server, in response, sends the
 proxy's IP address to the other browser at 203.0.113.33. Using this information,
 the other browser sends a UDP packet to the proxy, which is proxied over HTTP
