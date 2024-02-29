@@ -76,7 +76,7 @@ Table of Contents
      1.1.  Conventions and Definitions
    2.  Proxied UDP Listener Mechanism
    3.  HTTP Datagram Payload Format
-   4.  The connect-udp-listen Header Field
+   4.  The Connect-UDP-Listen Header Field
    5.  The Proxy-Public-Address Response Header Field
    6.  Proxy behavior
    7.  Security Considerations
@@ -135,7 +135,7 @@ Table of Contents
 
    Before sending its UDP Proxying request to the proxy, the client
    allocates an even-numbered context ID, see Section 4 of
-   [CONNECT-UDP].  The client then adds the "connect-udp-listen" header
+   [CONNECT-UDP].  The client then adds the "Connect-UDP-Listen" header
    field to its UDP Proxying request, with its value set as the
    allocated context ID, see Section 4.  If the proxy accepts the
    CONNECT UDP Listener request, it adds the allocated public IP and
@@ -144,7 +144,7 @@ Table of Contents
 3.  HTTP Datagram Payload Format
 
    When HTTP Datagrams [HTTP-DGRAM] associated with this Listener UDP
-   Proxying request contain the context ID in the connect-udp-listen
+   Proxying request contain the context ID in the Connect-UDP-Listen
    header field, the format of their UDP Proxying Payload field (see
    Section 5 of [CONNECT-UDP]) is defined by Figure 1:
 
@@ -176,15 +176,15 @@ Table of Contents
    UDP Payload:  The unmodified UDP Payload of this proxied UDP packet
       (referred to as "data octets" in [UDP]).
 
-4.  The connect-udp-listen Header Field
+4.  The Connect-UDP-Listen Header Field
 
-   The "connect-udp-listen" header field’s value is an Integer.  It is
+   The "Connect-UDP-Listen" header field’s value is an Integer.  It is
    set as the Context ID allocated for Listener UDP Proxying; see
    Section 2.  Any other value type MUST be handled as if the field were
    not present by the recipients (for example, if this field is defined
    multiple times, its type becomes a List and therefore is to be
    ignored).  This document does not define any parameters for the
-   connect-udp-listen header field value, but future documents might
+   Connect-UDP-Listen header field value, but future documents might
    define parameters.  Receivers MUST ignore unknown parameters.
 
 5.  The Proxy-Public-Address Response Header Field
@@ -242,13 +242,18 @@ Table of Contents
    unauthorized targets.  Proxies can either silently discard such
    datagrams or abort the corresponding request stream.
 
+   Unlike non-binding CONNECT-UDP, since the proxy tunnels datagrams
+   from any target to clients bound to their respective public IP and
+   ports, the clients MUST be ready to handle potential unwanted traffic
+   from unknown destinations.
+
 8.  IANA Considerations
 
    This document will request IANA to register the following entry in
    the "HTTP Field Name" registry maintained at
    <https://www.iana.org/assignments/http-fields>:
 
-   Field Name:  connect-udp-listen
+   Field Name:  Connect-UDP-Listen
    Template:  None
    Status:  provisional (permanent if this document is approved)
    Reference:  This document
