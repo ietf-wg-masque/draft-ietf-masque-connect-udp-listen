@@ -206,9 +206,11 @@ Table of Contents
 
                        Figure 2: Proxy Address Format
 
-   Note that since the addresses are conveyed in HTTP response headers,
-   a subsequent change of addresses on the proxy cannot be conveyed to
-   the client.
+   The proxy MUST use one each of IPv4address and IPv6address when
+   proxy-public-address is defined as two IP-port-pairings.  Note that
+   since the addresses are conveyed in HTTP response headers, a
+   subsequent change of addresses on the proxy cannot be conveyed to the
+   client.
 
 6.  Proxy behavior
 
