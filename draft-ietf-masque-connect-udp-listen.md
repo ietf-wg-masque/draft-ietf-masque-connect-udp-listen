@@ -1,5 +1,5 @@
 ---
-title: "Proxying Binding UDP in HTTP"
+title: "Proxying Bound UDP in HTTP"
 abbrev: "CONNECT-UDP Bind"
 category: std
 docname: draft-ietf-masque-connect-udp-listen-latest
@@ -101,7 +101,7 @@ from {{!QUIC=RFC9000}}. This document uses the terms Integer and List from
 # Proxied UDP Binding Mechanism {#mechanism}
 
 In unextended UDP Proxying requests, the target host is encoded in the HTTP
-request path or query. For Binding UDP Proxying, it is instead conveyed in each
+request path or query. For Bound UDP Proxying, it is instead conveyed in each
 HTTP Datagram, see {{format}}.
 
 When performing URI Template Expansion of the UDP Proxying template (see
@@ -121,14 +121,14 @@ the format of their UDP Proxying Payload field (see {{Section 5 of
 CONNECT-UDP}}) is defined by {{dgram-format}}:
 
 ~~~ ascii-art
-Binding UDP Proxying Payload {
+Bound UDP Proxying Payload {
   IP Version (8),
   IP Address (32..128),
   UDP Port (16),
   UDP Payload (..),
 }
 ~~~
-{: #dgram-format title="Binding UDP Proxying HTTP Datagram Format"}
+{: #dgram-format title="Bound UDP Proxying HTTP Datagram Format"}
 
 IP Version:
 
@@ -183,7 +183,7 @@ security considerations in {{Section 21 of ?TURN=RFC8656}}.
 Since unextended UDP Proxying requests carry the target as part of the request,
 the proxy can protect unauthorized targets by rejecting requests before creating
 the tunnel, and communicate the rejection reason in response header fields.
-Binding UDP Proxying requests do not have this ability. Therefore, proxies MUST
+Bound UDP Proxying requests do not have this ability. Therefore, proxies MUST
 validate the target on every datagram and MUST NOT forward individual datagrams
 with unauthorized targets. Proxies can either silently discard such datagrams or
 abort the corresponding request stream.
@@ -220,7 +220,7 @@ Comments:
 
 In the example below, the client is configured with URI Template
 "https://example.org/.well-known/masque/udp/{target_host}/{target_port}/" and
-wishes to use WebRTC with another browser over a Binding UDP Proxying tunnel.
+wishes to use WebRTC with another browser over a Bound UDP Proxying tunnel.
 It contacts a STUN server at 192.0.2.42. The STUN server, in response, sends the
 proxy's IP address to the other browser at 203.0.113.33. Using this information,
 the other browser sends a UDP packet to the proxy, which is proxied over HTTP
