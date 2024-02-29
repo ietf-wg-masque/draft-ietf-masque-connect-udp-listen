@@ -1,6 +1,6 @@
 ---
-title: "Proxying Listener UDP in HTTP"
-abbrev: "CONNECT-UDP Listen"
+title: "Proxying Bound UDP in HTTP"
+abbrev: "CONNECT-UDP Bind"
 category: std
 docname: draft-ietf-masque-connect-udp-listen-latest
 submissiontype: IETF
@@ -29,6 +29,7 @@ keyword:
   - masque
   - http-ng
   - listen
+  - bind
 author:
   -
     ins: D. Schinazi
@@ -97,10 +98,10 @@ from {{!QUIC=RFC9000}}. This document uses the terms Integer and List from
 {{Section 3 of !STRUCTURED-FIELDS=RFC8941}} to specify syntax and parsing.
 
 
-# Proxied UDP Listener Mechanism {#mechanism}
+# Proxied UDP Binding Mechanism {#mechanism}
 
 In unextended UDP Proxying requests, the target host is encoded in the HTTP
-request path or query. For Listener UDP Proxying, it is instead conveyed in each
+request path or query. For Bound UDP Proxying, it is instead conveyed in each
 HTTP Datagram, see {{format}}.
 
 When performing URI Template Expansion of the UDP Proxying template (see
@@ -109,25 +110,25 @@ target_port variables to the '*' character (ASCII character 0x2A).
 
 Before sending its UDP Proxying request to the proxy, the client allocates an
 even-numbered context ID, see {{Section 4 of CONNECT-UDP}}. The client then adds
-the "Connect-UDP-Listen" header field to its UDP Proxying request, with its
+the "Connect-UDP-Bind" header field to its UDP Proxying request, with its
 value set as the allocated context ID, see {{hdr}}.
 
 # HTTP Datagram Payload Format {#format}
 
-When HTTP Datagrams {{!HTTP-DGRAM=RFC9297}} associated with this Listener UDP
-Proxying request contain the context ID in the Connect-UDP-Listen header field,
+When HTTP Datagrams {{!HTTP-DGRAM=RFC9297}} associated with this Bound UDP
+Proxying request contain the context ID in the Connect-UDP-Bind header field,
 the format of their UDP Proxying Payload field (see {{Section 5 of
 CONNECT-UDP}}) is defined by {{dgram-format}}:
 
 ~~~ ascii-art
-Listener UDP Proxying Payload {
+Bound UDP Proxying Payload {
   IP Version (8),
   IP Address (32..128),
   UDP Port (16),
   UDP Payload (..),
 }
 ~~~
-{: #dgram-format title="Listener UDP Proxying HTTP Datagram Format"}
+{: #dgram-format title="Bound UDP Proxying HTTP Datagram Format"}
 
 IP Version:
 
@@ -153,24 +154,23 @@ UDP Payload:
 : The unmodified UDP Payload of this proxied UDP packet (referred to as "data
 octets" in {{UDP}}).
 
+# The Connect-UDP-Bind Header Field {#hdr}
 
-# The Connect-UDP-Listen Header Field {#hdr}
-
-The "Connect-UDP-Listen" header field’s value is an Integer. It is set as the
-Context ID allocated for Listener UDP Proxying; see {{mechanism}}. Any other
+The "Connect-UDP-Bind" header field’s value is an Integer. It is set as the
+Context ID allocated for Bound UDP Proxying; see {{mechanism}}. Any other
 value type MUST be handled as if the field were not present by the recipients
 (for example, if this field is defined multiple times, its type becomes a List
 and therefore is to be ignored). This document does not define any parameters
-for the Connect-UDP-Listen header field value, but future documents might define
+for the Connect-UDP-Bind header field value, but future documents might define
 parameters. Receivers MUST ignore unknown parameters.
 
 # Proxy behavior
 
-After accepting the Connect-UDP Listener proxying request, the proxy uses a UDP
+After accepting the Connect-UDP Binding proxying request, the proxy uses a UDP
 port to transmit UDP payloads received from the client to the target IP Address
-and UDP Port specified in each Listener Datagram Payload received from the
+and UDP Port specified in each binding Datagram Payload received from the
 client. The proxy uses the same port to listen for UDP packets from any
-authorized target and encapsulates the packets in the Listener Datagram
+authorized target and encapsulates the packets in the Binding Datagram
 Payload format, specifying the IP and port of the target and forwards it to
 the client.
 
@@ -183,7 +183,7 @@ security considerations in {{Section 21 of ?TURN=RFC8656}}.
 Since unextended UDP Proxying requests carry the target as part of the request,
 the proxy can protect unauthorized targets by rejecting requests before creating
 the tunnel, and communicate the rejection reason in response header fields.
-Listener UDP Proxying requests do not have this ability. Therefore, proxies MUST
+Bound UDP Proxying requests do not have this ability. Therefore, proxies MUST
 validate the target on every datagram and MUST NOT forward individual datagrams
 with unauthorized targets. Proxies can either silently discard such datagrams or
 abort the corresponding request stream.
@@ -198,8 +198,7 @@ This document will request IANA to register the following entry in the "HTTP
 Field Name" registry maintained at
 <[](https://www.iana.org/assignments/http-fields)>:
 
-Field Name:
-: Connect-UDP-Listen
+: Connect-UDP-Bind
 
 Template:
 : None
@@ -221,7 +220,7 @@ Comments:
 
 In the example below, the client is configured with URI Template
 "https://example.org/.well-known/masque/udp/{target_host}/{target_port}/" and
-wishes to use WebRTC with another browser over a listener UDP Proxying tunnel.
+wishes to use WebRTC with another browser over a Bound UDP Proxying tunnel.
 It contacts a STUN server at 192.0.2.42. The STUN server, in response, sends the
 proxy's IP address to the other browser at 203.0.113.33. Using this information,
 the other browser sends a UDP packet to the proxy, which is proxied over HTTP
@@ -236,7 +235,7 @@ back to the client.
    :scheme = https
    :path = /.well-known/masque/udp/*/*/
    :authority = proxy.example.org
-   connect-udp-listen = 2
+   connect-udp-bind = 2
    capsule-protocol = ?1
 
  DATAGRAM                       -------->
