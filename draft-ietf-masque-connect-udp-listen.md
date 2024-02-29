@@ -262,7 +262,7 @@ back to the client.
             <--------  STREAM(44): HEADERS
                          :status = 200
                          capsule-protocol = ?1
-                         proxy-public-address = 192.10.11.45:3030
+                         proxy-public-address = 192.0.2.45:54321,[2001:db8::1234]:54321
 
 /* Wait for STUN server to respond to UDP packet. */
 
