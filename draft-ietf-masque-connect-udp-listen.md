@@ -186,6 +186,8 @@ IP-port-pairing = ( IPv4address / "[" IPv6address "]" ) ":" port
 ~~~
 {: #target-format title="Proxy Address Format"}
 
+The proxy MUST use one each of IPv4address and IPv6address when
+proxy-public-address is defined as two IP-port-pairings.
 Note that since the addresses are conveyed in HTTP response headers,
 a subsequent change of addresses on the proxy cannot be conveyed to the client.
 
