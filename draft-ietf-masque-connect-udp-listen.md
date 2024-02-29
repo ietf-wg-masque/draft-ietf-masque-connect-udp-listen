@@ -110,13 +110,13 @@ target_port variables to the '*' character (ASCII character 0x2A).
 
 Before sending its UDP Proxying request to the proxy, the client allocates an
 even-numbered context ID, see {{Section 4 of CONNECT-UDP}}. The client then adds
-the "connect-udp-bind" header field to its UDP Proxying request, with its
+the "Connect-UDP-Bind" header field to its UDP Proxying request, with its
 value set as the allocated context ID, see {{hdr}}.
 
 # HTTP Datagram Payload Format {#format}
 
-When HTTP Datagrams {{!HTTP-DGRAM=RFC9297}} associated with this Binding UDP
-Proxying request contain the context ID in the connect-udp-bind header field,
+When HTTP Datagrams {{!HTTP-DGRAM=RFC9297}} associated with this Bound UDP
+Proxying request contain the context ID in the Connect-UDP-Bind header field,
 the format of their UDP Proxying Payload field (see {{Section 5 of
 CONNECT-UDP}}) is defined by {{dgram-format}}:
 
@@ -154,15 +154,14 @@ UDP Payload:
 : The unmodified UDP Payload of this proxied UDP packet (referred to as "data
 octets" in {{UDP}}).
 
+# The Connect-UDP-Bind Header Field {#hdr}
 
-# The connect-udp-bind Header Field {#hdr}
-
-The "connect-udp-bind" header field’s value is an Integer. It is set as the
-Context ID allocated for Binding UDP Proxying; see {{mechanism}}. Any other
+The "Connect-UDP-Bind" header field’s value is an Integer. It is set as the
+Context ID allocated for Bound UDP Proxying; see {{mechanism}}. Any other
 value type MUST be handled as if the field were not present by the recipients
 (for example, if this field is defined multiple times, its type becomes a List
 and therefore is to be ignored). This document does not define any parameters
-for the connect-udp-bind header field value, but future documents might define
+for the Connect-UDP-Bind header field value, but future documents might define
 parameters. Receivers MUST ignore unknown parameters.
 
 # Proxy behavior
@@ -199,8 +198,7 @@ This document will request IANA to register the following entry in the "HTTP
 Field Name" registry maintained at
 <[](https://www.iana.org/assignments/http-fields)>:
 
-Field Name:
-: connect-udp-bind
+: Connect-UDP-Bind
 
 Template:
 : None
