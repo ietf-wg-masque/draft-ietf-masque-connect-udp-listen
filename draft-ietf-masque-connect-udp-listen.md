@@ -182,7 +182,7 @@ Proxy-Public-Address response header defined as follows:
 
 ~~~ ascii-art
 proxy-public-address = IP-port-pairing (, IP-port-pairing)
-IP-port-pairing = IPv4address:port / IPv6address:port
+IP-port-pairing = ( IPv4address / "[" IPv6address "]" ) ":" port
 ~~~
 {: #target-format title="Proxy Address Format"}
 
