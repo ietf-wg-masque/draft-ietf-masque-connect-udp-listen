@@ -186,7 +186,8 @@ IP-port-pairing = IPv4address:port / IPv6address:port
 ~~~
 {: #target-format title="Proxy Address Format"}
 
-Once assigned, the allocated IP and ports cannot be updated mid-stream.
+Note that since the addresses are conveyed in HTTP response headers,
+a subsequent change of addresses on the proxy cannot be conveyed to the client.
 
 # Proxy behavior
 
