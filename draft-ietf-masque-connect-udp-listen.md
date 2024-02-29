@@ -170,7 +170,8 @@ parameters. Receivers MUST ignore unknown parameters.
 # The Proxy-Public-Address Response Header Field {#response}
 
 Upon accepting the request, the proxy MUST select at least one public IP
-address to bind. For each selected address, it MUST select an open port to
+address to bind. The proxy MAY also select a second address from a different address
+family. For each selected address, it MUST select an open port to
 bind to this request. From then and until the tunnel is closed, the proxy
 SHALL send packets received on these IP-port tuples to the client. The proxy
 then MUST communicate the selected addresses and ports to the client using
