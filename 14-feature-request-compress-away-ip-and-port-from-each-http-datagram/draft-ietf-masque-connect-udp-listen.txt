@@ -150,8 +150,9 @@ Table of Contents
 
    The client and the proxy exchange COMPRESSION_ASSIGN capsules in
    order to establish which IP a given context ID corresponds to.  The
-   context ID can correspond to uncompressed payloads to/from any target
-   i.e. any value.
+   context ID can correspond to both compressed and uncompressed
+   payloads to/from any target and are configured as defined in
+   Section 4.1.
 
 3.  HTTP Datagram Payload Format
 
