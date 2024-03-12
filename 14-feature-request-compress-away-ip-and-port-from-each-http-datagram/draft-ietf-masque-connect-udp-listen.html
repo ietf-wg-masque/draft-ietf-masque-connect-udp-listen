@@ -1358,8 +1358,10 @@ octets" in <span>[<a href="#UDP" class="cite xref">UDP</a>]</span>).<a href="#se
       <h2 id="name-context-id">
 <a href="#section-4" class="section-number selfRef">4. </a><a href="#name-context-id" class="section-name selfRef">Context ID</a>
       </h2>
-<p id="section-4-1">Context ID values <span class="bcp14">MUST</span> always be greater than 0. A payload with value 0 <span class="bcp14">MUST</span>
-be dropped by the receiving party.<a href="#section-4-1" class="pilcrow">¶</a></p>
+<p id="section-4-1">The context ID 0 was reserved by unextended connect-udp and is not used by this extension.
+Once an endpoint has ascertained that the peer supports this extension, the endpoint <span class="bcp14">MUST NOT</span>
+send any datagrams with context ID set to 0, and <span class="bcp14">MUST</span> drop any received datagrams with
+context ID set to 0.<a href="#section-4-1" class="pilcrow">¶</a></p>
 <p id="section-4-2">An even context ID <span class="bcp14">MUST</span> be used by clients to send packets to the proxy, and an odd
 context ID <span class="bcp14">MUST</span> be used by the proxy to send packets to the client. A Client and
 a proxy <span class="bcp14">MUST</span> exhange COMPRESSION_ASSIGN packets for a given context ID to guarantee
