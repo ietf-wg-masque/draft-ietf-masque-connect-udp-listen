@@ -117,7 +117,7 @@ the "connect-udp-bind" header field to its UDP Proxying request, with its
 value set as the allocated context ID, see {{contextid}}. Likewise, the proxy
 can allocate and use odd numbered context IDs to send payloads to the client.
 
-The client and the proxy MUST exchange COMPRESSION_ASSIGN capsules in order to
+The client and the proxy exchange COMPRESSION_ASSIGN capsules in order to
 establish which IP a given context ID corresponds to. The context ID can
 correspond to uncompressed payloads to/from any target i.e. any value.
 
