@@ -201,7 +201,7 @@ In such a case, the client or the proxy MUST send a COMPRESSION_ASSIGN capsule
 client respectively) MUST echo back with either a  COMPRESSION_ASSIGN capsule
 if it accepts the compression request, or a  COMPRESSION_CLOSE with the context
 ID (see {{capsulecloseformat}}) if it doesn't wish to support  compression for
-the given Context ID (For example, due to \considerable memory requirements of
+the given Context ID (For example, due to considerable memory requirements of
 establishing  a list of mappings per target per client). If the compression was
 rejected, the client and proxy MUST use an uncompressed context ID to exhange
 UDP payloads for the given target.
