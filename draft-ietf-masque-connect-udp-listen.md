@@ -182,9 +182,9 @@ context ID set to 0.
 
 An even context ID MUST be used by clients to allocate uncompressed or compressed
 contexts, and an odd context ID MUST be used by the proxy to allocate compressed
-context IDs. A Client and a proxy MUST exhange COMPRESSION_ASSIGN packets for a 
+context IDs. A Client and a proxy MUST exhange COMPRESSION_ASSIGN packets for a
 given context ID to guarantee that all payloads are received and processed by the
-other party, see {{compression}}. They MAY pre-emptively use Context IDs not 
+other party, see {{compression}}. They MAY pre-emptively use Context IDs not
 acknowledged by the other party yet, knowing that those packets MAY be lost sinc
 the COMPRESSION_ASSIGN request receiving proxy or client is not guaranteed to be
 ready to accept payloads until a COMPRESSION_ASSIGN response is echoed back.
