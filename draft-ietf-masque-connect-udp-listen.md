@@ -148,8 +148,6 @@ Listener UDP Proxying Compressed Payload {
 ~~~
 {: #dgram-format-compressed title="Compressed Bound UDP Proxying HTTP Datagram Format"}
 
-{: #dgram-format title="Bound UDP Proxying HTTP Datagram Format"}
-
 IP Version:
 
 : The IP Version of the following IP Address field. MUST be 4 or 6.
