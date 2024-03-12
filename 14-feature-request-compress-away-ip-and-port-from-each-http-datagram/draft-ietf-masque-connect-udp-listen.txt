@@ -148,7 +148,7 @@ Table of Contents
    allocate and use odd numbered context IDs to send payloads to the
    client.
 
-   The client and the proxy MUST exchange COMPRESSION_ASSIGN capsules in
+   The client and the proxy exchange COMPRESSION_ASSIGN capsules in
    order to establish which IP a given context ID corresponds to.  The
    context ID can correspond to uncompressed payloads to/from any target
    i.e. any value.
