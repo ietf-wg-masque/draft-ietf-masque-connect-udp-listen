@@ -119,7 +119,8 @@ can allocate and use odd numbered context IDs to send payloads to the client.
 
 The client and the proxy exchange COMPRESSION_ASSIGN capsules in order to
 establish which IP a given context ID corresponds to. The context ID can
-correspond to uncompressed payloads to/from any target i.e. any value.
+correspond to both compressed and uncompressed payloads to/from any target and
+are configured as defined in {{compression}}.
 
 # HTTP Datagram Payload Format {#format}
 
