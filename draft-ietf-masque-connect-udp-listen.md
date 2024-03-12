@@ -174,8 +174,10 @@ octets" in {{UDP}}).
 
 # Context ID {#contextid}
 
-Context ID values MUST always be greater than 0. A payload with value 0 MUST
-be dropped by the receiving party.
+The context ID 0 was reserved by unextended connect-udp and is not used by this extension.
+Once an endpoint has ascertained that the peer supports this extension, the endpoint MUST NOT
+send any datagrams with context ID set to 0, and MUST drop any received datagrams with
+context ID set to 0.
 
 An even context ID MUST be used by clients to send packets to the proxy, and an odd
 context ID MUST be used by the proxy to send packets to the client. A Client and
