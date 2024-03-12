@@ -247,6 +247,7 @@ Capsule {
 ~~~ ascii-art
 Capsule {
   Type COMPRESSION_CLOSE (0x07),
+  Length (i),
   Context ID (i),
 }
 ~~~
