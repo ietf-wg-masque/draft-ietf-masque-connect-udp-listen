@@ -1365,7 +1365,7 @@ send any datagrams with context ID set to 0, and <span class="bcp14">MUST</span>
 context ID set to 0.<a href="#section-4-1" class="pilcrow">¶</a></p>
 <p id="section-4-2">An even context ID <span class="bcp14">MUST</span> be used by clients to allocate uncompressed or compressed
 contexts, and an odd context ID <span class="bcp14">MUST</span> be used by the proxy to allocate compressed
-context IDs. A Client and a proxy <span class="bcp14">MUST</span> exhange a COMPRESSION_ASSIGN request and echo
+context IDs. A Client and a proxy exhange a COMPRESSION_ASSIGN request and echo
 response in order to successfully allocate a new context ID and guarantee that all
 payloads are received and processed by the other party, see <a href="#compression" class="auto internal xref">Section 4.1</a>. They
 <span class="bcp14">MAY</span> pre-emptively use Context IDs not yet acknowledged by the other party, knowing
