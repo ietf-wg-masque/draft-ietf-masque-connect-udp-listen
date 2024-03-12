@@ -128,7 +128,7 @@ Proxying request contain the context ID in the Connect-UDP-Bind header field,
 the format of their UDP Proxying Payload field (see {{Section 5 of
 CONNECT-UDP}}) is defined by {{dgram-format}} when context ID is set to the value
 used for uncompressed CONNECT UDP bind and {{dgram-format-compressed}} when
-context ID is any other value.
+context ID matches one registered for compressed payloads.
 (See {{contextid}} for compressed and uncompressed assignments.)
 
 ~~~ ascii-art
