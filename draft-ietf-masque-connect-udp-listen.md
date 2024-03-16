@@ -111,6 +111,14 @@ When performing URI Template Expansion of the UDP Proxying template (see
 {{Section 3 of CONNECT-UDP}}), the client sets both the target_host and the
 target_port variables to the '*' character (ASCII character 0x2A).
 
+This extension leverages context IDs (see Section 4 of CONNECT-UDP) to compress 
+the target IP address and port when encoding datagrams on the wire. Either 
+endpoint can register a context ID and the IP/ports it's associated with by 
+sending a COMPRESSION_ASSIGN capsule to its peer. The peer will then echo that 
+capsule to indicate it's received it. From then on, both endpoints are aware of 
+the context ID and can send compressed datagrams. Later, any endpoint can 
+decide to close the compression context by sending a COMPRESSION_CLOSE capsule.
+
 Before sending its UDP Proxying request to the proxy, the client allocates an
 even-numbered context ID, see {{Section 4 of CONNECT-UDP}}. The client then adds
 the "connect-udp-bind" header field to its UDP Proxying request, with its
@@ -408,6 +416,9 @@ back to the client.
    connect-udp-bind = 2
    capsule-protocol = ?1
 
+            <--------  STREAM(44): HEADERS
+                         :status = 200
+                         capsule-protocol = ?1
 
 /* Request Context ID 2 to be used for uncompressed UDP payloads
  from/to any target */
@@ -430,10 +441,6 @@ back to the client.
    IP Address = 192.0.2.42
    UDP Port = 1234
    UDP Payload = Encapsulated UDP Payload
-
-            <--------  STREAM(44): HEADERS
-                         :status = 200
-                         capsule-protocol = ?1
 
 /* Wait for STUN server to respond to UDP packet. */
 
