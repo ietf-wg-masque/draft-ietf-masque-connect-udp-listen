@@ -14,7 +14,7 @@ protocols such as HTTP/3, but is not sufficient for some UDP peer-to-peer
 protocols like WebRTC. This document proposes an extension to UDP Proxying in
 HTTP that enables such use-cases. 
     " name="description">
-<meta content="xml2rfc 3.20.0" name="generator">
+<meta content="xml2rfc 3.21.0" name="generator">
 <meta content="quic" name="keyword">
 <meta content="http" name="keyword">
 <meta content="datagram" name="keyword">
@@ -29,18 +29,18 @@ HTTP that enables such use-cases.
 <meta content="bind" name="keyword">
 <meta content="draft-ietf-masque-connect-udp-listen-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.20.0
-    Python 3.11.8
+  xml2rfc 3.21.0
+    Python 3.12.3
     ConfigArgParse 1.7
     google-i18n-address 3.1.0
     intervaltree 3.1.0
-    Jinja2 3.1.2
-    lxml 4.9.3
-    platformdirs 4.2.0
+    Jinja2 3.1.4
+    lxml 4.9.4
+    platformdirs 4.2.2
     pycountry 22.3.5
     PyYAML 6.0.1
     requests 2.31.0
-    setuptools 68.2.2
+    setuptools 69.5.1
     six 1.16.0
     wcwidth 0.2.13
 -->
@@ -1041,11 +1041,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">CONNECT-UDP Bind</td>
-<td class="right">March 2024</td>
+<td class="right">June 2024</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Schinazi &amp; Singh</td>
-<td class="center">Expires 13 September 2024</td>
+<td class="center">Expires 22 December 2024</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1058,12 +1058,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-masque-connect-udp-listen-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2024-03-12" class="published">12 March 2024</time>
+<time datetime="2024-06-20" class="published">20 June 2024</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2024-09-13">13 September 2024</time></dd>
+<dd class="expires"><time datetime="2024-12-22">22 December 2024</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1121,7 +1121,7 @@ HTTP that enables such use-cases.<a href="#section-abstract-1" class="pilcrow">�
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 13 September 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 22 December 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1171,7 +1171,10 @@ HTTP that enables such use-cases.<a href="#section-abstract-1" class="pilcrow">�
                 <p id="section-toc.1-1.4.2.1.1"><a href="#section-4.1" class="auto internal xref">4.1</a>.  <a href="#name-address-compression" class="internal xref">Address Compression</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.1.2.1">
-                    <p id="section-toc.1-1.4.2.1.2.1.1"><a href="#section-4.1.1" class="auto internal xref">4.1.1</a>.  <a href="#name-compression-mapping" class="internal xref">Compression Mapping</a></p>
+                    <p id="section-toc.1-1.4.2.1.2.1.1"><a href="#section-4.1.1" class="auto internal xref">4.1.1</a>.  <a href="#name-uncompressed-datagrams" class="internal xref">Uncompressed datagrams</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.1.2.2">
+                    <p id="section-toc.1-1.4.2.1.2.2.1"><a href="#section-4.1.2" class="auto internal xref">4.1.2</a>.  <a href="#name-compression-mapping" class="internal xref">Compression Mapping</a></p>
 </li>
                 </ul>
 </li>
@@ -1180,6 +1183,14 @@ HTTP that enables such use-cases.<a href="#section-abstract-1" class="pilcrow">�
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.3">
                 <p id="section-toc.1-1.4.2.3.1"><a href="#section-4.3" class="auto internal xref">4.3</a>.  <a href="#name-capsules" class="internal xref">Capsules</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.3.2.1">
+                    <p id="section-toc.1-1.4.2.3.2.1.1"><a href="#section-4.3.1" class="auto internal xref">4.3.1</a>.  <a href="#name-the-compression_assign-caps" class="internal xref">The COMPRESSION_ASSIGN capsule</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.3.2.2">
+                    <p id="section-toc.1-1.4.2.3.2.2.1"><a href="#section-4.3.2" class="auto internal xref">4.3.2</a>.  <a href="#name-the-compression_close-capsu" class="internal xref">The COMPRESSION_CLOSE capsule</a></p>
+</li>
+                </ul>
 </li>
             </ul>
 </li>
@@ -1263,23 +1274,27 @@ from <span>[<a href="#QUIC" class="cite xref">QUIC</a>]</span>. This document us
 <a href="#section-2" class="section-number selfRef">2. </a><a href="#name-proxied-udp-binding-mechani" class="section-name selfRef">Proxied UDP Binding Mechanism</a>
       </h2>
 <p id="section-2-1">In unextended UDP Proxying requests, the target host is encoded in the HTTP
-request path or query. For Bound UDP Proxying, it is either conveyed in each
+request path or query. For Bound UDP Proxying, the target is either conveyed in each
 HTTP Datagram (see <a href="#format" class="auto internal xref">Section 3</a>), or registered via capsules and then compressed
-(see <a href="#contextid" class="auto internal xref">Section 4</a>).
-request path or query. For Bound UDP Proxying, it is instead conveyed in each
-HTTP Datagram, see <a href="#format" class="auto internal xref">Section 3</a>.<a href="#section-2-1" class="pilcrow">¶</a></p>
+(see <a href="#contextid" class="auto internal xref">Section 4</a>).<a href="#section-2-1" class="pilcrow">¶</a></p>
 <p id="section-2-2">When performing URI Template Expansion of the UDP Proxying template (see
 <span><a href="https://rfc-editor.org/rfc/rfc9298#section-3" class="relref">Section 3</a> of [<a href="#CONNECT-UDP" class="cite xref">CONNECT-UDP</a>]</span>), the client sets both the target_host and the
 target_port variables to the '*' character (ASCII character 0x2A).<a href="#section-2-2" class="pilcrow">¶</a></p>
-<p id="section-2-3">Before sending its UDP Proxying request to the proxy, the client allocates an
+<p id="section-2-3">This extension leverages context IDs (see Section 4 of CONNECT-UDP) to compress
+the target IP address and port when encoding datagrams on the wire. Either
+endpoint can register a context ID and the IP/ports it's associated with by
+sending a COMPRESSION_ASSIGN capsule to its peer. The peer will then echo that
+capsule to indicate that it has been received and accepted. From then on, both endpoints are aware of
+the context ID and can send compressed datagrams. Later, any endpoint can
+decide to close the compression context by sending a COMPRESSION_CLOSE capsule.<a href="#section-2-3" class="pilcrow">¶</a></p>
+<p id="section-2-4">Before sending its UDP Proxying request to the proxy, the client allocates an
 even-numbered context ID, see <span><a href="https://rfc-editor.org/rfc/rfc9298#section-4" class="relref">Section 4</a> of [<a href="#CONNECT-UDP" class="cite xref">CONNECT-UDP</a>]</span>. The client then adds
-the "connect-udp-bind" header field to its UDP Proxying request, with its
-value set as the allocated context ID, see <a href="#contextid" class="auto internal xref">Section 4</a>. Likewise, the proxy
-can allocate and use odd numbered context IDs to send payloads to the client.<a href="#section-2-3" class="pilcrow">¶</a></p>
-<p id="section-2-4">The client and the proxy exchange COMPRESSION_ASSIGN capsules in order to
+the "connect-udp-bind" header field. Likewise, the proxy
+can allocate and use odd numbered context IDs to send payloads to the client.<a href="#section-2-4" class="pilcrow">¶</a></p>
+<p id="section-2-5">The client and the proxy exchange COMPRESSION_ASSIGN capsules in order to
 establish which IP a given context ID corresponds to. The context ID can
 correspond to both compressed and uncompressed payloads to/from any target and
-are configured as defined in <a href="#compression" class="auto internal xref">Section 4.1</a>.<a href="#section-2-4" class="pilcrow">¶</a></p>
+are configured as defined in <a href="#compression" class="auto internal xref">Section 4.1</a>.<a href="#section-2-5" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="format">
@@ -1289,15 +1304,15 @@ are configured as defined in <a href="#compression" class="auto internal xref">S
       </h2>
 <p id="section-3-1">When HTTP Datagrams <span>[<a href="#HTTP-DGRAM" class="cite xref">HTTP-DGRAM</a>]</span> associated with this Bound UDP
 Proxying request contain the context ID in the Connect-UDP-Bind header field,
-the format of their UDP Proxying Payload field (see <span><a href="https://rfc-editor.org/rfc/rfc9298#section-5" class="relref">Section 5</a> of [<a href="#CONNECT-UDP" class="cite xref">CONNECT-UDP</a>]</span>) is defined by <a href="#dgram-format" class="auto internal xref">Figure 1</a> when context ID is set to the value
+the format of their UDP Proxying Payload field (see <span><a href="https://rfc-editor.org/rfc/rfc9298#section-5" class="relref">Section 5</a> of [<a href="#CONNECT-UDP" class="cite xref">CONNECT-UDP</a>]</span>) is defined by <a href="#dgram-format" class="auto internal xref">Figure 1</a> when context ID is set to be used
 used for uncompressed CONNECT UDP bind and <a href="#dgram-format-compressed" class="auto internal xref">Figure 2</a> when
-context ID matches one registered for compressed payloads.
+context ID is set to one previously registered for compressed payloads.
 (See <a href="#contextid" class="auto internal xref">Section 4</a> for compressed and uncompressed assignments.)<a href="#section-3-1" class="pilcrow">¶</a></p>
 <span id="name-uncompressed-bound-udp-prox"></span><div id="dgram-format">
 <figure id="figure-1">
         <div class="alignLeft art-ascii-art art-text artwork" id="section-3-2.1">
 <pre>
-Bound UDP Proxying Payload {
+Bound UDP Uncompressed Payload {
   IP Version (8),
   IP Address (32..128),
   UDP Port (16),
@@ -1313,7 +1328,7 @@ Bound UDP Proxying Payload {
 <figure id="figure-2">
         <div class="alignLeft art-ascii-art art-text artwork" id="section-3-3.1">
 <pre>
-Listener UDP Proxying Compressed Payload {
+Bound UDP Proxying Compressed Payload {
   UDP Payload (..),
 }
 </pre>
@@ -1359,56 +1374,56 @@ octets" in <span>[<a href="#UDP" class="cite xref">UDP</a>]</span>).<a href="#se
       <h2 id="name-context-id">
 <a href="#section-4" class="section-number selfRef">4. </a><a href="#name-context-id" class="section-name selfRef">Context ID</a>
       </h2>
-<p id="section-4-1">The context ID 0 was reserved by unextended connect-udp and is not used by this extension.
+<p id="section-4-1">This extension leverages context IDs (see <span><a href="https://rfc-editor.org/rfc/rfc9298#section-4" class="relref">Section 4</a> of [<a href="#CONNECT-UDP" class="cite xref">CONNECT-UDP</a>]</span>) to compress the target IP address and port when encoding datagrams on the wire. Either endpoint can register a context ID and the IP/ports it's associated with by sending a COMPRESSION_ASSIGN capsule to its peer. The peer will then echo that capsule to indicate it's received it. From then on, both endpoints are aware of the context ID and can send compressed datagrams. Later, any endpoint can decide to close the compression context by sending a COMPRESSION_CLOSE capsule.<a href="#section-4-1" class="pilcrow">¶</a></p>
+<p id="section-4-2">The context ID 0 was reserved by unextended connect-udp and is not used by this extension.
 Once an endpoint has ascertained that the peer supports this extension, the endpoint <span class="bcp14">MUST NOT</span>
 send any datagrams with context ID set to 0, and <span class="bcp14">MUST</span> drop any received datagrams with
-context ID set to 0.<a href="#section-4-1" class="pilcrow">¶</a></p>
-<p id="section-4-2">An even context ID <span class="bcp14">MUST</span> be used by clients to allocate uncompressed or compressed
+context ID set to 0.<a href="#section-4-2" class="pilcrow">¶</a></p>
+<p id="section-4-3">An even context ID <span class="bcp14">MUST</span> be used by clients to allocate uncompressed or compressed
 contexts, and an odd context ID <span class="bcp14">MUST</span> be used by the proxy to allocate compressed
-context IDs. A Client and a proxy exhange a COMPRESSION_ASSIGN request and echo
-response in order to successfully allocate a new context ID and guarantee that all
-payloads are received and processed by the other party, see <a href="#compression" class="auto internal xref">Section 4.1</a>. They
-<span class="bcp14">MAY</span> pre-emptively use Context IDs not yet acknowledged by the other party, knowing
-that those packets <span class="bcp14">MAY</span> be lost since the COMPRESSION_ASSIGN request receiving proxy
+context IDs.They <span class="bcp14">MAY</span> pre-emptively use Context IDs not yet acknowledged by the other party, knowing that those packets <span class="bcp14">MAY</span> be lost since the COMPRESSION_ASSIGN request receiving proxy
 or client is not guaranteed to be ready to accept payloads until a COMPRESSION_ASSIGN
-response is echoed back.<a href="#section-4-2" class="pilcrow">¶</a></p>
+response is echoed back.<a href="#section-4-3" class="pilcrow">¶</a></p>
 <div id="compression">
 <section id="section-4.1">
         <h3 id="name-address-compression">
 <a href="#section-4.1" class="section-number selfRef">4.1. </a><a href="#name-address-compression" class="section-name selfRef">Address Compression</a>
         </h3>
-<p id="section-4.1-1">If the client wishes to allocate a Context ID for uncompressed packets,
-it <span class="bcp14">MUST</span> exchange the COMPRESSION_ASSIGN capsule (see <a href="#capsuleassignformat" class="auto internal xref">Figure 3</a>)
-with the proxy with an unused Context ID defined in <a href="#contextid" class="auto internal xref">Section 4</a> with
-the IP Length set to zero.<a href="#section-4.1-1" class="pilcrow">¶</a></p>
-<p id="section-4.1-2">The client and the proxy <span class="bcp14">MAY</span> choose to compress the IP and port information
+<p id="section-4.1-1">The client and the proxy <span class="bcp14">MAY</span> choose to compress the IP and port information
 per datagram for a given target against the Context ID.
 In such a case, the client or the proxy <span class="bcp14">MUST</span> send a COMPRESSION_ASSIGN capsule
 (see <a href="#capsuleassignformat" class="auto internal xref">Figure 3</a>) with the target information (see
-<a href="#targetmappingformat" class="auto internal xref">Figure 5</a>) it wishes to compress and the other party (proxy or
-client respectively) <span class="bcp14">MUST</span> echo back with either a  COMPRESSION_ASSIGN capsule
-if it accepts the compression request, or a  COMPRESSION_CLOSE with the context
-ID (see <a href="#capsulecloseformat" class="auto internal xref">Figure 4</a>) if it doesn't wish to support  compression for
+<a href="#targetmappingformat" class="auto internal xref">Figure 4</a>) it wishes to compress and the other party (proxy or
+client respectively) <span class="bcp14">MUST</span> echo back with either a COMPRESSION_ASSIGN capsule
+if it accepts the compression request, or a COMPRESSION_CLOSE with the context
+ID (see <a href="#capsulecloseformat" class="auto internal xref">Figure 5</a>) if it doesn't wish to support  compression for
 the given Context ID (For example, due to considerable memory requirements of
 establishing  a list of mappings per target per client). If the compression was
-rejected, the client and proxy <span class="bcp14">MUST</span> use an uncompressed context ID to exhange
-UDP payloads for the given target.<a href="#section-4.1-2" class="pilcrow">¶</a></p>
-<div id="mappings">
+rejected, the client and proxy <span class="bcp14">MUST</span> use an uncompressed context ID (See <a href="#uncompressed" class="auto internal xref">Section 4.1.1</a>) to exhange
+UDP payloads for the given target.<a href="#section-4.1-1" class="pilcrow">¶</a></p>
+<div id="uncompressed">
 <section id="section-4.1.1">
-          <h4 id="name-compression-mapping">
-<a href="#section-4.1.1" class="section-number selfRef">4.1.1. </a><a href="#name-compression-mapping" class="section-name selfRef">Compression Mapping</a>
+          <h4 id="name-uncompressed-datagrams">
+<a href="#section-4.1.1" class="section-number selfRef">4.1.1. </a><a href="#name-uncompressed-datagrams" class="section-name selfRef">Uncompressed datagrams</a>
           </h4>
-<p id="section-4.1.1-1">If a COMPRESSION_ASSIGN is received by client or proxy with IP length non zero,
-the proxy and client <span class="bcp14">MUST</span> maintain a compression mapping between Target and
-Context ID and update this mapping whenever new COMPRESSION_ASSIGN capsules
-are exchanged between the two. Upon completing this exchange, the proxy and
-the client <span class="bcp14">MUST</span> send each other packets corresponding to a target using the
-unique Context ID assigned to the given target, while omitting IP and port
-information.<a href="#section-4.1.1-1" class="pilcrow">¶</a></p>
-<p id="section-4.1.1-2">The client or proxy <span class="bcp14">MAY</span> choose to unregister any context IDs that it registered
+<p id="section-4.1.1-1">If the client wishes to allocate a Context ID for uncompressed packets,
+it <span class="bcp14">MUST</span> first exchange the COMPRESSION_ASSIGN capsule (see <a href="#capsuleassignformat" class="auto internal xref">Figure 3</a>)
+with the proxy with an unused Context ID defined in <a href="#contextid" class="auto internal xref">Section 4</a> with
+the IP Length set to zero.<a href="#section-4.1.1-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="mappings">
+<section id="section-4.1.2">
+          <h4 id="name-compression-mapping">
+<a href="#section-4.1.2" class="section-number selfRef">4.1.2. </a><a href="#name-compression-mapping" class="section-name selfRef">Compression Mapping</a>
+          </h4>
+<p id="section-4.1.2-1">When an endpoint receives a COMPRESSION_ASSIGN capsule with a non-zero IP length, it <span class="bcp14">MUST</span> decide whether to accept or reject the compression mapping:<a href="#section-4.1.2-1" class="pilcrow">¶</a></p>
+<p id="section-4.1.2-2">if it accepts the mapping, first the receiver <span class="bcp14">MUST</span> save the mapping from context ID to address and port. Second, the receiver <span class="bcp14">MUST</span> echo an identical COMPRESSION_ASSIGN capsule back to its peer.<a href="#section-4.1.2-2" class="pilcrow">¶</a></p>
+<p id="section-4.1.2-3">if it rejects the mapping, the receiver <span class="bcp14">MUST</span> respond by sending a COMPRESSION_CLOSE capsule with the context ID set to the one from the received COMPRESSION_ASSIGN capsule<a href="#section-4.1.2-3" class="pilcrow">¶</a></p>
+<p id="section-4.1.2-4">The client or proxy <span class="bcp14">MAY</span> choose to unregister any context IDs that it registered
 or was registered with it respectively using COMPRESSION_CLOSE
 (For example when a mapping is unused for a long time). Another potential use is
-<a href="#restrictingips" class="auto internal xref">Section 4.2</a>.<a href="#section-4.1.1-2" class="pilcrow">¶</a></p>
+<a href="#restrictingips" class="auto internal xref">Section 4.2</a>.<a href="#section-4.1.2-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1418,8 +1433,8 @@ or was registered with it respectively using COMPRESSION_CLOSE
         <h3 id="name-restricting-ips">
 <a href="#section-4.2" class="section-number selfRef">4.2. </a><a href="#name-restricting-ips" class="section-name selfRef">Restricting IPs</a>
         </h3>
-<p id="section-4.2-1">The client <span class="bcp14">MAY</span> at any point request the proxy reject all traffic from uncompressed
-targets by using COMPRESSION_CLOSE on the Context ID corresponding to uncompressed
+<p id="section-4.2-1">If an uncompressed Context ID was set (via <a href="#uncompressed" class="auto internal xref">Section 4.1.1</a>), the client <span class="bcp14">MAY</span> at any point request the proxy reject all traffic from uncompressed
+targets by using COMPRESSION_CLOSE (see <a href="#compressionclose" class="auto internal xref">Section 4.3.2</a>) on said Context ID.
 targets effectively acting as a firewall against unwanted or unknown IPs.<a href="#section-4.2-1" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -1428,10 +1443,16 @@ targets effectively acting as a firewall against unwanted or unknown IPs.<a href
         <h3 id="name-capsules">
 <a href="#section-4.3" class="section-number selfRef">4.3. </a><a href="#name-capsules" class="section-name selfRef">Capsules</a>
         </h3>
-<p id="section-4.3-1">The Listener capsule types are defined below:<a href="#section-4.3-1" class="pilcrow">¶</a></p>
+<p id="section-4.3-1">The Listener capsule types are defined as follows:<a href="#section-4.3-1" class="pilcrow">¶</a></p>
+<div id="compressionassign">
+<section id="section-4.3.1">
+          <h4 id="name-the-compression_assign-caps">
+<a href="#section-4.3.1" class="section-number selfRef">4.3.1. </a><a href="#name-the-compression_assign-caps" class="section-name selfRef">The COMPRESSION_ASSIGN capsule</a>
+          </h4>
+<p id="section-4.3.1-1">The Compression Assign capsule has two purposes. Either to request the assignment of a Context ID (see <a href="#contextid" class="auto internal xref">Section 4</a>) to a corresponding target IP:Port. Or to accept a COMPRESSION_ASSIGN request from the other party.<a href="#section-4.3.1-1" class="pilcrow">¶</a></p>
 <span id="name-compression-assign-capsule-"></span><div id="capsuleassignformat">
 <figure id="figure-3">
-          <div class="alignLeft art-ascii-art art-text artwork" id="section-4.3-2.1">
+            <div class="alignLeft art-ascii-art art-text artwork" id="section-4.3.1-2.1">
 <pre>
 Capsule {
   Type COMPRESSION_ASSIGN (0x05),
@@ -1442,26 +1463,11 @@ Capsule {
 </div>
 <figcaption><a href="#figure-3" class="selfRef">Figure 3</a>:
 <a href="#name-compression-assign-capsule-" class="selfRef">Compression Assign Capsule Format</a>
-          </figcaption></figure>
-</div>
-<span id="name-compression-close-capsule-f"></span><div id="capsulecloseformat">
-<figure id="figure-4">
-          <div class="alignLeft art-ascii-art art-text artwork" id="section-4.3-3.1">
-<pre>
-Capsule {
-  Type COMPRESSION_CLOSE (0x07),
-  Length (i),
-  Context ID (i),
-}
-</pre>
-</div>
-<figcaption><a href="#figure-4" class="selfRef">Figure 4</a>:
-<a href="#name-compression-close-capsule-f" class="selfRef">Compression Close Capsule Format</a>
-          </figcaption></figure>
+            </figcaption></figure>
 </div>
 <span id="name-target-information-format"></span><div id="targetmappingformat">
-<figure id="figure-5">
-          <div class="alignLeft art-ascii-art art-text artwork" id="section-4.3-4.1">
+<figure id="figure-4">
+            <div class="alignLeft art-ascii-art art-text artwork" id="section-4.3.1-3.1">
 <pre>
 Target Information {
   Context ID (i),
@@ -1471,13 +1477,38 @@ Target Information {
 }
 </pre>
 </div>
-<figcaption><a href="#figure-5" class="selfRef">Figure 5</a>:
+<figcaption><a href="#figure-4" class="selfRef">Figure 4</a>:
 <a href="#name-target-information-format" class="selfRef">Target Information Format</a>
-          </figcaption></figure>
+            </figcaption></figure>
 </div>
-<p id="section-4.3-5">The IP Length, Address and Port fields in <a href="#targetmappingformat" class="auto internal xref">Figure 5</a> are the
+<p id="section-4.3.1-4">The IP Length, Address and Port fields in <a href="#targetmappingformat" class="auto internal xref">Figure 4</a> are the
 same as those defined in <a href="#format" class="auto internal xref">Section 3</a>. However, the IP version can be set
-to 0 when allocating an uncompressed Context ID<a href="#section-4.3-5" class="pilcrow">¶</a></p>
+to 0 when allocating an uncompressed Context ID, as defined in <a href="#contextid" class="auto internal xref">Section 4</a>.<a href="#section-4.3.1-4" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="compressionclose">
+<section id="section-4.3.2">
+          <h4 id="name-the-compression_close-capsu">
+<a href="#section-4.3.2" class="section-number selfRef">4.3.2. </a><a href="#name-the-compression_close-capsu" class="section-name selfRef">The COMPRESSION_CLOSE capsule</a>
+          </h4>
+<p id="section-4.3.2-1">The Compression Close capsule serves the following purposes. As a response to reject a COMPRESSION_ASSIGN request and to close or clean up any existing compression mappings. Once a COMPRESSION_CLOSE is sent for a given Context ID, the sending party <span class="bcp14">MAY</span> reject any datagrams received for that Context ID until it is reallocated through a COMPRESSION_ASSIGN exchange.<a href="#section-4.3.2-1" class="pilcrow">¶</a></p>
+<span id="name-compression-close-capsule-f"></span><div id="capsulecloseformat">
+<figure id="figure-5">
+            <div class="alignLeft art-ascii-art art-text artwork" id="section-4.3.2-2.1">
+<pre>
+Capsule {
+  Type COMPRESSION_CLOSE (0x07),
+  Length (i),
+  Context ID (i),
+}
+</pre>
+</div>
+<figcaption><a href="#figure-5" class="selfRef">Figure 5</a>:
+<a href="#name-compression-close-capsule-f" class="selfRef">Compression Close Capsule Format</a>
+            </figcaption></figure>
+</div>
+</section>
+</div>
 </section>
 </div>
 </section>
@@ -1739,6 +1770,9 @@ back to the client.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
    connect-udp-bind = 2
    capsule-protocol = ?1
 
+            &lt;--------  STREAM(44): HEADERS
+                         :status = 200
+                         capsule-protocol = ?1
 
 /* Request Context ID 2 to be used for uncompressed UDP payloads
  from/to any target */
@@ -1761,10 +1795,6 @@ back to the client.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
    IP Address = 192.0.2.42
    UDP Port = 1234
    UDP Payload = Encapsulated UDP Payload
-
-            &lt;--------  STREAM(44): HEADERS
-                         :status = 200
-                         capsule-protocol = ?1
 
 /* Wait for STUN server to respond to UDP packet. */
 
