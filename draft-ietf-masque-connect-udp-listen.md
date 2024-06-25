@@ -187,9 +187,9 @@ Once an endpoint has ascertained that the peer supports this extension, the endp
 send any datagrams with context ID set to 0, and MUST silently drop any received datagrams with
 context ID set to 0.
 
-An even context ID MUST be used by clients to allocate uncompressed or compressed
-contexts, and an odd context ID MUST be used by the proxy to allocate compressed
-context IDs.They MAY pre-emptively use Context IDs not yet acknowledged by the other party, knowing that those packets MAY be lost since the COMPRESSION_ASSIGN request receiving proxy
+As mandated in {{Section 4 of CONNECT-UDP}}, clients will allocate even context IDs
+while proxies will allocate odd ones.
+They MAY pre-emptively use Context IDs not yet acknowledged by the other party, knowing that those packets MAY be lost since the COMPRESSION_ASSIGN request receiving proxy
 or client is not guaranteed to be ready to accept payloads until a COMPRESSION_ASSIGN
 response is echoed back.
 
