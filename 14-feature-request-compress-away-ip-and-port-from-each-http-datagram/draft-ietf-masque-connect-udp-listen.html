@@ -1516,12 +1516,12 @@ Capsule {
       <h2 id="name-the-connect-udp-bind-header">
 <a href="#section-5" class="section-number selfRef">5. </a><a href="#name-the-connect-udp-bind-header" class="section-name selfRef">The connect-udp-bind Header Field</a>
       </h2>
-<p id="section-5-1">The "connect-udp-bind" header field’s value is a boolean set to true. Any other
-value type <span class="bcp14">MUST</span> be handled as if the field were not present by the recipients
-(for example, if this field is defined multiple times, its type becomes a List
-and therefore is to be ignored). This document does not define any parameters
-for the Connect-UDP-Bind header field value, but future documents might define
-parameters. Receivers <span class="bcp14">MUST</span> ignore unknown parameters.<a href="#section-5-1" class="pilcrow">¶</a></p>
+<p id="section-5-1">The "connect-udp-bind" header field’s value is a boolean structured value field
+set to to true. Any other value type <span class="bcp14">MUST</span> be handled as if the field were not
+present by the recipients (for example, if this field is defined multiple times,
+its type becomes a List and therefore is to be ignored). This document does not
+define any parameters for the Connect-UDP-Bind header field value, but future
+documents might define parameters. Receivers <span class="bcp14">MUST</span> ignore unknown parameters.<a href="#section-5-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="proxy-behavior">
@@ -1763,7 +1763,7 @@ back to the client.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
    :scheme = https
    :path = /.well-known/masque/udp/*/*/
    :authority = proxy.example.org
-   connect-udp-bind = 1
+   connect-udp-bind = ?1
    capsule-protocol = ?1
 
             &lt;--------  STREAM(44): HEADERS
