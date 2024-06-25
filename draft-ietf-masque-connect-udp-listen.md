@@ -282,12 +282,12 @@ Capsule {
 
 # The connect-udp-bind Header Field {#hdr}
 
-The "connect-udp-bind" header field’s value is a boolean set to true. Any other
-value type MUST be handled as if the field were not present by the recipients
-(for example, if this field is defined multiple times, its type becomes a List
-and therefore is to be ignored). This document does not define any parameters
-for the Connect-UDP-Bind header field value, but future documents might define
-parameters. Receivers MUST ignore unknown parameters.
+The "connect-udp-bind" header field’s value is a boolean structured value field
+set to to true. Any other value type MUST be handled as if the field were not
+present by the recipients (for example, if this field is defined multiple times,
+its type becomes a List and therefore is to be ignored). This document does not
+define any parameters for the Connect-UDP-Bind header field value, but future
+documents might define parameters. Receivers MUST ignore unknown parameters.
 
 # Proxy behavior
 
@@ -413,7 +413,7 @@ back to the client.
    :scheme = https
    :path = /.well-known/masque/udp/*/*/
    :authority = proxy.example.org
-   connect-udp-bind = 1
+   connect-udp-bind = ?1
    capsule-protocol = ?1
 
             <--------  STREAM(44): HEADERS
