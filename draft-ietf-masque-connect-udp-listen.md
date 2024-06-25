@@ -179,11 +179,14 @@ the "Proxy-Public-Address" header. The format of that header is defined below
 using IPv4address, IPv6address and port from {{Section 3.2 of !URI=RFC3986}}.
 
 The proxy MUST then respond with the allocated IP and port pairings using the
-Proxy-Public-Address response header defined as follows:
+Proxy-Public-Address response header which is defined as a List of Strings.
+The list contains a maximum of one IPv4 address and port, and one IPv6 address
+and port each. IP-literal, IPv4address and Port are defined in
+{{Section 3 of !URI=RFC3986}}
 
 ~~~ ascii-art
-proxy-public-address = IP-port-pairing (, IP-port-pairing)
-IP-port-pairing = ( IPv4address / "[" IPv6address "]" ) ":" port
+proxy-public-address = List of IP:Port pairings
+IP:Port pairing = IP-literal:Port / IPv4address:Port
 ~~~
 {: #target-format title="Proxy Address Format"}
 
