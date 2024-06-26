@@ -1342,15 +1342,10 @@ bind to this request. From then and until the tunnel is closed, the proxy
 <span class="bcp14">SHALL</span> send packets received on these IP-port tuples to the client. The proxy
 <span class="bcp14">MUST</span> communicate the selected addresses and ports to the client using
 the "Proxy-Public-Address" header. The format of that header is defined below
-using IPv4address, IPv6address and port from <span><a href="https://rfc-editor.org/rfc/rfc3986#section-3.2" class="relref">Section 3.2</a> of [<a href="#URI" class="cite xref">URI</a>]</span>.<a href="#section-5-1" class="pilcrow">¶</a></p>
-<p id="section-5-2">The proxy <span class="bcp14">MUST</span> then respond with the allocated IP and port pairings using the
-Proxy-Public-Address response header which is defined as a List of Strings.
-The list contains a maximum of one IPv4 address and port, and one IPv6 address
-and port each. IP-literal, IPv4address and port are defined in
-<span><a href="https://rfc-editor.org/rfc/rfc3986#section-3" class="relref">Section 3</a> of [<a href="#URI" class="cite xref">URI</a>]</span><a href="#section-5-2" class="pilcrow">¶</a></p>
+using IP-literal, IPv4address, IPv6address and port from <span><a href="https://rfc-editor.org/rfc/rfc3986#section-3.2" class="relref">Section 3.2</a> of [<a href="#URI" class="cite xref">URI</a>]</span>.<a href="#section-5-1" class="pilcrow">¶</a></p>
 <span id="name-proxy-address-format"></span><div id="target-format">
 <figure id="figure-2">
-        <div class="alignLeft art-ascii-art art-text artwork" id="section-5-3.1">
+        <div class="alignLeft art-ascii-art art-text artwork" id="section-5-2.1">
 <pre>
 proxy-public-address = List of IP:Port pairings
 IP:Port pairing = IP-literal:Port / IPv4address:Port
@@ -1360,14 +1355,14 @@ IP:Port pairing = IP-literal:Port / IPv4address:Port
 <a href="#name-proxy-address-format" class="selfRef">Proxy Address Format</a>
         </figcaption></figure>
 </div>
-<p id="section-5-4">If the proxy sends two IP-port pairings, they <span class="bcp14">MUST</span> be of different
+<p id="section-5-3">If the proxy sends two IP-port pairings, they <span class="bcp14">MUST</span> be of different
 address families. If the client receives a Proxy-Public-Address field
 with two IP-port pairings of the same address family, it <span class="bcp14">MUST</span> treat
 the response as malformed. Similarly, if the field is missing or
 contains a number of pairings different from one or two, it <span class="bcp14">MUST</span>
 treat the response as malformed.
 Note that since the addresses are conveyed in HTTP response headers,
-a subsequent change of addresses on the proxy cannot be conveyed to the client.<a href="#section-5-4" class="pilcrow">¶</a></p>
+a subsequent change of addresses on the proxy cannot be conveyed to the client.<a href="#section-5-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="proxy-behavior">
