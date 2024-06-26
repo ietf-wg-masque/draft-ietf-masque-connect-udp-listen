@@ -298,8 +298,8 @@ client. The proxy uses the same port to listen for UDP packets from any
 authorized target and encapsulates the packets in the Binding Datagram
 Payload format, specifying the IP and port of the target and forwards it to
 the client.
-When the client or proxy send a COMPRESSION_ASSIGN capsule, the proxy or client
-respectively either register a mapping from Context ID to the provided target
+When an endpoint receives a COMPRESSION_ASSIGN capsule, it
+either registers a mapping from Context ID to the provided target
 and port and echo back the capsule or reject. If the IP length was 0,
 the Context ID can be used by either party to send uncompressed payloads and
 the proxy reads the IP, port information per  packet, as opposed to doing a
