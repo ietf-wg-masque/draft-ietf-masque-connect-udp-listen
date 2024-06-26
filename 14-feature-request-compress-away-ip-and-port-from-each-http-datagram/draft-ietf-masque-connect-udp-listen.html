@@ -1566,7 +1566,7 @@ validate the target on every datagram and <span class="bcp14">MUST NOT</span> fo
 with unauthorized targets. Proxies can either silently discard such datagrams or
 abort the corresponding request stream.<a href="#section-7-2" class="pilcrow">¶</a></p>
 <p id="section-7-3">Note that if the compression response (COMPRESSION_ASSIGN OR COMPRESSION_CLOSE)
-cannot be immediately sent due to flow or congestion control, an upper limit on how many compression responses the endpoint is willing to buffer <span class="bcp14">SHOULD</span> be set to prevent DDOS-ing. The proxy <span class="bcp14">MAY</span>
+cannot be immediately sent due to flow or congestion control, an upper limit on how many compression responses the endpoint is willing to buffer <span class="bcp14">MUST</span> be set to prevent memory exhaustion. The proxy <span class="bcp14">MAY</span>
 close the connection if such conditions occur.<a href="#section-7-3" class="pilcrow">¶</a></p>
 </section>
 </div>
