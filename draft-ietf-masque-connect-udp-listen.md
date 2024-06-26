@@ -312,7 +312,8 @@ uncompressed.
 
 If the proxy receives UDP payloads that don't correspond to any mapping i.e.
 no compression for the given target was ever established and a mapping for
-uncompressed or any target is missing, the proxy simply drops the packet.
+uncompressed or any target is missing, the proxy will either drop the datagram or
+temporarily buffer it (see {{Section 5 of CONNECT-UDP}}).
 
 
 # Security Considerations
