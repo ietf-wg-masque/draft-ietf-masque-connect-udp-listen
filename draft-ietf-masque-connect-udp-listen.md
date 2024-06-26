@@ -330,7 +330,7 @@ with unauthorized targets. Proxies can either silently discard such datagrams or
 abort the corresponding request stream.
 
 Note that if the compression response (COMPRESSION_ASSIGN OR COMPRESSION_CLOSE)
-cannot be immediately sent due to flow or congestion control, an upper limit on how many compression responses the endpoint is willing to buffer SHOULD be set to prevent DDOS-ing. The proxy MAY
+cannot be immediately sent due to flow or congestion control, an upper limit on how many compression responses the endpoint is willing to buffer MUST be set to prevent memory exhaustion. The proxy MAY
 close the connection if such conditions occur.
 
 # IANA Considerations
