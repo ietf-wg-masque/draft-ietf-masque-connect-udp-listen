@@ -120,7 +120,8 @@ Table of Contents
    This document uses terminology from [CONNECT-UDP] and notational
    conventions from [QUIC].  This document uses the terms Integer and
    List from Section 3 of [STRUCTURED-FIELDS] to specify syntax and
-   parsing.
+   parsing.  This document uses Augmented Backus-Naur Form and parsing/
+   serialization behvaviors from [ABNF]
 
 2.  Proxied UDP Binding Mechanism
 
@@ -258,6 +259,11 @@ Table of Contents
 9.  References
 
 9.1.  Normative References
+
+   [ABNF]     Crocker, D., Ed. and P. Overell, "Augmented BNF for Syntax
+              Specifications: ABNF", STD 68, RFC 5234,
+              DOI 10.17487/RFC5234, January 2008,
+              <https://www.rfc-editor.org/rfc/rfc5234>.
 
    [CONNECT-UDP]
               Schinazi, D., "Proxying UDP in HTTP", RFC 9298,
