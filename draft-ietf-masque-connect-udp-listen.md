@@ -331,7 +331,7 @@ abort the corresponding request stream.
 
 Note that if the compression response (COMPRESSION_ASSIGN OR COMPRESSION_CLOSE)
 cannot be immediately sent due to flow or congestion control, an upper limit on how many compression responses the endpoint is willing to buffer SHOULD be set to prevent DDOS-ing. The proxy MAY
-consider closing the connection if such conditions occur.
+close the connection if such conditions occur.
 
 # IANA Considerations
 
