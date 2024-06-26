@@ -109,16 +109,8 @@ When performing URI Template Expansion of the UDP Proxying template (see
 {{Section 3 of CONNECT-UDP}}), the client sets both the target_host and the
 target_port variables to the '*' character (ASCII character 0x2A).
 
-This extension leverages context IDs (see Section 4 of CONNECT-UDP) to compress
-the target IP address and port when encoding datagrams on the wire. Either
-endpoint can register a context ID and the IP/ports it's associated with by
-sending a COMPRESSION_ASSIGN capsule to its peer. The peer will then echo that
-capsule to indicate that it has been received and accepted. From then on, both endpoints are aware of
-the context ID and can send compressed datagrams. Later, any endpoint can
-decide to close the compression context by sending a COMPRESSION_CLOSE capsule.
-
 When sending the UDP Proxying request to the proxy, the client adds
-the "connect-udp-bind" header field to identify it as such. Both client and proxy can negotiate even and odd numbered context IDs to send UDP payloads to each other.
+the "Connect-UDP-Bind" header field to identify it as such. Both client and proxy can negotiate even and odd numbered context IDs to send UDP payloads to each other.
 
 The client and the proxy exchange COMPRESSION_ASSIGN capsules in order to
 establish which IP a given context ID corresponds to. The context ID can
@@ -244,7 +236,7 @@ The Compression Assign capsule has two purposes. Either to request the assignmen
 
 ~~~ ascii-art
 Capsule {
-  Type COMPRESSION_ASSIGN (0x1F1F1F1F),
+  Type COMPRESSION_ASSIGN (0x1C0FE323),
   Length (i),
   Target Information,
 }
@@ -271,7 +263,7 @@ The Compression Close capsule serves the following purposes. As a response to re
 
 ~~~ ascii-art
 Capsule {
-  Type COMPRESSION_CLOSE (0x1F1F1F20),
+  Type COMPRESSION_CLOSE (0x39B9914F),
   Length (i),
   Context ID (i),
 }
@@ -280,9 +272,9 @@ Capsule {
 
 
 
-# The connect-udp-bind Header Field {#hdr}
+# The Connect-UDP-Bind Header Field {#hdr}
 
-The "connect-udp-bind" header field’s value is a boolean structured field
+The "Connect-UDP-Bind" header field’s value is a boolean structured field
 set to to true. Any other value type MUST be handled as if the field were not
 present by the recipients (for example, if this field is defined multiple times,
 its type becomes a List and therefore is to be ignored). This document does not
@@ -297,18 +289,7 @@ and UDP Port specified in each binding Datagram Payload received from the
 client. The proxy uses the same port to listen for UDP packets from any
 authorized target and encapsulates the packets in the Binding Datagram
 Payload format, specifying the IP and port of the target and forwards it to
-the client.
-When an endpoint receives a COMPRESSION_ASSIGN capsule, it
-either registers a mapping from Context ID to the provided target
-and port and echo back the capsule or reject. If the IP length was 0,
-the Context ID can be used by either party to send uncompressed payloads and
-the proxy reads the IP, port information per  packet, as opposed to doing a
-lookup in its Compression Mapping.
-
-
-When COMPRESSION_CLOSE is received from or sent to the client, the proxy and
-client forget the context ID, regardless of whether it is compressed or
-uncompressed.
+the client if a corresponding Context ID mapping exist.
 
 If the proxy receives UDP payloads that don't correspond to any mapping i.e.
 no compression for the given target was ever established and a mapping for
@@ -361,7 +342,7 @@ This document also requests IANA to register the following new "HTTP Capsule Typ
 <[](https://www.iana.org/assignments/masque)>:
 
 Value:
-: 0x1F1F1F1F
+: 0x1C0FE323
 
 Capsule Type:
 : COMPRESSION_ASSIGN
@@ -378,7 +359,7 @@ Comments:
 {: spacing="compact"}
 
 Value:
-: 0x1F1F1F20
+: 0x39B9914F
 
 Capsule Type:
 : COMPRESSION_CLOSE
@@ -424,14 +405,14 @@ back to the client.
 /* Request Context ID 2 to be used for uncompressed UDP payloads
  from/to any target */
  CAPSULE                       -------->
-   Type = COMPRESSION_ASSIGN (0x1F1F1F1F)
+   Type = COMPRESSION_ASSIGN (0x1C0FE323)
    Context ID = 2
    IP Version = 0
 
 
 /*Proxy confirms registration.*/
             <-------- CAPSULE
-                        Type = COMPRESSION_ASSIGN (0x1F1F1F1F)
+                        Type = COMPRESSION_ASSIGN (0x1C0FE323)
                         Context ID = 2
                         IP Version = 0
 
@@ -467,7 +448,7 @@ back to the client.
 
 /* Register 203.0.113.33:1234 to compress it in the future*/
  CAPSULE                       -------->
-   Type = COMPRESSION_ASSIGN (0x1F1F1F1F)
+   Type = COMPRESSION_ASSIGN (0x1C0FE323)
    Context ID = 4
    IP Version = 4
    IP Address = 203.0.113.33
@@ -476,7 +457,7 @@ back to the client.
 
 /*Proxy confirms registration.*/
             <-------- CAPSULE
-                        Type = COMPRESSION_ASSIGN (0x1F1F1F1F)
+                        Type = COMPRESSION_ASSIGN (0x1C0FE323)
                         Context ID = 4
                         IP Version = 4
                         IP Address = 203.0.113.33
@@ -494,14 +475,14 @@ back to the client.
 
 /* Request packets without a corresponding context to be dropped*/
  CAPSULE                       -------->
-   Type = COMPRESSION_CLOSE (0x1F1F1F20)
+   Type = COMPRESSION_CLOSE (0x39B9914F)
    Context ID = 2
 
 
 
 /* Proxy confirms unmapped IP rejection. */
             <-------- CAPSULE
-                        Type = COMPRESSION_CLOSE (0x1F1F1F20)
+                        Type = COMPRESSION_CLOSE (0x39B9914F)
                         Context ID = 2
 /* Proxy drops any packets received on the
 bound IP(s):Port */
