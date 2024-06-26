@@ -1340,7 +1340,7 @@ address to bind. The proxy <span class="bcp14">MAY</span> also select a second a
 family. For each selected address, it <span class="bcp14">MUST</span> select an open port to
 bind to this request. From then and until the tunnel is closed, the proxy
 <span class="bcp14">SHALL</span> send packets received on these IP-port tuples to the client. The proxy
-then <span class="bcp14">MUST</span> communicate the selected addresses and ports to the client using
+<span class="bcp14">MUST</span> communicate the selected addresses and ports to the client using
 the "Proxy-Public-Address" header. The format of that header is defined below
 using IPv4address, IPv6address and port from <span><a href="https://rfc-editor.org/rfc/rfc3986#section-3.2" class="relref">Section 3.2</a> of [<a href="#URI" class="cite xref">URI</a>]</span>.<a href="#section-5-1" class="pilcrow">¶</a></p>
 <p id="section-5-2">The proxy <span class="bcp14">MUST</span> then respond with the allocated IP and port pairings using the
