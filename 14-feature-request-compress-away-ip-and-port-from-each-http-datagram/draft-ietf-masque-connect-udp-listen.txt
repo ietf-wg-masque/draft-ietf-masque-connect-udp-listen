@@ -181,7 +181,7 @@ Table of Contents
 
        Figure 1: Uncompressed Bound UDP Proxying HTTP Datagram Format
 
-   Bound UDP Proxying Compressed Payload {
+   Compressed Bound UDP Proxying Payload {
      UDP Payload (..),
    }
 
