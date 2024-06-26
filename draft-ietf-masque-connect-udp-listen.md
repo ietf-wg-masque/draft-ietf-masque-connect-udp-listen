@@ -146,7 +146,7 @@ Uncompressed Bound UDP Proxying Payload {
 {: #dgram-format title="Uncompressed Bound UDP Proxying HTTP Datagram Format"}
 
 ~~~ ascii-art
-Bound UDP Proxying Compressed Payload {
+Compressed Bound UDP Proxying Payload {
   UDP Payload (..),
 }
 ~~~
