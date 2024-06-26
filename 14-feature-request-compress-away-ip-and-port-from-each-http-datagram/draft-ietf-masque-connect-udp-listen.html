@@ -1547,7 +1547,8 @@ client forget the context ID, regardless of whether it is compressed or
 uncompressed.<a href="#section-6-2" class="pilcrow">¶</a></p>
 <p id="section-6-3">If the proxy receives UDP payloads that don't correspond to any mapping i.e.
 no compression for the given target was ever established and a mapping for
-uncompressed or any target is missing, the proxy simply drops the packet.<a href="#section-6-3" class="pilcrow">¶</a></p>
+uncompressed or any target is missing, the proxy will either drop the datagram or
+temporarily buffer it (see <span><a href="https://rfc-editor.org/rfc/rfc9298#section-5" class="relref">Section 5</a> of [<a href="#CONNECT-UDP" class="cite xref">CONNECT-UDP</a>]</span>).<a href="#section-6-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="security-considerations">
