@@ -136,7 +136,7 @@ context ID is set to one previously registered for compressed payloads.
 (See {{contextid}} for compressed and uncompressed assignments.)
 
 ~~~ ascii-art
-Bound UDP Uncompressed Payload {
+Uncompressed Bound UDP Proxying Payload {
   IP Version (8),
   IP Address (32..128),
   UDP Port (16),
