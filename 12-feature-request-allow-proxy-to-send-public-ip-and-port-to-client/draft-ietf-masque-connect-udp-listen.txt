@@ -5,7 +5,7 @@
 MASQUE                                                       D. Schinazi
 Internet-Draft                                                  A. Singh
 Intended status: Standards Track                              Google LLC
-Expires: 28 December 2024                                   26 June 2024
+Expires: 29 December 2024                                   27 June 2024
 
 
                        Proxying Bound UDP in HTTP
@@ -54,7 +54,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 28 December 2024.
+   This Internet-Draft will expire on 29 December 2024.
 
 Copyright Notice
 
@@ -200,8 +200,8 @@ Table of Contents
    header.  The format of that header is defined below using IP-literal,
    IPv4address, IPv6address and port from Section 3.2 of [URI].
 
-   proxy-public-address = List of IP:Port pairings
-   IP:Port pairing = IP-literal:Port / IPv4address:Port
+   proxy-public-address = ip-port-tuple *( "," ip-port-tuple )
+   ip-port-tuple = ( IP-literal / IPv4address ) ":" port
 
                        Figure 2: Proxy Address Format
 
