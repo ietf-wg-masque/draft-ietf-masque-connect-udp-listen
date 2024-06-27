@@ -122,7 +122,7 @@ are configured as defined in {{compression}}.
 When HTTP Datagrams {{!HTTP-DGRAM=RFC9297}} associated with this Bound UDP
 Proxying request contain the Connect-UDP-Bind header field,
 the format of their UDP Proxying Payload field (see {{Section 5 of
-CONNECT-UDP}}) is defined by {{dgram-format}} when context ID is set to be used
+CONNECT-UDP}}) is defined by {{dgram-format}} when context ID is set to be
 used for uncompressed connect-udp bind and {{dgram-format-compressed}} when
 context ID is set to one previously registered for compressed payloads.
 (See {{contextid}} for compressed and uncompressed assignments.)
