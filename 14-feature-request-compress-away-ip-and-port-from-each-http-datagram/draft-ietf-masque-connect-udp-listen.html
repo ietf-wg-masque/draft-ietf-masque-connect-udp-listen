@@ -1484,7 +1484,7 @@ to 0 when allocating an uncompressed Context ID, as defined in <a href="#context
           <h4 id="name-the-compression_close-capsu">
 <a href="#section-4.3.2" class="section-number selfRef">4.3.2. </a><a href="#name-the-compression_close-capsu" class="section-name selfRef">The COMPRESSION_CLOSE capsule</a>
           </h4>
-<p id="section-4.3.2-1">The Compression Close capsule serves the following purposes. As a response to reject a COMPRESSION_ASSIGN request and to close or clean up any existing compression mappings. Once a COMPRESSION_CLOSE is sent for a given Context ID, the sending party <span class="bcp14">MAY</span> reject any datagrams received for that Context ID until it is reallocated through a COMPRESSION_ASSIGN exchange.<a href="#section-4.3.2-1" class="pilcrow">¶</a></p>
+<p id="section-4.3.2-1">The Compression Close capsule serves the following purposes. As a response to reject a COMPRESSION_ASSIGN request and to close or clean up any existing compression mappings. Once a COMPRESSION_CLOSE is sent for a given Context ID, the sending party <span class="bcp14">MAY</span> drop any datagrams received for that Context ID until it is reallocated through a COMPRESSION_ASSIGN exchange.<a href="#section-4.3.2-1" class="pilcrow">¶</a></p>
 <span id="name-compression-close-capsule-f"></span><div id="capsulecloseformat">
 <figure id="figure-5">
             <div class="alignLeft art-ascii-art art-text artwork" id="section-4.3.2-2.1">
