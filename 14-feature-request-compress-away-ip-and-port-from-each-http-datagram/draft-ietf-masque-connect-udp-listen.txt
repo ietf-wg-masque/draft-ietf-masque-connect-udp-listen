@@ -5,7 +5,7 @@
 MASQUE                                                       D. Schinazi
 Internet-Draft                                                  A. Singh
 Intended status: Standards Track                              Google LLC
-Expires: 28 December 2024                                   26 June 2024
+Expires: 29 December 2024                                   27 June 2024
 
 
                        Proxying Bound UDP in HTTP
@@ -54,7 +54,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 28 December 2024.
+   This Internet-Draft will expire on 29 December 2024.
 
 Copyright Notice
 
@@ -158,8 +158,8 @@ Table of Contents
    Proxying request contain the Connect-UDP-Bind header field, the
    format of their UDP Proxying Payload field (see Section 5 of
    [CONNECT-UDP]) is defined by Figure 1 when context ID is set to be
-   used used for uncompressed connect-udp bind and Figure 2 when context
-   ID is set to one previously registered for compressed payloads.  (See
+   used for uncompressed connect-udp bind and Figure 2 when context ID
+   is set to one previously registered for compressed payloads.  (See
    Section 4 for compressed and uncompressed assignments.)
 
    Uncompressed Bound UDP Proxying Payload {
