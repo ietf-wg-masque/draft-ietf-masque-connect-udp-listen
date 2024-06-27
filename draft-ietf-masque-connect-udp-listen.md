@@ -95,7 +95,9 @@ Proxying HTTP request.
 
 This document uses terminology from {{CONNECT-UDP}} and notational conventions
 from {{!QUIC=RFC9000}}. This document uses the terms Integer and List from
-{{Section 3 of !STRUCTURED-FIELDS=RFC8941}} to specify syntax and parsing. This document uses Augmented Backus-Naur Form and parsing/serialization behvaviors from {{!ABNF=RFC5234}}
+{{Section 3 of !STRUCTURED-FIELDS=RFC8941}} to specify syntax and parsing.
+This document uses Augmented Backus-Naur Form and parsing/serialization
+behaviors from {{!ABNF=RFC5234}}
 
 
 # Proxied UDP Binding Mechanism {#mechanism}
