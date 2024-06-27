@@ -110,7 +110,9 @@ When performing URI Template Expansion of the UDP Proxying template (see
 target_port variables to the '*' character (ASCII character 0x2A).
 
 When sending the UDP Proxying request to the proxy, the client adds
-the "Connect-UDP-Bind" header field to identify it as such. Both client and proxy can negotiate even and odd numbered context IDs to send UDP payloads to each other.
+the "Connect-UDP-Bind" header field to identify it as such. Both client and
+proxy can negotiate even and odd numbered context IDs to send UDP
+payloads to each other.
 
 The client and the proxy exchange COMPRESSION_ASSIGN capsules in order to
 establish which IP a given context ID corresponds to. The context ID can
