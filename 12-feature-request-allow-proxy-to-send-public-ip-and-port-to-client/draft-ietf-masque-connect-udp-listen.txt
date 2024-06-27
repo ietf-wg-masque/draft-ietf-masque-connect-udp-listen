@@ -121,7 +121,7 @@ Table of Contents
    conventions from [QUIC].  This document uses the terms Integer and
    List from Section 3 of [STRUCTURED-FIELDS] to specify syntax and
    parsing.  This document uses Augmented Backus-Naur Form and parsing/
-   serialization behvaviors from [ABNF]
+   serialization behaviors from [ABNF]
 
 2.  Proxied UDP Binding Mechanism
 
