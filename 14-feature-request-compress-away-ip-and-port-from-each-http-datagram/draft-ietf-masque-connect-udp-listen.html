@@ -1281,7 +1281,9 @@ HTTP Datagram (see <a href="#format" class="auto internal xref">Section 3</a>), 
 <span><a href="https://rfc-editor.org/rfc/rfc9298#section-3" class="relref">Section 3</a> of [<a href="#CONNECT-UDP" class="cite xref">CONNECT-UDP</a>]</span>), the client sets both the target_host and the
 target_port variables to the '*' character (ASCII character 0x2A).<a href="#section-2-2" class="pilcrow">¶</a></p>
 <p id="section-2-3">When sending the UDP Proxying request to the proxy, the client adds
-the "Connect-UDP-Bind" header field to identify it as such. Both client and proxy can negotiate even and odd numbered context IDs to send UDP payloads to each other.<a href="#section-2-3" class="pilcrow">¶</a></p>
+the "Connect-UDP-Bind" header field to identify it as such. Both client and
+proxy can negotiate even and odd numbered context IDs to send UDP
+payloads to each other.<a href="#section-2-3" class="pilcrow">¶</a></p>
 <p id="section-2-4">The client and the proxy exchange COMPRESSION_ASSIGN capsules in order to
 establish which IP a given context ID corresponds to. The context ID can
 correspond to both compressed and uncompressed payloads to/from any target and
