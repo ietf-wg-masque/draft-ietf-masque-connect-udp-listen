@@ -179,8 +179,8 @@ the "Proxy-Public-Address" header. The format of that header is defined below
 using IP-literal, IPv4address, IPv6address and port from {{Section 3.2 of !URI=RFC3986}}.
 
 ~~~ ascii-art
-proxy-public-address = List of IP:Port pairings
-IP:Port pairing = IP-literal:Port / IPv4address:Port
+proxy-public-address = ip-port-tuple *( "," ip-port-tuple )
+ip-port-tuple = ( IP-literal / IPv4address ) ":" port
 ~~~
 {: #target-format title="Proxy Address Format"}
 
