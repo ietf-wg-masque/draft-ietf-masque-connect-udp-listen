@@ -249,8 +249,8 @@ Capsule {
 Target Information {
   Context ID (i),
   IP Version (8),
-  IP Address (32..128),
-  UDP Port (16),
+  [IP Address (32..128)],
+  [UDP Port (16)],
 }
 ~~~
 {: #targetmappingformat title="Target Information Format"}
