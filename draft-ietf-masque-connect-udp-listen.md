@@ -230,6 +230,7 @@ targets effectively acting as a firewall against unwanted or unknown IPs.
 
 
 ## Capsules {#capsules}
+
 The Listener capsule types are defined as follows:
 
 ### The COMPRESSION_ASSIGN capsule {#compressionassign}
