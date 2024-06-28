@@ -245,7 +245,7 @@ Capsule {
 ~~~
 {: #capsuleassignformat title="Compression Assign Capsule Format"}
 
-~~~ ascii-art
+~~~
 Target Information {
   Context ID (i),
   IP Version (8),
