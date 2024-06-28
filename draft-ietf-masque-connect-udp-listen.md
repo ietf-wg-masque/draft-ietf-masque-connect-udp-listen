@@ -280,7 +280,7 @@ to 0 when allocating an uncompressed Context ID, as defined in {{contextid}}.
 The Compression Close capsule serves the following purposes. As a response to
 reject a COMPRESSION_ASSIGN request and to close or clean up any existing
 compression mappings. Once a COMPRESSION_CLOSE has been exchanged between
-endpoints, they MUST NOT use that Context ID until it is re-assigned via a 
+endpoints, they MUST NOT use that Context ID until it is re-assigned via a
 COMPRESSION_ASSIGN exchange.
 
 ~~~
