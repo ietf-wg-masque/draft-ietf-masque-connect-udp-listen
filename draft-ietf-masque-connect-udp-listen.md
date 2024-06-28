@@ -296,14 +296,18 @@ Capsule {
 
 # The Connect-UDP-Bind Header Field {#hdr}
 
-The "Connect-UDP-Bind" header field’s value is a boolean structured field
-set to to true. Any other value type MUST be handled as if the field were not
+The "Connect-UDP-Bind" header field’s value is a Boolean Structured Field
+set to to true. When this value is set in the request, and the request is
+accepted by the proxy, the Connect-UDP-Bind extension has been enabled,
+and the proxy MUST follow {{behavior}} to deal with UDP Payloads from and
+to the client.
+Any other value type MUST be handled as if the field were not
 present by the recipients (for example, if this field is defined multiple times,
 its type becomes a List and therefore is to be ignored). This document does not
 define any parameters for the Connect-UDP-Bind header field value, but future
 documents might define parameters. Receivers MUST ignore unknown parameters.
 
-# Proxy behavior
+# Proxy behavior {#behavior}
 
 After accepting the Connect-UDP Binding proxying request, the proxy uses a UDP
 port to transmit UDP payloads received from the client to the target IP Address
