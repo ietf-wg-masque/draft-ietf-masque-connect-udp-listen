@@ -181,7 +181,7 @@ context ID set to 0.
 
 As mandated in {{Section 4 of CONNECT-UDP}}, clients will allocate even context IDs
 while proxies will allocate odd ones.
-They MAY pre-emptively use Context IDs not yet acknowledged by the other party, knowing that those packets MAY be lost since the COMPRESSION_ASSIGN request receiving proxy
+They MAY pre-emptively use Context IDs not yet acknowledged by the other party, knowing that those packets can be lost since the COMPRESSION_ASSIGN request receiving proxy
 or client is not guaranteed to be ready to accept payloads until a COMPRESSION_ASSIGN
 response is echoed back.
 
