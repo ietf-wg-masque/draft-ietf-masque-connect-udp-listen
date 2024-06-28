@@ -77,7 +77,7 @@ tunnels for communicating UDP payloads {{!UDP=RFC0768}} to a fixed host and
 port. Combined with the HTTP CONNECT method (see {{Section 9.3.6 of
 !HTTP=RFC9110}}), it allows proxying the majority of a Web Browser's HTTP
 traffic. However WebRTC {{WebRTC}} relies on ICE {{?ICE=RFC8445}} to provide
-connectivity between two Web browsers, and ICE relies on the ability to send 
+connectivity between two Web browsers, and ICE relies on the ability to send
 and receive UDP packets to multiple hosts. While in theory it might be possible
 to accomplish this using multiple UDP Proxying HTTP requests, HTTP semantics
 {{HTTP}} do not guarantee that distinct requests will be handled by the same
@@ -144,7 +144,7 @@ Compressed Bound UDP Proxying Payload {
   UDP Payload (..),
 }
 ~~~
-{: #dgram-format-compressed title="Compressed Bound UDP Proxying HTTP 
+{: #dgram-format-compressed title="Compressed Bound UDP Proxying HTTP
 Datagram Format"}
 
 IP Version:
@@ -154,7 +154,7 @@ IP Version:
 IP Address:
 
 : The IP Address of this proxied UDP packet. When sent from client to proxy,
-this is the target host to which the proxy will send this UDP payload. When 
+this is the target host to which the proxy will send this UDP payload. When
 sent from proxy to client, this represents the source IP address of the UDP
 packet received by the proxy. This field has a length of 32 bits when the
 corresponding IP Version field value is 4, and 128 when the IP Version is 6.
@@ -206,13 +206,13 @@ if it accepts the compression request, or a COMPRESSION_CLOSE with the context
 ID (see {{capsulecloseformat}}) if it doesn't wish to support  compression for
 the given Context ID (For example, due to the memory cost of
 establishing  a list of mappings per target per client). If the compression was
-rejected, the client and proxy MUST use an uncompressed context ID 
+rejected, the client and proxy MUST use an uncompressed context ID
 (See {{uncompressed}}) to exhange UDP payloads for the given target.
 
 ### Uncompressed datagrams {#uncompressed}
 
 If the client wishes to allocate a Context ID for uncompressed packets,
-it MUST first exchange the COMPRESSION_ASSIGN capsule 
+it MUST first exchange the COMPRESSION_ASSIGN capsule
 (see {{capsuleassignformat}}) with the proxy with an unused Context ID
 defined in {{contextid}} with the IP Length set to zero.
 
@@ -237,7 +237,7 @@ is {{restrictingips}}.
 ## Restricting IPs {#restrictingips}
 
 If an uncompressed Context ID was set (via {{uncompressed}}), the client MAY at
-any point request the proxy reject all traffic from uncompressed targets by 
+any point request the proxy reject all traffic from uncompressed targets by
 using COMPRESSION_CLOSE (see {{compressionclose}}) on said Context ID.
 targets effectively acting as a firewall against unwanted or unknown IPs.
 
@@ -248,7 +248,7 @@ The Listener capsule types are defined as follows:
 
 ### The COMPRESSION_ASSIGN capsule {#compressionassign}
 
-The Compression Assign capsule has two purposes. Either to request the 
+The Compression Assign capsule has two purposes. Either to request the
 assignment of a Context ID (see {{contextid}}) to a corresponding target IP:Port.
 Or to accept a COMPRESSION_ASSIGN request from the other party.
 
@@ -322,14 +322,14 @@ or temporarily buffer it (see {{Section 5 of CONNECT-UDP}}).
 # Security Considerations
 
 The security considerations described in {{Section 7 of CONNECT-UDP}} also
-apply here. Since TURN can be run over this mechanism, implementors should 
+apply here. Since TURN can be run over this mechanism, implementors should
 review the security considerations in {{Section 21 of ?TURN=RFC8656}}.
 
 Since unextended UDP Proxying requests carry the target as part of the request,
 the proxy can protect unauthorized targets by rejecting requests before
-creating the tunnel, and communicate the rejection reason in response header 
-fields. Bound UDP Proxying requests do not have this ability. Therefore, 
-proxies MUST validate the target on every datagram and MUST NOT forward 
+creating the tunnel, and communicate the rejection reason in response header
+fields. Bound UDP Proxying requests do not have this ability. Therefore,
+proxies MUST validate the target on every datagram and MUST NOT forward
 individual datagrams with unauthorized targets. Proxies can either silently
 discard such datagrams or abort the corresponding request stream.
 
@@ -362,7 +362,7 @@ Comments:
 {: spacing="compact"}
 
 
-This document also requests IANA to register the following new 
+This document also requests IANA to register the following new
 "HTTP Capsule Types" maintained at
 <[](https://www.iana.org/assignments/masque)>:
 
@@ -407,8 +407,8 @@ In the example below, the client is configured with URI Template
 "https://example.org/.well-known/masque/udp/{target_host}/{target_port}/" and
 wishes to use WebRTC with another browser over a Bound UDP Proxying tunnel.
 It contacts a STUN server at 192.0.2.42. The STUN server, in response, sends
-the proxy's IP address to the other browser at 203.0.113.33. Using this 
-information, the other browser sends a UDP packet to the proxy, which is 
+the proxy's IP address to the other browser at 203.0.113.33. Using this
+information, the other browser sends a UDP packet to the proxy, which is
 proxied over HTTP back to the client.
 
 ~~~ ascii-art
