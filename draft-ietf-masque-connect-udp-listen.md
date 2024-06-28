@@ -263,7 +263,7 @@ to 0 when allocating an uncompressed Context ID, as defined in {{contextid}}.
 
 The Compression Close capsule serves the following purposes. As a response to reject a COMPRESSION_ASSIGN request and to close or clean up any existing compression mappings. Once a COMPRESSION_CLOSE is sent for a given Context ID, the sending party MAY drop any datagrams received for that Context ID until it is reallocated through a COMPRESSION_ASSIGN exchange.
 
-~~~ ascii-art
+~~~
 Capsule {
   Type COMPRESSION_CLOSE (0x39B9914F),
   Length (i),
