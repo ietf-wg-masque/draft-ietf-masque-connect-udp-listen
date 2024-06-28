@@ -230,11 +230,10 @@ Table of Contents
    echoes back with either a COMPRESSION_ASSIGN capsule if it accepts
    the compression request, or a COMPRESSION_CLOSE with the context ID
    (see Figure 5) if it doesn't wish to support compression for the
-   given Context ID (For example, due to considerable memory
-   requirements of establishing a list of mappings per target per
-   client).  If the compression was rejected, the client and proxy MUST
-   use an uncompressed context ID (See Section 4.1.1) to exhange UDP
-   payloads for the given target.
+   given Context ID (For example, due to the memory cost of establishing
+   a list of mappings per target per client).  If the compression was
+   rejected, the client and proxy MUST use an uncompressed context ID
+   (See Section 4.1.1) to exhange UDP payloads for the given target.
 
 4.1.1.  Uncompressed datagrams
 
