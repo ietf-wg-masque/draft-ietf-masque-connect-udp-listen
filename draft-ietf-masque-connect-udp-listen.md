@@ -228,7 +228,7 @@ context ID to address and port. Second, the receiver MUST echo an identical COMP
 if it rejects the mapping, the receiver MUST respond by sending a
 COMPRESSION_CLOSE capsule with the context ID set to the one from the received COMPRESSION_ASSIGN capsule
 
-The client or proxy MAY choose to close any context contexts that it registered
+The client or proxy MAY choose to close any context that it registered
 or was registered with it respectively using COMPRESSION_CLOSE
 (For example when a mapping is unused for a long time). Another potential use
 is {{restrictingips}}.
