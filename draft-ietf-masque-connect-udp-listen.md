@@ -96,6 +96,8 @@ Proxying HTTP request.
 This document uses terminology from {{CONNECT-UDP}} and notational conventions
 from {{!QUIC=RFC9000}}. This document uses the terms Integer and List from
 {{Section 3 of !STRUCTURED-FIELDS=RFC8941}} to specify syntax and parsing.
+This document uses Augmented Backus-Naur Form and parsing/serialization
+behaviors from {{!ABNF=RFC5234}}
 
 
 # Proxied UDP Binding Mechanism {#mechanism}
@@ -111,7 +113,9 @@ target_port variables to the '*' character (ASCII character 0x2A).
 Before sending its UDP Proxying request to the proxy, the client allocates an
 even-numbered context ID, see {{Section 4 of CONNECT-UDP}}. The client then adds
 the "Connect-UDP-Bind" header field to its UDP Proxying request, with its
-value set as the allocated context ID, see {{hdr}}.
+value set as the allocated context ID, see {{hdr}}. If the proxy accepts the
+CONNECT UDP Bind request, it adds the allocated public IP and target for the
+client to the response, see {{response}}.
 
 # HTTP Datagram Payload Format {#format}
 
@@ -163,6 +167,33 @@ value type MUST be handled as if the field were not present by the recipients
 and therefore is to be ignored). This document does not define any parameters
 for the Connect-UDP-Bind header field value, but future documents might define
 parameters. Receivers MUST ignore unknown parameters.
+
+
+# The Proxy-Public-Address Response Header Field {#response}
+
+Upon accepting the request, the proxy MUST select at least one public IP
+address to bind. The proxy MAY assign more addresses. For each selected
+address, it MUST select an open port to bind to this request. From then
+and until the tunnel is closed, the proxy SHALL send packets received on
+these IP-port tuples to the client. The proxy MUST communicate the selected
+addresses and ports to the client using the "Proxy-Public-Address" header.
+The header is defined as a List of IP-Port-tuples.
+The format of the tuple is defined using IP-literal, IPv4address, IPv6address
+and port from {{Section 3.2 of !URI=RFC3986}}.
+
+~~~ ascii-art
+ip-port-tuple = ( IP-literal / IPv4address ) ":" port
+~~~
+{: #target-format title="Proxy Address Format"}
+
+
+When a single IP-Port tuple is provided in the Proxy-Public-Address field, the
+proxy MUST use the same public IP and Port for the remainder of the connection.
+When multiple tuples are provided, maintaining address stability per address
+family is RECOMMENDED.
+
+Note that since the addresses are conveyed in HTTP response headers,
+a subsequent change of addresses on the proxy cannot be conveyed to the client.
 
 # Proxy behavior
 
@@ -249,6 +280,8 @@ back to the client.
             <--------  STREAM(44): HEADERS
                          :status = 200
                          capsule-protocol = ?1
+                         proxy-public-address = 192.0.2.45:54321,  \
+                         		   [2001:db8::1234]:54321
 
 /* Wait for STUN server to respond to UDP packet. */
 
