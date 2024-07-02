@@ -1041,11 +1041,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">CONNECT-UDP Bind</td>
-<td class="right">June 2024</td>
+<td class="right">July 2024</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Schinazi &amp; Singh</td>
-<td class="center">Expires 29 December 2024</td>
+<td class="center">Expires 3 January 2025</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1058,12 +1058,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-masque-connect-udp-listen-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2024-06-27" class="published">27 June 2024</time>
+<time datetime="2024-07-02" class="published">2 July 2024</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2024-12-29">29 December 2024</time></dd>
+<dd class="expires"><time datetime="2025-01-03">3 January 2025</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1121,7 +1121,7 @@ HTTP that enables such use-cases.<a href="#section-abstract-1" class="pilcrow">�
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 29 December 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 3 January 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1338,18 +1338,18 @@ parameters. Receivers <span class="bcp14">MUST</span> ignore unknown parameters.
 <a href="#section-5" class="section-number selfRef">5. </a><a href="#name-the-proxy-public-address-re" class="section-name selfRef">The Proxy-Public-Address Response Header Field</a>
       </h2>
 <p id="section-5-1">Upon accepting the request, the proxy <span class="bcp14">MUST</span> select at least one public IP
-address to bind. The proxy <span class="bcp14">MAY</span> also select a second address from a different address
-family. For each selected address, it <span class="bcp14">MUST</span> select an open port to
-bind to this request. From then and until the tunnel is closed, the proxy
-<span class="bcp14">SHALL</span> send packets received on these IP-port tuples to the client. The proxy
-<span class="bcp14">MUST</span> communicate the selected addresses and ports to the client using
-the "Proxy-Public-Address" header. The format of that header is defined below
-using IP-literal, IPv4address, IPv6address and port from <span><a href="https://rfc-editor.org/rfc/rfc3986#section-3.2" class="relref">Section 3.2</a> of [<a href="#URI" class="cite xref">URI</a>]</span>.<a href="#section-5-1" class="pilcrow">¶</a></p>
+address to bind. The proxy <span class="bcp14">MAY</span> assign more addresses. For each selected
+address, it <span class="bcp14">MUST</span> select an open port to bind to this request. From then
+and until the tunnel is closed, the proxy <span class="bcp14">SHALL</span> send packets received on
+these IP-port tuples to the client. The proxy <span class="bcp14">MUST</span> communicate the selected
+addresses and ports to the client using the "Proxy-Public-Address" header.
+The header is defined as a List of IP-Port-tuples.
+The format of the tuple is defined using IP-literal, IPv4address, IPv6address
+and port from <span><a href="https://rfc-editor.org/rfc/rfc3986#section-3.2" class="relref">Section 3.2</a> of [<a href="#URI" class="cite xref">URI</a>]</span>.<a href="#section-5-1" class="pilcrow">¶</a></p>
 <span id="name-proxy-address-format"></span><div id="target-format">
 <figure id="figure-2">
         <div class="alignLeft art-ascii-art art-text artwork" id="section-5-2.1">
 <pre>
-proxy-public-address = ip-port-tuple *( "," ip-port-tuple )
 ip-port-tuple = ( IP-literal / IPv4address ) ":" port
 </pre>
 </div>
@@ -1357,14 +1357,12 @@ ip-port-tuple = ( IP-literal / IPv4address ) ":" port
 <a href="#name-proxy-address-format" class="selfRef">Proxy Address Format</a>
         </figcaption></figure>
 </div>
-<p id="section-5-3">If the proxy sends two IP-port pairings, they <span class="bcp14">MUST</span> be of different
-address families. If the client receives a Proxy-Public-Address field
-with two IP-port pairings of the same address family, it <span class="bcp14">MUST</span> treat
-the response as malformed. Similarly, if the field is missing or
-contains a number of pairings different from one or two, it <span class="bcp14">MUST</span>
-treat the response as malformed.
-Note that since the addresses are conveyed in HTTP response headers,
-a subsequent change of addresses on the proxy cannot be conveyed to the client.<a href="#section-5-3" class="pilcrow">¶</a></p>
+<p id="section-5-3">When a single IP-Port tuple is provided in the Proxy-Public-Address field, the
+proxy <span class="bcp14">MUST</span> use the same public IP and Port for the remainder of the connection.
+When multiple tuples are provided, maintaining address stability per address
+family is <span class="bcp14">RECOMMENDED</span>.<a href="#section-5-3" class="pilcrow">¶</a></p>
+<p id="section-5-4">Note that since the addresses are conveyed in HTTP response headers,
+a subsequent change of addresses on the proxy cannot be conveyed to the client.<a href="#section-5-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="proxy-behavior">
