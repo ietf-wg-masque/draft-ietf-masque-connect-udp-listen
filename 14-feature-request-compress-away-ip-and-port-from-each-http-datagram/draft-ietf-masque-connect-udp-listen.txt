@@ -225,13 +225,13 @@ Table of Contents
    The client and the proxy MAY choose to compress the IP and port
    information per datagram for a given target against the Context ID.
    In such a case, the client or the proxy sends a COMPRESSION_ASSIGN
-   capsule (see Figure 3) with the target information (see Figure 4) it
-   wishes to compress and the other party (proxy or client respectively)
-   echoes back with either a COMPRESSION_ASSIGN capsule if it accepts
-   the compression request, or a COMPRESSION_CLOSE with the context ID
-   (see Figure 5) if it doesn't wish to support compression for the
-   given Context ID (For example, due to the memory cost of establishing
-   a list of mappings per target per client).  If the compression was
+   capsule (see Figure 3) with the target information it wishes to
+   compress and the other party (proxy or client respectively) echoes
+   back with either a COMPRESSION_ASSIGN capsule if it accepts the
+   compression request, or a COMPRESSION_CLOSE with the context ID (see
+   Figure 4) if it doesn't wish to support compression for the given
+   Context ID (For example, due to the memory cost of establishing a
+   list of mappings per target per client).  If the compression was
    rejected, the client and proxy MUST use an uncompressed context ID
    (See Section 4.1.1) to exhange UDP payloads for the given target.
 
@@ -283,21 +283,15 @@ Table of Contents
    Capsule {
      Type COMPRESSION_ASSIGN (0x1C0FE323),
      Length (i),
-     Target Information,
+     Context ID (i),
+     IP Version (8),
+     IP Address (32..128),
+     UDP Port (16),
    }
 
                 Figure 3: Compression Assign Capsule Format
 
-   Target Information {
-     Context ID (i),
-     IP Version (8),
-     [IP Address (32..128)],
-     [UDP Port (16)],
-   }
-
-                    Figure 4: Target Information Format
-
-   The IP Length, Address and Port fields in Figure 4 are the same as
+   The IP Length, Address and Port fields in Figure 3 are the same as
    those defined in Section 3.  However, the IP version can be set to 0
    when allocating an uncompressed Context ID, as defined in Section 4.
 
@@ -315,7 +309,7 @@ Table of Contents
      Context ID (i),
    }
 
-                 Figure 5: Compression Close Capsule Format
+                 Figure 4: Compression Close Capsule Format
 
 5.  The Connect-UDP-Bind Header Field
 
