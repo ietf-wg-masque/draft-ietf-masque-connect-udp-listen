@@ -85,9 +85,9 @@ server. This can lead to the UDP packets being sent from distinct IP addresses,
 thereby preventing ICE from operating correctly. Consequently, UDP Proxying
 requests cannot enable WebRTC connectivity between peers.
 
-This document describes an extension to UDP Proxying in HTTP that allows sending
-and receiving UDP payloads to multiple hosts within the scope of a single UDP
-Proxying HTTP request.
+This document describes an extension to UDP Proxying in HTTP that allows
+sending and receiving UDP payloads to multiple hosts within the scope of a
+single UDP Proxying HTTP request.
 
 ## Conventions and Definitions
 
@@ -95,27 +95,26 @@ Proxying HTTP request.
 
 This document uses terminology from {{CONNECT-UDP}} and notational conventions
 from {{!QUIC=RFC9000}}. This document uses the terms Integer and List from
-{{Section 3 of !STRUCTURED-FIELDS=RFC8941}} to specify syntax and parsing.
-This document uses Augmented Backus-Naur Form and parsing/serialization
-behaviors from {{!ABNF=RFC5234}}
+{{Section 3 of !STRUCTURED-FIELDS=RFC8941}} to specify syntax and parsing. This
+document uses Augmented Backus-Naur Form and parsing/serialization behaviors
+from {{!ABNF=RFC5234}}
 
 # Proxied UDP Binding Mechanism {#mechanism}
 
 In unextended UDP Proxying requests, the target host is encoded in the HTTP
-request path or query. For Bound UDP Proxying, the target is either conveyed
-in each HTTP Datagram (see {{format}}), or registered via capsules and then
+request path or query. For Bound UDP Proxying, the target is either conveyed in
+each HTTP Datagram (see {{format}}), or registered via capsules and then
 compressed (see {{contextid}}).
 
 When performing URI Template Expansion of the UDP Proxying template (see
 {{Section 3 of CONNECT-UDP}}), the client sets both the target_host and the
 target_port variables to the '*' character (ASCII character 0x2A).
 
-When sending the UDP Proxying request to the proxy, the client adds
-the "Connect-UDP-Bind" header field to identify it as such.
-If the proxy accepts the CONNECT UDP Bind request, it adds the allocated public
-IP:port tuples for the client to the response, see {{response}}.
-Both client and proxy can then negotiate even and odd numbered context IDs to
-send UDP payloads to each other.
+When sending the UDP Proxying request to the proxy, the client adds the
+"Connect-UDP-Bind" header field to identify it as such. If the proxy accepts
+the CONNECT UDP Bind request, it adds the allocated public IP:port tuples for
+the client to the response, see {{response}}. Both client and proxy can then
+negotiate even and odd numbered context IDs to send UDP payloads to each other.
 
 The client and the proxy exchange COMPRESSION_ASSIGN capsules in order to
 establish which IP a given context ID corresponds to. The context ID can
@@ -125,12 +124,12 @@ are configured as defined in {{compression}}.
 # HTTP Datagram Payload Format {#format}
 
 When HTTP Datagrams {{!HTTP-DGRAM=RFC9297}} associated with this Bound UDP
-Proxying request contain the Connect-UDP-Bind header field,
-the format of their UDP Proxying Payload field (see {{Section 5 of
-CONNECT-UDP}}) is defined by {{dgram-format}} when context ID is set to be
-used for uncompressed connect-udp bind and {{dgram-format-compressed}} when
-context ID is set to one previously registered for compressed payloads.
-(See {{contextid}} for compressed and uncompressed assignments.)
+Proxying request contain the Connect-UDP-Bind header field, the format of their
+UDP Proxying Payload field (see {{Section 5 of CONNECT-UDP}}) is defined by
+{{dgram-format}} when context ID is set to be used for uncompressed connect-udp
+bind and {{dgram-format-compressed}} when context ID is set to one previously
+registered for compressed payloads. (See {{contextid}} for compressed and
+uncompressed assignments.)
 
 ~~~ ascii-art
 Uncompressed Bound UDP Proxying Payload {
@@ -178,46 +177,45 @@ octets" in {{UDP}}).
 
 This extension leverages context IDs (see {{Section 4 of CONNECT-UDP}}) to
 compress the target IP address and port when encoding datagrams on the wire.
-Either endpoint can register a context ID and the IP/ports it's associated
-with by sending a COMPRESSION_ASSIGN capsule to its peer. The peer will then
-echo that capsule to indicate it's received it. From then on, both endpoints
-are aware of the context ID and can send compressed datagrams. Later, any
-endpoint can decide to close the compression context by sending a
-COMPRESSION_CLOSE capsule.
+Either endpoint can register a context ID and the IP/ports it's associated with
+by sending a COMPRESSION_ASSIGN capsule to its peer. The peer will then echo
+that capsule to indicate it's received it. From then on, both endpoints are
+aware of the context ID and can send compressed datagrams. Later, any endpoint
+can decide to close the compression context by sending a COMPRESSION_CLOSE
+capsule.
 
-The context ID 0 was reserved by unextended connect-udp and is not used by
-this extension. Once an endpoint has ascertained that the peer supports this
+The context ID 0 was reserved by unextended connect-udp and is not used by this
+extension. Once an endpoint has ascertained that the peer supports this
 extension, the endpoint MUST NOT send any datagrams with context ID set to 0,
 and MUST silently drop any received datagrams with context ID set to 0.
 
 As mandated in {{Section 4 of CONNECT-UDP}}, clients will allocate even context
-IDs while proxies will allocate odd ones.
-They MAY pre-emptively use Context IDs not yet acknowledged by the other party,
-knowing that those packets can be lost since the COMPRESSION_ASSIGN request
-receiving proxy or client is not guaranteed to be ready to accept payloads
-until a COMPRESSION_ASSIGN response is echoed back.
+IDs while proxies will allocate odd ones. They MAY pre-emptively use Context
+IDs not yet acknowledged by the other party, knowing that those packets can be
+lost since the COMPRESSION_ASSIGN request receiving proxy or client is not
+guaranteed to be ready to accept payloads until a COMPRESSION_ASSIGN response
+is echoed back.
 
 ## Address Compression {#compression}
 
-The client and the proxy MAY choose to compress the IP and port information
-per datagram for a given target against the Context ID.
-In such a case, the client or the proxy sends a COMPRESSION_ASSIGN capsule
-(see {{capsuleassignformat}}) with the target information it wishes to
-compress and the other party (proxy or client respectively) echoes back
-with either a COMPRESSION_ASSIGN capsule if it accepts the compression request,
-or a COMPRESSION_CLOSE with the context ID (see {{capsulecloseformat}}) if it
-doesn't wish to support compression for the given Context ID (For example,
-due to the memory cost of establishing  a list of mappings per target per
-client). If the compression was rejected, the client and proxy MUST use an
-uncompressed context ID (See {{uncompressed}}) to exhange UDP payloads for
-the given target.
+The client and the proxy MAY choose to compress the IP and port information per
+datagram for a given target against the Context ID. In such a case, the client
+or the proxy sends a COMPRESSION_ASSIGN capsule (see {{capsuleassignformat}})
+with the target information it wishes to compress and the other party (proxy or
+client respectively) echoes back with either a COMPRESSION_ASSIGN capsule if it
+accepts the compression request, or a COMPRESSION_CLOSE with the context ID
+(see {{capsulecloseformat}}) if it doesn't wish to support compression for the
+given Context ID (For example, due to the memory cost of establishing a list of
+mappings per target per client). If the compression was rejected, the client
+and proxy MUST use an uncompressed context ID (See {{uncompressed}}) to exhange
+UDP payloads for the given target.
 
 ### Uncompressed datagrams {#uncompressed}
 
-If the client wishes to allocate a Context ID for uncompressed packets,
-it MUST first exchange the COMPRESSION_ASSIGN capsule
-(see {{capsuleassignformat}}) with the proxy with an unused Context ID
-defined in {{contextid}} with the IP Length set to zero.
+If the client wishes to allocate a Context ID for uncompressed packets, it MUST
+first exchange the COMPRESSION_ASSIGN capsule (see {{capsuleassignformat}})
+with the proxy with an unused Context ID defined in {{contextid}} with the IP
+Length set to zero.
 
 ### Compression Mapping {#mappings}
 
@@ -232,18 +230,17 @@ if it rejects the mapping, the receiver MUST respond by sending a
 COMPRESSION_CLOSE capsule with the context ID set to the one from the received
 COMPRESSION_ASSIGN capsule
 
-The client or proxy MAY choose to close any context that it registered
-or was registered with it respectively using COMPRESSION_CLOSE
-(For example when a mapping is unused for a long time). Another potential use
-is {{restrictingips}}.
+The client or proxy MAY choose to close any context that it registered or was
+registered with it respectively using COMPRESSION_CLOSE (For example when a
+mapping is unused for a long time). Another potential use is {{restrictingips}}.
 
 
 ## Restricting IPs {#restrictingips}
 
 If an uncompressed Context ID was set (via {{uncompressed}}), the client MAY at
 any point request the proxy reject all traffic from uncompressed targets by
-using COMPRESSION_CLOSE (see {{compressionclose}}) on said Context ID.
-targets effectively acting as a firewall against unwanted or unknown IPs.
+using COMPRESSION_CLOSE (see {{compressionclose}}) on said Context ID. targets
+effectively acting as a firewall against unwanted or unknown IPs.
 
 
 ## Capsules {#capsules}
@@ -253,8 +250,8 @@ The Listener capsule types are defined as follows:
 ### The COMPRESSION_ASSIGN capsule {#compressionassign}
 
 The Compression Assign capsule has two purposes. Either to request the
-assignment of a Context ID (see {{contextid}}) to a corresponding target IP:Port.
-Or to accept a COMPRESSION_ASSIGN request from the other party.
+assignment of a Context ID (see {{contextid}}) to a corresponding target
+IP:Port. Or to accept a COMPRESSION_ASSIGN request from the other party.
 
 ~~~
 Capsule {
@@ -268,16 +265,16 @@ Capsule {
 ~~~
 {: #capsuleassignformat title="Compression Assign Capsule Format"}
 
-The IP Length, Address and Port fields in {{capsuleassignformat}} are the
-same as those defined in {{format}}. However, the IP version can be set
-to 0 when allocating an uncompressed Context ID, as defined in {{contextid}}.
+The IP Length, Address and Port fields in {{capsuleassignformat}} are the same
+as those defined in {{format}}. However, the IP version can be set to 0 when
+allocating an uncompressed Context ID, as defined in {{contextid}}.
 
 ### The COMPRESSION_CLOSE capsule {#compressionclose}
 
-The Compression Close capsule serves two purposes. As a response to
-reject a COMPRESSION_ASSIGN request and to close or to clean up any existing
-compression mappings. Once a COMPRESSION_CLOSE has been exchanged between
-endpoints, they MUST NOT use that Context ID again.
+The Compression Close capsule serves two purposes. As a response to reject a
+COMPRESSION_ASSIGN request and to close or to clean up any existing compression
+mappings. Once a COMPRESSION_CLOSE has been exchanged between endpoints, they
+MUST NOT use that Context ID again.
 
 ~~~
 Capsule {
@@ -292,15 +289,14 @@ Capsule {
 
 # The Connect-UDP-Bind Header Field {#hdr}
 
-The "Connect-UDP-Bind" header field’s value is a Boolean Structured Field
-set to to true. When this value is set in the request, and the request is
-accepted by the proxy, the Connect-UDP-Bind extension has been enabled,
-and the proxy MUST follow {{behavior}} to deal with UDP Payloads from and
-to the client.
-Any other value type MUST be handled as if the field were not
-present by the recipients (for example, if this field is defined multiple times,
-its type becomes a List and therefore is to be ignored). This document does not
-define any parameters for the Connect-UDP-Bind header field value, but future
+The "Connect-UDP-Bind" header field’s value is a Boolean Structured Field set
+to to true. When this value is set in the request, and the request is accepted
+by the proxy, the Connect-UDP-Bind extension has been enabled, and the proxy
+MUST follow {{behavior}} to deal with UDP Payloads from and to the client. Any
+other value type MUST be handled as if the field were not present by the
+recipients (for example, if this field is defined multiple times, its type
+becomes a List and therefore is to be ignored). This document does not define
+any parameters for the Connect-UDP-Bind header field value, but future
 documents might define parameters. Receivers MUST ignore unknown parameters.
 
 
@@ -308,13 +304,13 @@ documents might define parameters. Receivers MUST ignore unknown parameters.
 
 Upon accepting the request, the proxy MUST select at least one public IP
 address to bind. The proxy MAY assign more addresses. For each selected
-address, it MUST select an open port to bind to this request. From then
-and until the tunnel is closed, the proxy SHALL send packets received on
-these IP-port tuples to the client. The proxy MUST communicate the selected
-addresses and ports to the client using the "Proxy-Public-Address" header.
-The header is defined as a List of IP-Port-tuples.
-The format of the tuple is defined using IP-literal, IPv4address, IPv6address
-and port from {{Section 3.2 of !URI=RFC3986}}.
+address, it MUST select an open port to bind to this request. From then and
+until the tunnel is closed, the proxy SHALL send packets received on these
+IP-port tuples to the client. The proxy MUST communicate the selected addresses
+and ports to the client using the "Proxy-Public-Address" header. The header is
+defined as a List of IP-Port-tuples. The format of the tuple is defined using
+IP-literal, IPv4address, IPv6address and port from {{Section 3.2 of
+!URI=RFC3986}}.
 
 ~~~ ascii-art
 ip-port-tuple = ( IP-literal / IPv4address ) ":" port
@@ -326,21 +322,21 @@ proxy MUST use the same public IP and Port for the remainder of the connection.
 When multiple tuples are provided, maintaining address stability per address
 family is RECOMMENDED.
 
-Note that since the addresses are conveyed in HTTP response headers,
-a subsequent change of addresses on the proxy cannot be conveyed to the client.
+Note that since the addresses are conveyed in HTTP response headers, a
+subsequent change of addresses on the proxy cannot be conveyed to the client.
 
 # Proxy behavior {#behavior}
 
 After accepting the Connect-UDP Binding proxying request, the proxy uses an
-assigned IP:port to transmit UDP payloads received from  the client to the target
-IP Address and UDP Port specified in each binding Datagram Payload received from
-the client. The proxy uses the same ports to listen for UDP packets from any
-authorized target and encapsulates the packets in the Binding Datagram Payload
-format, and forwards it to the client if a corresponding Context ID mapping exists
-for the target.
+assigned IP:port to transmit UDP payloads received from the client to the
+target IP Address and UDP Port specified in each binding Datagram Payload
+received from the client. The proxy uses the same ports to listen for UDP
+packets from any authorized target and encapsulates the packets in the Binding
+Datagram Payload format, and forwards it to the client if a corresponding
+Context ID mapping exists for the target.
 
-If the proxy receives UDP payloads that don't correspond to any mapping i.e.
-no compression for the given target was ever established and a mapping for
+If the proxy receives UDP payloads that don't correspond to any mapping i.e. no
+compression for the given target was ever established and a mapping for
 uncompressed or any target is missing, the proxy will either drop the datagram
 or temporarily buffer it (see {{Section 5 of CONNECT-UDP}}).
 
@@ -360,9 +356,9 @@ individual datagrams with unauthorized targets. Proxies can either silently
 discard such datagrams or abort the corresponding request stream.
 
 Note that if the compression response (COMPRESSION_ASSIGN OR COMPRESSION_CLOSE)
-cannot be immediately sent due to flow or congestion control, an upper limit
-on how many compression responses the endpoint is willing to buffer MUST be set
-to prevent memory exhaustion. The proxy MAY close the connection if such
+cannot be immediately sent due to flow or congestion control, an upper limit on
+how many compression responses the endpoint is willing to buffer MUST be set to
+prevent memory exhaustion. The proxy MAY close the connection if such
 conditions occur.
 
 # IANA Considerations
@@ -431,9 +427,9 @@ Comments:
 
 In the example below, the client is configured with URI Template
 "https://example.org/.well-known/masque/udp/{target_host}/{target_port}/" and
-wishes to use WebRTC with another browser over a Bound UDP Proxying tunnel.
-It contacts a STUN server at 192.0.2.42. The STUN server, in response, sends
-the proxy's IP address to the other browser at 203.0.113.33. Using this
+wishes to use WebRTC with another browser over a Bound UDP Proxying tunnel. It
+contacts a STUN server at 192.0.2.42. The STUN server, in response, sends the
+proxy's IP address to the other browser at 203.0.113.33. Using this
 information, the other browser sends a UDP packet to the proxy, which is
 proxied over HTTP back to the client.
 
