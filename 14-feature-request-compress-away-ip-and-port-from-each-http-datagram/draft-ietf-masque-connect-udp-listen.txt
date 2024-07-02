@@ -5,7 +5,7 @@
 MASQUE                                                       D. Schinazi
 Internet-Draft                                                  A. Singh
 Intended status: Standards Track                              Google LLC
-Expires: 30 December 2024                                   28 June 2024
+Expires: 3 January 2025                                      2 July 2024
 
 
                        Proxying Bound UDP in HTTP
@@ -54,7 +54,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 30 December 2024.
+   This Internet-Draft will expire on 3 January 2025.
 
 Copyright Notice
 
@@ -256,7 +256,7 @@ Table of Contents
    COMPRESSION_CLOSE capsule with the context ID set to the one from the
    received COMPRESSION_ASSIGN capsule
 
-   The client or proxy MAY choose to close any context contexts that it
+   The client or proxy MAY choose to close any context that it
    registered or was registered with it respectively using
    COMPRESSION_CLOSE (For example when a mapping is unused for a long
    time).  Another potential use is Section 4.2.
