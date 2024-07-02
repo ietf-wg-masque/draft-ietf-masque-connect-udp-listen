@@ -5,7 +5,7 @@
 MASQUE                                                       D. Schinazi
 Internet-Draft                                                  A. Singh
 Intended status: Standards Track                              Google LLC
-Expires: 1 September 2024                               29 February 2024
+Expires: 3 January 2025                                      2 July 2024
 
 
                        Proxying Bound UDP in HTTP
@@ -54,7 +54,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 1 September 2024.
+   This Internet-Draft will expire on 3 January 2025.
 
 Copyright Notice
 
@@ -77,12 +77,13 @@ Table of Contents
    2.  Proxied UDP Binding Mechanism
    3.  HTTP Datagram Payload Format
    4.  The Connect-UDP-Bind Header Field
-   5.  Proxy behavior
-   6.  Security Considerations
-   7.  IANA Considerations
-   8.  References
-     8.1.  Normative References
-     8.2.  Informative References
+   5.  The Proxy-Public-Address Response Header Field
+   6.  Proxy behavior
+   7.  Security Considerations
+   8.  IANA Considerations
+   9.  References
+     9.1.  Normative References
+     9.2.  Informative References
    Appendix A.  Example
    Appendix B.  Comparison with CONNECT-IP
    Acknowledgments
@@ -119,7 +120,8 @@ Table of Contents
    This document uses terminology from [CONNECT-UDP] and notational
    conventions from [QUIC].  This document uses the terms Integer and
    List from Section 3 of [STRUCTURED-FIELDS] to specify syntax and
-   parsing.
+   parsing.  This document uses Augmented Backus-Naur Form and parsing/
+   serialization behaviors from [ABNF]
 
 2.  Proxied UDP Binding Mechanism
 
@@ -136,7 +138,9 @@ Table of Contents
    allocates an even-numbered context ID, see Section 4 of
    [CONNECT-UDP].  The client then adds the "Connect-UDP-Bind" header
    field to its UDP Proxying request, with its value set as the
-   allocated context ID, see Section 4.
+   allocated context ID, see Section 4.  If the proxy accepts the
+   CONNECT UDP Bind request, it adds the allocated public IP and target
+   for the client to the response, see Section 5.
 
 3.  HTTP Datagram Payload Format
 
@@ -184,7 +188,32 @@ Table of Contents
    header field value, but future documents might define parameters.
    Receivers MUST ignore unknown parameters.
 
-5.  Proxy behavior
+5.  The Proxy-Public-Address Response Header Field
+
+   Upon accepting the request, the proxy MUST select at least one public
+   IP address to bind.  The proxy MAY assign more addresses.  For each
+   selected address, it MUST select an open port to bind to this
+   request.  From then and until the tunnel is closed, the proxy SHALL
+   send packets received on these IP-port tuples to the client.  The
+   proxy MUST communicate the selected addresses and ports to the client
+   using the "Proxy-Public-Address" header.  The header is defined as a
+   List of IP-Port-tuples.  The format of the tuple is defined using IP-
+   literal, IPv4address, IPv6address and port from Section 3.2 of [URI].
+
+   ip-port-tuple = ( IP-literal / IPv4address ) ":" port
+
+                       Figure 2: Proxy Address Format
+
+   When a single IP-Port tuple is provided in the Proxy-Public-Address
+   field, the proxy MUST use the same public IP and Port for the
+   remainder of the connection.  When multiple tuples are provided,
+   maintaining address stability per address family is RECOMMENDED.
+
+   Note that since the addresses are conveyed in HTTP response headers,
+   a subsequent change of addresses on the proxy cannot be conveyed to
+   the client.
+
+6.  Proxy behavior
 
    After accepting the Connect-UDP Binding proxying request, the proxy
    uses a UDP port to transmit UDP payloads received from the client to
@@ -194,7 +223,7 @@ Table of Contents
    the packets in the Binding Datagram Payload format, specifying the IP
    and port of the target and forwards it to the client.
 
-6.  Security Considerations
+7.  Security Considerations
 
    The security considerations described in Section 7 of [CONNECT-UDP]
    also apply here.  Since TURN can be run over this mechanism,
@@ -215,7 +244,7 @@ Table of Contents
    ports, the clients MUST be ready to handle potential unwanted traffic
    from unknown destinations.
 
-7.  IANA Considerations
+8.  IANA Considerations
 
    This document will request IANA to register the following entry in
    the "HTTP
@@ -226,9 +255,14 @@ Table of Contents
    Reference:  This document
    Comments:  None
 
-8.  References
+9.  References
 
-8.1.  Normative References
+9.1.  Normative References
+
+   [ABNF]     Crocker, D., Ed. and P. Overell, "Augmented BNF for Syntax
+              Specifications: ABNF", STD 68, RFC 5234,
+              DOI 10.17487/RFC5234, January 2008,
+              <https://www.rfc-editor.org/rfc/rfc5234>.
 
    [CONNECT-UDP]
               Schinazi, D., "Proxying UDP in HTTP", RFC 9298,
@@ -268,7 +302,12 @@ Table of Contents
               DOI 10.17487/RFC0768, August 1980,
               <https://www.rfc-editor.org/rfc/rfc768>.
 
-8.2.  Informative References
+   [URI]      Berners-Lee, T., Fielding, R., and L. Masinter, "Uniform
+              Resource Identifier (URI): Generic Syntax", STD 66,
+              RFC 3986, DOI 10.17487/RFC3986, January 2005,
+              <https://www.rfc-editor.org/rfc/rfc3986>.
+
+9.2.  Informative References
 
    [CONNECT-IP]
               Pauly, T., Schinazi, D., Chernyakhovsky, A., Kühlewind,
@@ -325,6 +364,8 @@ Appendix A.  Example
                <--------  STREAM(44): HEADERS
                             :status = 200
                             capsule-protocol = ?1
+                            proxy-public-address = 192.0.2.45:54321,  \
+                                              [2001:db8::1234]:54321
 
    /* Wait for STUN server to respond to UDP packet. */
 

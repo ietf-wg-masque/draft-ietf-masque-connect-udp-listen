@@ -14,7 +14,7 @@ protocols such as HTTP/3, but is not sufficient for some UDP peer-to-peer
 protocols like WebRTC. This document proposes an extension to UDP Proxying in
 HTTP that enables such use-cases. 
     " name="description">
-<meta content="xml2rfc 3.19.4" name="generator">
+<meta content="xml2rfc 3.21.0" name="generator">
 <meta content="quic" name="keyword">
 <meta content="http" name="keyword">
 <meta content="datagram" name="keyword">
@@ -29,18 +29,18 @@ HTTP that enables such use-cases.
 <meta content="bind" name="keyword">
 <meta content="draft-ietf-masque-connect-udp-listen-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.19.4
-    Python 3.11.6
+  xml2rfc 3.21.0
+    Python 3.12.3
     ConfigArgParse 1.7
     google-i18n-address 3.1.0
     intervaltree 3.1.0
-    Jinja2 3.1.2
-    lxml 4.9.3
-    platformdirs 4.2.0
+    Jinja2 3.1.4
+    lxml 4.9.4
+    platformdirs 4.2.2
     pycountry 22.3.5
     PyYAML 6.0.1
     requests 2.31.0
-    setuptools 68.2.2
+    setuptools 69.5.1
     six 1.16.0
     wcwidth 0.2.13
 -->
@@ -1041,11 +1041,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">CONNECT-UDP Bind</td>
-<td class="right">February 2024</td>
+<td class="right">July 2024</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Schinazi &amp; Singh</td>
-<td class="center">Expires 1 September 2024</td>
+<td class="center">Expires 3 January 2025</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1058,12 +1058,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-masque-connect-udp-listen-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2024-02-29" class="published">29 February 2024</time>
+<time datetime="2024-07-02" class="published">2 July 2024</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2024-09-01">1 September 2024</time></dd>
+<dd class="expires"><time datetime="2025-01-03">3 January 2025</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1121,7 +1121,7 @@ HTTP that enables such use-cases.<a href="#section-abstract-1" class="pilcrow">�
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 1 September 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 3 January 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1168,36 +1168,39 @@ HTTP that enables such use-cases.<a href="#section-abstract-1" class="pilcrow">�
             <p id="section-toc.1-1.4.1"><a href="#section-4" class="auto internal xref">4</a>.  <a href="#name-the-connect-udp-bind-header" class="internal xref">The Connect-UDP-Bind Header Field</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5">
-            <p id="section-toc.1-1.5.1"><a href="#section-5" class="auto internal xref">5</a>.  <a href="#name-proxy-behavior" class="internal xref">Proxy behavior</a></p>
+            <p id="section-toc.1-1.5.1"><a href="#section-5" class="auto internal xref">5</a>.  <a href="#name-the-proxy-public-address-re" class="internal xref">The Proxy-Public-Address Response Header Field</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6">
-            <p id="section-toc.1-1.6.1"><a href="#section-6" class="auto internal xref">6</a>.  <a href="#name-security-considerations" class="internal xref">Security Considerations</a></p>
+            <p id="section-toc.1-1.6.1"><a href="#section-6" class="auto internal xref">6</a>.  <a href="#name-proxy-behavior" class="internal xref">Proxy behavior</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7">
-            <p id="section-toc.1-1.7.1"><a href="#section-7" class="auto internal xref">7</a>.  <a href="#name-iana-considerations" class="internal xref">IANA Considerations</a></p>
+            <p id="section-toc.1-1.7.1"><a href="#section-7" class="auto internal xref">7</a>.  <a href="#name-security-considerations" class="internal xref">Security Considerations</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8">
-            <p id="section-toc.1-1.8.1"><a href="#section-8" class="auto internal xref">8</a>.  <a href="#name-references" class="internal xref">References</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.1">
-                <p id="section-toc.1-1.8.2.1.1"><a href="#section-8.1" class="auto internal xref">8.1</a>.  <a href="#name-normative-references" class="internal xref">Normative References</a></p>
+            <p id="section-toc.1-1.8.1"><a href="#section-8" class="auto internal xref">8</a>.  <a href="#name-iana-considerations" class="internal xref">IANA Considerations</a></p>
 </li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.2">
-                <p id="section-toc.1-1.8.2.2.1"><a href="#section-8.2" class="auto internal xref">8.2</a>.  <a href="#name-informative-references" class="internal xref">Informative References</a></p>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9">
+            <p id="section-toc.1-1.9.1"><a href="#section-9" class="auto internal xref">9</a>.  <a href="#name-references" class="internal xref">References</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.1">
+                <p id="section-toc.1-1.9.2.1.1"><a href="#section-9.1" class="auto internal xref">9.1</a>.  <a href="#name-normative-references" class="internal xref">Normative References</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.2">
+                <p id="section-toc.1-1.9.2.2.1"><a href="#section-9.2" class="auto internal xref">9.2</a>.  <a href="#name-informative-references" class="internal xref">Informative References</a></p>
 </li>
             </ul>
 </li>
-          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9">
-            <p id="section-toc.1-1.9.1"><a href="#appendix-A" class="auto internal xref">Appendix A</a>.  <a href="#name-example" class="internal xref">Example</a></p>
-</li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10">
-            <p id="section-toc.1-1.10.1"><a href="#appendix-B" class="auto internal xref">Appendix B</a>.  <a href="#name-comparison-with-connect-ip" class="internal xref">Comparison with CONNECT-IP</a></p>
+            <p id="section-toc.1-1.10.1"><a href="#appendix-A" class="auto internal xref">Appendix A</a>.  <a href="#name-example" class="internal xref">Example</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11">
-            <p id="section-toc.1-1.11.1"><a href="#appendix-C" class="auto internal xref"></a><a href="#name-acknowledgments" class="internal xref">Acknowledgments</a></p>
+            <p id="section-toc.1-1.11.1"><a href="#appendix-B" class="auto internal xref">Appendix B</a>.  <a href="#name-comparison-with-connect-ip" class="internal xref">Comparison with CONNECT-IP</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.12">
-            <p id="section-toc.1-1.12.1"><a href="#appendix-D" class="auto internal xref"></a><a href="#name-authors-addresses" class="internal xref">Authors' Addresses</a></p>
+            <p id="section-toc.1-1.12.1"><a href="#appendix-C" class="auto internal xref"></a><a href="#name-acknowledgments" class="internal xref">Acknowledgments</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.13">
+            <p id="section-toc.1-1.13.1"><a href="#appendix-D" class="auto internal xref"></a><a href="#name-authors-addresses" class="internal xref">Authors' Addresses</a></p>
 </li>
         </ul>
 </nav>
@@ -1233,7 +1236,9 @@ described in BCP 14 <span>[<a href="#RFC2119" class="cite xref">RFC2119</a>]</s
 appear in all capitals, as shown here.<a href="#section-1.1-1" class="pilcrow">¶</a></p>
 <p id="section-1.1-2">This document uses terminology from <span>[<a href="#CONNECT-UDP" class="cite xref">CONNECT-UDP</a>]</span> and notational conventions
 from <span>[<a href="#QUIC" class="cite xref">QUIC</a>]</span>. This document uses the terms Integer and List from
-<span><a href="https://rfc-editor.org/rfc/rfc8941#section-3" class="relref">Section 3</a> of [<a href="#STRUCTURED-FIELDS" class="cite xref">STRUCTURED-FIELDS</a>]</span> to specify syntax and parsing.<a href="#section-1.1-2" class="pilcrow">¶</a></p>
+<span><a href="https://rfc-editor.org/rfc/rfc8941#section-3" class="relref">Section 3</a> of [<a href="#STRUCTURED-FIELDS" class="cite xref">STRUCTURED-FIELDS</a>]</span> to specify syntax and parsing.
+This document uses Augmented Backus-Naur Form and parsing/serialization
+behaviors from <span>[<a href="#ABNF" class="cite xref">ABNF</a>]</span><a href="#section-1.1-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1252,7 +1257,9 @@ target_port variables to the '*' character (ASCII character 0x2A).<a href="#sect
 <p id="section-2-3">Before sending its UDP Proxying request to the proxy, the client allocates an
 even-numbered context ID, see <span><a href="https://rfc-editor.org/rfc/rfc9298#section-4" class="relref">Section 4</a> of [<a href="#CONNECT-UDP" class="cite xref">CONNECT-UDP</a>]</span>. The client then adds
 the "Connect-UDP-Bind" header field to its UDP Proxying request, with its
-value set as the allocated context ID, see <a href="#hdr" class="auto internal xref">Section 4</a>.<a href="#section-2-3" class="pilcrow">¶</a></p>
+value set as the allocated context ID, see <a href="#hdr" class="auto internal xref">Section 4</a>. If the proxy accepts the
+CONNECT UDP Bind request, it adds the allocated public IP and target for the
+client to the response, see <a href="#response" class="auto internal xref">Section 5</a>.<a href="#section-2-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="format">
@@ -1325,94 +1332,131 @@ for the Connect-UDP-Bind header field value, but future documents might define
 parameters. Receivers <span class="bcp14">MUST</span> ignore unknown parameters.<a href="#section-4-1" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="proxy-behavior">
+<div id="response">
 <section id="section-5">
-      <h2 id="name-proxy-behavior">
-<a href="#section-5" class="section-number selfRef">5. </a><a href="#name-proxy-behavior" class="section-name selfRef">Proxy behavior</a>
+      <h2 id="name-the-proxy-public-address-re">
+<a href="#section-5" class="section-number selfRef">5. </a><a href="#name-the-proxy-public-address-re" class="section-name selfRef">The Proxy-Public-Address Response Header Field</a>
       </h2>
-<p id="section-5-1">After accepting the Connect-UDP Binding proxying request, the proxy uses a UDP
+<p id="section-5-1">Upon accepting the request, the proxy <span class="bcp14">MUST</span> select at least one public IP
+address to bind. The proxy <span class="bcp14">MAY</span> assign more addresses. For each selected
+address, it <span class="bcp14">MUST</span> select an open port to bind to this request. From then
+and until the tunnel is closed, the proxy <span class="bcp14">SHALL</span> send packets received on
+these IP-port tuples to the client. The proxy <span class="bcp14">MUST</span> communicate the selected
+addresses and ports to the client using the "Proxy-Public-Address" header.
+The header is defined as a List of IP-Port-tuples.
+The format of the tuple is defined using IP-literal, IPv4address, IPv6address
+and port from <span><a href="https://rfc-editor.org/rfc/rfc3986#section-3.2" class="relref">Section 3.2</a> of [<a href="#URI" class="cite xref">URI</a>]</span>.<a href="#section-5-1" class="pilcrow">¶</a></p>
+<span id="name-proxy-address-format"></span><div id="target-format">
+<figure id="figure-2">
+        <div class="alignLeft art-ascii-art art-text artwork" id="section-5-2.1">
+<pre>
+ip-port-tuple = ( IP-literal / IPv4address ) ":" port
+</pre>
+</div>
+<figcaption><a href="#figure-2" class="selfRef">Figure 2</a>:
+<a href="#name-proxy-address-format" class="selfRef">Proxy Address Format</a>
+        </figcaption></figure>
+</div>
+<p id="section-5-3">When a single IP-Port tuple is provided in the Proxy-Public-Address field, the
+proxy <span class="bcp14">MUST</span> use the same public IP and Port for the remainder of the connection.
+When multiple tuples are provided, maintaining address stability per address
+family is <span class="bcp14">RECOMMENDED</span>.<a href="#section-5-3" class="pilcrow">¶</a></p>
+<p id="section-5-4">Note that since the addresses are conveyed in HTTP response headers,
+a subsequent change of addresses on the proxy cannot be conveyed to the client.<a href="#section-5-4" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="proxy-behavior">
+<section id="section-6">
+      <h2 id="name-proxy-behavior">
+<a href="#section-6" class="section-number selfRef">6. </a><a href="#name-proxy-behavior" class="section-name selfRef">Proxy behavior</a>
+      </h2>
+<p id="section-6-1">After accepting the Connect-UDP Binding proxying request, the proxy uses a UDP
 port to transmit UDP payloads received from the client to the target IP Address
 and UDP Port specified in each binding Datagram Payload received from the
 client. The proxy uses the same port to listen for UDP packets from any
 authorized target and encapsulates the packets in the Binding Datagram
 Payload format, specifying the IP and port of the target and forwards it to
-the client.<a href="#section-5-1" class="pilcrow">¶</a></p>
+the client.<a href="#section-6-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="security-considerations">
-<section id="section-6">
+<section id="section-7">
       <h2 id="name-security-considerations">
-<a href="#section-6" class="section-number selfRef">6. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
+<a href="#section-7" class="section-number selfRef">7. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
       </h2>
-<p id="section-6-1">The security considerations described in <span><a href="https://rfc-editor.org/rfc/rfc9298#section-7" class="relref">Section 7</a> of [<a href="#CONNECT-UDP" class="cite xref">CONNECT-UDP</a>]</span> also apply
+<p id="section-7-1">The security considerations described in <span><a href="https://rfc-editor.org/rfc/rfc9298#section-7" class="relref">Section 7</a> of [<a href="#CONNECT-UDP" class="cite xref">CONNECT-UDP</a>]</span> also apply
 here. Since TURN can be run over this mechanism, implementors should review the
-security considerations in <span><a href="https://rfc-editor.org/rfc/rfc8656#section-21" class="relref">Section 21</a> of [<a href="#TURN" class="cite xref">TURN</a>]</span>.<a href="#section-6-1" class="pilcrow">¶</a></p>
-<p id="section-6-2">Since unextended UDP Proxying requests carry the target as part of the request,
+security considerations in <span><a href="https://rfc-editor.org/rfc/rfc8656#section-21" class="relref">Section 21</a> of [<a href="#TURN" class="cite xref">TURN</a>]</span>.<a href="#section-7-1" class="pilcrow">¶</a></p>
+<p id="section-7-2">Since unextended UDP Proxying requests carry the target as part of the request,
 the proxy can protect unauthorized targets by rejecting requests before creating
 the tunnel, and communicate the rejection reason in response header fields.
 Bound UDP Proxying requests do not have this ability. Therefore, proxies <span class="bcp14">MUST</span>
 validate the target on every datagram and <span class="bcp14">MUST NOT</span> forward individual datagrams
 with unauthorized targets. Proxies can either silently discard such datagrams or
-abort the corresponding request stream.<a href="#section-6-2" class="pilcrow">¶</a></p>
-<p id="section-6-3">Unlike non-binding CONNECT-UDP, since the proxy tunnels datagrams from any
+abort the corresponding request stream.<a href="#section-7-2" class="pilcrow">¶</a></p>
+<p id="section-7-3">Unlike non-binding CONNECT-UDP, since the proxy tunnels datagrams from any
 target to clients bound to their respective public IP and ports, the clients
-<span class="bcp14">MUST</span> be ready to handle potential unwanted traffic from unknown destinations.<a href="#section-6-3" class="pilcrow">¶</a></p>
+<span class="bcp14">MUST</span> be ready to handle potential unwanted traffic from unknown destinations.<a href="#section-7-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="iana-considerations">
-<section id="section-7">
+<section id="section-8">
       <h2 id="name-iana-considerations">
-<a href="#section-7" class="section-number selfRef">7. </a><a href="#name-iana-considerations" class="section-name selfRef">IANA Considerations</a>
+<a href="#section-8" class="section-number selfRef">8. </a><a href="#name-iana-considerations" class="section-name selfRef">IANA Considerations</a>
       </h2>
-<span class="break"></span><dl class="dlCompact dlParallel" id="section-7-1">
-        <dt id="section-7-1.1">This document will request IANA to register the following entry in the "HTTP</dt>
-        <dd style="margin-left: 1.5em" id="section-7-1.2">
-          <p id="section-7-1.2.1"></p><a href="#section-7-1.2" class="pilcrow">¶</a>
+<span class="break"></span><dl class="dlCompact dlParallel" id="section-8-1">
+        <dt id="section-8-1.1">This document will request IANA to register the following entry in the "HTTP</dt>
+        <dd style="margin-left: 1.5em" id="section-8-1.2">
+          <p id="section-8-1.2.1"></p><a href="#section-8-1.2" class="pilcrow">¶</a>
 </dd>
         <dd class="break"></dd>
-<dt id="section-7-1.3">Field Name" registry maintained at</dt>
-        <dd style="margin-left: 1.5em" id="section-7-1.4">
-          <p id="section-7-1.4.1"></p><a href="#section-7-1.4" class="pilcrow">¶</a>
+<dt id="section-8-1.3">Field Name" registry maintained at</dt>
+        <dd style="margin-left: 1.5em" id="section-8-1.4">
+          <p id="section-8-1.4.1"></p><a href="#section-8-1.4" class="pilcrow">¶</a>
 </dd>
         <dd class="break"></dd>
-<dt id="section-7-1.5">&lt;<span><a href="https://www.iana.org/assignments/http-fields">https://www.iana.org/assignments/http-fields</a></span>&gt;:</dt>
-        <dd style="margin-left: 1.5em" id="section-7-1.6">
-          <p id="section-7-1.6.1">Connect-UDP-Bind<a href="#section-7-1.6.1" class="pilcrow">¶</a></p>
+<dt id="section-8-1.5">&lt;<span><a href="https://www.iana.org/assignments/http-fields">https://www.iana.org/assignments/http-fields</a></span>&gt;:</dt>
+        <dd style="margin-left: 1.5em" id="section-8-1.6">
+          <p id="section-8-1.6.1">Connect-UDP-Bind<a href="#section-8-1.6.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
-<dt id="section-7-1.7">Template:</dt>
-        <dd style="margin-left: 1.5em" id="section-7-1.8">
-          <p id="section-7-1.8.1">None<a href="#section-7-1.8.1" class="pilcrow">¶</a></p>
+<dt id="section-8-1.7">Template:</dt>
+        <dd style="margin-left: 1.5em" id="section-8-1.8">
+          <p id="section-8-1.8.1">None<a href="#section-8-1.8.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
-<dt id="section-7-1.9">Status:</dt>
-        <dd style="margin-left: 1.5em" id="section-7-1.10">
-          <p id="section-7-1.10.1">provisional (permanent if this document is approved)<a href="#section-7-1.10.1" class="pilcrow">¶</a></p>
+<dt id="section-8-1.9">Status:</dt>
+        <dd style="margin-left: 1.5em" id="section-8-1.10">
+          <p id="section-8-1.10.1">provisional (permanent if this document is approved)<a href="#section-8-1.10.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
-<dt id="section-7-1.11">Reference:</dt>
-        <dd style="margin-left: 1.5em" id="section-7-1.12">
-          <p id="section-7-1.12.1">This document<a href="#section-7-1.12.1" class="pilcrow">¶</a></p>
+<dt id="section-8-1.11">Reference:</dt>
+        <dd style="margin-left: 1.5em" id="section-8-1.12">
+          <p id="section-8-1.12.1">This document<a href="#section-8-1.12.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
-<dt id="section-7-1.13">Comments:</dt>
-        <dd style="margin-left: 1.5em" id="section-7-1.14">
-          <p id="section-7-1.14.1">None<a href="#section-7-1.14.1" class="pilcrow">¶</a></p>
+<dt id="section-8-1.13">Comments:</dt>
+        <dd style="margin-left: 1.5em" id="section-8-1.14">
+          <p id="section-8-1.14.1">None<a href="#section-8-1.14.1" class="pilcrow">¶</a></p>
 </dd>
       <dd class="break"></dd>
 </dl>
 </section>
 </div>
-<section id="section-8">
+<section id="section-9">
       <h2 id="name-references">
-<a href="#section-8" class="section-number selfRef">8. </a><a href="#name-references" class="section-name selfRef">References</a>
+<a href="#section-9" class="section-number selfRef">9. </a><a href="#name-references" class="section-name selfRef">References</a>
       </h2>
 <div id="sec-normative-references">
-<section id="section-8.1">
+<section id="section-9.1">
         <h3 id="name-normative-references">
-<a href="#section-8.1" class="section-number selfRef">8.1. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
+<a href="#section-9.1" class="section-number selfRef">9.1. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
         </h3>
 <dl class="references">
+<dt id="ABNF">[ABNF]</dt>
+        <dd>
+<span class="refAuthor">Crocker, D., Ed.</span> and <span class="refAuthor">P. Overell</span>, <span class="refTitle">"Augmented BNF for Syntax Specifications: ABNF"</span>, <span class="seriesInfo">STD 68</span>, <span class="seriesInfo">RFC 5234</span>, <span class="seriesInfo">DOI 10.17487/RFC5234</span>, <time datetime="2008-01" class="refDate">January 2008</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc5234">https://www.rfc-editor.org/rfc/rfc5234</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="CONNECT-UDP">[CONNECT-UDP]</dt>
         <dd>
 <span class="refAuthor">Schinazi, D.</span>, <span class="refTitle">"Proxying UDP in HTTP"</span>, <span class="seriesInfo">RFC 9298</span>, <span class="seriesInfo">DOI 10.17487/RFC9298</span>, <time datetime="2022-08" class="refDate">August 2022</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9298">https://www.rfc-editor.org/rfc/rfc9298</a>&gt;</span>. </dd>
@@ -1442,16 +1486,20 @@ target to clients bound to their respective public IP and ports, the clients
 <span class="refAuthor">Nottingham, M.</span> and <span class="refAuthor">P. Kamp</span>, <span class="refTitle">"Structured Field Values for HTTP"</span>, <span class="seriesInfo">RFC 8941</span>, <span class="seriesInfo">DOI 10.17487/RFC8941</span>, <time datetime="2021-02" class="refDate">February 2021</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8941">https://www.rfc-editor.org/rfc/rfc8941</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="UDP">[UDP]</dt>
-      <dd>
+        <dd>
 <span class="refAuthor">Postel, J.</span>, <span class="refTitle">"User Datagram Protocol"</span>, <span class="seriesInfo">STD 6</span>, <span class="seriesInfo">RFC 768</span>, <span class="seriesInfo">DOI 10.17487/RFC0768</span>, <time datetime="1980-08" class="refDate">August 1980</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc768">https://www.rfc-editor.org/rfc/rfc768</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="URI">[URI]</dt>
+      <dd>
+<span class="refAuthor">Berners-Lee, T.</span>, <span class="refAuthor">Fielding, R.</span>, and <span class="refAuthor">L. Masinter</span>, <span class="refTitle">"Uniform Resource Identifier (URI): Generic Syntax"</span>, <span class="seriesInfo">STD 66</span>, <span class="seriesInfo">RFC 3986</span>, <span class="seriesInfo">DOI 10.17487/RFC3986</span>, <time datetime="2005-01" class="refDate">January 2005</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc3986">https://www.rfc-editor.org/rfc/rfc3986</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 </dl>
 </section>
 </div>
 <div id="sec-informative-references">
-<section id="section-8.2">
+<section id="section-9.2">
         <h3 id="name-informative-references">
-<a href="#section-8.2" class="section-number selfRef">8.2. </a><a href="#name-informative-references" class="section-name selfRef">Informative References</a>
+<a href="#section-9.2" class="section-number selfRef">9.2. </a><a href="#name-informative-references" class="section-name selfRef">Informative References</a>
         </h3>
 <dl class="references">
 <dt id="CONNECT-IP">[CONNECT-IP]</dt>
@@ -1510,6 +1558,8 @@ back to the client.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
             &lt;--------  STREAM(44): HEADERS
                          :status = 200
                          capsule-protocol = ?1
+                         proxy-public-address = 192.0.2.45:54321,  \
+                                           [2001:db8::1234]:54321
 
 /* Wait for STUN server to respond to UDP packet. */
 
