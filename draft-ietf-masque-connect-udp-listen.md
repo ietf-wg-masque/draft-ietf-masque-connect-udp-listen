@@ -199,15 +199,15 @@ until a COMPRESSION_ASSIGN response is echoed back.
 The client and the proxy MAY choose to compress the IP and port information
 per datagram for a given target against the Context ID.
 In such a case, the client or the proxy sends a COMPRESSION_ASSIGN capsule
-(see {{capsuleassignformat}}) with the target information (see
-{{targetmappingformat}}) it wishes to compress and the other party (proxy or
-client respectively) echoes back with either a COMPRESSION_ASSIGN capsule
-if it accepts the compression request, or a COMPRESSION_CLOSE with the context
-ID (see {{capsulecloseformat}}) if it doesn't wish to support compression for
-the given Context ID (For example, due to the memory cost of
-establishing  a list of mappings per target per client). If the compression was
-rejected, the client and proxy MUST use an uncompressed context ID
-(See {{uncompressed}}) to exhange UDP payloads for the given target.
+(see {{capsuleassignformat}}) with the target information it wishes to
+compress and the other party (proxy or client respectively) echoes back
+with either a COMPRESSION_ASSIGN capsule if it accepts the compression request,
+or a COMPRESSION_CLOSE with the context ID (see {{capsulecloseformat}}) if it
+doesn't wish to support compression for the given Context ID (For example,
+due to the memory cost of establishing  a list of mappings per target per
+client). If the compression was rejected, the client and proxy MUST use an
+uncompressed context ID (See {{uncompressed}}) to exhange UDP payloads for
+the given target.
 
 ### Uncompressed datagrams {#uncompressed}
 
@@ -215,7 +215,6 @@ If the client wishes to allocate a Context ID for uncompressed packets,
 it MUST first exchange the COMPRESSION_ASSIGN capsule
 (see {{capsuleassignformat}}) with the proxy with an unused Context ID
 defined in {{contextid}} with the IP Length set to zero.
-
 
 ### Compression Mapping {#mappings}
 
@@ -256,22 +255,15 @@ Or to accept a COMPRESSION_ASSIGN request from the other party.
 Capsule {
   Type COMPRESSION_ASSIGN (0x1C0FE323),
   Length (i),
-  Target Information,
+  Context ID (i),
+  IP Version (8),
+  IP Address (32..128),
+  UDP Port (16),
 }
 ~~~
 {: #capsuleassignformat title="Compression Assign Capsule Format"}
 
-~~~
-Target Information {
-  Context ID (i),
-  IP Version (8),
-  [IP Address (32..128)],
-  [UDP Port (16)],
-}
-~~~
-{: #targetmappingformat title="Target Information Format"}
-
-The IP Length, Address and Port fields in {{targetmappingformat}} are the
+The IP Length, Address and Port fields in {{capsuleassignformat}} are the
 same as those defined in {{format}}. However, the IP version can be set
 to 0 when allocating an uncompressed Context ID, as defined in {{contextid}}.
 
