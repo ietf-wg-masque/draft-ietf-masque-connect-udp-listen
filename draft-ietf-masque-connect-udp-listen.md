@@ -94,9 +94,10 @@ Proxying HTTP request.
 {::boilerplate bcp14-tagged}
 
 This document uses terminology from {{CONNECT-UDP}} and notational conventions
-from {{!QUIC=RFC9000}}. This document uses the terms Integer, Boolean and List
-from {{Section 3 of !STRUCTURED-FIELDS=RFC8941}} to specify syntax and parsing.
-
+from {{!QUIC=RFC9000}}. This document uses the terms Integer and List from
+{{Section 3 of !STRUCTURED-FIELDS=RFC8941}} to specify syntax and parsing.
+This document uses Augmented Backus-Naur Form and parsing/serialization
+behaviors from {{!ABNF=RFC5234}}
 
 # Proxied UDP Binding Mechanism {#mechanism}
 
@@ -110,9 +111,11 @@ When performing URI Template Expansion of the UDP Proxying template (see
 target_port variables to the '*' character (ASCII character 0x2A).
 
 When sending the UDP Proxying request to the proxy, the client adds
-the "Connect-UDP-Bind" header field to identify it as such. Both client and
-proxy can negotiate even and odd numbered context IDs to send UDP
-payloads to each other.
+the "Connect-UDP-Bind" header field to identify it as such. 
+If the proxy accepts the CONNECT UDP Bind request, it adds the allocated public
+IP:port tuples for the client to the response, see {{response}}.
+Both client and proxy can then negotiate even and odd numbered context IDs to
+send UDP payloads to each other.
 
 The client and the proxy exchange COMPRESSION_ASSIGN capsules in order to
 establish which IP a given context ID corresponds to. The context ID can
@@ -222,10 +225,12 @@ When an endpoint receives a COMPRESSION_ASSIGN capsule with a non-zero IP
 length, it MUST decide whether to accept or reject the compression mapping:
 
 if it accepts the mapping, first the receiver MUST save the mapping from
-context ID to address and port. Second, the receiver MUST echo an identical COMPRESSION_ASSIGN capsule back to its peer.
+context ID to address and port. Second, the receiver MUST echo an identical
+COMPRESSION_ASSIGN capsule back to its peer.
 
 if it rejects the mapping, the receiver MUST respond by sending a
-COMPRESSION_CLOSE capsule with the context ID set to the one from the received COMPRESSION_ASSIGN capsule
+COMPRESSION_CLOSE capsule with the context ID set to the one from the received
+COMPRESSION_ASSIGN capsule
 
 The client or proxy MAY choose to close any context that it registered
 or was registered with it respectively using COMPRESSION_CLOSE
@@ -269,8 +274,8 @@ to 0 when allocating an uncompressed Context ID, as defined in {{contextid}}.
 
 ### The COMPRESSION_CLOSE capsule {#compressionclose}
 
-The Compression Close capsule serves the following purposes. As a response to
-reject a COMPRESSION_ASSIGN request and to close or clean up any existing
+The Compression Close capsule serves two purposes. As a response to
+reject a COMPRESSION_ASSIGN request and to close or to clean up any existing
 compression mappings. Once a COMPRESSION_CLOSE has been exchanged between
 endpoints, they MUST NOT use that Context ID again.
 
@@ -298,15 +303,41 @@ its type becomes a List and therefore is to be ignored). This document does not
 define any parameters for the Connect-UDP-Bind header field value, but future
 documents might define parameters. Receivers MUST ignore unknown parameters.
 
+
+# The Proxy-Public-Address Response Header Field {#response}
+
+Upon accepting the request, the proxy MUST select at least one public IP
+address to bind. The proxy MAY assign more addresses. For each selected
+address, it MUST select an open port to bind to this request. From then
+and until the tunnel is closed, the proxy SHALL send packets received on
+these IP-port tuples to the client. The proxy MUST communicate the selected
+addresses and ports to the client using the "Proxy-Public-Address" header.
+The header is defined as a List of IP-Port-tuples.
+The format of the tuple is defined using IP-literal, IPv4address, IPv6address
+and port from {{Section 3.2 of !URI=RFC3986}}.
+
+~~~ ascii-art
+ip-port-tuple = ( IP-literal / IPv4address ) ":" port
+~~~
+{: #target-format title="Proxy Address Format"}
+
+When a single IP-Port tuple is provided in the Proxy-Public-Address field, the
+proxy MUST use the same public IP and Port for the remainder of the connection.
+When multiple tuples are provided, maintaining address stability per address
+family is RECOMMENDED.
+
+Note that since the addresses are conveyed in HTTP response headers,
+a subsequent change of addresses on the proxy cannot be conveyed to the client.
+
 # Proxy behavior {#behavior}
 
-After accepting the Connect-UDP Binding proxying request, the proxy uses a UDP
-port to transmit UDP payloads received from the client to the target IP Address
-and UDP Port specified in each binding Datagram Payload received from the
-client. The proxy uses the same port to listen for UDP packets from any
-authorized target and encapsulates the packets in the Binding Datagram
-Payload format, specifying the IP and port of the target and forwards it to
-the client if a corresponding Context ID mapping exist.
+After accepting the Connect-UDP Binding proxying request, the proxy uses an
+assigned IP:port to transmit UDP payloads received from  the client to the target
+IP Address and UDP Port specified in each binding Datagram Payload received from
+the client. The proxy uses the same ports to listen for UDP packets from any
+authorized target and encapsulates the packets in the Binding Datagram Payload
+format, and forwards it to the client if a corresponding Context ID mapping exists
+for the target.
 
 If the proxy receives UDP payloads that don't correspond to any mapping i.e.
 no compression for the given target was ever established and a mapping for
@@ -421,6 +452,8 @@ proxied over HTTP back to the client.
             <--------  STREAM(44): HEADERS
                          :status = 200
                          capsule-protocol = ?1
+                         proxy-public-address = 192.0.2.45:54321,  \
+                         		   [2001:db8::1234]:54321
 
 /* Request Context ID 2 to be used for uncompressed UDP payloads
  from/to any target */
