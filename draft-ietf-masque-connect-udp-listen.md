@@ -203,7 +203,7 @@ In such a case, the client or the proxy sends a COMPRESSION_ASSIGN capsule
 {{targetmappingformat}}) it wishes to compress and the other party (proxy or
 client respectively) echoes back with either a COMPRESSION_ASSIGN capsule
 if it accepts the compression request, or a COMPRESSION_CLOSE with the context
-ID (see {{capsulecloseformat}}) if it doesn't wish to support  compression for
+ID (see {{capsulecloseformat}}) if it doesn't wish to support compression for
 the given Context ID (For example, due to the memory cost of
 establishing  a list of mappings per target per client). If the compression was
 rejected, the client and proxy MUST use an uncompressed context ID
@@ -280,8 +280,7 @@ to 0 when allocating an uncompressed Context ID, as defined in {{contextid}}.
 The Compression Close capsule serves the following purposes. As a response to
 reject a COMPRESSION_ASSIGN request and to close or clean up any existing
 compression mappings. Once a COMPRESSION_CLOSE has been exchanged between
-endpoints, they MUST NOT use that Context ID until it is re-assigned via a
-COMPRESSION_ASSIGN exchange.
+endpoints, they MUST NOT use that Context ID again.
 
 ~~~
 Capsule {
