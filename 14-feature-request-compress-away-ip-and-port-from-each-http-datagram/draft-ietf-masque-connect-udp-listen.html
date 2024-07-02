@@ -1397,7 +1397,7 @@ In such a case, the client or the proxy sends a COMPRESSION_ASSIGN capsule
 <a href="#targetmappingformat" class="auto internal xref">Figure 4</a>) it wishes to compress and the other party (proxy or
 client respectively) echoes back with either a COMPRESSION_ASSIGN capsule
 if it accepts the compression request, or a COMPRESSION_CLOSE with the context
-ID (see <a href="#capsulecloseformat" class="auto internal xref">Figure 5</a>) if it doesn't wish to support  compression for
+ID (see <a href="#capsulecloseformat" class="auto internal xref">Figure 5</a>) if it doesn't wish to support compression for
 the given Context ID (For example, due to the memory cost of
 establishing  a list of mappings per target per client). If the compression was
 rejected, the client and proxy <span class="bcp14">MUST</span> use an uncompressed context ID
@@ -1501,8 +1501,7 @@ to 0 when allocating an uncompressed Context ID, as defined in <a href="#context
 <p id="section-4.3.2-1">The Compression Close capsule serves the following purposes. As a response to
 reject a COMPRESSION_ASSIGN request and to close or clean up any existing
 compression mappings. Once a COMPRESSION_CLOSE has been exchanged between
-endpoints, they <span class="bcp14">MUST NOT</span> use that Context ID until it is re-assigned via a
-COMPRESSION_ASSIGN exchange.<a href="#section-4.3.2-1" class="pilcrow">¶</a></p>
+endpoints, they <span class="bcp14">MUST NOT</span> use that Context ID again.<a href="#section-4.3.2-1" class="pilcrow">¶</a></p>
 <span id="name-compression-close-capsule-f"></span><div id="capsulecloseformat">
 <figure id="figure-5">
             <div class="alignLeft art-text artwork" id="section-4.3.2-2.1">
