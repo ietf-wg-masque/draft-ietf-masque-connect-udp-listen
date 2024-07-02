@@ -252,7 +252,7 @@ The Compression Assign capsule has two purposes. Either to request the
 assignment of a Context ID (see {{contextid}}) to a corresponding target IP:Port.
 Or to accept a COMPRESSION_ASSIGN request from the other party.
 
-~~~ ascii-art
+~~~
 Capsule {
   Type COMPRESSION_ASSIGN (0x1C0FE323),
   Length (i),
