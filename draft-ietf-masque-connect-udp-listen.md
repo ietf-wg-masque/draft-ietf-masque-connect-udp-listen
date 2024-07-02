@@ -111,7 +111,7 @@ When performing URI Template Expansion of the UDP Proxying template (see
 target_port variables to the '*' character (ASCII character 0x2A).
 
 When sending the UDP Proxying request to the proxy, the client adds
-the "Connect-UDP-Bind" header field to identify it as such. 
+the "Connect-UDP-Bind" header field to identify it as such.
 If the proxy accepts the CONNECT UDP Bind request, it adds the allocated public
 IP:port tuples for the client to the response, see {{response}}.
 Both client and proxy can then negotiate even and odd numbered context IDs to
