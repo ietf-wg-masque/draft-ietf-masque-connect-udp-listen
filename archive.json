@@ -1,0 +1,388 @@
+{
+  "magic": "E!vIA5L86J2I",
+  "timestamp": "2022-11-24T01:50:50.253529+00:00",
+  "repo": "DavidSchinazi/draft-schinazi-connect-udp-listen",
+  "labels": [
+    {
+      "name": "bug",
+      "description": "Something isn't working",
+      "color": "d73a4a"
+    },
+    {
+      "name": "documentation",
+      "description": "Improvements or additions to documentation",
+      "color": "0075ca"
+    },
+    {
+      "name": "duplicate",
+      "description": "This issue or pull request already exists",
+      "color": "cfd3d7"
+    },
+    {
+      "name": "enhancement",
+      "description": "New feature or request",
+      "color": "a2eeef"
+    },
+    {
+      "name": "good first issue",
+      "description": "Good for newcomers",
+      "color": "7057ff"
+    },
+    {
+      "name": "help wanted",
+      "description": "Extra attention is needed",
+      "color": "008672"
+    },
+    {
+      "name": "invalid",
+      "description": "This doesn't seem right",
+      "color": "e4e669"
+    },
+    {
+      "name": "question",
+      "description": "Further information is requested",
+      "color": "d876e3"
+    },
+    {
+      "name": "wontfix",
+      "description": "This will not be worked on",
+      "color": "ffffff"
+    },
+    {
+      "name": "editorial",
+      "description": "",
+      "color": "f9d0c4"
+    }
+  ],
+  "issues": [
+    {
+      "number": 1,
+      "id": "I_kwDOHnqa9M5NkapI",
+      "title": "Improve document title",
+      "url": "https://github.com/DavidSchinazi/draft-schinazi-connect-udp-listen/issues/1",
+      "state": "OPEN",
+      "author": "LPardue",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [
+        "editorial"
+      ],
+      "body": "The first time I heard the title the thought that crossed my mind was that it could be used to support more modes of UDP usage that focus on listening - such as multicast reception.\r\n\r\nHowever, when I look at the draft, the interaction model doesn't really fit the multicast subscribe/join model. (I can think of ways to do that but I won't waste your time here).\r\n\r\nAssuming you want to keep the document scope and design as is, I might suggest a tweak to the document title that more closely matches that definition. Maybe something like \"UDP socket multiplexing over single HTTP requests\" :bike::shed\"\r\n\r\n",
+      "createdAt": "2022-07-12T00:39:23Z",
+      "updatedAt": "2022-10-12T15:59:18Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 2,
+      "id": "I_kwDOHnqa9M5OTVL5",
+      "title": "TURN security considerations",
+      "url": "https://github.com/DavidSchinazi/draft-schinazi-connect-udp-listen/issues/2",
+      "state": "CLOSED",
+      "author": "DavidSchinazi",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "On the mailing list Magnus said:\r\n\r\n> I think you need to go through the security considerations of TURN (RFC 8656) and consider what is applicable as you are replicating that service here.",
+      "createdAt": "2022-07-21T19:14:25Z",
+      "updatedAt": "2022-10-12T16:21:23Z",
+      "closedAt": "2022-10-12T16:21:23Z",
+      "comments": []
+    },
+    {
+      "number": 3,
+      "id": "I_kwDOHnqa9M5Onbi8",
+      "title": "\"Proxying\"",
+      "url": "https://github.com/DavidSchinazi/draft-schinazi-connect-udp-listen/issues/3",
+      "state": "CLOSED",
+      "author": "mnot",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [
+        "editorial"
+      ],
+      "body": "This term is used throughout the document, including places where \"tunnelling\" would be more appropriate. \r\n\r\nGenerally you only want to use \"proxying\" where you're talking about the behaviour of an intermediary that's acting as a proxy.",
+      "createdAt": "2022-07-27T03:03:16Z",
+      "updatedAt": "2022-10-12T15:59:25Z",
+      "closedAt": "2022-10-12T15:59:25Z",
+      "comments": [
+        {
+          "author": "DavidSchinazi",
+          "authorAssociation": "OWNER",
+          "body": "I agree, I'll write a PR.",
+          "createdAt": "2022-07-27T15:46:10Z",
+          "updatedAt": "2022-07-27T15:46:10Z"
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "id": "I_kwDOHnqa9M5O9PWu",
+      "title": "Documenting failure cases",
+      "url": "https://github.com/DavidSchinazi/draft-schinazi-connect-udp-listen/issues/4",
+      "state": "CLOSED",
+      "author": "LPardue",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "I can imagine some failure cases for this extension that might benefit from some explicit documentation. \r\n\r\nThis document defers its security considerations to CONNECT-UDP and that is good. But, for example, where CONNECT-UDP says something like \r\n\r\n> [some IP ranges are special, clients might try them and] UDP proxies can use the\r\n   destination_ip_prohibited Proxy Error Type from Section 2.3.5 of\r\n   [[PROXY-STATUS](https://datatracker.ietf.org/doc/html/draft-ietf-masque-connect-udp-15#ref-PROXY-STATUS)] when rejecting such requests.\r\n\r\nthere's not a direct equivalent in this document because the request for `*` can't be be enforced in the same way. Instead, what might happen is a client or proxy could include a bad IP address like 127.0.0.1 by including it in the datagram payload. The recipient of this datagram would probably want to quietly drop that datagram, or maybe go so far as resetting the stream, or perhaps something in between (drop and signal?).",
+      "createdAt": "2022-08-01T16:27:02Z",
+      "updatedAt": "2022-10-12T16:15:16Z",
+      "closedAt": "2022-10-12T16:15:16Z",
+      "comments": [
+        {
+          "author": "DavidSchinazi",
+          "authorAssociation": "OWNER",
+          "body": "Good point, we should at the very least add some recommendations so implementers know what options they have",
+          "createdAt": "2022-08-01T18:42:16Z",
+          "updatedAt": "2022-08-01T18:42:16Z"
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "id": "I_kwDOHnqa9M5TJh0a",
+      "title": "Explain connect-udp-listen use in definition",
+      "url": "https://github.com/DavidSchinazi/draft-schinazi-connect-udp-listen/issues/5",
+      "state": "CLOSED",
+      "author": "tfpauly",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [
+        "asingh-g"
+      ],
+      "labels": [
+        "editorial"
+      ],
+      "body": "The section, \"The connect-udp-listen Header Field\", defines the syntax for the header, but doesn't explain that the integer value is a context ID. This is mentioned earlier, but it would be easier to read if this definition mentioned at least briefly what the value is as well.",
+      "createdAt": "2022-10-03T16:27:50Z",
+      "updatedAt": "2022-10-12T14:14:37Z",
+      "closedAt": "2022-10-12T14:14:37Z",
+      "comments": []
+    },
+    {
+      "number": 10,
+      "id": "I_kwDOHnqa9M5T9DLx",
+      "title": "Describe proxy behavior",
+      "url": "https://github.com/DavidSchinazi/draft-schinazi-connect-udp-listen/issues/10",
+      "state": "OPEN",
+      "author": "tfpauly",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [
+        "asingh-g"
+      ],
+      "labels": [],
+      "body": "We should likely have more description of server behavior \u2014 i.e., allocating a local port for the client on a particular IP, and always sending and receiving from that port on the proxying side. Also we should define more clearly how to reject a listen request.",
+      "createdAt": "2022-10-13T22:53:45Z",
+      "updatedAt": "2022-11-22T21:09:39Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "asingh-g",
+          "authorAssociation": "COLLABORATOR",
+          "body": "In 108ce84af67b289e88b0053b3e8ddddf1ddc6716 I added a basic proxy behavior, with the assumption that we've previously made under Security Considerations that the proxy works with a set of authorised targets. This, I figure, is up for discussion in the WG.\r\n\r\nFor rejecting listen requests, do we need something in addition to what we already have in [the CONNECT UDP RFC](https://datatracker.ietf.org/doc/rfc9298/)? \r\n\r\n",
+          "createdAt": "2022-11-22T21:09:38Z",
+          "updatedAt": "2022-11-22T21:09:38Z"
+        }
+      ]
+    }
+  ],
+  "pulls": [
+    {
+      "number": 6,
+      "id": "PR_kwDOHnqa9M5AODtX",
+      "title": "clarified connect-udp-listen and simplified some of the text",
+      "url": "https://github.com/DavidSchinazi/draft-schinazi-connect-udp-listen/pull/6",
+      "state": "MERGED",
+      "author": "asingh-g",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "made some changes to simplify the doc, some of these are a little nit-picky. ",
+      "createdAt": "2022-10-05T14:30:36Z",
+      "updatedAt": "2022-10-12T14:14:49Z",
+      "baseRepository": "DavidSchinazi/draft-schinazi-connect-udp-listen",
+      "baseRefName": "main",
+      "baseRefOid": "06eae6840bc46c2d4a7946285fab40771eb9f281",
+      "headRepository": "DavidSchinazi/draft-schinazi-connect-udp-listen",
+      "headRefName": "explain-connect-udp-listen-use-in-definition",
+      "headRefOid": "9c05dba2d6537c8eb7ad2adb8dd61ec8f92df587",
+      "closedAt": "2022-10-12T14:14:36Z",
+      "mergedAt": "2022-10-12T14:14:36Z",
+      "mergedBy": "asingh-g",
+      "mergeCommit": {
+        "oid": "87c6a76ae17529b43c2385e34d24c737321a4d34"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOHnqa9M5DdwoV",
+          "commit": {
+            "abbreviatedOid": "63318fb"
+          },
+          "author": "DavidSchinazi",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "Looks great! A few minor comments",
+          "createdAt": "2022-10-05T18:35:05Z",
+          "updatedAt": "2022-10-05T18:44:24Z",
+          "comments": [
+            {
+              "originalPosition": 16,
+              "body": "Using RFC 2119 terms in lower-case is discouraged, so I'd avoid the word \"may\"\r\n```suggestion\r\nmultiple hosts. While in theory it might be possible to accomplish this using\r\n```",
+              "createdAt": "2022-10-05T18:36:15Z",
+              "updatedAt": "2022-10-05T18:44:24Z"
+            },
+            {
+              "originalPosition": 15,
+              "body": "`that` is more correct than `which` here, since the subsequent clause is essential to the meaning of the sentence\r\n```suggestion\r\nand that relies on the ability to send and receive UDP packets to\r\n```",
+              "createdAt": "2022-10-05T18:36:39Z",
+              "updatedAt": "2022-10-05T18:44:24Z"
+            },
+            {
+              "originalPosition": 40,
+              "body": "Line-length, here and elsewhere\r\n```suggestion\r\nthe \"connect-udp-listen\" header field to its proxying request, with its value\r\nset as the allocated context ID, see {{hdr}}.\r\n```",
+              "createdAt": "2022-10-05T18:37:49Z",
+              "updatedAt": "2022-10-05T18:44:24Z"
+            },
+            {
+              "originalPosition": 81,
+              "body": "This sentence was following the usual structured header boilerplate, I'd rather add the fact that the value is the context ID as a separate sentence.",
+              "createdAt": "2022-10-05T18:42:15Z",
+              "updatedAt": "2022-10-05T18:44:24Z"
+            },
+            {
+              "originalPosition": 87,
+              "body": "This is backwards. This document doesn't define them, but future documents might define them",
+              "createdAt": "2022-10-05T18:42:55Z",
+              "updatedAt": "2022-10-05T18:44:24Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHnqa9M5Du7rL",
+          "commit": {
+            "abbreviatedOid": "63318fb"
+          },
+          "author": "tfpauly",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2022-10-10T18:03:13Z",
+          "updatedAt": "2022-10-10T18:03:13Z",
+          "comments": [
+            {
+              "originalPosition": 15,
+              "body": "I would actually go with removing the `and`:\r\n\r\n```suggestion\r\nwhich relies on the ability to send and receive UDP packets to\r\n```",
+              "createdAt": "2022-10-10T18:03:13Z",
+              "updatedAt": "2022-10-10T18:03:13Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHnqa9M5Du7wi",
+          "commit": {
+            "abbreviatedOid": "63318fb"
+          },
+          "author": "tfpauly",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2022-10-10T18:03:38Z",
+          "updatedAt": "2022-10-10T18:03:38Z",
+          "comments": [
+            {
+              "originalPosition": 21,
+              "body": "```suggestion\r\nthat distinct requests will be handled by the same server. This can lead\r\n```",
+              "createdAt": "2022-10-10T18:03:38Z",
+              "updatedAt": "2022-10-10T18:03:38Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 7,
+      "id": "PR_kwDOHnqa9M5Aql8z",
+      "title": "Moar tunnels",
+      "url": "https://github.com/DavidSchinazi/draft-schinazi-connect-udp-listen/pull/7",
+      "state": "MERGED",
+      "author": "DavidSchinazi",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "Fixes #3 ",
+      "createdAt": "2022-10-12T15:58:08Z",
+      "updatedAt": "2022-10-12T15:59:28Z",
+      "baseRepository": "DavidSchinazi/draft-schinazi-connect-udp-listen",
+      "baseRefName": "main",
+      "baseRefOid": "1c7f6136678a36de07de173029454268bcbbf462",
+      "headRepository": "DavidSchinazi/draft-schinazi-connect-udp-listen",
+      "headRefName": "tunnelling",
+      "headRefOid": "717a4590668623643bfe6311991fb59f1a5f32c7",
+      "closedAt": "2022-10-12T15:59:25Z",
+      "mergedAt": "2022-10-12T15:59:25Z",
+      "mergedBy": "DavidSchinazi",
+      "mergeCommit": {
+        "oid": "190866e4f20a7bf89adc6e4066738185118b97cb"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 8,
+      "id": "PR_kwDOHnqa9M5Aqo4Y",
+      "title": "Mention that target validation is per datagram",
+      "url": "https://github.com/DavidSchinazi/draft-schinazi-connect-udp-listen/pull/8",
+      "state": "MERGED",
+      "author": "DavidSchinazi",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "Fixes #4 ",
+      "createdAt": "2022-10-12T16:08:02Z",
+      "updatedAt": "2022-10-12T16:15:18Z",
+      "baseRepository": "DavidSchinazi/draft-schinazi-connect-udp-listen",
+      "baseRefName": "main",
+      "baseRefOid": "190866e4f20a7bf89adc6e4066738185118b97cb",
+      "headRepository": "DavidSchinazi/draft-schinazi-connect-udp-listen",
+      "headRefName": "moar_security",
+      "headRefOid": "ca8adb0847eb8081f1e073ea4613586ab96549da",
+      "closedAt": "2022-10-12T16:15:15Z",
+      "mergedAt": "2022-10-12T16:15:15Z",
+      "mergedBy": "DavidSchinazi",
+      "mergeCommit": {
+        "oid": "e56c4dd157cc1b0c189001786ccfde01a65001f2"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 9,
+      "id": "PR_kwDOHnqa9M5AqscC",
+      "title": "Mention TURN security",
+      "url": "https://github.com/DavidSchinazi/draft-schinazi-connect-udp-listen/pull/9",
+      "state": "MERGED",
+      "author": "DavidSchinazi",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "Fixes #2",
+      "createdAt": "2022-10-12T16:20:38Z",
+      "updatedAt": "2022-10-12T16:21:25Z",
+      "baseRepository": "DavidSchinazi/draft-schinazi-connect-udp-listen",
+      "baseRefName": "main",
+      "baseRefOid": "e56c4dd157cc1b0c189001786ccfde01a65001f2",
+      "headRepository": "DavidSchinazi/draft-schinazi-connect-udp-listen",
+      "headRefName": "turnsec",
+      "headRefOid": "5759c371a3af83a34d7c13bd9fd65211fb9341a5",
+      "closedAt": "2022-10-12T16:21:22Z",
+      "mergedAt": "2022-10-12T16:21:22Z",
+      "mergedBy": "DavidSchinazi",
+      "mergeCommit": {
+        "oid": "88114f605f5abc6df39ca806af3294ca6c3c8f0a"
+      },
+      "comments": [],
+      "reviews": []
+    }
+  ]
+}
