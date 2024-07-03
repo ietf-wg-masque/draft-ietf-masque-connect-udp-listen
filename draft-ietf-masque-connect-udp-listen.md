@@ -258,11 +258,11 @@ UDP Payload:
 octets" in {{UDP}}).
 
 
-## Capsules {#capsules}
+# Capsules {#capsules}
 
 This document defines new capsule types that deal with registering context IDs.
 
-### The COMPRESSION_ASSIGN capsule {#compressionassign}
+## The COMPRESSION_ASSIGN capsule {#compressionassign}
 
 The Compression Assign capsule has two purposes. Either to request the
 assignment of a Context ID (see {{contextid}}) to a corresponding target
@@ -287,7 +287,7 @@ When the IP Version is set to 0, the IP Address and UDP Port fields are
 omitted. This allows registering an uncompressed Context ID, as described in
 {{contextid}}.
 
-### The COMPRESSION_CLOSE capsule {#compressionclose}
+## The COMPRESSION_CLOSE capsule {#compressionclose}
 
 The Compression Close capsule serves two purposes. As a response to reject a
 COMPRESSION_ASSIGN request and to close or to clean up any existing compression
@@ -303,7 +303,7 @@ Capsule {
 ~~~
 {: #capsulecloseformat title="Compression Close Capsule Format"}
 
-### Symmetry
+## Symmetry
 
 As mandated in {{Section 4 of CONNECT-UDP}}, clients can only allocate even
 context IDs, while proxies can only allocate odd ones. This makes the
