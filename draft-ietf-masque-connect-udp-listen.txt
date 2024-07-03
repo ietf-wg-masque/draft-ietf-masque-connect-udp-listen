@@ -82,18 +82,18 @@ Table of Contents
    5.  Compressed Operation
      5.1.  Compression Mapping
      5.2.  Compressed Payload Format
-     5.3.  Capsules
-       5.3.1.  The COMPRESSION_ASSIGN capsule
-       5.3.2.  The COMPRESSION_CLOSE capsule
-       5.3.3.  Symmetry
-   6.  The Connect-UDP-Bind Header Field
-   7.  The Proxy-Public-Address Response Header Field
-   8.  Proxy behavior
-   9.  Security Considerations
-   10. IANA Considerations
-   11. References
-     11.1.  Normative References
-     11.2.  Informative References
+   6.  Capsules
+     6.1.  The COMPRESSION_ASSIGN capsule
+     6.2.  The COMPRESSION_CLOSE capsule
+     6.3.  Symmetry
+   7.  The Connect-UDP-Bind Header Field
+   8.  The Proxy-Public-Address Response Header Field
+   9.  Proxy behavior
+   10. Security Considerations
+   11. IANA Considerations
+   12. References
+     12.1.  Normative References
+     12.2.  Informative References
    Appendix A.  Example
    Appendix B.  Comparison with CONNECT-IP
    Acknowledgments
@@ -148,7 +148,7 @@ Table of Contents
    When sending the UDP Proxying request to the proxy, the client adds
    the "Connect-UDP-Bind" header field to identify it as such.  If the
    proxy accepts the CONNECT UDP Bind request, it adds the allocated
-   public IP:port tuples for the client to the response; see Section 7.
+   public IP:port tuples for the client to the response; see Section 8.
    Both client and proxy can then negotiate even and odd numbered
    context IDs to send UDP payloads to each other.
 
@@ -171,7 +171,7 @@ Table of Contents
 
    The context ID 0 was reserved by unextended connect-udp and is not
    used by this extension.  Once an endpoint has ascertained that the
-   peer supports this extension (see Section 6), the endpoint MUST NOT
+   peer supports this extension (see Section 7), the endpoint MUST NOT
    send any datagrams with context ID set to 0, and MUST silently drop
    any received datagrams with context ID set to 0.
 
@@ -230,9 +230,9 @@ Table of Contents
 
    If an uncompressed Context ID was set (via Section 4), the client MAY
    at any point request the proxy reject all traffic from uncompressed
-   targets by using COMPRESSION_CLOSE (see Section 5.3.2) on said
-   Context ID.  Then the proxy effectively acts as a firewall against
-   unwanted or unknown IPs.
+   targets by using COMPRESSION_CLOSE (see Section 6.2) on said Context
+   ID.  Then the proxy effectively acts as a firewall against unwanted
+   or unknown IPs.
 
 5.  Compressed Operation
 
@@ -288,12 +288,12 @@ Table of Contents
    UDP Payload:  The unmodified UDP Payload of this proxied UDP packet
       (referred to as "data octets" in [UDP]).
 
-5.3.  Capsules
+6.  Capsules
 
    This document defines new capsule types that deal with registering
    context IDs.
 
-5.3.1.  The COMPRESSION_ASSIGN capsule
+6.1.  The COMPRESSION_ASSIGN capsule
 
    The Compression Assign capsule has two purposes.  Either to request
    the assignment of a Context ID (see Section 3) to a corresponding
@@ -318,7 +318,7 @@ Table of Contents
    are omitted.  This allows registering an uncompressed Context ID, as
    described in Section 3.
 
-5.3.2.  The COMPRESSION_CLOSE capsule
+6.2.  The COMPRESSION_CLOSE capsule
 
    The Compression Close capsule serves two purposes.  As a response to
    reject a COMPRESSION_ASSIGN request and to close or to clean up any
@@ -334,7 +334,7 @@ Table of Contents
 
                  Figure 4: Compression Close Capsule Format
 
-5.3.3.  Symmetry
+6.3.  Symmetry
 
    As mandated in Section 4 of [CONNECT-UDP], clients can only allocate
    even context IDs, while proxies can only allocate odd ones.  This
@@ -342,7 +342,7 @@ Table of Contents
    client receives a COMPRESSION_ASSIGN capsule with an even context ID,
    it knows that this has to be an echo of a capsule it already sent.
 
-6.  The Connect-UDP-Bind Header Field
+7.  The Connect-UDP-Bind Header Field
 
    The "Connect-UDP-Bind" header field’s value is a Boolean Structured
    Field set to true.  Clients and proxy both indicate support for this
@@ -356,7 +356,7 @@ Table of Contents
    value, but future documents might define parameters.  Receivers MUST
    ignore unknown parameters.
 
-7.  The Proxy-Public-Address Response Header Field
+8.  The Proxy-Public-Address Response Header Field
 
    Upon accepting the request, the proxy MUST select at least one public
    IP address to bind.  The proxy MAY assign more addresses.  For each
@@ -381,7 +381,7 @@ Table of Contents
    a subsequent change of addresses on the proxy cannot be conveyed to
    the client.
 
-8.  Proxy behavior
+9.  Proxy behavior
 
    After accepting the Connect-UDP Binding proxying request, the proxy
    uses an assigned IP:port to transmit UDP payloads received from the
@@ -398,7 +398,7 @@ Table of Contents
    will either drop the datagram or temporarily buffer it (see Section 5
    of [CONNECT-UDP]).
 
-9.  Security Considerations
+10.  Security Considerations
 
    The security considerations described in Section 7 of [CONNECT-UDP]
    also apply here.  Since TURN can be run over this mechanism,
@@ -421,7 +421,7 @@ Table of Contents
    exhaustion.  The proxy MAY close the connection if such conditions
    occur.
 
-10.  IANA Considerations
+11.  IANA Considerations
 
    This document will request IANA to register the following entry in
    the "HTTP
@@ -452,9 +452,9 @@ Table of Contents
    Reference:  This document
    Comments:  None
 
-11.  References
+12.  References
 
-11.1.  Normative References
+12.1.  Normative References
 
    [ABNF]     Crocker, D., Ed. and P. Overell, "Augmented BNF for Syntax
               Specifications: ABNF", STD 68, RFC 5234,
@@ -504,7 +504,7 @@ Table of Contents
               RFC 3986, DOI 10.17487/RFC3986, January 2005,
               <https://www.rfc-editor.org/rfc/rfc3986>.
 
-11.2.  Informative References
+12.2.  Informative References
 
    [CONNECT-IP]
               Pauly, T., Ed., Schinazi, D., Chernyakhovsky, A.,
