@@ -1,6 +1,6 @@
-# Proxying Listener UDP in HTTP
+# Proxying Bound UDP in HTTP
 
-This is the working area for the MASQUE WG Internet-Draft, "Proxying Listener UDP in HTTP".
+This is the working area for the MASQUE WG Internet-Draft, "Proxying Bound UDP in HTTP".
 
 * [Editor's Copy](https://ietf-wg-masque.github.io/draft-ietf-masque-connect-udp-listen/draft-ietf-masque-connect-udp-listen.html)
 * [Datatracker Page](https://datatracker.ietf.org/doc/draft-ietf-masque-connect-udp-listen)
