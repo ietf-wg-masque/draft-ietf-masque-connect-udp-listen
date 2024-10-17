@@ -114,8 +114,6 @@ When sending the UDP Proxying request to the proxy, the client adds
 the "Connect-UDP-Bind" header field to identify it as such.
 If the proxy accepts the CONNECT UDP Bind request, it adds the allocated public
 IP:port tuples for the client to the response, see {{response}}.
-Both client and proxy can then negotiate even and odd numbered context IDs to
-send UDP payloads to each other.
 
 The client and the proxy exchange COMPRESSION_ASSIGN capsules in order to
 establish which IP a given context ID corresponds to. The context ID can
@@ -354,10 +352,10 @@ review the security considerations in {{Section 21 of ?TURN=RFC8656}}.
 Since unextended UDP Proxying requests carry the target as part of the request,
 the proxy can protect unauthorized targets by rejecting requests before
 creating the tunnel, and communicate the rejection reason in response header
-fields. Bound UDP Proxying requests do not have this ability. Therefore,
-proxies MUST validate the target on every datagram and MUST NOT forward
-individual datagrams with unauthorized targets. Proxies can either silently
-discard such datagrams or abort the corresponding request stream.
+fields. Bound UDP Proxying requests, on the other hand, MUST reject all traffic
+on compressed contexts that does not correspond to the mapped target. On the
+other hand, an uncompressed context SHALL allow all traffic through to the
+client.
 
 Note that if the compression response (COMPRESSION_ASSIGN OR COMPRESSION_CLOSE)
 cannot be immediately sent due to flow or congestion control, an upper limit
@@ -430,12 +428,10 @@ Comments:
 # Example
 
 In the example below, the client is configured with URI Template
-"https://example.org/.well-known/masque/udp/{target_host}/{target_port}/" and
-wishes to use WebRTC with another browser over a Bound UDP Proxying tunnel.
-It contacts a STUN server at 192.0.2.42. The STUN server, in response, sends
-the proxy's IP address to the other browser at 203.0.113.33. Using this
-information, the other browser sends a UDP packet to the proxy, which is
-proxied over HTTP back to the client.
+"https://example.org/.well-known/masque/udp/{target_host}/{target_port}/"
+and listens for traffic on the proxy, eventually decides that it no
+longer wants to listen for connections from new targets, and limits
+its communication with only 223.0.2.31:4321 and no other UDP target.
 
 ~~~ ascii-art
  Client                                             Server
@@ -457,27 +453,21 @@ proxied over HTTP back to the client.
 
 /* Request Context ID 2 to be used for uncompressed UDP payloads
  from/to any target */
+
  CAPSULE                       -------->
    Type = COMPRESSION_ASSIGN (0x1C0FE323)
    Context ID = 2
    IP Version = 0
 
 
-/*Proxy confirms registration.*/
+/* Proxy confirms registration. */
+
             <-------- CAPSULE
                         Type = COMPRESSION_ASSIGN (0x1C0FE323)
                         Context ID = 2
                         IP Version = 0
 
- DATAGRAM                       -------->
-   Quarter Stream ID = 11
-   Context ID = 2
-   IP Version = 4
-   IP Address = 192.0.2.42
-   UDP Port = 1234
-   UDP Payload = Encapsulated UDP Payload
-
-/* Wait for STUN server to respond to UDP packet. */
+/* Target talks to Client using the uncompressed context */
 
             <--------  DATAGRAM
                          Quarter Stream ID = 11
@@ -487,37 +477,54 @@ proxied over HTTP back to the client.
                          UDP Port = 1234
                          UDP Payload = Encapsulated UDP Payload
 
-/* Wait for the STUN server to send the proxy's IP and */
-/* port to the other browser and for the other browser */
-/* to send a UDP packet to the proxy. */
+/ *Client responds on the same uncompressed context */
 
+ DATAGRAM                       -------->
+   Quarter Stream ID = 11
+   Context ID = 2
+   IP Version = 4
+   IP Address = 192.0.2.42
+   UDP Port = 1234
+   UDP Payload = Encapsulated UDP Payload
+
+/* Another target talks to Client using the uncompressed context */
             <--------  DATAGRAM
                          Quarter Stream ID = 11
                          Context ID = 2
                          IP Version = 4
-                         IP Address = 203.0.113.33
+                         IP Address = 223.0.2.31
                          UDP Port = 4321
                          UDP Payload = Encapsulated UDP Payload
 
-/* Register 203.0.113.33:1234 to compress it in the future*/
+/ *Client responds on the same uncompressed context */
+
+ DATAGRAM                       -------->
+   Quarter Stream ID = 11
+   Context ID = 2
+   IP Version = 4
+   IP Address = 223.0.2.31
+   UDP Port = 4321
+   UDP Payload = Encapsulated UDP Payload
+
+/* Register 223.0.2.31:4321 to compress it in the future */
  CAPSULE                       -------->
    Type = COMPRESSION_ASSIGN (0x1C0FE323)
    Context ID = 4
    IP Version = 4
-   IP Address = 203.0.113.33
-   UDP Port = 1234
+   IP Address = 223.0.2.31
+   UDP Port = 4321
 
 
-/*Proxy confirms registration.*/
+/* Proxy confirms registration.*/
             <-------- CAPSULE
                         Type = COMPRESSION_ASSIGN (0x1C0FE323)
                         Context ID = 4
                         IP Version = 4
-                        IP Address = 203.0.113.33
-                        UDP Port = 1234
+                        IP Address = 223.0.2.31
+                        UDP Port = 4321
 
 /* Omit IP and Port for future packets intended for*/
-/*203.0.113.33:1234 hereon */
+/* 223.0.2.31:4321 hereon */
  DATAGRAM                       -------->
    Context ID = 4
    UDP Payload = Encapsulated UDP Payload
@@ -526,19 +533,22 @@ proxied over HTTP back to the client.
                         Context ID = 4
                         UDP Payload = Encapsulated UDP Payload
 
-/* Request packets without a corresponding context to be dropped*/
+/* Request packets without a corresponding compressed Context */
+/* to be dropped by closing the uncompressed Context */
  CAPSULE                       -------->
    Type = COMPRESSION_CLOSE (0x39B9914F)
    Context ID = 2
-
 
 
 /* Proxy confirms unmapped IP rejection. */
             <-------- CAPSULE
                         Type = COMPRESSION_CLOSE (0x39B9914F)
                         Context ID = 2
-/* Proxy drops any packets received on the
-bound IP(s):Port */
+
+/* All traffic that does not belong to the registered */
+/* Context ID 4 = 223.0.2.31:4321 is dropped at the proxy */
+
+
 ~~~
 
 # Comparison with CONNECT-IP
