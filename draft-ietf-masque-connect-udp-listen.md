@@ -378,7 +378,7 @@ receive from all targets. If the UDP proxy would reject unextended UDP proxying
 requests to some targets (as recommended in {{Section 7 of CONNECT-UDP}}), then
 for bound UDP proxying requests where the uncompressed context is open, the
 UDP proxy needs to perform checks on the target of each uncompressed context
-datagram.
+datagram it receives.
 
 Note that if the compression response (COMPRESSION_ASSIGN OR COMPRESSION_CLOSE)
 cannot be immediately sent due to flow or congestion control, an upper limit on
@@ -487,7 +487,7 @@ its communication with only 203.0.113.11:4321 and no other UDP target.
                          UDP Port = 1234
                          UDP Payload = Encapsulated UDP Payload
 
-/ *Client responds on the same uncompressed context */
+/ * Client responds on the same uncompressed context */
 
  DATAGRAM                       -------->
    Quarter Stream ID = 11
@@ -506,7 +506,7 @@ its communication with only 203.0.113.11:4321 and no other UDP target.
                          UDP Port = 4321
                          UDP Payload = Encapsulated UDP Payload
 
-/ *Client responds on the same uncompressed context */
+/ * Client responds on the same uncompressed context */
 
  DATAGRAM                       -------->
    Quarter Stream ID = 11
@@ -556,7 +556,7 @@ its communication with only 203.0.113.11:4321 and no other UDP target.
                         Context ID = 2
 
 /* Context ID 4 = 203.0.113.11:4321 traffic is accepted, */
-/* And the rest is dropped at the proxy*/
+/* And the rest is dropped at the proxy */
 
 
 ~~~
