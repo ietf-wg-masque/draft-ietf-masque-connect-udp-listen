@@ -372,10 +372,13 @@ review the security considerations in {{Section 21 of ?TURN=RFC8656}}.
 Since unextended UDP Proxying requests carry the target as part of the request,
 the proxy can protect unauthorized targets by rejecting requests before
 creating the tunnel, and communicate the rejection reason in response header
-fields. Bound UDP Proxying requests, on the other hand, MUST reject all traffic
-on compressed contexts that does not correspond to the mapped target. On the
-other hand, an uncompressed context SHALL allow all traffic through to the
-client.
+fields. The uncompressed context allows transporting datagrams to and from any
+target. Clients that keep the uncompressed context open need to be able to
+receive from all targets. If the UDP proxy would reject unextended UDP proxying
+requests to some targets (as recommended in {{Section 7 of CONNECT-UDP}}), then
+for bound UDP proxying requests where the uncompressed context is open, the
+UDP proxy needs to perform checks on the target of each uncompressed context
+datagram.
 
 Note that if the compression response (COMPRESSION_ASSIGN OR COMPRESSION_CLOSE)
 cannot be immediately sent due to flow or congestion control, an upper limit on
@@ -437,7 +440,7 @@ In the example below, the client is configured with URI Template
 "https://example.org/.well-known/masque/udp/{target_host}/{target_port}/"
 and listens for traffic on the proxy, eventually decides that it no
 longer wants to listen for connections from new targets, and limits
-its communication with only 223.0.2.31:4321 and no other UDP target.
+its communication with only 203.0.113.11:4321 and no other UDP target.
 
 ~~~
  Client                                             Server
@@ -499,7 +502,7 @@ its communication with only 223.0.2.31:4321 and no other UDP target.
                          Quarter Stream ID = 11
                          Context ID = 2
                          IP Version = 4
-                         IP Address = 223.0.2.31
+                         IP Address = 203.0.113.11
                          UDP Port = 4321
                          UDP Payload = Encapsulated UDP Payload
 
@@ -509,16 +512,16 @@ its communication with only 223.0.2.31:4321 and no other UDP target.
    Quarter Stream ID = 11
    Context ID = 2
    IP Version = 4
-   IP Address = 223.0.2.31
+   IP Address = 203.0.113.11
    UDP Port = 4321
    UDP Payload = Encapsulated UDP Payload
 
-/* Register 223.0.2.31:4321 to compress it in the future */
+/* Register 203.0.113.11:4321 to compress it in the future */
  CAPSULE                       -------->
    Type = COMPRESSION_ASSIGN
    Context ID = 4
    IP Version = 4
-   IP Address = 223.0.2.31
+   IP Address = 203.0.113.11
    UDP Port = 4321
 
 
@@ -527,11 +530,11 @@ its communication with only 223.0.2.31:4321 and no other UDP target.
                         Type = COMPRESSION_ASSIGN
                         Context ID = 4
                         IP Version = 4
-                        IP Address = 223.0.2.31
+                        IP Address = 203.0.113.11
                         UDP Port = 4321
 
 /* Omit IP and Port for future packets intended for*/
-/* 223.0.2.31:4321 hereon */
+/* 203.0.113.11:4321 hereon */
  DATAGRAM                       -------->
    Context ID = 4
    UDP Payload = Encapsulated UDP Payload
@@ -552,8 +555,8 @@ its communication with only 223.0.2.31:4321 and no other UDP target.
                         Type = COMPRESSION_CLOSE
                         Context ID = 2
 
-/* All traffic that does not belong to the registered */
-/* Context ID 4 = 223.0.2.31:4321 is dropped at the proxy */
+/* Context ID 4 = 203.0.113.11:4321 traffic is accepted, */
+/* And the rest is dropped at the proxy*/
 
 
 ~~~
