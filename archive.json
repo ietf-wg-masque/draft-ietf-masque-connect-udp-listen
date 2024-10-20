@@ -1,7 +1,7 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2022-11-24T01:50:50.253529+00:00",
-  "repo": "DavidSchinazi/draft-schinazi-connect-udp-listen",
+  "timestamp": "2024-10-20T00:54:48.476039+00:00",
+  "repo": "ietf-wg-masque/draft-ietf-masque-connect-udp-listen",
   "labels": [
     {
       "name": "bug",
@@ -59,8 +59,8 @@
       "number": 1,
       "id": "I_kwDOHnqa9M5NkapI",
       "title": "Improve document title",
-      "url": "https://github.com/DavidSchinazi/draft-schinazi-connect-udp-listen/issues/1",
-      "state": "OPEN",
+      "url": "https://github.com/ietf-wg-masque/draft-ietf-masque-connect-udp-listen/issues/1",
+      "state": "CLOSED",
       "author": "LPardue",
       "authorAssociation": "NONE",
       "assignees": [],
@@ -69,18 +69,33 @@
       ],
       "body": "The first time I heard the title the thought that crossed my mind was that it could be used to support more modes of UDP usage that focus on listening - such as multicast reception.\r\n\r\nHowever, when I look at the draft, the interaction model doesn't really fit the multicast subscribe/join model. (I can think of ways to do that but I won't waste your time here).\r\n\r\nAssuming you want to keep the document scope and design as is, I might suggest a tweak to the document title that more closely matches that definition. Maybe something like \"UDP socket multiplexing over single HTTP requests\" :bike::shed\"\r\n\r\n",
       "createdAt": "2022-07-12T00:39:23Z",
-      "updatedAt": "2022-10-12T15:59:18Z",
-      "closedAt": null,
-      "comments": []
+      "updatedAt": "2024-02-29T21:34:22Z",
+      "closedAt": "2024-02-29T21:34:22Z",
+      "comments": [
+        {
+          "author": "MikeBishop",
+          "authorAssociation": "NONE",
+          "body": "Listen seems reasonable, by comparison to existing syscalls. I suggest closing with no action, and revisit if the scope changes.",
+          "createdAt": "2023-11-10T09:46:00Z",
+          "updatedAt": "2023-11-10T09:46:00Z"
+        },
+        {
+          "author": "asingh-g",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I think I should poll the WG if they want the name to change to connect-udp bind at the next IETF since that seemed to be the most popular name alternative from what I noticed in the mailing list. ",
+          "createdAt": "2024-01-02T21:44:10Z",
+          "updatedAt": "2024-01-02T21:44:10Z"
+        }
+      ]
     },
     {
       "number": 2,
       "id": "I_kwDOHnqa9M5OTVL5",
       "title": "TURN security considerations",
-      "url": "https://github.com/DavidSchinazi/draft-schinazi-connect-udp-listen/issues/2",
+      "url": "https://github.com/ietf-wg-masque/draft-ietf-masque-connect-udp-listen/issues/2",
       "state": "CLOSED",
       "author": "DavidSchinazi",
-      "authorAssociation": "OWNER",
+      "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "On the mailing list Magnus said:\r\n\r\n> I think you need to go through the security considerations of TURN (RFC 8656) and consider what is applicable as you are replicating that service here.",
@@ -93,7 +108,7 @@
       "number": 3,
       "id": "I_kwDOHnqa9M5Onbi8",
       "title": "\"Proxying\"",
-      "url": "https://github.com/DavidSchinazi/draft-schinazi-connect-udp-listen/issues/3",
+      "url": "https://github.com/ietf-wg-masque/draft-ietf-masque-connect-udp-listen/issues/3",
       "state": "CLOSED",
       "author": "mnot",
       "authorAssociation": "NONE",
@@ -108,7 +123,7 @@
       "comments": [
         {
           "author": "DavidSchinazi",
-          "authorAssociation": "OWNER",
+          "authorAssociation": "COLLABORATOR",
           "body": "I agree, I'll write a PR.",
           "createdAt": "2022-07-27T15:46:10Z",
           "updatedAt": "2022-07-27T15:46:10Z"
@@ -119,7 +134,7 @@
       "number": 4,
       "id": "I_kwDOHnqa9M5O9PWu",
       "title": "Documenting failure cases",
-      "url": "https://github.com/DavidSchinazi/draft-schinazi-connect-udp-listen/issues/4",
+      "url": "https://github.com/ietf-wg-masque/draft-ietf-masque-connect-udp-listen/issues/4",
       "state": "CLOSED",
       "author": "LPardue",
       "authorAssociation": "NONE",
@@ -132,7 +147,7 @@
       "comments": [
         {
           "author": "DavidSchinazi",
-          "authorAssociation": "OWNER",
+          "authorAssociation": "COLLABORATOR",
           "body": "Good point, we should at the very least add some recommendations so implementers know what options they have",
           "createdAt": "2022-08-01T18:42:16Z",
           "updatedAt": "2022-08-01T18:42:16Z"
@@ -143,7 +158,7 @@
       "number": 5,
       "id": "I_kwDOHnqa9M5TJh0a",
       "title": "Explain connect-udp-listen use in definition",
-      "url": "https://github.com/DavidSchinazi/draft-schinazi-connect-udp-listen/issues/5",
+      "url": "https://github.com/ietf-wg-masque/draft-ietf-masque-connect-udp-listen/issues/5",
       "state": "CLOSED",
       "author": "tfpauly",
       "authorAssociation": "CONTRIBUTOR",
@@ -163,8 +178,8 @@
       "number": 10,
       "id": "I_kwDOHnqa9M5T9DLx",
       "title": "Describe proxy behavior",
-      "url": "https://github.com/DavidSchinazi/draft-schinazi-connect-udp-listen/issues/10",
-      "state": "OPEN",
+      "url": "https://github.com/ietf-wg-masque/draft-ietf-masque-connect-udp-listen/issues/10",
+      "state": "CLOSED",
       "author": "tfpauly",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [
@@ -173,8 +188,8 @@
       "labels": [],
       "body": "We should likely have more description of server behavior \u2014 i.e., allocating a local port for the client on a particular IP, and always sending and receiving from that port on the proxying side. Also we should define more clearly how to reject a listen request.",
       "createdAt": "2022-10-13T22:53:45Z",
-      "updatedAt": "2022-11-22T21:09:39Z",
-      "closedAt": null,
+      "updatedAt": "2023-02-27T20:28:41Z",
+      "closedAt": "2023-02-27T20:28:41Z",
       "comments": [
         {
           "author": "asingh-g",
@@ -184,6 +199,280 @@
           "updatedAt": "2022-11-22T21:09:38Z"
         }
       ]
+    },
+    {
+      "number": 11,
+      "id": "I_kwDOHnqa9M5czmE7",
+      "title": "TCP-Listen equivalent?",
+      "url": "https://github.com/ietf-wg-masque/draft-ietf-masque-connect-udp-listen/issues/11",
+      "state": "CLOSED",
+      "author": "vparla",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "Are there plans to create a peer draft or perhaps expand this draft to cover both TCP and UDP listening?",
+      "createdAt": "2023-01-25T17:30:45Z",
+      "updatedAt": "2023-01-25T19:14:57Z",
+      "closedAt": "2023-01-25T19:14:57Z",
+      "comments": [
+        {
+          "author": "DavidSchinazi",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Not currently. I would prefer to see this as part of a separate draft.",
+          "createdAt": "2023-01-25T18:45:19Z",
+          "updatedAt": "2023-01-25T18:45:19Z"
+        },
+        {
+          "author": "vparla",
+          "authorAssociation": "NONE",
+          "body": "If you decide to create a peer draft, I would be happy to join you on it as TCP listeners will be important to have as well.",
+          "createdAt": "2023-01-25T19:14:56Z",
+          "updatedAt": "2023-01-25T19:14:56Z"
+        }
+      ]
+    },
+    {
+      "number": 12,
+      "id": "I_kwDOHnqa9M5ekf2q",
+      "title": "Feature request: allow proxy to send public IP and port to client",
+      "url": "https://github.com/ietf-wg-masque/draft-ietf-masque-connect-udp-listen/issues/12",
+      "state": "CLOSED",
+      "author": "DavidSchinazi",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [
+        "asingh-g"
+      ],
+      "labels": [],
+      "body": "From Peter Thatcher on the [list](https://mailarchive.ietf.org/arch/msg/masque/jK85NRLMUPyiwyGAl0l39cSmTmM/):\r\n\r\n> To be more useful for WebRTC, it would be nice for the proxy to tell the client what IP and port it is exposing publically (much like TURN does).  Then WebRTC  (or ICE more generally) could signal that as an ICE candidate to the remote side.  It could get around this using a STUN server, but that's slower and more clunky.",
+      "createdAt": "2023-02-15T21:59:04Z",
+      "updatedAt": "2024-07-02T19:03:26Z",
+      "closedAt": "2024-07-02T19:03:26Z",
+      "comments": []
+    },
+    {
+      "number": 13,
+      "id": "I_kwDOHnqa9M5ekgWT",
+      "title": "Feature request: allow restricting accessible IPs",
+      "url": "https://github.com/ietf-wg-masque/draft-ietf-masque-connect-udp-listen/issues/13",
+      "state": "CLOSED",
+      "author": "DavidSchinazi",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "From Benjamin Schwartz on the [list](https://mailarchive.ietf.org/arch/msg/masque/66VOveKF0IRiGOmZPgxccJTftp0/) and also Peter Thatcher on the [list](https://mailarchive.ietf.org/arch/msg/masque/jK85NRLMUPyiwyGAl0l39cSmTmM/):\r\n\r\n> TURN has a concept of \"permissions\" (see RFC 5576 Sections 2.3 and 8) which is kind of like a whitelist of remote IPs that are allowed to send through the proxy to the local client.  This was designed to prevent a client from using a TURN server to acts as a server (the intention was to only use TURN as a mechanism for p2p connections).  If the intention of draft-schinazi-connect-udp-listen-01 is to allow for a local client to act as a server and allow arbitrary remote clients to connect to it, then you don't need such a mechanism.  But if that's not the intention, you'll need something like TURN permissions to prevent it.",
+      "createdAt": "2023-02-15T22:00:48Z",
+      "updatedAt": "2024-07-02T19:48:46Z",
+      "closedAt": "2024-07-02T19:48:46Z",
+      "comments": [
+        {
+          "author": "asingh-g",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I think it makes sense to allow all connections through by default, i.e. let it work as a server and expose the client to any targets when CONNECT-UDP is in listener mode. \r\n\r\nBesides, if people deem that permissions need to be built, it could be done through a separate extension.",
+          "createdAt": "2023-11-02T16:09:49Z",
+          "updatedAt": "2023-11-02T16:09:49Z"
+        },
+        {
+          "author": "marten-seemann",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "If you want to address this in this draft, you could add a \"whitelist\" and \"blacklist\" to the request. These fields would be mutually exclusive, and would contain a list of IP addresses (and ports, maybe?).\r\n\r\nThat said, I don't have use case for either of them, so I'd be fine with punting it to a future extension.",
+          "createdAt": "2023-11-02T16:17:09Z",
+          "updatedAt": "2023-11-02T16:17:09Z"
+        },
+        {
+          "author": "DavidSchinazi",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I agree, we don't have a use case for these permissions either. Since it would be straightforward to build this as a future extension, I'm inclined to not incorporate the feature.",
+          "createdAt": "2023-11-02T19:29:30Z",
+          "updatedAt": "2023-11-02T19:29:30Z"
+        },
+        {
+          "author": "asingh-g",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Tommy's idea of adding the option to block uncompressed connections may be sufficient to do this, see my latest update to the [PR](https://github.com/ietf-wg-masque/draft-ietf-masque-connect-udp-listen/pull/19)",
+          "createdAt": "2024-01-02T21:52:08Z",
+          "updatedAt": "2024-01-02T21:52:08Z"
+        }
+      ]
+    },
+    {
+      "number": 14,
+      "id": "I_kwDOHnqa9M5ekkyH",
+      "title": "Feature request: compress away IP and port from each HTTP Datagram",
+      "url": "https://github.com/ietf-wg-masque/draft-ietf-masque-connect-udp-listen/issues/14",
+      "state": "CLOSED",
+      "author": "DavidSchinazi",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [
+        "asingh-g"
+      ],
+      "labels": [],
+      "body": "From Ben Schwartz on the [list](https://mailarchive.ietf.org/arch/msg/masque/66VOveKF0IRiGOmZPgxccJTftp0/):\r\n\r\n> In IPv6, the proposed header adds 19 bytes of overhead per packet.  For Opus compressed audio, this represents >50% of the media bandwidth for low-bitrate VoIP (20ms frames, 12kbps) or interactive music (2.5ms frames, 112kbps).\r\n>\r\n> The natural benchmark for this draft is TURN.  To reduce per-packet overhead, TURN offers a form of \"header compression\" called Channels (https://datatracker.ietf.org/doc/html/rfc8656#section-3.5).  The equivalent thing for this draft would be to define a dynamic context allocation option.",
+      "createdAt": "2023-02-15T22:13:09Z",
+      "updatedAt": "2024-07-02T19:48:47Z",
+      "closedAt": "2024-07-02T19:48:47Z",
+      "comments": [
+        {
+          "author": "DavidSchinazi",
+          "authorAssociation": "COLLABORATOR",
+          "body": "This makes sense. I would imagine performing this by using a capsule to register a context ID that maps to a given (IP version, IP address, UDP port) tuple",
+          "createdAt": "2023-02-15T22:14:00Z",
+          "updatedAt": "2023-02-15T22:14:00Z"
+        }
+      ]
+    },
+    {
+      "number": 20,
+      "id": "I_kwDOHnqa9M51-6uB",
+      "title": "Should \"connect-udp-listen\" be registered as \"Connect-UDP-Listen\"?",
+      "url": "https://github.com/ietf-wg-masque/draft-ietf-masque-connect-udp-listen/issues/20",
+      "state": "CLOSED",
+      "author": "tfpauly",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [
+        "asingh-g"
+      ],
+      "labels": [],
+      "body": "Should \"connect-udp-listen\" be registered (and referred to in the text definition) as \"Connect-UDP-Listen\"? All of the registrations are in H1 capitalized style, so it feels like we should do that. Also useful to say if it is \"Connect-UDP-Listen\" or \"Connect-Udp-Listen\" canonically...",
+      "createdAt": "2023-11-06T15:25:35Z",
+      "updatedAt": "2024-02-29T21:00:07Z",
+      "closedAt": "2024-02-29T21:00:07Z",
+      "comments": [
+        {
+          "author": "asingh-g",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I don't have strong feelings either way, I would be willing to use H1 style. @DavidSchinazi thoughts?",
+          "createdAt": "2024-01-02T21:24:49Z",
+          "updatedAt": "2024-01-02T21:24:49Z"
+        },
+        {
+          "author": "DavidSchinazi",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I couldn't find any official rules in the [style guide](https://httpwg.org/admin/editors/style-guide) but looking through the [IANA registry](https://www.iana.org/assignments/http-fields/http-fields.xhtml) I agree with Tommy that most fields are camel cased, with acronyms upper-cased. So I think we want to change this to `Connect-UDP-Listen`.",
+          "createdAt": "2024-01-05T15:21:03Z",
+          "updatedAt": "2024-01-05T15:21:03Z"
+        }
+      ]
+    },
+    {
+      "number": 21,
+      "id": "I_kwDOHnqa9M51_Q2z",
+      "title": "Allow peeling off connected connect-udp?",
+      "url": "https://github.com/ietf-wg-masque/draft-ietf-masque-connect-udp-listen/issues/21",
+      "state": "CLOSED",
+      "author": "tfpauly",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "As an alternative to compressing different contexts, we could also allow a client to open up a more standard \"connect-udp\" connected UDP socket through the proxy that shares a port with the listening \"connect-udp\" instance. That would allow a flow like:\r\n\r\n1. Open listener connect-udp\r\n2. Receive inbound packets (with IPs and ports in datagrams)\r\n3. Open a more specific connect-udp for that IP and port, and continue without needing the datagrams to contain IP and port\r\n\r\nThis matches what technically is supported by sockets, where you can have an unconnected UDP socket in parallel with more specific connected UDP sockets.",
+      "createdAt": "2023-11-06T16:07:26Z",
+      "updatedAt": "2024-01-02T21:34:56Z",
+      "closedAt": "2024-01-02T21:34:56Z",
+      "comments": [
+        {
+          "author": "tfpauly",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "I guess a problem here would be if the multiple requests end up on different hosts",
+          "createdAt": "2023-11-06T16:09:43Z",
+          "updatedAt": "2023-11-06T16:09:43Z"
+        },
+        {
+          "author": "DavidSchinazi",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Yeah requests landing on different servers is a real problem. We could accomplish the same level of overhead without the separate request though, by using context IDs to compress the IP and port. Any reason that's not sufficient?",
+          "createdAt": "2023-11-06T16:13:49Z",
+          "updatedAt": "2023-11-06T16:13:49Z"
+        },
+        {
+          "author": "tfpauly",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "The only difference is that in the model of separate requests, you could close the listener and leave the more specific connection open. But that's probably not necessary to support, since you could also just drop packets you don't want to reply to.",
+          "createdAt": "2023-11-07T08:46:06Z",
+          "updatedAt": "2023-11-07T08:46:06Z"
+        },
+        {
+          "author": "asingh-g",
+          "authorAssociation": "COLLABORATOR",
+          "body": "If you want to close everything but the more specific connection, we can do what you proposed at last IETF about discarding uncompressed requests. I added it to the [PR for compression](https://github.com/ietf-wg-masque/draft-ietf-masque-connect-udp-listen/pull/19)",
+          "createdAt": "2024-01-02T21:34:56Z",
+          "updatedAt": "2024-01-02T21:34:56Z"
+        }
+      ]
+    },
+    {
+      "number": 25,
+      "id": "I_kwDOHnqa9M6O17Hm",
+      "title": "Appendix A mentions STUN server sending IP to other browser",
+      "url": "https://github.com/ietf-wg-masque/draft-ietf-masque-connect-udp-listen/issues/25",
+      "state": "OPEN",
+      "author": "recvfrom",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [
+        "editorial"
+      ],
+      "body": "The example in Appendix A mentions:\r\n> ... [the client] wishes to use WebRTC with another browser over a Bound UDP Proxying tunnel.  It contacts a STUN server at 192.0.2.42. The STUN server, in response, sends the proxy's IP address to the other browser at 203.0.113.33.  Using this information, the other browser sends a UDP packet to the proxy, which is proxied over HTTP back to the client.\r\n\r\nIIUC the STUN server doesn't send information between clients, though, and instead is only used by each side to determine their public IP address when building the list of ICE candidates (which the clients then send to each other through other means).",
+      "createdAt": "2024-07-08T20:23:15Z",
+      "updatedAt": "2024-07-10T19:56:32Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "DavidSchinazi",
+          "authorAssociation": "COLLABORATOR",
+          "body": "You're correct. OK we'll have to fix this. Marking as editorial.",
+          "createdAt": "2024-07-10T19:56:31Z",
+          "updatedAt": "2024-07-10T19:56:31Z"
+        }
+      ]
+    },
+    {
+      "number": 26,
+      "id": "I_kwDOHnqa9M6QNkiT",
+      "title": "Unclear validation requirement in Security Considerations",
+      "url": "https://github.com/ietf-wg-masque/draft-ietf-masque-connect-udp-listen/issues/26",
+      "state": "OPEN",
+      "author": "DavidSchinazi",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "From @gloinul on the [list](https://mailarchive.ietf.org/arch/msg/masque/vaL2o4FTvfzJMLYhBie1yIgNwbw/):\r\n\r\n> Therefore, proxies MUST validate the target on every datagram and MUST NOT forward individual datagrams with unauthorized targets.\r\n\r\nTo me it is unclear what this sentence actually require the proxy to do? If one uses the uncompressed operation, the proxy can forward any arriving traffic to the client, equally the client can send with a target address of any. Is the expectation here to verify that the client is not sending any packets to a destination target that is on a list to be protected? How is the proxy arriving at which addresses are not ok to send to?",
+      "createdAt": "2024-07-19T17:31:41Z",
+      "updatedAt": "2024-07-19T17:32:19Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "DavidSchinazi",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I agree. This text predates the ability to close the uncompressed context, we just forgot to update it. Will fix",
+          "createdAt": "2024-07-19T17:32:17Z",
+          "updatedAt": "2024-07-19T17:32:17Z"
+        }
+      ]
+    },
+    {
+      "number": 27,
+      "id": "I_kwDOHnqa9M6QNlNj",
+      "title": "Unclear discussion of context IDs",
+      "url": "https://github.com/ietf-wg-masque/draft-ietf-masque-connect-udp-listen/issues/27",
+      "state": "OPEN",
+      "author": "DavidSchinazi",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [
+        "editorial"
+      ],
+      "body": "From @gloinul on the [list](https://mailarchive.ietf.org/arch/msg/masque/vaL2o4FTvfzJMLYhBie1yIgNwbw/):\r\n\r\n> Both client and proxy can then negotiate even and odd numbered context IDs to send UDP payloads to each other.\r\n\r\nTo me it is unclear what this sentence actually require the proxy to do? If one uses the uncompressed operation, the proxy can forward any arriving traffic to the client, equally the client can send with a target address of any. Is the expectation here to verify that the client is not sending any packets to a destination target that is on a list to be protected? How is the proxy arriving at which addresses are not ok to send to?",
+      "createdAt": "2024-07-19T17:33:54Z",
+      "updatedAt": "2024-07-19T17:34:03Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "DavidSchinazi",
+          "authorAssociation": "COLLABORATOR",
+          "body": "The intent here was to remind the reader of how context IDs work per RFC 9298. We'll look into making some editorial improvements.",
+          "createdAt": "2024-07-19T17:34:02Z",
+          "updatedAt": "2024-07-19T17:34:02Z"
+        }
+      ]
     }
   ],
   "pulls": [
@@ -191,7 +480,7 @@
       "number": 6,
       "id": "PR_kwDOHnqa9M5AODtX",
       "title": "clarified connect-udp-listen and simplified some of the text",
-      "url": "https://github.com/DavidSchinazi/draft-schinazi-connect-udp-listen/pull/6",
+      "url": "https://github.com/ietf-wg-masque/draft-ietf-masque-connect-udp-listen/pull/6",
       "state": "MERGED",
       "author": "asingh-g",
       "authorAssociation": "COLLABORATOR",
@@ -200,10 +489,10 @@
       "body": "made some changes to simplify the doc, some of these are a little nit-picky. ",
       "createdAt": "2022-10-05T14:30:36Z",
       "updatedAt": "2022-10-12T14:14:49Z",
-      "baseRepository": "DavidSchinazi/draft-schinazi-connect-udp-listen",
+      "baseRepository": "ietf-wg-masque/draft-ietf-masque-connect-udp-listen",
       "baseRefName": "main",
       "baseRefOid": "06eae6840bc46c2d4a7946285fab40771eb9f281",
-      "headRepository": "DavidSchinazi/draft-schinazi-connect-udp-listen",
+      "headRepository": "ietf-wg-masque/draft-ietf-masque-connect-udp-listen",
       "headRefName": "explain-connect-udp-listen-use-in-definition",
       "headRefOid": "9c05dba2d6537c8eb7ad2adb8dd61ec8f92df587",
       "closedAt": "2022-10-12T14:14:36Z",
@@ -220,7 +509,7 @@
             "abbreviatedOid": "63318fb"
           },
           "author": "DavidSchinazi",
-          "authorAssociation": "OWNER",
+          "authorAssociation": "COLLABORATOR",
           "state": "COMMENTED",
           "body": "Looks great! A few minor comments",
           "createdAt": "2022-10-05T18:35:05Z",
@@ -304,19 +593,19 @@
       "number": 7,
       "id": "PR_kwDOHnqa9M5Aql8z",
       "title": "Moar tunnels",
-      "url": "https://github.com/DavidSchinazi/draft-schinazi-connect-udp-listen/pull/7",
+      "url": "https://github.com/ietf-wg-masque/draft-ietf-masque-connect-udp-listen/pull/7",
       "state": "MERGED",
       "author": "DavidSchinazi",
-      "authorAssociation": "OWNER",
+      "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Fixes #3 ",
       "createdAt": "2022-10-12T15:58:08Z",
       "updatedAt": "2022-10-12T15:59:28Z",
-      "baseRepository": "DavidSchinazi/draft-schinazi-connect-udp-listen",
+      "baseRepository": "ietf-wg-masque/draft-ietf-masque-connect-udp-listen",
       "baseRefName": "main",
       "baseRefOid": "1c7f6136678a36de07de173029454268bcbbf462",
-      "headRepository": "DavidSchinazi/draft-schinazi-connect-udp-listen",
+      "headRepository": "ietf-wg-masque/draft-ietf-masque-connect-udp-listen",
       "headRefName": "tunnelling",
       "headRefOid": "717a4590668623643bfe6311991fb59f1a5f32c7",
       "closedAt": "2022-10-12T15:59:25Z",
@@ -332,19 +621,19 @@
       "number": 8,
       "id": "PR_kwDOHnqa9M5Aqo4Y",
       "title": "Mention that target validation is per datagram",
-      "url": "https://github.com/DavidSchinazi/draft-schinazi-connect-udp-listen/pull/8",
+      "url": "https://github.com/ietf-wg-masque/draft-ietf-masque-connect-udp-listen/pull/8",
       "state": "MERGED",
       "author": "DavidSchinazi",
-      "authorAssociation": "OWNER",
+      "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Fixes #4 ",
       "createdAt": "2022-10-12T16:08:02Z",
       "updatedAt": "2022-10-12T16:15:18Z",
-      "baseRepository": "DavidSchinazi/draft-schinazi-connect-udp-listen",
+      "baseRepository": "ietf-wg-masque/draft-ietf-masque-connect-udp-listen",
       "baseRefName": "main",
       "baseRefOid": "190866e4f20a7bf89adc6e4066738185118b97cb",
-      "headRepository": "DavidSchinazi/draft-schinazi-connect-udp-listen",
+      "headRepository": "ietf-wg-masque/draft-ietf-masque-connect-udp-listen",
       "headRefName": "moar_security",
       "headRefOid": "ca8adb0847eb8081f1e073ea4613586ab96549da",
       "closedAt": "2022-10-12T16:15:15Z",
@@ -360,19 +649,19 @@
       "number": 9,
       "id": "PR_kwDOHnqa9M5AqscC",
       "title": "Mention TURN security",
-      "url": "https://github.com/DavidSchinazi/draft-schinazi-connect-udp-listen/pull/9",
+      "url": "https://github.com/ietf-wg-masque/draft-ietf-masque-connect-udp-listen/pull/9",
       "state": "MERGED",
       "author": "DavidSchinazi",
-      "authorAssociation": "OWNER",
+      "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Fixes #2",
       "createdAt": "2022-10-12T16:20:38Z",
       "updatedAt": "2022-10-12T16:21:25Z",
-      "baseRepository": "DavidSchinazi/draft-schinazi-connect-udp-listen",
+      "baseRepository": "ietf-wg-masque/draft-ietf-masque-connect-udp-listen",
       "baseRefName": "main",
       "baseRefOid": "e56c4dd157cc1b0c189001786ccfde01a65001f2",
-      "headRepository": "DavidSchinazi/draft-schinazi-connect-udp-listen",
+      "headRepository": "ietf-wg-masque/draft-ietf-masque-connect-udp-listen",
       "headRefName": "turnsec",
       "headRefOid": "5759c371a3af83a34d7c13bd9fd65211fb9341a5",
       "closedAt": "2022-10-12T16:21:22Z",
@@ -383,6 +672,2456 @@
       },
       "comments": [],
       "reviews": []
+    },
+    {
+      "number": 15,
+      "id": "PR_kwDOHnqa9M5KwmmJ",
+      "title": "define basic listener proxy behavior",
+      "url": "https://github.com/ietf-wg-masque/draft-ietf-masque-connect-udp-listen/pull/15",
+      "state": "MERGED",
+      "author": "asingh-g",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Added basic proxy behavior as discussed in https://github.com/DavidSchinazi/draft-schinazi-connect-udp-listen/issues/10\r\n\r\nCloses #10 ",
+      "createdAt": "2023-02-25T16:47:47Z",
+      "updatedAt": "2023-02-27T20:28:43Z",
+      "baseRepository": "ietf-wg-masque/draft-ietf-masque-connect-udp-listen",
+      "baseRefName": "main",
+      "baseRefOid": "2480a6abe82dd16daebd5ed5a7d75f1fb7f59a4a",
+      "headRepository": "ietf-wg-masque/draft-ietf-masque-connect-udp-listen",
+      "headRefName": "describe-proxy-behavior",
+      "headRefOid": "badfa7a92fd541aeffc255ecd767c08ba84b6b45",
+      "closedAt": "2023-02-27T20:28:40Z",
+      "mergedAt": "2023-02-27T20:28:40Z",
+      "mergedBy": "DavidSchinazi",
+      "mergeCommit": {
+        "oid": "cd9aa4131ba2f05922c13e816c56bc482ba6fed2"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOHnqa9M5Odl48",
+          "commit": {
+            "abbreviatedOid": "108ce84"
+          },
+          "author": "DavidSchinazi",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-02-27T20:27:38Z",
+          "updatedAt": "2023-02-27T20:27:38Z",
+          "comments": [
+            {
+              "originalPosition": 6,
+              "body": "Fixing line length\r\n```suggestion\r\nAfter accepting the Connect-UDP Listener proxying request, the proxy uses a UDP\r\nport to transmit UDP payloads received from the client to the target IP Address\r\nand UDP Port specified in each Listener Datagram Payload received from the\r\nclient. The proxy uses the same port to listen for UDP packets from any\r\nauthorized target and encapsulates the packets in the Listener Datagram\r\nPayload format, specifying the IP and port of the target and forwards it to\r\nthe client.\r\n```",
+              "createdAt": "2023-02-27T20:27:38Z",
+              "updatedAt": "2023-02-27T20:27:38Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHnqa9M5OdmJK",
+          "commit": {
+            "abbreviatedOid": "badfa7a"
+          },
+          "author": "DavidSchinazi",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2023-02-27T20:28:07Z",
+          "updatedAt": "2023-02-27T20:28:07Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 16,
+      "id": "PR_kwDOHnqa9M5eX-4u",
+      "title": "Add security considerations for targets connecting to listener",
+      "url": "https://github.com/ietf-wg-masque/draft-ietf-masque-connect-udp-listen/pull/16",
+      "state": "CLOSED",
+      "author": "asingh-g",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Add a recommended security consideration for targets trying to connect to a listening client. Leave it up to the implementers if they want the proxy to act as a server",
+      "createdAt": "2023-11-01T21:24:26Z",
+      "updatedAt": "2023-11-01T21:36:41Z",
+      "baseRepository": "ietf-wg-masque/draft-ietf-masque-connect-udp-listen",
+      "baseRefName": "main",
+      "baseRefOid": "c75e0b1472c7c7a9d7c40a7c1cbaf25f30654cbc",
+      "headRepository": "ietf-wg-masque/draft-ietf-masque-connect-udp-listen",
+      "headRefName": "14-feature-request-compress-away-ip-and-port-from-each-http-datagram",
+      "headRefOid": "925a246c8de71c47439850ce2dc401ee74a1b1c2",
+      "closedAt": "2023-11-01T21:36:40Z",
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 17,
+      "id": "PR_kwDOHnqa9M5eYCRc",
+      "title": "Add security considerations for targets connecting to listener",
+      "url": "https://github.com/ietf-wg-masque/draft-ietf-masque-connect-udp-listen/pull/17",
+      "state": "MERGED",
+      "author": "asingh-g",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "~Leave it up to the implementation to determine if they should restrict connecting IPs or allow the proxy to act as a server~\r\n\r\nEDIT: As discussed below, allow all targets to be forwarded, add security consideration about this",
+      "createdAt": "2023-11-01T21:37:51Z",
+      "updatedAt": "2024-01-05T15:34:13Z",
+      "baseRepository": "ietf-wg-masque/draft-ietf-masque-connect-udp-listen",
+      "baseRefName": "main",
+      "baseRefOid": "c75e0b1472c7c7a9d7c40a7c1cbaf25f30654cbc",
+      "headRepository": "ietf-wg-masque/draft-ietf-masque-connect-udp-listen",
+      "headRefName": "security-considerations-unauth-targets",
+      "headRefOid": "c8125e726bbf4010eb1ee89e5e7725f0a138c0a5",
+      "closedAt": "2024-01-05T10:41:10Z",
+      "mergedAt": "2024-01-05T10:41:10Z",
+      "mergedBy": "DavidSchinazi",
+      "mergeCommit": {
+        "oid": "39ff5250f9db4dcea46a3e60d4f0793fb3bf122b"
+      },
+      "comments": [
+        {
+          "author": "asingh-g",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> I don't believe this resolves #13. That issue is asking for introducing a way for clients to request proxies to only allow incoming packets from certain targets.\r\n\r\n\r\nThe client could simply try to reach those targets via the proxy, effectively creating the permission for them. I believe that this is similar to how network firewalls function and how WebRTC gets around these issues.",
+          "createdAt": "2023-11-01T22:46:48Z",
+          "updatedAt": "2023-11-01T22:48:02Z"
+        },
+        {
+          "author": "asingh-g",
+          "authorAssociation": "COLLABORATOR",
+          "body": "And to add to my previous comment, the cost here is one UDP packet being sent out per target it wants to receive from. Which doesn't seem significant, unless we want the client to be able to open permissions for entire subnets. At that point, it acts as a server.\r\nThoughts @DavidSchinazi ?",
+          "createdAt": "2023-11-01T22:54:03Z",
+          "updatedAt": "2023-11-01T22:54:03Z"
+        },
+        {
+          "author": "marten-seemann",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "> > I don't believe this resolves #13. That issue is asking for introducing a way for clients to request proxies to only allow incoming packets from certain targets.\r\n> \r\n> The client could simply try to reach those targets via the proxy, effectively creating the permission for them. I believe that this is similar to how network firewalls function and how WebRTC gets around these issues.\r\n\r\nThis would be very unfortunate, and jeopardize entire use cases for this draft. At the very least there should be explicit config option that needs to be set by the client. Having to enable each incoming address separately would defeat the purpose of creating a publicly reachable listener, and make it impossible to use it for the initial proxied QUIC connections in the [QUIC NAT Traversal draft](https://datatracker.ietf.org/doc/draft-seemann-quic-nat-traversal/).",
+          "createdAt": "2023-11-01T23:48:38Z",
+          "updatedAt": "2023-11-01T23:48:38Z"
+        },
+        {
+          "author": "asingh-g",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Taking @DavidSchinazi 's suggestion, I've changed the security consideration. We leave it default open to forwarding all traffic from any targets to the client. Let me know what you think of this proposal @marten-seemann.",
+          "createdAt": "2023-11-02T08:02:55Z",
+          "updatedAt": "2023-11-02T08:02:55Z"
+        },
+        {
+          "author": "marten-seemann",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "I still don't think that this PR addresses #13 though. This issue should not be closed when this PR is merged.",
+          "createdAt": "2023-11-02T15:23:44Z",
+          "updatedAt": "2023-11-02T15:23:44Z"
+        },
+        {
+          "author": "asingh-g",
+          "authorAssociation": "COLLABORATOR",
+          "body": "From the linked PR:\r\n>If the intention of draft-schinazi-connect-udp-listen-01 is to allow for a local client to act as a server and allow arbitrary remote clients to connect to it, then you don't need such a mechanism. But if that's not the intention, you'll need something like TURN permissions to prevent it.\r\n\r\nI think the general idea here is that we want to do the former i.e. allow the client to act as a server, effectively exposing its port to the internet and letting it deal with the traffic that lands on its side, via the proxy. \r\nI don't intend to close this or the other PRs until I present them at the Masque WG and get a general sense on whether the WG is okay with not building permissions and just letting the protocol exist as is.",
+          "createdAt": "2023-11-02T15:38:27Z",
+          "updatedAt": "2023-11-02T15:38:27Z"
+        },
+        {
+          "author": "marten-seemann",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "I'm not disagreeing here. All I'm saying is that this PR does *not* resolve #13 (as it currently claims it does). It might or might not be fine to not resolve #13, but why not discuss that on the issue?",
+          "createdAt": "2023-11-02T16:01:50Z",
+          "updatedAt": "2023-11-02T16:01:50Z"
+        },
+        {
+          "author": "asingh-g",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Okay that's valid, I'll add the some comments there",
+          "createdAt": "2023-11-02T16:05:28Z",
+          "updatedAt": "2023-11-02T16:05:28Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOHnqa9M5l30vp",
+          "commit": {
+            "abbreviatedOid": "925a246"
+          },
+          "author": "marten-seemann",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "CHANGES_REQUESTED",
+          "body": "I don't believe this resolves #13. That issue is asking for introducing a way for clients to request proxies to only allow incoming packets from certain targets.",
+          "createdAt": "2023-11-01T21:44:53Z",
+          "updatedAt": "2023-11-01T21:45:02Z",
+          "comments": [
+            {
+              "originalPosition": 6,
+              "body": "It is not clear to me how the proxy would know which IPs are safe and which ones aren't.",
+              "createdAt": "2023-11-01T21:44:53Z",
+              "updatedAt": "2023-11-01T21:45:02Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHnqa9M5l4CN2",
+          "commit": {
+            "abbreviatedOid": "925a246"
+          },
+          "author": "asingh-g",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-11-01T22:43:16Z",
+          "updatedAt": "2023-11-01T22:43:16Z",
+          "comments": [
+            {
+              "originalPosition": 6,
+              "body": "Determining what qualifies as a safe or accepted target is an exercise that should be left to the proxy implementation in my opinion. This applies both ways, the proxy may only want to provide its proxying capability to certain targets, and likewise only let certain targets talk to the client, or they allow all traffic either way, knowing the risks involved, up to them to monitor or limit the traffic. ",
+              "createdAt": "2023-11-01T22:43:16Z",
+              "updatedAt": "2023-11-01T22:43:16Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHnqa9M5l4L5Y",
+          "commit": {
+            "abbreviatedOid": "925a246"
+          },
+          "author": "DavidSchinazi",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-11-01T23:39:21Z",
+          "updatedAt": "2023-11-01T23:39:21Z",
+          "comments": [
+            {
+              "originalPosition": 6,
+              "body": "Unfortunately, leaving this as exercise to the proxy leads to interoperability issues. In this case, one proxy might decide to restrict to addresses that the client has sent to, whereas another might restrict to address and ports. Now clients don't know which is which and have to guess. It's almost always better to be explicit when it comes to load-bearing behavior like this.\r\n\r\nI would instead mention in security considerations that, unlike in regular CONNECT-UDP, the clients can now receive unwanted traffic from other hosts, and should be ready to handle it.",
+              "createdAt": "2023-11-01T23:39:21Z",
+              "updatedAt": "2023-11-01T23:39:21Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHnqa9M5l9X1F",
+          "commit": {
+            "abbreviatedOid": "9a4f2e0"
+          },
+          "author": "marten-seemann",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2023-11-02T15:22:27Z",
+          "updatedAt": "2023-11-02T15:23:04Z",
+          "comments": [
+            {
+              "originalPosition": 4,
+              "body": "```suggestion\r\nUnlike non-binding CONNECT-UDP, since the proxy tunnels datagrams from any\r\n```",
+              "createdAt": "2023-11-02T15:22:28Z",
+              "updatedAt": "2023-11-02T15:23:04Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHnqa9M5l_ZeA",
+          "commit": {
+            "abbreviatedOid": "9a4f2e0"
+          },
+          "author": "DavidSchinazi",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2023-11-02T19:48:31Z",
+          "updatedAt": "2023-11-02T19:48:39Z",
+          "comments": [
+            {
+              "originalPosition": 6,
+              "body": "Given the security implications, this needs to be mandatory\r\n```suggestion\r\nMUST be ready to handle potential unwanted traffic from unknown destinations.\r\n```",
+              "createdAt": "2023-11-02T19:48:31Z",
+              "updatedAt": "2023-11-02T19:48:39Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 18,
+      "id": "PR_kwDOHnqa9M5eaDNB",
+      "title": "Add IP and port allocated to the client in the response header of the CONNECT UDP listen request (Closes #12)",
+      "url": "https://github.com/ietf-wg-masque/draft-ietf-masque-connect-udp-listen/pull/18",
+      "state": "MERGED",
+      "author": "asingh-g",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Closes #12",
+      "createdAt": "2023-11-02T08:37:04Z",
+      "updatedAt": "2024-07-02T19:03:25Z",
+      "baseRepository": "ietf-wg-masque/draft-ietf-masque-connect-udp-listen",
+      "baseRefName": "main",
+      "baseRefOid": "c986a14f338a7b28daf18d55d718e8ac20be9471",
+      "headRepository": "ietf-wg-masque/draft-ietf-masque-connect-udp-listen",
+      "headRefName": "12-feature-request-allow-proxy-to-send-public-ip-and-port-to-client",
+      "headRefOid": "e0955899f8a3da286037db2588217917eb04c4cb",
+      "closedAt": "2024-07-02T19:03:24Z",
+      "mergedAt": "2024-07-02T19:03:24Z",
+      "mergedBy": "asingh-g",
+      "mergeCommit": {
+        "oid": "59dac79d354bf1a25373e2ade689d4142729e1f8"
+      },
+      "comments": [
+        {
+          "author": "LPardue",
+          "authorAssociation": "NONE",
+          "body": "If this is a standalone header field, I don't see a good reason for it not to use structured field values",
+          "createdAt": "2024-03-19T06:22:31Z",
+          "updatedAt": "2024-03-19T06:22:31Z"
+        },
+        {
+          "author": "LPardue",
+          "authorAssociation": "NONE",
+          "body": "If I sent an IPv4-mapped IPv6 address*, which limit would it count against?\r\n\r\n* https://datatracker.ietf.org/doc/html/rfc4291#section-2.5.5.2",
+          "createdAt": "2024-03-19T15:51:45Z",
+          "updatedAt": "2024-03-19T15:52:05Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOHnqa9M5l_XnL",
+          "commit": {
+            "abbreviatedOid": "a0bda38"
+          },
+          "author": "DavidSchinazi",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-11-02T19:42:42Z",
+          "updatedAt": "2023-11-02T19:47:20Z",
+          "comments": [
+            {
+              "originalPosition": 16,
+              "body": "missing empty newline after title",
+              "createdAt": "2023-11-02T19:43:04Z",
+              "updatedAt": "2023-11-02T19:47:20Z"
+            },
+            {
+              "originalPosition": 18,
+              "body": "Do we want to make this mandatory? I was imagining this being optional",
+              "createdAt": "2023-11-02T19:43:38Z",
+              "updatedAt": "2023-11-02T19:47:20Z"
+            },
+            {
+              "originalPosition": 19,
+              "body": "We should support sending multiple addresses, as it's common for a proxy to have multiple addresses",
+              "createdAt": "2023-11-02T19:44:12Z",
+              "updatedAt": "2023-11-02T19:47:20Z"
+            },
+            {
+              "originalPosition": 19,
+              "body": "We'll want to define the syntax more formally. You can use [9484](https://www.rfc-editor.org/rfc/rfc9484#name-uri-template-variable-forma) as an example",
+              "createdAt": "2023-11-02T19:45:17Z",
+              "updatedAt": "2023-11-02T19:47:20Z"
+            },
+            {
+              "originalPosition": 20,
+              "body": "Another thought is about address changes mid-stream. We could support those by using a capsule instead of a header, but that might be overkill. Maybe we should acknowledge the limitation though",
+              "createdAt": "2023-11-02T19:47:16Z",
+              "updatedAt": "2023-11-02T19:47:20Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHnqa9M5l_cgI",
+          "commit": {
+            "abbreviatedOid": "a0bda38"
+          },
+          "author": "marten-seemann",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-11-02T19:57:34Z",
+          "updatedAt": "2023-11-02T19:57:34Z",
+          "comments": [
+            {
+              "originalPosition": 18,
+              "body": "In what situation do you imagine a proxy would not want to send this? I'd assume that nobody really cares about these ~20 bytes more.",
+              "createdAt": "2023-11-02T19:57:34Z",
+              "updatedAt": "2023-11-02T19:57:34Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHnqa9M5o8q0C",
+          "commit": {
+            "abbreviatedOid": "a0bda38"
+          },
+          "author": "tfpauly",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-12-02T00:36:33Z",
+          "updatedAt": "2023-12-02T00:36:33Z",
+          "comments": [
+            {
+              "originalPosition": 20,
+              "body": "An address change would break connectivity, right? If I've told other devices my \"public\" IP through the proxy and that changes, I need to start over. That should be a different request.",
+              "createdAt": "2023-12-02T00:36:33Z",
+              "updatedAt": "2023-12-02T00:36:33Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHnqa9M5pF_T4",
+          "commit": {
+            "abbreviatedOid": "a0bda38"
+          },
+          "author": "DavidSchinazi",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-12-04T19:01:13Z",
+          "updatedAt": "2023-12-04T19:01:13Z",
+          "comments": [
+            {
+              "originalPosition": 20,
+              "body": "Not necessarily. If a new address is added, then the layer above UDP could conceivably communicate that, and then migrate traffic over to using it.\r\n\r\nBut this is probably too niche and not worth the complexity.",
+              "createdAt": "2023-12-04T19:01:13Z",
+              "updatedAt": "2023-12-04T19:01:13Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHnqa9M5xymAp",
+          "commit": {
+            "abbreviatedOid": "a0bda38"
+          },
+          "author": "asingh-g",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-02-29T14:49:14Z",
+          "updatedAt": "2024-02-29T14:49:15Z",
+          "comments": [
+            {
+              "originalPosition": 19,
+              "body": "Done, lmk what you think of the new definition",
+              "createdAt": "2024-02-29T14:49:14Z",
+              "updatedAt": "2024-02-29T14:49:15Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHnqa9M5x0G4M",
+          "commit": {
+            "abbreviatedOid": "7079cef"
+          },
+          "author": "DavidSchinazi",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-02-29T17:33:44Z",
+          "updatedAt": "2024-02-29T17:58:20Z",
+          "comments": [
+            {
+              "originalPosition": 23,
+              "body": "This encoding allows sending two addresses of the same address family, which doesn't really make sense. That might be a pain to encode in the ABNF format but we can fix that with a MUST",
+              "createdAt": "2024-02-29T17:36:52Z",
+              "updatedAt": "2024-02-29T17:58:20Z"
+            },
+            {
+              "originalPosition": 24,
+              "body": "This encoding is tricky because IPv6 addresses have colons in them. I would suggest doing something closer to RFC3986 host. Also, the ABNF format from that RFC requires double quotes to encode strings like colons.\r\n\r\n```suggestion\r\nIP-port-pairing = ( IPv4address / \"[\" IPv6address \"]\" ) \":\" port\r\n```",
+              "createdAt": "2024-02-29T17:42:33Z",
+              "updatedAt": "2024-02-29T17:58:20Z"
+            },
+            {
+              "originalPosition": 20,
+              "body": "Can we also add a sentence here to mention the fact that addresses cannot be updated mid-stream? Perhaps \"Note that since the addresses are conveyed in HTTP response headers, a subsequent change of addresses on the proxy cannot be conveyed to the client.\"",
+              "createdAt": "2024-02-29T17:44:04Z",
+              "updatedAt": "2024-02-29T17:58:20Z"
+            },
+            {
+              "originalPosition": 36,
+              "body": "IPv4 examples need to use the prefixes reserved for documentation by RFC 5737. I'd also add IPv6. The documentation prefix for v6 is 2001:db8::/32. I'd also use an ephemeral port. All together:\r\n\r\n```suggestion\r\n                         proxy-public-address = 192.0.2.45:54321,[2001:db8::1234]:54321\r\n```",
+              "createdAt": "2024-02-29T17:49:00Z",
+              "updatedAt": "2024-02-29T17:58:20Z"
+            },
+            {
+              "originalPosition": 19,
+              "body": "Follow max line length. You should get a warning when building for these lines",
+              "createdAt": "2024-02-29T17:49:44Z",
+              "updatedAt": "2024-02-29T17:58:20Z"
+            },
+            {
+              "originalPosition": 18,
+              "body": "nit: the prose should discuss concepts (like \"IPv4 address\") as opposed to the ABNF encoding (like \"IPv4address\").\r\n\r\n```suggestion\r\nUpon accepting the request, the proxy MUST select at least one public IP address to bind. For each selected address, it MUST select an open port to bind to this request. From then and until the tunnel is closed, the proxy SHALL send packets received on these IP-port tuples to the client. The proxy then MUST communicate the selected addresses and ports to the client using the \"Proxy-Public-Address\" header. The format of that header is defined below using IPv4address, IPv6address and port from {{Section 3.2 of !URI=RFC3986}}.\r\n```",
+              "createdAt": "2024-02-29T17:55:14Z",
+              "updatedAt": "2024-02-29T17:58:20Z"
+            },
+            {
+              "originalPosition": 20,
+              "body": "avoid lowercase must",
+              "createdAt": "2024-02-29T17:55:22Z",
+              "updatedAt": "2024-02-29T17:58:20Z"
+            },
+            {
+              "originalPosition": 20,
+              "body": "use camelcase when discussing headers in prose, similar to Connect-UDP-Listen",
+              "createdAt": "2024-02-29T17:55:36Z",
+              "updatedAt": "2024-02-29T17:58:20Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHnqa9M5x1k8Q",
+          "commit": {
+            "abbreviatedOid": "50ac4da"
+          },
+          "author": "DavidSchinazi",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-02-29T21:04:00Z",
+          "updatedAt": "2024-02-29T21:04:00Z",
+          "comments": [
+            {
+              "originalPosition": 36,
+              "body": "\r\n```suggestion\r\nIf the proxy sends two IP-port pairings, they MUST be of different\r\naddress families. If the client receives a Proxy-Public-Address field\r\nwith two IP-port pairings of the same address family, it MUST treat\r\nthe response as malformed. Similarly, if the field is missing or\r\ncontains a number of pairings different from one or two, it MUST\r\ntreat the response as malformed.\r\n```",
+              "createdAt": "2024-02-29T21:04:00Z",
+              "updatedAt": "2024-02-29T21:04:01Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHnqa9M5x1wf4",
+          "commit": {
+            "abbreviatedOid": "1b6c39d"
+          },
+          "author": "DavidSchinazi",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-02-29T21:36:49Z",
+          "updatedAt": "2024-02-29T21:37:48Z",
+          "comments": [
+            {
+              "originalPosition": 19,
+              "body": "```suggestion\r\naddress to bind. The proxy MAY also select a second address from a different address\r\nfamily. For each selected address, it MUST select an open port to\r\n```",
+              "createdAt": "2024-02-29T21:36:49Z",
+              "updatedAt": "2024-02-29T21:37:48Z"
+            },
+            {
+              "originalPosition": 51,
+              "body": "```suggestion\r\n                         proxy-public-address = 192.0.2.45:54321,  \\\r\n```",
+              "createdAt": "2024-02-29T21:37:45Z",
+              "updatedAt": "2024-02-29T21:37:48Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHnqa9M5x1xXM",
+          "commit": {
+            "abbreviatedOid": "c0738a2"
+          },
+          "author": "DavidSchinazi",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-02-29T21:39:30Z",
+          "updatedAt": "2024-02-29T21:39:30Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOHnqa9M5z8ptg",
+          "commit": {
+            "abbreviatedOid": "c0738a2"
+          },
+          "author": "tfpauly",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "CHANGES_REQUESTED",
+          "body": "",
+          "createdAt": "2024-03-19T06:16:49Z",
+          "updatedAt": "2024-03-19T06:16:52Z",
+          "comments": [
+            {
+              "originalPosition": 24,
+              "body": "Rather than using a new header, can we add a parameter to the existing proxy-status header?",
+              "createdAt": "2024-03-19T06:16:49Z",
+              "updatedAt": "2024-03-19T06:16:52Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHnqa9M5z8tsx",
+          "commit": {
+            "abbreviatedOid": "c0738a2"
+          },
+          "author": "kazuho",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-03-19T06:22:34Z",
+          "updatedAt": "2024-03-19T06:22:34Z",
+          "comments": [
+            {
+              "originalPosition": 24,
+              "body": "Do we have a precedence of a Proxy-Status parameter being a MUST send? I could be incorrect, but I had the impression that Proxy-Status provided visibility rather than required behavior.\r\n\r\nNot that I have a strong opinion, but to me use of a different field sounds more natural considering that the address MUST be included in the response.",
+              "createdAt": "2024-03-19T06:22:34Z",
+              "updatedAt": "2024-03-19T06:22:34Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHnqa9M5z8ttF",
+          "commit": {
+            "abbreviatedOid": "c0738a2"
+          },
+          "author": "bemasc",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-03-19T06:22:35Z",
+          "updatedAt": "2024-03-19T06:22:36Z",
+          "comments": [
+            {
+              "originalPosition": 37,
+              "body": "I think it's probably a mistake to limit this to one IP of each family.  There's nothing wrong with a proxy having multiple IPs of the same family on different network interfaces, in which case it would be optimal to allocate ports on all of them and allow ICE to find the best one.",
+              "createdAt": "2024-03-19T06:22:35Z",
+              "updatedAt": "2024-03-19T06:22:36Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHnqa9M5z8tyJ",
+          "commit": {
+            "abbreviatedOid": "c0738a2"
+          },
+          "author": "achernya",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-03-19T06:22:53Z",
+          "updatedAt": "2024-03-19T06:22:53Z",
+          "comments": [
+            {
+              "originalPosition": 24,
+              "body": "I'd be curious to hear what the benefit would be? If I understood your comment in the session correctly it sounds like you were suggesting it would be less confusing? But I am having a hard time differentiating it from \"same outcome, different spelling\"?",
+              "createdAt": "2024-03-19T06:22:53Z",
+              "updatedAt": "2024-03-19T06:22:53Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHnqa9M5z8x4d",
+          "commit": {
+            "abbreviatedOid": "c0738a2"
+          },
+          "author": "LPardue",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-03-19T06:35:53Z",
+          "updatedAt": "2024-03-19T06:35:54Z",
+          "comments": [
+            {
+              "originalPosition": 37,
+              "body": "No strong opinion on doing this, but relaxing the limits feels like it would make parsing the field a whole lot easier.",
+              "createdAt": "2024-03-19T06:35:54Z",
+              "updatedAt": "2024-03-19T06:35:54Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHnqa9M50FQzp",
+          "commit": {
+            "abbreviatedOid": "c0738a2"
+          },
+          "author": "tfpauly",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-03-19T22:39:34Z",
+          "updatedAt": "2024-03-19T22:39:34Z",
+          "comments": [
+            {
+              "originalPosition": 24,
+              "body": "At the session, there was confusion about this new proposed header being about \"here are all of the proxy's public addresses\", which it is not (it is \"here are the addresses I'm using for this one request\").\r\n\r\nProxy-Status is an established header that already tells the client about what the proxy did related to this one request, and already gives you remote IP addresses and other information. So adding this to there makes sense.\r\n\r\nRegarding if it needs to be sent... I think it's OK for this document to say \"if udp-bind clients need to get the local address, then this header needs to be sent\"",
+              "createdAt": "2024-03-19T22:39:34Z",
+              "updatedAt": "2024-03-19T22:39:34Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHnqa9M50FhCt",
+          "commit": {
+            "abbreviatedOid": "c0738a2"
+          },
+          "author": "asingh-g",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-03-19T23:35:52Z",
+          "updatedAt": "2024-03-19T23:35:52Z",
+          "comments": [
+            {
+              "originalPosition": 24,
+              "body": "How do you determine if the bind clients need the address? That would have to be a flag in the initial client request",
+              "createdAt": "2024-03-19T23:35:52Z",
+              "updatedAt": "2024-03-19T23:35:52Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHnqa9M50GKTY",
+          "commit": {
+            "abbreviatedOid": "c0738a2"
+          },
+          "author": "tfpauly",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-03-20T00:50:16Z",
+          "updatedAt": "2024-03-20T00:50:16Z",
+          "comments": [
+            {
+              "originalPosition": 24,
+              "body": "No, I mean that the spec just says \"clients need this, so you have to send it to them\"",
+              "createdAt": "2024-03-20T00:50:16Z",
+              "updatedAt": "2024-03-20T00:50:16Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHnqa9M5_oDAz",
+          "commit": {
+            "abbreviatedOid": "c0e9acc"
+          },
+          "author": "DavidSchinazi",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-06-26T09:09:30Z",
+          "updatedAt": "2024-06-26T10:31:48Z",
+          "comments": [
+            {
+              "originalPosition": 23,
+              "body": "I would remove the word \"then\" here because it makes it sound like this happens after the previous sentence\r\n\r\n```suggestion\r\nMUST communicate the selected addresses and ports to the client using\r\n```",
+              "createdAt": "2024-06-26T09:09:30Z",
+              "updatedAt": "2024-06-26T10:31:48Z"
+            },
+            {
+              "originalPosition": 27,
+              "body": "This paragraph seems duplicative of the one above",
+              "createdAt": "2024-06-26T09:20:55Z",
+              "updatedAt": "2024-06-26T10:31:48Z"
+            },
+            {
+              "originalPosition": 30,
+              "body": "```suggestion\r\nand port each. IP-literal, IPv4address and port are defined in\r\n```",
+              "createdAt": "2024-06-26T09:25:15Z",
+              "updatedAt": "2024-06-26T10:31:48Z"
+            },
+            {
+              "originalPosition": 35,
+              "body": "\"List of\" is not ABNF syntax as defined in RFC 5234.\r\n\r\n```suggestion\r\nproxy-public-address = ip-port-tuple *( \",\" ip-port-tuple )\r\nip-port-tuple = ( IP-literal / IPv4address ) \":\" port\r\n```",
+              "createdAt": "2024-06-26T09:26:17Z",
+              "updatedAt": "2024-06-26T10:31:48Z"
+            },
+            {
+              "originalPosition": 37,
+              "body": "Thinking through this some more, maybe it's best to not restrict to two? I don't remember what the motivation was for the restriction",
+              "createdAt": "2024-06-26T10:28:53Z",
+              "updatedAt": "2024-06-26T10:31:48Z"
+            },
+            {
+              "originalPosition": 37,
+              "body": "Speaking of which we should reference ABNF=RFC5234",
+              "createdAt": "2024-06-26T10:31:29Z",
+              "updatedAt": "2024-06-26T10:31:48Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHnqa9M5_tkAf",
+          "commit": {
+            "abbreviatedOid": "c0e9acc"
+          },
+          "author": "asingh-g",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-06-26T18:18:37Z",
+          "updatedAt": "2024-06-26T18:18:37Z",
+          "comments": [
+            {
+              "originalPosition": 37,
+              "body": "> Thinking through this some more, maybe it's best to not restrict to two? I don't remember what the motivation was for the restriction\r\n\r\nThe reason was up to one for IPv4 and one for IPv6 ",
+              "createdAt": "2024-06-26T18:18:37Z",
+              "updatedAt": "2024-06-26T18:18:37Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHnqa9M5_tlBZ",
+          "commit": {
+            "abbreviatedOid": "c0e9acc"
+          },
+          "author": "bemasc",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-06-26T18:21:03Z",
+          "updatedAt": "2024-06-26T18:21:03Z",
+          "comments": [
+            {
+              "originalPosition": 37,
+              "body": "This comment is in the wrong thread.",
+              "createdAt": "2024-06-26T18:21:03Z",
+              "updatedAt": "2024-06-26T18:21:03Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHnqa9M5_tmhn",
+          "commit": {
+            "abbreviatedOid": "c0e9acc"
+          },
+          "author": "asingh-g",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-06-26T18:24:40Z",
+          "updatedAt": "2024-06-26T18:24:40Z",
+          "comments": [
+            {
+              "originalPosition": 37,
+              "body": "I thought so too but github isn't letting me reply to that comment for some weird reason",
+              "createdAt": "2024-06-26T18:24:40Z",
+              "updatedAt": "2024-06-26T18:24:41Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHnqa9M5_2c5k",
+          "commit": {
+            "abbreviatedOid": "c051e88"
+          },
+          "author": "DavidSchinazi",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "Ugh the GitHub UI is making this more difficult than it needs to be",
+          "createdAt": "2024-06-27T10:38:50Z",
+          "updatedAt": "2024-06-27T10:42:46Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "```suggestion\r\n{{Section 3 of !STRUCTURED-FIELDS=RFC8941}} to specify syntax and parsing.\r\nThis document uses Augmented Backus-Naur Form and parsing/serialization\r\nbehaviors from {{!ABNF=RFC5234}}\r\n```",
+              "createdAt": "2024-06-27T10:38:50Z",
+              "updatedAt": "2024-06-27T10:42:46Z"
+            },
+            {
+              "originalPosition": 35,
+              "body": "This comment was marked as resolved but wasn't addressed (probably GitHub bug)",
+              "createdAt": "2024-06-27T10:40:13Z",
+              "updatedAt": "2024-06-27T10:42:46Z"
+            },
+            {
+              "originalPosition": 37,
+              "body": "What I meant was: I don't remember why we restricted to one IPv4 and one IPv6",
+              "createdAt": "2024-06-27T10:41:54Z",
+              "updatedAt": "2024-06-27T10:42:46Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHnqa9M5_534c",
+          "commit": {
+            "abbreviatedOid": "c0e9acc"
+          },
+          "author": "asingh-g",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-06-27T16:11:07Z",
+          "updatedAt": "2024-06-27T16:11:07Z",
+          "comments": [
+            {
+              "originalPosition": 37,
+              "body": "I mean I guess you could have more than one of each (to work with different subnets?). But then we need a way for the client to know which IP:Port would be used for what target",
+              "createdAt": "2024-06-27T16:11:07Z",
+              "updatedAt": "2024-06-27T16:11:07Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHnqa9M5_6Dyu",
+          "commit": {
+            "abbreviatedOid": "c0e9acc"
+          },
+          "author": "bemasc",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-06-27T16:32:32Z",
+          "updatedAt": "2024-06-27T16:32:32Z",
+          "comments": [
+            {
+              "originalPosition": 37,
+              "body": "The client doesn't need to know.  Even the proxy may not know!  On many operating systems, the choice of outgoing interface is controlled by the routing table and is not straightforward for application software to control.",
+              "createdAt": "2024-06-27T16:32:32Z",
+              "updatedAt": "2024-06-27T16:32:32Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHnqa9M6AAarK",
+          "commit": {
+            "abbreviatedOid": "c0e9acc"
+          },
+          "author": "asingh-g",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-06-28T10:32:21Z",
+          "updatedAt": "2024-06-28T10:32:21Z",
+          "comments": [
+            {
+              "originalPosition": 37,
+              "body": "Would having multiple addresses for the same family be counterproductive to this extensions since the client can no longer guarantee the IP:Port at which it will be sending/receiving. ",
+              "createdAt": "2024-06-28T10:32:21Z",
+              "updatedAt": "2024-06-28T10:32:21Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHnqa9M6ACl0E",
+          "commit": {
+            "abbreviatedOid": "c0e9acc"
+          },
+          "author": "bemasc",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-06-28T14:15:52Z",
+          "updatedAt": "2024-06-28T14:15:52Z",
+          "comments": [
+            {
+              "originalPosition": 37,
+              "body": "For peer-to-peer use cases like WebRTC, it's normal to have multiple addresses of the same family.  Each address becomes an \"ICE candidate\", and the ICE procedure tries all pairs of addresses (in some prioritized order) to find a working connection (accounting for interference by NATs, etc.).\r\n\r\nFor client-server use cases like HTTP/3, the situation is perhaps more interesting.  If the server is trying to use this protocol, it likely does need a single consistent address for each connection.  It also needs other guarantees beyond the proxy itself, such as requiring that there are no firewalls or NATs preventing inbound connections to the ports it has opened.\r\n\r\nMy recommendation would be to remove any restriction on the number of addresses within the protocol, but note that proxies intended for client-server use should select at most one address of each family.",
+              "createdAt": "2024-06-28T14:15:52Z",
+              "updatedAt": "2024-06-28T14:15:52Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHnqa9M6AOvOQ",
+          "commit": {
+            "abbreviatedOid": "32d1b83"
+          },
+          "author": "DavidSchinazi",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "At this point this looks really good, I think the only open question is the allowed number of addresses. My recommendation would be to allow any number of addresses but to say that address stability is RECOMMENDED since many protocols rely on that. That way we get the best of both worlds - future innovation is possible without breaking existing use cases",
+          "createdAt": "2024-07-01T13:06:12Z",
+          "updatedAt": "2024-07-01T13:06:12Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOHnqa9M6AYhde",
+          "commit": {
+            "abbreviatedOid": "c0e9acc"
+          },
+          "author": "asingh-g",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-07-02T13:51:20Z",
+          "updatedAt": "2024-07-02T13:51:20Z",
+          "comments": [
+            {
+              "originalPosition": 37,
+              "body": "Makes sense. I've removed the limitation but recommended address stability",
+              "createdAt": "2024-07-02T13:51:20Z",
+              "updatedAt": "2024-07-02T13:51:20Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHnqa9M6AbSGL",
+          "commit": {
+            "abbreviatedOid": "e095589"
+          },
+          "author": "DavidSchinazi",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "Thanks for addressing all my comments!",
+          "createdAt": "2024-07-02T19:01:56Z",
+          "updatedAt": "2024-07-02T19:01:56Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 19,
+      "id": "PR_kwDOHnqa9M5eaXY6",
+      "title": "Compress away IP and Port using Context IDs",
+      "url": "https://github.com/ietf-wg-masque/draft-ietf-masque-connect-udp-listen/pull/19",
+      "state": "MERGED",
+      "author": "asingh-g",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Closes #13\r\nCloses #14\r\n\r\n~~clients and proxies may omit IP, Port info, if sending data to the same IP and Port as before~~\r\n\r\nAdd compression via context IDs, which are to be registered via capsules\r\n\r\nEdit:\r\nAlso, add the ability to suppress any uncompressed traffic",
+      "createdAt": "2023-11-02T09:35:19Z",
+      "updatedAt": "2024-07-02T19:48:46Z",
+      "baseRepository": "ietf-wg-masque/draft-ietf-masque-connect-udp-listen",
+      "baseRefName": "main",
+      "baseRefOid": "59dac79d354bf1a25373e2ade689d4142729e1f8",
+      "headRepository": "ietf-wg-masque/draft-ietf-masque-connect-udp-listen",
+      "headRefName": "14-feature-request-compress-away-ip-and-port-from-each-http-datagram",
+      "headRefOid": "3678efe4d1d6a991961573c40566f40ba81163da",
+      "closedAt": "2024-07-02T19:48:46Z",
+      "mergedAt": "2024-07-02T19:48:45Z",
+      "mergedBy": "asingh-g",
+      "mergeCommit": {
+        "oid": "4ad96a4909cbb3d0a41dc94e794aedd4d76e213a"
+      },
+      "comments": [
+        {
+          "author": "asingh-g",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@DavidSchinazi fair point. Should we create another target identifier different from context-ID?",
+          "createdAt": "2023-11-02T23:03:09Z",
+          "updatedAt": "2023-11-02T23:03:29Z"
+        },
+        {
+          "author": "DavidSchinazi",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I don't think we need to, we can use the context identifiers to indicate the compression. We just need a process to [register](https://www.rfc-editor.org/rfc/rfc9298#section-4-3) context IDs so both peers agree on what they mean. A capsule would probably be the best bet here",
+          "createdAt": "2023-11-02T23:28:09Z",
+          "updatedAt": "2023-11-02T23:28:09Z"
+        },
+        {
+          "author": "asingh-g",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I agree. I have changed the draft, to make it so that we use capsules to enable compression. Please let me know what you think @DavidSchinazi and @tfpauly ",
+          "createdAt": "2023-11-07T12:06:39Z",
+          "updatedAt": "2023-11-07T12:06:39Z"
+        },
+        {
+          "author": "asingh-g",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I remember @tfpauly 's suggestion at IETF about an option to close arbitrary forwarding from the proxy to the client which I think is a great idea and is a decent alternative over adding a permissions mechanism.\r\n\r\nI'm thinking we can use the existing compression request capsule by adding an optional field to communicate this option from the client to the proxy\r\n\r\nSomething like \r\n```\r\nCapsule:{\r\nTYPE= COMPRESSION_REQUEST,\r\n.\r\n.\r\n.\r\n disable-uncompressed-forwarding= true,\r\n}\r\n\r\n```\r\n\r\nI've added it to the last pushed commit, let me know your thoughts on it",
+          "createdAt": "2024-01-02T21:22:10Z",
+          "updatedAt": "2024-01-02T21:22:10Z"
+        },
+        {
+          "author": "DavidSchinazi",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Instead of adding a `disable-uncompressed-forwarding` bool to every `COMPRESSION_REQUEST`, it would be simpler and more efficient to instead add a `COMPRESSION_CLOSE` capsule. That would add the new feature of being able to drop compression state that's no longer used, with the benefit of solving this for free - one can disable uncompressed forwarding by sending a `COMPRESSION_CLOSE` for the uncompressed context ID.",
+          "createdAt": "2024-01-05T16:53:34Z",
+          "updatedAt": "2024-01-05T16:53:34Z"
+        },
+        {
+          "author": "asingh-g",
+          "authorAssociation": "COLLABORATOR",
+          "body": "As discussed, I've added the COMPRESSION_REJECT and COMPRESSION_CLOSE capsules. I've removed the disable-uncompressed-forwarding field",
+          "createdAt": "2024-02-29T19:36:54Z",
+          "updatedAt": "2024-02-29T19:36:54Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOHnqa9M5l_Z_V",
+          "commit": {
+            "abbreviatedOid": "dd6a262"
+          },
+          "author": "DavidSchinazi",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "I'm not sure I understand how this works",
+          "createdAt": "2023-11-02T19:50:11Z",
+          "updatedAt": "2023-11-02T20:02:26Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "this change doesn't seem correct?",
+              "createdAt": "2023-11-02T19:50:12Z",
+              "updatedAt": "2023-11-02T20:02:26Z"
+            },
+            {
+              "originalPosition": 49,
+              "body": "How does the receiver know if the version/address/port is included or omitted?",
+              "createdAt": "2023-11-02T20:01:43Z",
+              "updatedAt": "2023-11-02T20:02:26Z"
+            },
+            {
+              "originalPosition": 72,
+              "body": "What happens if this packet gets lost?",
+              "createdAt": "2023-11-02T20:02:14Z",
+              "updatedAt": "2023-11-02T20:02:26Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHnqa9M5mWUXS",
+          "commit": {
+            "abbreviatedOid": "dd6a262"
+          },
+          "author": "tfpauly",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-11-07T08:48:23Z",
+          "updatedAt": "2023-11-07T08:48:23Z",
+          "comments": [
+            {
+              "originalPosition": 49,
+              "body": "Yeah, I don't see how either side could know which to expect. I would think we'd need to change context ID, not just use the same one?",
+              "createdAt": "2023-11-07T08:48:23Z",
+              "updatedAt": "2023-11-07T08:48:24Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHnqa9M5mYeA9",
+          "commit": {
+            "abbreviatedOid": "4c1b7a7"
+          },
+          "author": "tfpauly",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "CHANGES_REQUESTED",
+          "body": "",
+          "createdAt": "2023-11-07T13:29:40Z",
+          "updatedAt": "2023-11-07T13:29:45Z",
+          "comments": [
+            {
+              "originalPosition": 176,
+              "body": "I don't think that works \u2014 context ID 0 is reserved for the standard UDP datagram format (so no address+port)",
+              "createdAt": "2023-11-07T13:29:41Z",
+              "updatedAt": "2023-11-07T13:29:45Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHnqa9M5mYooT",
+          "commit": {
+            "abbreviatedOid": "4c1b7a7"
+          },
+          "author": "asingh-g",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-11-07T13:50:44Z",
+          "updatedAt": "2023-11-07T13:50:44Z",
+          "comments": [
+            {
+              "originalPosition": 176,
+              "body": "Ah I see, We could use any other number I guess. I can swap it out for 2",
+              "createdAt": "2023-11-07T13:50:44Z",
+              "updatedAt": "2023-11-07T13:50:44Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHnqa9M5mZKf0",
+          "commit": {
+            "abbreviatedOid": "4c1b7a7"
+          },
+          "author": "DavidSchinazi",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "This solution is workable. Many smaller comments inline but this is going in the right direction.",
+          "createdAt": "2023-11-07T14:42:23Z",
+          "updatedAt": "2023-11-07T15:06:26Z",
+          "comments": [
+            {
+              "originalPosition": 7,
+              "body": "This is about COMPRESSION_REQUEST/COMPRESSION_ASSIGN capsules, not DATAGRAM\r\n```suggestion\r\nHTTP Datagram, see {{format}} or registered via capsules and then compressed, see {{contextid}}.\r\n```",
+              "createdAt": "2023-11-07T14:42:24Z",
+              "updatedAt": "2023-11-07T15:06:26Z"
+            },
+            {
+              "originalPosition": 66,
+              "body": "This property comes from 9298, so no need for 2119 language, we can just state it as fact",
+              "createdAt": "2023-11-07T14:44:09Z",
+              "updatedAt": "2023-11-07T15:06:26Z"
+            },
+            {
+              "originalPosition": 66,
+              "body": "It's considered bad form to use lower case \"must\". One potential rephrase would be `s/The client must specify/The client specifies/`",
+              "createdAt": "2023-11-07T14:45:03Z",
+              "updatedAt": "2023-11-07T15:06:26Z"
+            },
+            {
+              "originalPosition": 65,
+              "body": "Format nit: please keep line lengths and line breaks consistent with the rest of the document. Very long lines make reviews harder",
+              "createdAt": "2023-11-07T14:45:39Z",
+              "updatedAt": "2023-11-07T15:06:26Z"
+            },
+            {
+              "originalPosition": 95,
+              "body": "We don't need the Quarter Stream ID here because capsules are already tied to a stream",
+              "createdAt": "2023-11-07T14:47:33Z",
+              "updatedAt": "2023-11-07T15:06:26Z"
+            },
+            {
+              "originalPosition": 129,
+              "body": "This is the part of the spec that needs 2119 language to make it clear what is mandatory vs optional",
+              "createdAt": "2023-11-07T14:48:33Z",
+              "updatedAt": "2023-11-07T15:06:26Z"
+            },
+            {
+              "originalPosition": 153,
+              "body": "This is draft is still work in progress, so we should not use low values to avoid burning them. The procedure is to pick a random number that fits in 3-4 bytes and make sure it's not reserved (check registry for which values are reserved)",
+              "createdAt": "2023-11-07T14:52:28Z",
+              "updatedAt": "2023-11-07T15:06:26Z"
+            },
+            {
+              "originalPosition": 86,
+              "body": "There's no text documenting what the COMPRESSION_ASSIGN is for. Is the idea that the sender of COMPRESSION_REQUEST MUST NOT use the compression until it has received a COMPRESSION_ASSIGN?",
+              "createdAt": "2023-11-07T14:54:09Z",
+              "updatedAt": "2023-11-07T15:06:26Z"
+            },
+            {
+              "originalPosition": 87,
+              "body": "Since we have COMPRESSION_ASSIGN, does it make sense to have COMPRESSION_REJECT? This is because a compression context requires the receiver to allocate memory, so to defend against memory exhaustion attacks it might be useful to say \"nope sorry I'm not going to allocate these resources\"",
+              "createdAt": "2023-11-07T15:02:42Z",
+              "updatedAt": "2023-11-07T15:06:26Z"
+            },
+            {
+              "originalPosition": 35,
+              "body": "Nit: it would be easier to have a separate wire format ascii art for compressed instead of adding \"MUST be omitted\" to every field here",
+              "createdAt": "2023-11-07T15:03:33Z",
+              "updatedAt": "2023-11-07T15:06:26Z"
+            },
+            {
+              "originalPosition": 88,
+              "body": "Since COMPRESSION_ASSIGN is a response, it doesn't need to echo the IP/port, just the context ID - or is there a reason for it?",
+              "createdAt": "2023-11-07T15:04:25Z",
+              "updatedAt": "2023-11-07T15:06:26Z"
+            },
+            {
+              "originalPosition": 176,
+              "body": "FWIW this is an extension to connect-udp so it wouldn't be crazy to reuse context ID 0, because in this case datagrams with context ID zero have no logical semantics. Both options make sense",
+              "createdAt": "2023-11-07T15:05:52Z",
+              "updatedAt": "2023-11-07T15:06:26Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHnqa9M5mZdO7",
+          "commit": {
+            "abbreviatedOid": "4c1b7a7"
+          },
+          "author": "tfpauly",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-11-07T15:10:15Z",
+          "updatedAt": "2023-11-07T15:10:15Z",
+          "comments": [
+            {
+              "originalPosition": 153,
+              "body": "+1 here",
+              "createdAt": "2023-11-07T15:10:15Z",
+              "updatedAt": "2023-11-07T15:10:15Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHnqa9M5mZd90",
+          "commit": {
+            "abbreviatedOid": "4c1b7a7"
+          },
+          "author": "tfpauly",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-11-07T15:11:26Z",
+          "updatedAt": "2023-11-07T15:11:26Z",
+          "comments": [
+            {
+              "originalPosition": 176,
+              "body": "Interesting, wasn't clear that connect-udp would allow that \u2014 I assumed that's why the draft originally used 2 there.\r\n\r\n> The Context ID value of 0 is reserved for UDP payloads, while non-zero values are dynamically allocated. Non-zero even-numbered Context IDs are client-allocated, and odd-numbered Context IDs are proxy-allocated.\r\n",
+              "createdAt": "2023-11-07T15:11:26Z",
+              "updatedAt": "2023-11-07T15:11:47Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHnqa9M5mgQX0",
+          "commit": {
+            "abbreviatedOid": "4c1b7a7"
+          },
+          "author": "DavidSchinazi",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-11-08T09:02:01Z",
+          "updatedAt": "2023-11-08T09:02:02Z",
+          "comments": [
+            {
+              "originalPosition": 176,
+              "body": "Everything's allowed if the extension is negotiated. I guess the nice property of using 2 instead of 0 is that the client can send datagrams before receiving the response headers",
+              "createdAt": "2023-11-08T09:02:02Z",
+              "updatedAt": "2023-11-08T09:02:02Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHnqa9M5mqJW5",
+          "commit": {
+            "abbreviatedOid": "4c1b7a7"
+          },
+          "author": "asingh-g",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-11-09T11:28:51Z",
+          "updatedAt": "2023-11-09T11:28:51Z",
+          "comments": [
+            {
+              "originalPosition": 88,
+              "body": "I was wondering if we should allow the server to assign compressions via odd numbered Context IDs",
+              "createdAt": "2023-11-09T11:28:51Z",
+              "updatedAt": "2023-11-09T11:28:51Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHnqa9M5x1C-2",
+          "commit": {
+            "abbreviatedOid": "15fb878"
+          },
+          "author": "DavidSchinazi",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-02-29T19:39:57Z",
+          "updatedAt": "2024-02-29T19:58:27Z",
+          "comments": [
+            {
+              "originalPosition": 8,
+              "body": "nit:\r\n\r\n```suggestion\r\nHTTP Datagram (see {{format}}), or registered via capsules and then compressed\r\n(see {{contextid}}).\r\n```",
+              "createdAt": "2024-02-29T19:39:57Z",
+              "updatedAt": "2024-02-29T19:58:27Z"
+            },
+            {
+              "originalPosition": 53,
+              "body": "The no-compression context isn't 0 though right? It's the value allocated on line 111. Maybe we need to give that value a name up there and reuse that name here.\r\n\r\nThat said, another option could be for us to change the meaning of context ID 0 and use 0 instead of allocating one. But then we have some slight ambiguity when the client sends before receiving the server's HTTP headers (and knowing whether the server supports this extension or not), so we probably want to stick with a non-zero allocated value.",
+              "createdAt": "2024-02-29T19:43:06Z",
+              "updatedAt": "2024-02-29T19:58:27Z"
+            },
+            {
+              "originalPosition": 58,
+              "body": "```suggestion\r\ndisabled; see {{restrictingips}}.\r\n```",
+              "createdAt": "2024-02-29T19:43:41Z",
+              "updatedAt": "2024-02-29T19:58:27Z"
+            },
+            {
+              "originalPosition": 60,
+              "body": "To me \"header\" makes me think of HTTP headers. How about this:\r\n\r\n```suggestion\r\n## Address Compression {#compression}\r\n```",
+              "createdAt": "2024-02-29T19:44:26Z",
+              "updatedAt": "2024-02-29T19:58:27Z"
+            },
+            {
+              "originalPosition": 72,
+              "body": "Can we add text saying that endpoints MUST NOT use a compressed ID until the peer has accepted it?",
+              "createdAt": "2024-02-29T19:49:04Z",
+              "updatedAt": "2024-02-29T19:58:27Z"
+            },
+            {
+              "originalPosition": 103,
+              "body": "missing newline",
+              "createdAt": "2024-02-29T19:49:25Z",
+              "updatedAt": "2024-02-29T19:58:27Z"
+            },
+            {
+              "originalPosition": 91,
+              "body": "What's the motivation for echoing the COMPRESSION_CLOSE capsule? Can't the client stop using it when it sends instead of when it receives the echo",
+              "createdAt": "2024-02-29T19:50:25Z",
+              "updatedAt": "2024-02-29T19:58:27Z"
+            },
+            {
+              "originalPosition": 153,
+              "body": "This comment is still relevant",
+              "createdAt": "2024-02-29T19:52:39Z",
+              "updatedAt": "2024-02-29T19:58:27Z"
+            },
+            {
+              "originalPosition": 137,
+              "body": "I don't think I understand what the enable bit means, can you elaborate?",
+              "createdAt": "2024-02-29T19:54:44Z",
+              "updatedAt": "2024-02-29T19:58:27Z"
+            },
+            {
+              "originalPosition": 78,
+              "body": "Why only the client receiving this instead of both client and proxy?",
+              "createdAt": "2024-02-29T19:55:32Z",
+              "updatedAt": "2024-02-29T19:58:27Z"
+            },
+            {
+              "originalPosition": 107,
+              "body": "I'm not sure I understand why we need four capsule types. Could we make this work with only two (COMPRESSION_OPEN and COMPRESSION_CLOSE)? Conceptually you need an open one (sent in one direction to request, and echoed to confirm) and a close one (used as a response to an open to reject, and used directly to request closure)",
+              "createdAt": "2024-02-29T19:58:09Z",
+              "updatedAt": "2024-02-29T19:58:27Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHnqa9M5zKhVL",
+          "commit": {
+            "abbreviatedOid": "ad79ac8"
+          },
+          "author": "DavidSchinazi",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-03-12T19:12:41Z",
+          "updatedAt": "2024-03-12T19:31:08Z",
+          "comments": [
+            {
+              "originalPosition": 20,
+              "body": "This part of the text is explaining the concept, so it doesn't need to be normative\r\n```suggestion\r\nThe client and the proxy exchange COMPRESSION_ASSIGN capsules in order to\r\n```",
+              "createdAt": "2024-03-12T19:12:41Z",
+              "updatedAt": "2024-03-12T19:31:08Z"
+            },
+            {
+              "originalPosition": 22,
+              "body": "I'm not sure I understand the last sentence in this paragraph?",
+              "createdAt": "2024-03-12T19:13:11Z",
+              "updatedAt": "2024-03-12T19:31:08Z"
+            },
+            {
+              "originalPosition": 32,
+              "body": "It's not any other value, because there could be extensions that mean other things\r\n\r\n```suggestion\r\ncontext ID matches one registered for compressed payloads.\r\n```",
+              "createdAt": "2024-03-12T19:14:19Z",
+              "updatedAt": "2024-03-12T19:31:08Z"
+            },
+            {
+              "originalPosition": 61,
+              "body": "```suggestion\r\nThe context ID 0 was reserved by unextended connect-udp and is not used by this extension.\r\nOnce an endpoint has ascertained that the peer supports this extension, the endpoint MUST NOT\r\nsend any datagrams with context ID set to 0, and MUST drop any received datagrams with\r\ncontext ID set to 0.\r\n```",
+              "createdAt": "2024-03-12T19:16:34Z",
+              "updatedAt": "2024-03-12T19:31:08Z"
+            },
+            {
+              "originalPosition": 63,
+              "body": "This isn't quite right. The even vs odd split is for context ID allocation, not for sending packets (see [spec](https://www.rfc-editor.org/rfc/rfc9298#name-context-identifiers)).",
+              "createdAt": "2024-03-12T19:17:31Z",
+              "updatedAt": "2024-03-12T19:31:08Z"
+            },
+            {
+              "originalPosition": 65,
+              "body": "It's unclear to me what this MUST requires me to do. If this is explaining the concept, then we don't need normative text",
+              "createdAt": "2024-03-12T19:18:04Z",
+              "updatedAt": "2024-03-12T19:31:08Z"
+            },
+            {
+              "originalPosition": 67,
+              "body": "This sentence discusses acknowledging context IDs, but that concept hadn't been introduced yet",
+              "createdAt": "2024-03-12T19:18:54Z",
+              "updatedAt": "2024-03-12T19:31:08Z"
+            },
+            {
+              "originalPosition": 62,
+              "body": "I've put comments inline for this paragraph, but here's an attempt at tweaking the paragraph to explain the concepts without normative 2119 verbs - those come later:\r\n\r\n> This extension leverages context IDs (see Section 4 of CONNECT-UDP) to compress the target IP address and port when encoding datagrams on the wire. Either endpoint can register a context ID and the IP/ports it's associated with by sending a COMPRESSION_ASSIGN capsule to its peer. The peer will then echo that capsule to indicate it's received it. From then on, both endpoints are aware of the context ID and can send compressed datagrams. Later, any endpoint can decide to close the compression context by sending a COMPRESSION_CLOSE capsule.",
+              "createdAt": "2024-03-12T19:23:08Z",
+              "updatedAt": "2024-03-12T19:31:08Z"
+            },
+            {
+              "originalPosition": 74,
+              "body": "Now that we've changed how the uncompressed context ID is sent, can you do a search for all instances of the header? I saw one earlier that still says that's how we send the context and that's incorrect since now we just use the header to indicate support for this extension",
+              "createdAt": "2024-03-12T19:25:37Z",
+              "updatedAt": "2024-03-12T19:31:08Z"
+            },
+            {
+              "originalPosition": 87,
+              "body": "```suggestion\r\nthe given Context ID (For example, due to considerable memory requirements of\r\n```",
+              "createdAt": "2024-03-12T19:26:33Z",
+              "updatedAt": "2024-03-12T19:31:08Z"
+            },
+            {
+              "originalPosition": 95,
+              "body": "This somewhat contradicts the previous paragraph because it ignores the fact that any endpoint can reject the compression requested by the peer. Perhaps:\r\n\r\nWhen an endpoint receives a COMPRESSION_ASSIGN capsule with a non-zero IP length, it MUST decide whether to accept or reject the compression mapping:\r\n* if it accepts the mapping, first the receiver MUST save the mapping from context ID to address and port. Second, the receiver MUST echo an identical COMPRESSION_ASSIGN capsule back to its peer.\r\n* if it rejects the mapping, the receiver MUST respond by sending a COMPRESSION_CLOSE capsule with the context ID set to the one from the received COMPRESSION_ASSIGN capsule",
+              "createdAt": "2024-03-12T19:30:06Z",
+              "updatedAt": "2024-03-12T19:31:08Z"
+            },
+            {
+              "originalPosition": 131,
+              "body": "Missing capsule length",
+              "createdAt": "2024-03-12T19:30:43Z",
+              "updatedAt": "2024-03-12T19:31:08Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHnqa9M5zLYeY",
+          "commit": {
+            "abbreviatedOid": "15fb878"
+          },
+          "author": "asingh-g",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-03-12T20:13:22Z",
+          "updatedAt": "2024-03-12T20:13:22Z",
+          "comments": [
+            {
+              "originalPosition": 72,
+              "body": "We decided that the client could preemptively send compressed packets, accepting the fact that they may fall through",
+              "createdAt": "2024-03-12T20:13:22Z",
+              "updatedAt": "2024-03-12T20:13:22Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHnqa9M5zLZVH",
+          "commit": {
+            "abbreviatedOid": "15fb878"
+          },
+          "author": "asingh-g",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-03-12T20:14:12Z",
+          "updatedAt": "2024-03-12T20:14:13Z",
+          "comments": [
+            {
+              "originalPosition": 137,
+              "body": "Removed it",
+              "createdAt": "2024-03-12T20:14:12Z",
+              "updatedAt": "2024-03-12T20:14:13Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHnqa9M5zLZoG",
+          "commit": {
+            "abbreviatedOid": "15fb878"
+          },
+          "author": "asingh-g",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-03-12T20:14:29Z",
+          "updatedAt": "2024-03-12T20:14:30Z",
+          "comments": [
+            {
+              "originalPosition": 78,
+              "body": "fixed",
+              "createdAt": "2024-03-12T20:14:30Z",
+              "updatedAt": "2024-03-12T20:14:30Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHnqa9M5zLZ9o",
+          "commit": {
+            "abbreviatedOid": "15fb878"
+          },
+          "author": "asingh-g",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-03-12T20:14:46Z",
+          "updatedAt": "2024-03-12T20:14:46Z",
+          "comments": [
+            {
+              "originalPosition": 107,
+              "body": "Yes, following this approach now",
+              "createdAt": "2024-03-12T20:14:46Z",
+              "updatedAt": "2024-03-12T20:14:47Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHnqa9M5zLmqW",
+          "commit": {
+            "abbreviatedOid": "4c1b7a7"
+          },
+          "author": "asingh-g",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-03-12T20:26:01Z",
+          "updatedAt": "2024-03-12T20:26:01Z",
+          "comments": [
+            {
+              "originalPosition": 88,
+              "body": "Since we're reusing COMPRESSION_ASSIGN, maybe we still need thie IP/port etc?",
+              "createdAt": "2024-03-12T20:26:01Z",
+              "updatedAt": "2024-03-12T20:26:01Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHnqa9M5zL4IS",
+          "commit": {
+            "abbreviatedOid": "ad79ac8"
+          },
+          "author": "asingh-g",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-03-12T20:42:07Z",
+          "updatedAt": "2024-03-12T20:42:08Z",
+          "comments": [
+            {
+              "originalPosition": 22,
+              "body": "Sorry, that's a 4am brainfart",
+              "createdAt": "2024-03-12T20:42:07Z",
+              "updatedAt": "2024-03-12T20:42:08Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHnqa9M5zMI2G",
+          "commit": {
+            "abbreviatedOid": "ad79ac8"
+          },
+          "author": "asingh-g",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-03-12T20:57:32Z",
+          "updatedAt": "2024-03-12T20:57:33Z",
+          "comments": [
+            {
+              "originalPosition": 65,
+              "body": "Removed the MUST, redundant",
+              "createdAt": "2024-03-12T20:57:33Z",
+              "updatedAt": "2024-03-12T20:57:33Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHnqa9M5zMQBQ",
+          "commit": {
+            "abbreviatedOid": "ad79ac8"
+          },
+          "author": "asingh-g",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-03-12T21:03:02Z",
+          "updatedAt": "2024-03-12T21:03:02Z",
+          "comments": [
+            {
+              "originalPosition": 67,
+              "body": "The preceeding paragraph cites context ID from section 4 CONNECT UDP. Should I add a one liner to explain it a bit more?",
+              "createdAt": "2024-03-12T21:03:02Z",
+              "updatedAt": "2024-03-12T21:03:02Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHnqa9M5zMdmC",
+          "commit": {
+            "abbreviatedOid": "ad79ac8"
+          },
+          "author": "DavidSchinazi",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-03-12T21:16:12Z",
+          "updatedAt": "2024-03-12T21:16:12Z",
+          "comments": [
+            {
+              "originalPosition": 67,
+              "body": "But connect-udp doesn't define the concept of acknowledging context IDs. So I'd either define it quickly or add a forward reference",
+              "createdAt": "2024-03-12T21:16:12Z",
+              "updatedAt": "2024-03-12T21:16:12Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHnqa9M5--H_N",
+          "commit": {
+            "abbreviatedOid": "ad79ac8"
+          },
+          "author": "asingh-g",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-06-20T11:51:22Z",
+          "updatedAt": "2024-06-20T11:51:22Z",
+          "comments": [
+            {
+              "originalPosition": 67,
+              "body": "Added the reference to Context IDs from the original RFC",
+              "createdAt": "2024-06-20T11:51:22Z",
+              "updatedAt": "2024-06-20T11:51:22Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHnqa9M5_GI1d",
+          "commit": {
+            "abbreviatedOid": "9e7fa07"
+          },
+          "author": "DavidSchinazi",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-06-21T10:11:01Z",
+          "updatedAt": "2024-06-21T10:56:00Z",
+          "comments": [
+            {
+              "originalPosition": 77,
+              "body": "nit:\r\n```suggestion\r\nsend any datagrams with context ID set to 0, and MUST silently drop any received datagrams with\r\n```",
+              "createdAt": "2024-06-21T10:11:01Z",
+              "updatedAt": "2024-06-21T10:56:00Z"
+            },
+            {
+              "originalPosition": 82,
+              "body": "nit: this requirement comes from RFC 9298, so we don't need a new MUST. I would instead phrase it as a reference:\r\n\r\n```suggestion\r\nAs mandated in {{Section 4 of CONNECT-UDP}}, clients will allocate even context IDs\r\nwhile proxies will allocate odd ones.\r\nThey MAY pre-emptively use Context IDs not yet acknowledged by the other party, knowing that those packets MAY be lost since the COMPRESSION_ASSIGN request receiving proxy\r\n```",
+              "createdAt": "2024-06-21T10:49:30Z",
+              "updatedAt": "2024-06-21T10:56:00Z"
+            },
+            {
+              "originalPosition": 106,
+              "body": "Do we still need the \"Connect-UDP-Bind\" header if we now require this capsule? I guess we still need it to negotiate the use of this extension, but maybe it doesn't carry a context ID any more?",
+              "createdAt": "2024-06-21T10:51:24Z",
+              "updatedAt": "2024-06-21T10:56:00Z"
+            },
+            {
+              "originalPosition": 117,
+              "body": "We never defined what \"unregister\" means. I would instead say \"close a compression context\"",
+              "createdAt": "2024-06-21T10:52:43Z",
+              "updatedAt": "2024-06-21T10:56:00Z"
+            },
+            {
+              "originalPosition": 93,
+              "body": "This echoing MUST is redundant with the following section, can we refactor this to avoid duplicate normative language? For example we can have this paragraph explain the mechanism without normative text, and have the next section go into more details with 2119 language",
+              "createdAt": "2024-06-21T10:54:02Z",
+              "updatedAt": "2024-06-21T10:56:00Z"
+            },
+            {
+              "originalPosition": 141,
+              "body": "Let's not use low values like 0x5. Start with a 4-byte value",
+              "createdAt": "2024-06-21T10:54:44Z",
+              "updatedAt": "2024-06-21T10:56:00Z"
+            },
+            {
+              "originalPosition": 216,
+              "body": "I think you meant \"an upper limit on how many compression responses the endpoint is willing to buffer\"",
+              "createdAt": "2024-06-21T10:55:48Z",
+              "updatedAt": "2024-06-21T10:56:00Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHnqa9M5_cW8E",
+          "commit": {
+            "abbreviatedOid": "9e7fa07"
+          },
+          "author": "asingh-g",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-06-25T10:12:56Z",
+          "updatedAt": "2024-06-25T10:12:57Z",
+          "comments": [
+            {
+              "originalPosition": 106,
+              "body": "we don't. Should it be set to a boolean 0/1 value?",
+              "createdAt": "2024-06-25T10:12:57Z",
+              "updatedAt": "2024-06-25T10:12:57Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHnqa9M5_cs9y",
+          "commit": {
+            "abbreviatedOid": "9e7fa07"
+          },
+          "author": "DavidSchinazi",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-06-25T10:34:00Z",
+          "updatedAt": "2024-06-25T10:34:00Z",
+          "comments": [
+            {
+              "originalPosition": 106,
+              "body": "Boolean SGTM. Though it's not `0`/`1` it's `?0`/`?1` Here's an example of a structured field boolean: https://www.rfc-editor.org/rfc/rfc9297#section-3.4",
+              "createdAt": "2024-06-25T10:34:00Z",
+              "updatedAt": "2024-06-25T10:34:00Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHnqa9M5_o4Vf",
+          "commit": {
+            "abbreviatedOid": "8bd3ea3"
+          },
+          "author": "DavidSchinazi",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-06-26T10:37:46Z",
+          "updatedAt": "2024-06-26T12:59:41Z",
+          "comments": [
+            {
+              "originalPosition": 35,
+              "body": "When discussed in prose, we say \"Connect-UDP-Bind\" even if it's sent as \"connect-udp-bind\" over h2 and h3\r\n\r\nhttps://httpwg.org/admin/editors/style-guide",
+              "createdAt": "2024-06-26T10:37:46Z",
+              "updatedAt": "2024-06-26T12:59:41Z"
+            },
+            {
+              "originalPosition": 50,
+              "body": "```suggestion\r\nused for uncompressed connect-udp bind and {{dgram-format-compressed}} when\r\n```",
+              "createdAt": "2024-06-26T10:38:27Z",
+              "updatedAt": "2024-06-26T12:59:42Z"
+            },
+            {
+              "originalPosition": 56,
+              "body": "RFC 9298 mentions \"UDP Proxying Payload\" so I would instead say:\r\n\r\n```suggestion\r\nUncompressed Bound UDP Proxying Payload {\r\n```",
+              "createdAt": "2024-06-26T10:39:17Z",
+              "updatedAt": "2024-06-26T12:59:42Z"
+            },
+            {
+              "originalPosition": 67,
+              "body": "```suggestion\r\nCompressed Bound UDP Proxying Payload {\r\n```",
+              "createdAt": "2024-06-26T10:39:27Z",
+              "updatedAt": "2024-06-26T12:59:42Z"
+            },
+            {
+              "originalPosition": 82,
+              "body": "This repeats the text from line 114. Maybe we make the text up there shorter to avoid repetition?",
+              "createdAt": "2024-06-26T10:40:44Z",
+              "updatedAt": "2024-06-26T12:59:42Z"
+            },
+            {
+              "originalPosition": 91,
+              "body": "The packets being lost is not something that an implementation chooses, it's more a property of the system\r\n\r\n```suggestion\r\nThey MAY pre-emptively use Context IDs not yet acknowledged by the other party, knowing that those packets can be lost since the COMPRESSION_ASSIGN request receiving proxy\r\n```",
+              "createdAt": "2024-06-26T11:31:22Z",
+              "updatedAt": "2024-06-26T12:59:42Z"
+            },
+            {
+              "originalPosition": 105,
+              "body": "```suggestion\r\nthe given Context ID (For example, due to the memory cost of\r\n```",
+              "createdAt": "2024-06-26T11:32:44Z",
+              "updatedAt": "2024-06-26T12:59:42Z"
+            },
+            {
+              "originalPosition": 162,
+              "body": "I know art is in the eye of the beholder, but this isn't really art :P\r\n\r\n```suggestion\r\n~~~\r\n```",
+              "createdAt": "2024-06-26T12:31:58Z",
+              "updatedAt": "2024-06-26T12:59:42Z"
+            },
+            {
+              "originalPosition": 180,
+              "body": "```suggestion\r\n~~~\r\n```",
+              "createdAt": "2024-06-26T12:32:06Z",
+              "updatedAt": "2024-06-26T12:59:42Z"
+            },
+            {
+              "originalPosition": 167,
+              "body": "We need to account for the IP version = 0 scenario by making the IP address and port optional\r\n\r\n```suggestion\r\n  [IP Address (32..128)],\r\n  [UDP Port (16)],\r\n```",
+              "createdAt": "2024-06-26T12:37:47Z",
+              "updatedAt": "2024-06-26T12:59:42Z"
+            },
+            {
+              "originalPosition": 178,
+              "body": "Line length, here and throughout",
+              "createdAt": "2024-06-26T12:38:02Z",
+              "updatedAt": "2024-06-26T12:59:42Z"
+            },
+            {
+              "originalPosition": 178,
+              "body": "We haven't defined what rejecting a datagram means, so I'd say drop\r\n\r\n```suggestion\r\nThe Compression Close capsule serves the following purposes. As a response to reject a COMPRESSION_ASSIGN request and to close or clean up any existing compression mappings. Once a COMPRESSION_CLOSE is sent for a given Context ID, the sending party MAY drop any datagrams received for that Context ID until it is reallocated through a COMPRESSION_ASSIGN exchange.\r\n```",
+              "createdAt": "2024-06-26T12:39:18Z",
+              "updatedAt": "2024-06-26T12:59:42Z"
+            },
+            {
+              "originalPosition": 178,
+              "body": "I think we should also say that after sending or receiving COMPRESSION_CLOSE, the endpoint MUST NOT send with that context ID any more",
+              "createdAt": "2024-06-26T12:43:50Z",
+              "updatedAt": "2024-06-26T12:59:42Z"
+            },
+            {
+              "originalPosition": 193,
+              "body": "This paragraph should explain what the purpose of the header is (to enable this extension)",
+              "createdAt": "2024-06-26T12:44:43Z",
+              "updatedAt": "2024-06-26T12:59:42Z"
+            },
+            {
+              "originalPosition": 207,
+              "body": "This isn't quite right, the action on the receiver isn't when the sender sends, it's on reception\r\n\r\n```suggestion\r\nWhen an endpoint receives a COMPRESSION_ASSIGN capsule, it\r\neither registers a mapping from Context ID to the provided target\r\n```",
+              "createdAt": "2024-06-26T12:46:26Z",
+              "updatedAt": "2024-06-26T12:59:42Z"
+            },
+            {
+              "originalPosition": 206,
+              "body": "This appears to be duplicative of what's on line 201?",
+              "createdAt": "2024-06-26T12:49:53Z",
+              "updatedAt": "2024-06-26T12:59:42Z"
+            },
+            {
+              "originalPosition": 220,
+              "body": "```suggestion\r\nuncompressed or any target is missing, the proxy will either drop the datagram or\r\ntemporarily buffer it (see {{Section 5 of CONNECT-UDP}}).\r\n```",
+              "createdAt": "2024-06-26T12:52:05Z",
+              "updatedAt": "2024-06-26T12:59:42Z"
+            },
+            {
+              "originalPosition": 233,
+              "body": "```suggestion\r\ncannot be immediately sent due to flow or congestion control, an upper limit on how many compression responses the endpoint is willing to buffer MUST be set to prevent memory exhaustion. The proxy MAY\r\n```",
+              "createdAt": "2024-06-26T12:54:52Z",
+              "updatedAt": "2024-06-26T12:59:42Z"
+            },
+            {
+              "originalPosition": 234,
+              "body": "The proxy doesn't consider, it doesn't have free will :-)\r\n\r\n```suggestion\r\nclose the connection if such conditions occur.\r\n```",
+              "createdAt": "2024-06-26T12:55:01Z",
+              "updatedAt": "2024-06-26T12:59:42Z"
+            },
+            {
+              "originalPosition": 247,
+              "body": "It's best practice to generate these randomly to avoid collisions. I just ask Google to pick a random number between 16384 and 1073741823 and check that it doesn't hit the grease values",
+              "createdAt": "2024-06-26T12:56:38Z",
+              "updatedAt": "2024-06-26T12:59:42Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHnqa9M5_2nqf",
+          "commit": {
+            "abbreviatedOid": "0cd9d66"
+          },
+          "author": "DavidSchinazi",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "You missed some of my comments, most likely because of the GitHub UI. Please go through the Conversation tab of the GitHub UI and in the \"X conversations hidden\" click \"load more\" and then open them all to check if they're addresses. (I know this sucks, sorry)",
+          "createdAt": "2024-06-27T10:56:50Z",
+          "updatedAt": "2024-06-27T14:02:50Z",
+          "comments": [
+            {
+              "originalPosition": 27,
+              "body": "nit: line length\r\n\r\n```suggestion\r\nthe \"Connect-UDP-Bind\" header field to identify it as such. Both client and\r\nproxy can negotiate even and odd numbered context IDs to send UDP\r\npayloads to each other.\r\n```",
+              "createdAt": "2024-06-27T10:56:50Z",
+              "updatedAt": "2024-06-27T14:02:50Z"
+            },
+            {
+              "originalPosition": 91,
+              "body": "This comment and a few others haven't been addressed yet (again, probably GitHub bug)",
+              "createdAt": "2024-06-27T11:06:09Z",
+              "updatedAt": "2024-06-27T14:02:51Z"
+            },
+            {
+              "originalPosition": 26,
+              "body": "Doesn't the proxy also echo the header?",
+              "createdAt": "2024-06-27T11:49:17Z",
+              "updatedAt": "2024-06-27T14:02:51Z"
+            },
+            {
+              "originalPosition": 41,
+              "body": "typo\r\n\r\n```suggestion\r\nCONNECT-UDP}}) is defined by {{dgram-format}} when context ID is set to be\r\n```",
+              "createdAt": "2024-06-27T11:49:51Z",
+              "updatedAt": "2024-06-27T14:02:51Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHnqa9M6AAYsj",
+          "commit": {
+            "abbreviatedOid": "0cd9d66"
+          },
+          "author": "asingh-g",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-06-28T10:27:11Z",
+          "updatedAt": "2024-06-28T10:27:11Z",
+          "comments": [
+            {
+              "originalPosition": 26,
+              "body": "Does it need to have \"Connect-UDP-Bind\" in the response header? Is the following status sufficient, instead?\r\n```\r\nHEADERS\r\n :status = 200\r\n capsule-protocol = ?1\r\n```",
+              "createdAt": "2024-06-28T10:27:11Z",
+              "updatedAt": "2024-06-28T10:27:12Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHnqa9M6AOwY9",
+          "commit": {
+            "abbreviatedOid": "0cd9d66"
+          },
+          "author": "DavidSchinazi",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-07-01T13:08:29Z",
+          "updatedAt": "2024-07-01T13:08:29Z",
+          "comments": [
+            {
+              "originalPosition": 26,
+              "body": "That's not sufficient because it doesn't allow the client to differentiate between a server that knows this extension and supports it vs an old server that's never heard of this extension and completely ignored the Connect-UDP-Bind header. Echoing is a common tool for determining server support",
+              "createdAt": "2024-07-01T13:08:29Z",
+              "updatedAt": "2024-07-01T13:08:29Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHnqa9M6APWyM",
+          "commit": {
+            "abbreviatedOid": "7791ae9"
+          },
+          "author": "DavidSchinazi",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "OK we're pretty much there",
+          "createdAt": "2024-07-01T14:12:13Z",
+          "updatedAt": "2024-07-01T14:20:03Z",
+          "comments": [
+            {
+              "originalPosition": 160,
+              "body": "```suggestion\r\nThe client or proxy MAY choose to close any context that it registered\r\n```",
+              "createdAt": "2024-07-01T14:12:14Z",
+              "updatedAt": "2024-07-01T14:20:03Z"
+            },
+            {
+              "originalPosition": 184,
+              "body": "```suggestion\r\n~~~\r\n```",
+              "createdAt": "2024-07-01T14:13:04Z",
+              "updatedAt": "2024-07-01T14:20:03Z"
+            },
+            {
+              "originalPosition": 194,
+              "body": "Since this is the4 only use of Target Information, I would recommend inlining it to the definition of the capsule",
+              "createdAt": "2024-07-01T14:14:23Z",
+              "updatedAt": "2024-07-01T14:20:03Z"
+            },
+            {
+              "originalPosition": 212,
+              "body": "So as part of the debate around RFC 9298, we ended up deciding that re-registrating context IDs wasn't possible. (I didn't agree with that at the time). So to make life easier, I'd recommend removing \"until it is re-assigned via a COMPRESSION_ASSIGN exchange.\" here. We could fight it later, but let's avoid that debate for now.",
+              "createdAt": "2024-07-01T14:17:31Z",
+              "updatedAt": "2024-07-01T14:20:03Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHnqa9M6AYixP",
+          "commit": {
+            "abbreviatedOid": "7791ae9"
+          },
+          "author": "asingh-g",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-07-02T13:53:20Z",
+          "updatedAt": "2024-07-02T13:53:21Z",
+          "comments": [
+            {
+              "originalPosition": 212,
+              "body": "Okay sounds good",
+              "createdAt": "2024-07-02T13:53:21Z",
+              "updatedAt": "2024-07-02T13:53:21Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 22,
+      "id": "PR_kwDOHnqa9M5oS7fC",
+      "title": "update connect-udp-listen to use H1 style, Closes #20",
+      "url": "https://github.com/ietf-wg-masque/draft-ietf-masque-connect-udp-listen/pull/22",
+      "state": "MERGED",
+      "author": "asingh-g",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Closes https://github.com/ietf-wg-masque/draft-ietf-masque-connect-udp-listen/issues/20",
+      "createdAt": "2024-02-29T13:36:53Z",
+      "updatedAt": "2024-02-29T21:00:05Z",
+      "baseRepository": "ietf-wg-masque/draft-ietf-masque-connect-udp-listen",
+      "baseRefName": "main",
+      "baseRefOid": "39ff5250f9db4dcea46a3e60d4f0793fb3bf122b",
+      "headRepository": "ietf-wg-masque/draft-ietf-masque-connect-udp-listen",
+      "headRefName": "20-should-connect-udp-listen-be-registered-as-connect-udp-listen",
+      "headRefOid": "87a769685ed60fd2967aa47119c31100205881a6",
+      "closedAt": "2024-02-29T21:00:05Z",
+      "mergedAt": "2024-02-29T21:00:05Z",
+      "mergedBy": "DavidSchinazi",
+      "mergeCommit": {
+        "oid": "ce747bb99b74a6e0243521b696591f6711b5df89"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOHnqa9M5x0FGk",
+          "commit": {
+            "abbreviatedOid": "586f021"
+          },
+          "author": "DavidSchinazi",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "Can we also add \"Closes #20\" to the PR description? That way merging will automatically close the issue",
+          "createdAt": "2024-02-29T17:29:49Z",
+          "updatedAt": "2024-02-29T17:30:30Z",
+          "comments": [
+            {
+              "originalPosition": 48,
+              "body": "In HTTP/2 and HTTP/3, headers are encoded over the wire in lowercase, so I'd revert this one instance",
+              "createdAt": "2024-02-29T17:29:49Z",
+              "updatedAt": "2024-02-29T17:30:30Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHnqa9M5x1jhv",
+          "commit": {
+            "abbreviatedOid": "87a7696"
+          },
+          "author": "DavidSchinazi",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-02-29T21:00:01Z",
+          "updatedAt": "2024-02-29T21:00:01Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 23,
+      "id": "PR_kwDOHnqa9M5oTA-n",
+      "title": "Update Listener to bind (Closes #1)",
+      "url": "https://github.com/ietf-wg-masque/draft-ietf-masque-connect-udp-listen/pull/23",
+      "state": "MERGED",
+      "author": "asingh-g",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "(Closes #1)\r\n\r\nWe will likely also need to update the repo name and consequently the url inside the draft once this change is submitted",
+      "createdAt": "2024-02-29T13:48:04Z",
+      "updatedAt": "2024-02-29T21:34:21Z",
+      "baseRepository": "ietf-wg-masque/draft-ietf-masque-connect-udp-listen",
+      "baseRefName": "main",
+      "baseRefOid": "ce747bb99b74a6e0243521b696591f6711b5df89",
+      "headRepository": "ietf-wg-masque/draft-ietf-masque-connect-udp-listen",
+      "headRefName": "1-improve-document-title",
+      "headRefOid": "ae68222f27f00b7df8505aabe8294869fa52558e",
+      "closedAt": "2024-02-29T21:34:21Z",
+      "mergedAt": "2024-02-29T21:34:20Z",
+      "mergedBy": "DavidSchinazi",
+      "mergeCommit": {
+        "oid": "c986a14f338a7b28daf18d55d718e8ac20be9471"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOHnqa9M5x0F-Z",
+          "commit": {
+            "abbreviatedOid": "4898927"
+          },
+          "author": "DavidSchinazi",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "Similarly, can we add \"Closes #1\" to the PR description?",
+          "createdAt": "2024-02-29T17:31:42Z",
+          "updatedAt": "2024-02-29T17:32:25Z",
+          "comments": [
+            {
+              "originalPosition": 4,
+              "body": "Should we say \"Binding\" or \"Bound\"?",
+              "createdAt": "2024-02-29T17:31:42Z",
+              "updatedAt": "2024-02-29T17:32:25Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHnqa9M5x1EVO",
+          "commit": {
+            "abbreviatedOid": "4898927"
+          },
+          "author": "asingh-g",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-02-29T19:43:17Z",
+          "updatedAt": "2024-02-29T19:43:17Z",
+          "comments": [
+            {
+              "originalPosition": 4,
+              "body": "Either way makes sense, as binding is an adjective here. I don't lean strongly either way.",
+              "createdAt": "2024-02-29T19:43:17Z",
+              "updatedAt": "2024-02-29T19:43:17Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHnqa9M5x1jR7",
+          "commit": {
+            "abbreviatedOid": "4898927"
+          },
+          "author": "DavidSchinazi",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-02-29T20:59:23Z",
+          "updatedAt": "2024-02-29T20:59:23Z",
+          "comments": [
+            {
+              "originalPosition": 4,
+              "body": "Cool. I'd say I have a preference for Bound if they're the same to you",
+              "createdAt": "2024-02-29T20:59:23Z",
+              "updatedAt": "2024-02-29T20:59:23Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHnqa9M5x1vpd",
+          "commit": {
+            "abbreviatedOid": "ae68222"
+          },
+          "author": "DavidSchinazi",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-02-29T21:34:15Z",
+          "updatedAt": "2024-02-29T21:34:15Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 24,
+      "id": "PR_kwDOHnqa9M50QRvc",
+      "title": "Editorial pass",
+      "url": "https://github.com/ietf-wg-masque/draft-ietf-masque-connect-udp-listen/pull/24",
+      "state": "MERGED",
+      "author": "DavidSchinazi",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Fixed a few things from #19 that got missed, also some reorders that I think will make things clearer. Let me know what you think",
+      "createdAt": "2024-07-02T22:36:53Z",
+      "updatedAt": "2024-07-03T16:09:26Z",
+      "baseRepository": "ietf-wg-masque/draft-ietf-masque-connect-udp-listen",
+      "baseRefName": "main",
+      "baseRefOid": "2ac5073971a4bc7fecc3cfaf026af6f2e846d74a",
+      "headRepository": "ietf-wg-masque/draft-ietf-masque-connect-udp-listen",
+      "headRefName": "edit",
+      "headRefOid": "0e06e85fa85066e94afd1d2b5764011b543b6ecd",
+      "closedAt": "2024-07-03T16:09:22Z",
+      "mergedAt": "2024-07-03T16:09:22Z",
+      "mergedBy": "DavidSchinazi",
+      "mergeCommit": {
+        "oid": "ce3e11c8e5a062bb360e661a09c51ec61821861f"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOHnqa9M6AjXaL",
+          "commit": {
+            "abbreviatedOid": "0e06e85"
+          },
+          "author": "asingh-g",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "Looks all good to go!",
+          "createdAt": "2024-07-03T15:19:24Z",
+          "updatedAt": "2024-07-03T15:19:24Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 28,
+      "id": "PR_kwDOHnqa9M5-90ml",
+      "title": "Editorial changes, to fix the example and update security considerations",
+      "url": "https://github.com/ietf-wg-masque/draft-ietf-masque-connect-udp-listen/pull/28",
+      "state": "MERGED",
+      "author": "asingh-g",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "\u2026s other editorial changes",
+      "createdAt": "2024-10-17T12:54:54Z",
+      "updatedAt": "2024-10-18T17:27:57Z",
+      "baseRepository": "ietf-wg-masque/draft-ietf-masque-connect-udp-listen",
+      "baseRefName": "main",
+      "baseRefOid": "d5224944fab4539414db2606de95259b00a84c7e",
+      "headRepository": "ietf-wg-masque/draft-ietf-masque-connect-udp-listen",
+      "headRefName": "editorial-changes",
+      "headRefOid": "4f5b2913eebad14976fae548bf4fb035f9456777",
+      "closedAt": "2024-10-18T17:27:57Z",
+      "mergedAt": "2024-10-18T17:27:57Z",
+      "mergedBy": "DavidSchinazi",
+      "mergeCommit": {
+        "oid": "c681d8af0c4a96d6ce95c7426d1c39c4dcd71490"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOHnqa9M6NnBpm",
+          "commit": {
+            "abbreviatedOid": "d8b7d04"
+          },
+          "author": "DavidSchinazi",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-17T17:12:01Z",
+          "updatedAt": "2024-10-17T17:22:29Z",
+          "comments": [
+            {
+              "originalPosition": 18,
+              "body": "I'm not sure I understand this MUST. Compressed contexts all correspond to a mapped target, don't they?",
+              "createdAt": "2024-10-17T17:12:01Z",
+              "updatedAt": "2024-10-17T17:22:29Z"
+            },
+            {
+              "originalPosition": 20,
+              "body": "I don't think this needs a SHALL, just a statement of fact. Perhaps: \"The uncompressed context allows transporting datagrams to and from any target. Clients that keep the uncompressed context open need to be able to receive from all targets.\"",
+              "createdAt": "2024-10-17T17:16:16Z",
+              "updatedAt": "2024-10-17T17:22:29Z"
+            },
+            {
+              "originalPosition": 21,
+              "body": "I think one bit that was intended with this text was that protection needs to happen at the per-datagram level. Perhaps \"If the UDP proxy would reject unextended UDP proxying requests to some targets (as recommended in {{Section 7 of CONNECT-UDP}}), then for bound UDP proxying requests where the uncompressed context is open, the UDP proxy needs to perform checks on the target of each uncompressed context datagram\"",
+              "createdAt": "2024-10-17T17:19:40Z",
+              "updatedAt": "2024-10-17T17:22:29Z"
+            },
+            {
+              "originalPosition": 97,
+              "body": "https://www.rfc-editor.org/rfc/rfc5737.html#section-3",
+              "createdAt": "2024-10-17T17:21:13Z",
+              "updatedAt": "2024-10-17T17:22:29Z"
+            },
+            {
+              "originalPosition": 161,
+              "body": "Wait context ID 4 should still be open here right?",
+              "createdAt": "2024-10-17T17:22:25Z",
+              "updatedAt": "2024-10-17T17:22:29Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHnqa9M6NwTZJ",
+          "commit": {
+            "abbreviatedOid": "d8b7d04"
+          },
+          "author": "asingh-g",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-18T14:18:07Z",
+          "updatedAt": "2024-10-18T14:18:07Z",
+          "comments": [
+            {
+              "originalPosition": 161,
+              "body": "Oh maybe its not clear, year thats exactly what I'm saying but the sentence is split awkwardly",
+              "createdAt": "2024-10-18T14:18:07Z",
+              "updatedAt": "2024-10-18T14:18:07Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHnqa9M6NwzVm",
+          "commit": {
+            "abbreviatedOid": "d8b7d04"
+          },
+          "author": "asingh-g",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-18T15:05:18Z",
+          "updatedAt": "2024-10-18T15:05:19Z",
+          "comments": [
+            {
+              "originalPosition": 161,
+              "body": "I updated it to make a bit more sense",
+              "createdAt": "2024-10-18T15:05:19Z",
+              "updatedAt": "2024-10-18T15:05:19Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHnqa9M6Nwz6Q",
+          "commit": {
+            "abbreviatedOid": "d8b7d04"
+          },
+          "author": "asingh-g",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-18T15:06:27Z",
+          "updatedAt": "2024-10-18T15:06:27Z",
+          "comments": [
+            {
+              "originalPosition": 18,
+              "body": "maybe its the double negative, I'm trying to say that all traffic that doesn't belong to a bound context should be dropped ",
+              "createdAt": "2024-10-18T15:06:27Z",
+              "updatedAt": "2024-10-18T15:06:27Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHnqa9M6Nw0n-",
+          "commit": {
+            "abbreviatedOid": "d8b7d04"
+          },
+          "author": "asingh-g",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-18T15:07:50Z",
+          "updatedAt": "2024-10-18T15:07:50Z",
+          "comments": [
+            {
+              "originalPosition": 20,
+              "body": "I agree, this is better, I'll use it instead",
+              "createdAt": "2024-10-18T15:07:50Z",
+              "updatedAt": "2024-10-18T15:07:50Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHnqa9M6NxwLg",
+          "commit": {
+            "abbreviatedOid": "1c8d219"
+          },
+          "author": "DavidSchinazi",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM!",
+          "createdAt": "2024-10-18T17:23:02Z",
+          "updatedAt": "2024-10-18T17:26:25Z",
+          "comments": [
+            {
+              "originalPosition": 84,
+              "body": "```suggestion\r\n/ * Client responds on the same uncompressed context */\r\n```",
+              "createdAt": "2024-10-18T17:23:02Z",
+              "updatedAt": "2024-10-18T17:26:26Z"
+            },
+            {
+              "originalPosition": 24,
+              "body": "```suggestion\r\ndatagram it receives.\r\n```",
+              "createdAt": "2024-10-18T17:23:25Z",
+              "updatedAt": "2024-10-18T17:26:26Z"
+            },
+            {
+              "originalPosition": 105,
+              "body": "```suggestion\r\n/ * Client responds on the same uncompressed context */\r\n```",
+              "createdAt": "2024-10-18T17:24:04Z",
+              "updatedAt": "2024-10-18T17:26:26Z"
+            },
+            {
+              "originalPosition": 164,
+              "body": "```suggestion\r\n/* And the rest is dropped at the proxy */\r\n```",
+              "createdAt": "2024-10-18T17:24:42Z",
+              "updatedAt": "2024-10-18T17:26:26Z"
+            }
+          ]
+        }
+      ]
     }
   ]
 }
