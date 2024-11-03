@@ -330,10 +330,10 @@ address to bind. The proxy MAY assign more addresses. For each selected
 address, it MUST select an open port to bind to this request. From then and
 until the tunnel is closed, the proxy SHALL send packets received on these
 IP-port tuples to the client. The proxy MUST communicate the selected addresses
-and ports to the client using the "Proxy-Public-Address" header. The header is
-defined as a List of IP-Port-tuples. The format of the tuple is defined using
-IP-literal, IPv4address, IPv6address and port from {{Section 3.2 of
-!URI=RFC3986}}.
+and ports to the client using the "Proxy-Public-Address" header field. The
+header field is defined as a List of IP-Port-tuples. The format of the tuple is
+defined using IP-literal, IPv4address, IPv6address and port from {{Section 3.2
+of !URI=RFC3986}}.
 
 ~~~
 ip-port-tuple = ( IP-literal / IPv4address ) ":" port
@@ -388,14 +388,19 @@ conditions occur.
 
 # IANA Considerations
 
-This document will request IANA to register the following entry in the "HTTP
-Field Name" registry maintained at
+## HTTP Fields {#iana-fields}
+
+This document will request IANA to register the following new items in the
+"HTTP Field Name" registry maintained at
 <[](https://www.iana.org/assignments/http-fields)>:
 
-: Connect-UDP-Bind
+|      Field Name      | Structured Type |
+|:---------------------|:----------------|
+|   Connect-UDP-Bind   |      Item       |
+| Proxy-Public-Address |      List       |
+{: #iana-fields-table title="New Fields"}
 
-Template:
-: None
+All of these new entries use the following values for these fields:
 
 Status:
 : provisional (permanent if this document is approved)
@@ -404,12 +409,12 @@ Reference:
 : This document
 
 Comments:
-
 : None
 {: spacing="compact"}
 
+## Capsules {#iana-capsules}
 
-This document also requests IANA to register the following new items to the
+This document will request IANA to register the following new items to the
 "HTTP Capsule Types" registry maintained at
 <[](https://www.iana.org/assignments/masque)>:
 
@@ -427,8 +432,13 @@ Status:
 Reference:
 : This document
 
-Comments:
+Change Controller:
+: IETF
 
+Contact:
+: MASQUE Working Group <masque@ietf.org>
+
+Notes:
 : None
 {: spacing="compact"}
 
