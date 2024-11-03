@@ -14,7 +14,7 @@ protocols such as HTTP/3, but is not sufficient for some UDP peer-to-peer
 protocols like WebRTC. This document proposes an extension to UDP Proxying in
 HTTP that enables such use-cases. 
     " name="description">
-<meta content="xml2rfc 3.23.2" name="generator">
+<meta content="xml2rfc 3.24.0" name="generator">
 <meta content="quic" name="keyword">
 <meta content="http" name="keyword">
 <meta content="datagram" name="keyword">
@@ -29,13 +29,13 @@ HTTP that enables such use-cases.
 <meta content="bind" name="keyword">
 <meta content="draft-ietf-masque-connect-udp-listen-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.23.2
+  xml2rfc 3.24.0
     Python 3.12.7
     ConfigArgParse 1.7
     google-i18n-address 3.1.1
     intervaltree 3.1.0
     Jinja2 3.1.4
-    lxml 4.9.4
+    lxml 5.3.0
     platformdirs 4.3.6
     pycountry 22.3.5
     PyYAML 6.0.1
@@ -177,31 +177,6 @@ HTTP that enables such use-cases.
 }
 
 @font-face {
-  font-family: 'Cabin Condensed';
-  font-style: normal;
-  font-weight: 600;
-  font-display: swap;
-  src: local('Cabin Condensed SemiBold'), local('CabinCondensed-SemiBold'), url('https://martinthomson.github.io/rfc-css/fonts/cabincondensed-semibold-vietnamese.woff2') format('woff2');
-  unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
-}
-@font-face {
-  font-family: 'Cabin Condensed';
-  font-style: normal;
-  font-weight: 600;
-  font-display: swap;
-  src: local('Cabin Condensed SemiBold'), local('CabinCondensed-SemiBold'), url('https://martinthomson.github.io/rfc-css/fonts/cabincondensed-semibold-latin-ext.woff2') format('woff2');
-  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-@font-face {
-  font-family: 'Cabin Condensed';
-  font-style: normal;
-  font-weight: 600;
-  font-display: swap;
-  src: local('Cabin Condensed SemiBold'), local('CabinCondensed-SemiBold'), url('https://martinthomson.github.io/rfc-css/fonts/cabincondensed-semibold-latin.woff2') format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-
-@font-face {
   font-family: 'Oxygen Mono';
   font-style: normal;
   font-weight: 400;
@@ -218,6 +193,77 @@ HTTP that enables such use-cases.
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
+@font-face {
+  font-family: 'Sofia Sans Semi Condensed';
+  font-style: italic;
+  font-weight: 1 1000;
+  src: url('https://martinthomson.github.io/rfc-css/fonts/sofiasanssemicondensed-italic-cyrillic-ext.woff2') format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+@font-face {
+  font-family: 'Sofia Sans Semi Condensed';
+  font-style: italic;
+  font-weight: 1 1000;
+  src: url('https://martinthomson.github.io/rfc-css/fonts/sofiasanssemicondensed-italic-cyrillic.woff2') format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: 'Sofia Sans Semi Condensed';
+  font-style: italic;
+  font-weight: 1 1000;
+  src: url('https://martinthomson.github.io/rfc-css/fonts/sofiasanssemicondensed-italic-greek.woff2') format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+@font-face {
+  font-family: 'Sofia Sans Semi Condensed';
+  font-style: italic;
+  font-weight: 1 1000;
+  src: url('https://martinthomson.github.io/rfc-css/fonts/sofiasanssemicondensed-italic-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Sofia Sans Semi Condensed';
+  font-style: italic;
+  font-weight: 1 1000;
+  src: url('https://martinthomson.github.io/rfc-css/fonts/sofiasanssemicondensed-italic-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Sofia Sans Semi Condensed';
+  font-style: normal;
+  font-weight: 1 1000;
+  src: url('https://martinthomson.github.io/rfc-css/fonts/sofiasanssemicondensed-regular-cyrillic-ext.woff2') format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+@font-face {
+  font-family: 'Sofia Sans Semi Condensed';
+  font-style: normal;
+  font-weight: 1 1000;
+  src: url('https://martinthomson.github.io/rfc-css/fonts/sofiasanssemicondensed-regular-cyrillic.woff2') format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: 'Sofia Sans Semi Condensed';
+  font-style: normal;
+  font-weight: 1 1000;
+  src: url('https://martinthomson.github.io/rfc-css/fonts/sofiasanssemicondensed-regular-greek.woff2') format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+@font-face {
+  font-family: 'Sofia Sans Semi Condensed';
+  font-style: normal;
+  font-weight: 1 1000;
+  src: url('https://martinthomson.github.io/rfc-css/fonts/sofiasanssemicondensed-regular-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Sofia Sans Semi Condensed';
+  font-style: normal;
+  font-weight: 1 1000;
+  src: url('https://martinthomson.github.io/rfc-css/fonts/sofiasanssemicondensed-regular-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
 :root {
   color-scheme: light dark;
   --background-color: #fff;
@@ -230,6 +276,7 @@ HTTP that enables such use-cases.
   --pilcrow-strong: #bbb;
   --small-font-size: 14.5px;
   --font-mono: 'Oxygen Mono', monospace;
+  --font-title: "Sofia Sans Semi Condensed", sans-serif;
   scrollbar-color: #bbb #eee;
 }
 body {
@@ -248,8 +295,8 @@ body {
 
 /* headings */
 h1, h2, h3, h4, h5, h6 {
-  font-family: "Cabin Condensed", sans-serif;
-  font-weight: 600;
+  font-family: var(--font-title);
+  font-weight: 680;
   margin: 0.8em 0 0.3em;
   font-size-adjust: 0.5;
   color: var(--title-color);
@@ -657,6 +704,12 @@ sub, sup {
   padding: 0.75em 0 2em 0;
   margin-bottom: 1em;
 }
+@media screen {
+  #toc nav {
+    font-family: var(--font-title);
+    font-weight: 360;
+  }
+}
 #toc nav ul {
   margin: 0 0.5em 0 0;
   padding: 0;
@@ -1040,11 +1093,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">CONNECT-UDP Bind</td>
-<td class="right">October 2024</td>
+<td class="right">November 2024</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Schinazi &amp; Singh</td>
-<td class="center">Expires 21 April 2025</td>
+<td class="center">Expires 7 May 2025</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1057,12 +1110,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-masque-connect-udp-listen-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2024-10-18" class="published">18 October 2024</time>
+<time datetime="2024-11-03" class="published">3 November 2024</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2025-04-21">21 April 2025</time></dd>
+<dd class="expires"><time datetime="2025-05-07">7 May 2025</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1120,7 +1173,7 @@ HTTP that enables such use-cases.<a href="#section-abstract-1" class="pilcrow">�
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 21 April 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 7 May 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1213,6 +1266,14 @@ HTTP that enables such use-cases.<a href="#section-abstract-1" class="pilcrow">�
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11">
             <p id="section-toc.1-1.11.1"><a href="#section-11" class="auto internal xref">11</a>. <a href="#name-iana-considerations" class="internal xref">IANA Considerations</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11.2.1">
+                <p id="section-toc.1-1.11.2.1.1"><a href="#section-11.1" class="auto internal xref">11.1</a>.  <a href="#name-http-fields" class="internal xref">HTTP Fields</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11.2.2">
+                <p id="section-toc.1-1.11.2.2.1"><a href="#section-11.2" class="auto internal xref">11.2</a>.  <a href="#name-capsules-2" class="internal xref">Capsules</a></p>
+</li>
+            </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.12">
             <p id="section-toc.1-1.12.1"><a href="#section-12" class="auto internal xref">12</a>. <a href="#name-references" class="internal xref">References</a></p>
@@ -1586,9 +1647,9 @@ address to bind. The proxy <span class="bcp14">MAY</span> assign more addresses.
 address, it <span class="bcp14">MUST</span> select an open port to bind to this request. From then and
 until the tunnel is closed, the proxy <span class="bcp14">SHALL</span> send packets received on these
 IP-port tuples to the client. The proxy <span class="bcp14">MUST</span> communicate the selected addresses
-and ports to the client using the "Proxy-Public-Address" header. The header is
-defined as a List of IP-Port-tuples. The format of the tuple is defined using
-IP-literal, IPv4address, IPv6address and port from <span><a href="https://rfc-editor.org/rfc/rfc3986#section-3.2" class="relref">Section 3.2</a> of [<a href="#URI" class="cite xref">URI</a>]</span>.<a href="#section-8-1" class="pilcrow">¶</a></p>
+and ports to the client using the "Proxy-Public-Address" header field. The
+header field is defined as a List of IP-Port-tuples. The format of the tuple is
+defined using IP-literal, IPv4address, IPv6address and port from <span><a href="https://rfc-editor.org/rfc/rfc3986#section-3.2" class="relref">Section 3.2</a> of [<a href="#URI" class="cite xref">URI</a>]</span>.<a href="#section-8-1" class="pilcrow">¶</a></p>
 <span id="name-proxy-address-format"></span><div id="target-format">
 <figure id="figure-5">
         <div class="alignLeft art-text artwork" id="section-8-2.1">
@@ -1656,88 +1717,120 @@ conditions occur.<a href="#section-10-3" class="pilcrow">¶</a></p>
       <h2 id="name-iana-considerations">
 <a href="#section-11" class="section-number selfRef">11. </a><a href="#name-iana-considerations" class="section-name selfRef">IANA Considerations</a>
       </h2>
-<span class="break"></span><dl class="dlCompact dlParallel" id="section-11-1">
-        <dt id="section-11-1.1">This document will request IANA to register the following entry in the "HTTP</dt>
-        <dd style="margin-left: 1.5em" id="section-11-1.2">
-          <p id="section-11-1.2.1"></p><a href="#section-11-1.2" class="pilcrow">¶</a>
-</dd>
-        <dd class="break"></dd>
-<dt id="section-11-1.3">Field Name" registry maintained at</dt>
-        <dd style="margin-left: 1.5em" id="section-11-1.4">
-          <p id="section-11-1.4.1"></p><a href="#section-11-1.4" class="pilcrow">¶</a>
-</dd>
-        <dd class="break"></dd>
-<dt id="section-11-1.5">&lt;<span><a href="https://www.iana.org/assignments/http-fields">https://www.iana.org/assignments/http-fields</a></span>&gt;:</dt>
-        <dd style="margin-left: 1.5em" id="section-11-1.6">
-          <p id="section-11-1.6.1">Connect-UDP-Bind<a href="#section-11-1.6.1" class="pilcrow">¶</a></p>
-</dd>
-        <dd class="break"></dd>
-<dt id="section-11-1.7">Template:</dt>
-        <dd style="margin-left: 1.5em" id="section-11-1.8">
-          <p id="section-11-1.8.1">None<a href="#section-11-1.8.1" class="pilcrow">¶</a></p>
-</dd>
-        <dd class="break"></dd>
-<dt id="section-11-1.9">Status:</dt>
-        <dd style="margin-left: 1.5em" id="section-11-1.10">
-          <p id="section-11-1.10.1">provisional (permanent if this document is approved)<a href="#section-11-1.10.1" class="pilcrow">¶</a></p>
-</dd>
-        <dd class="break"></dd>
-<dt id="section-11-1.11">Reference:</dt>
-        <dd style="margin-left: 1.5em" id="section-11-1.12">
-          <p id="section-11-1.12.1">This document<a href="#section-11-1.12.1" class="pilcrow">¶</a></p>
-</dd>
-        <dd class="break"></dd>
-<dt id="section-11-1.13">Comments:</dt>
-        <dd style="margin-left: 1.5em" id="section-11-1.14">
-          <p id="section-11-1.14.1">None<a href="#section-11-1.14.1" class="pilcrow">¶</a></p>
-</dd>
-      <dd class="break"></dd>
-</dl>
-<p id="section-11-2">This document also requests IANA to register the following new items to the
-"HTTP Capsule Types" registry maintained at
-&lt;<span><a href="https://www.iana.org/assignments/masque">https://www.iana.org/assignments/masque</a></span>&gt;:<a href="#section-11-2" class="pilcrow">¶</a></p>
-<span id="name-new-capsules"></span><div id="iana-capsules-table">
+<div id="iana-fields">
+<section id="section-11.1">
+        <h3 id="name-http-fields">
+<a href="#section-11.1" class="section-number selfRef">11.1. </a><a href="#name-http-fields" class="section-name selfRef">HTTP Fields</a>
+        </h3>
+<p id="section-11.1-1">This document will request IANA to register the following new items in the
+"HTTP Field Name" registry maintained at
+&lt;<span><a href="https://www.iana.org/assignments/http-fields">https://www.iana.org/assignments/http-fields</a></span>&gt;:<a href="#section-11.1-1" class="pilcrow">¶</a></p>
+<span id="name-new-fields"></span><div id="iana-fields-table">
 <table class="center" id="table-1">
-        <caption>
+          <caption>
 <a href="#table-1" class="selfRef">Table 1</a>:
-<a href="#name-new-capsules" class="selfRef">New Capsules</a>
-        </caption>
+<a href="#name-new-fields" class="selfRef">New Fields</a>
+          </caption>
 <thead>
-          <tr>
-            <th class="text-left" rowspan="1" colspan="1">Value</th>
-            <th class="text-left" rowspan="1" colspan="1">Capsule Type</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td class="text-left" rowspan="1" colspan="1">0x1C0FE323</td>
-            <td class="text-left" rowspan="1" colspan="1">COMPRESSION_ASSIGN</td>
-          </tr>
-          <tr>
-            <td class="text-left" rowspan="1" colspan="1">0x1C0FE324</td>
-            <td class="text-left" rowspan="1" colspan="1">COMPRESSION_CLOSE</td>
-          </tr>
-        </tbody>
-      </table>
+            <tr>
+              <th class="text-left" rowspan="1" colspan="1">Field Name</th>
+              <th class="text-left" rowspan="1" colspan="1">Structured Type</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">Connect-UDP-Bind</td>
+              <td class="text-left" rowspan="1" colspan="1">Item</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">Proxy-Public-Address</td>
+              <td class="text-left" rowspan="1" colspan="1">List</td>
+            </tr>
+          </tbody>
+        </table>
 </div>
-<p id="section-11-4">All of these new entries use the following values for these fields:<a href="#section-11-4" class="pilcrow">¶</a></p>
-<span class="break"></span><dl class="dlCompact dlParallel" id="section-11-5">
-        <dt id="section-11-5.1">Status:</dt>
-        <dd style="margin-left: 1.5em" id="section-11-5.2">
-          <p id="section-11-5.2.1">provisional (permanent if this document is approved)<a href="#section-11-5.2.1" class="pilcrow">¶</a></p>
+<p id="section-11.1-3">All of these new entries use the following values for these fields:<a href="#section-11.1-3" class="pilcrow">¶</a></p>
+<span class="break"></span><dl class="dlCompact dlParallel" id="section-11.1-4">
+          <dt id="section-11.1-4.1">Status:</dt>
+          <dd style="margin-left: 1.5em" id="section-11.1-4.2">
+            <p id="section-11.1-4.2.1">provisional (permanent if this document is approved)<a href="#section-11.1-4.2.1" class="pilcrow">¶</a></p>
+</dd>
+          <dd class="break"></dd>
+<dt id="section-11.1-4.3">Reference:</dt>
+          <dd style="margin-left: 1.5em" id="section-11.1-4.4">
+            <p id="section-11.1-4.4.1">This document<a href="#section-11.1-4.4.1" class="pilcrow">¶</a></p>
+</dd>
+          <dd class="break"></dd>
+<dt id="section-11.1-4.5">Comments:</dt>
+          <dd style="margin-left: 1.5em" id="section-11.1-4.6">
+            <p id="section-11.1-4.6.1">None<a href="#section-11.1-4.6.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
-<dt id="section-11-5.3">Reference:</dt>
-        <dd style="margin-left: 1.5em" id="section-11-5.4">
-          <p id="section-11-5.4.1">This document<a href="#section-11-5.4.1" class="pilcrow">¶</a></p>
-</dd>
-        <dd class="break"></dd>
-<dt id="section-11-5.5">Comments:</dt>
-        <dd style="margin-left: 1.5em" id="section-11-5.6">
-          <p id="section-11-5.6.1">None<a href="#section-11-5.6.1" class="pilcrow">¶</a></p>
-</dd>
-      <dd class="break"></dd>
 </dl>
+</section>
+</div>
+<div id="iana-capsules">
+<section id="section-11.2">
+        <h3 id="name-capsules-2">
+<a href="#section-11.2" class="section-number selfRef">11.2. </a><a href="#name-capsules-2" class="section-name selfRef">Capsules</a>
+        </h3>
+<p id="section-11.2-1">This document will request IANA to register the following new items to the
+"HTTP Capsule Types" registry maintained at
+&lt;<span><a href="https://www.iana.org/assignments/masque">https://www.iana.org/assignments/masque</a></span>&gt;:<a href="#section-11.2-1" class="pilcrow">¶</a></p>
+<span id="name-new-capsules"></span><div id="iana-capsules-table">
+<table class="center" id="table-2">
+          <caption>
+<a href="#table-2" class="selfRef">Table 2</a>:
+<a href="#name-new-capsules" class="selfRef">New Capsules</a>
+          </caption>
+<thead>
+            <tr>
+              <th class="text-left" rowspan="1" colspan="1">Value</th>
+              <th class="text-left" rowspan="1" colspan="1">Capsule Type</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">0x1C0FE323</td>
+              <td class="text-left" rowspan="1" colspan="1">COMPRESSION_ASSIGN</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">0x1C0FE324</td>
+              <td class="text-left" rowspan="1" colspan="1">COMPRESSION_CLOSE</td>
+            </tr>
+          </tbody>
+        </table>
+</div>
+<p id="section-11.2-3">All of these new entries use the following values for these fields:<a href="#section-11.2-3" class="pilcrow">¶</a></p>
+<span class="break"></span><dl class="dlCompact dlParallel" id="section-11.2-4">
+          <dt id="section-11.2-4.1">Status:</dt>
+          <dd style="margin-left: 1.5em" id="section-11.2-4.2">
+            <p id="section-11.2-4.2.1">provisional (permanent if this document is approved)<a href="#section-11.2-4.2.1" class="pilcrow">¶</a></p>
+</dd>
+          <dd class="break"></dd>
+<dt id="section-11.2-4.3">Reference:</dt>
+          <dd style="margin-left: 1.5em" id="section-11.2-4.4">
+            <p id="section-11.2-4.4.1">This document<a href="#section-11.2-4.4.1" class="pilcrow">¶</a></p>
+</dd>
+          <dd class="break"></dd>
+<dt id="section-11.2-4.5">Change Controller:</dt>
+          <dd style="margin-left: 1.5em" id="section-11.2-4.6">
+            <p id="section-11.2-4.6.1">IETF<a href="#section-11.2-4.6.1" class="pilcrow">¶</a></p>
+</dd>
+          <dd class="break"></dd>
+<dt id="section-11.2-4.7">Contact:</dt>
+          <dd style="margin-left: 1.5em" id="section-11.2-4.8">
+            <p id="section-11.2-4.8.1">MASQUE Working Group <a href="mailto:masque@ietf.org">masque@ietf.org</a><a href="#section-11.2-4.8.1" class="pilcrow">¶</a></p>
+</dd>
+          <dd class="break"></dd>
+<dt id="section-11.2-4.9">Notes:</dt>
+          <dd style="margin-left: 1.5em" id="section-11.2-4.10">
+            <p id="section-11.2-4.10.1">None<a href="#section-11.2-4.10.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+</dl>
+</section>
+</div>
 </section>
 </div>
 <div id="sec-combined-references">
