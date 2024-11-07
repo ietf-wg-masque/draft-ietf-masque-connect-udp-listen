@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-11-05T00:49:27.353250+00:00",
+  "timestamp": "2024-11-07T00:49:42.610259+00:00",
   "repo": "ietf-wg-masque/draft-ietf-masque-connect-udp-listen",
   "labels": [
     {
@@ -403,7 +403,7 @@
       "id": "I_kwDOHnqa9M6O17Hm",
       "title": "Appendix A mentions STUN server sending IP to other browser",
       "url": "https://github.com/ietf-wg-masque/draft-ietf-masque-connect-udp-listen/issues/25",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "recvfrom",
       "authorAssociation": "NONE",
       "assignees": [],
@@ -412,8 +412,8 @@
       ],
       "body": "The example in Appendix A mentions:\r\n> ... [the client] wishes to use WebRTC with another browser over a Bound UDP Proxying tunnel.  It contacts a STUN server at 192.0.2.42. The STUN server, in response, sends the proxy's IP address to the other browser at 203.0.113.33.  Using this information, the other browser sends a UDP packet to the proxy, which is proxied over HTTP back to the client.\r\n\r\nIIUC the STUN server doesn't send information between clients, though, and instead is only used by each side to determine their public IP address when building the list of ICE candidates (which the clients then send to each other through other means).",
       "createdAt": "2024-07-08T20:23:15Z",
-      "updatedAt": "2024-07-10T19:56:32Z",
-      "closedAt": null,
+      "updatedAt": "2024-11-06T10:00:40Z",
+      "closedAt": "2024-11-06T10:00:39Z",
       "comments": [
         {
           "author": "DavidSchinazi",
@@ -421,6 +421,13 @@
           "body": "You're correct. OK we'll have to fix this. Marking as editorial.",
           "createdAt": "2024-07-10T19:56:31Z",
           "updatedAt": "2024-07-10T19:56:31Z"
+        },
+        {
+          "author": "asingh-g",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Closing this since #28 changed and fixed the example\r\n",
+          "createdAt": "2024-11-06T10:00:35Z",
+          "updatedAt": "2024-11-06T10:00:35Z"
         }
       ]
     },
@@ -429,15 +436,15 @@
       "id": "I_kwDOHnqa9M6QNkiT",
       "title": "Unclear validation requirement in Security Considerations",
       "url": "https://github.com/ietf-wg-masque/draft-ietf-masque-connect-udp-listen/issues/26",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "DavidSchinazi",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "From @gloinul on the [list](https://mailarchive.ietf.org/arch/msg/masque/vaL2o4FTvfzJMLYhBie1yIgNwbw/):\r\n\r\n> Therefore, proxies MUST validate the target on every datagram and MUST NOT forward individual datagrams with unauthorized targets.\r\n\r\nTo me it is unclear what this sentence actually require the proxy to do? If one uses the uncompressed operation, the proxy can forward any arriving traffic to the client, equally the client can send with a target address of any. Is the expectation here to verify that the client is not sending any packets to a destination target that is on a list to be protected? How is the proxy arriving at which addresses are not ok to send to?",
       "createdAt": "2024-07-19T17:31:41Z",
-      "updatedAt": "2024-07-19T17:32:19Z",
-      "closedAt": null,
+      "updatedAt": "2024-11-06T10:00:01Z",
+      "closedAt": "2024-11-06T10:00:01Z",
       "comments": [
         {
           "author": "DavidSchinazi",
@@ -445,6 +452,13 @@
           "body": "I agree. This text predates the ability to close the uncompressed context, we just forgot to update it. Will fix",
           "createdAt": "2024-07-19T17:32:17Z",
           "updatedAt": "2024-07-19T17:32:17Z"
+        },
+        {
+          "author": "asingh-g",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Closing this since #28 corrected this\r\n",
+          "createdAt": "2024-11-06T10:00:01Z",
+          "updatedAt": "2024-11-06T10:00:01Z"
         }
       ]
     },
@@ -453,7 +467,7 @@
       "id": "I_kwDOHnqa9M6QNlNj",
       "title": "Unclear discussion of context IDs",
       "url": "https://github.com/ietf-wg-masque/draft-ietf-masque-connect-udp-listen/issues/27",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "DavidSchinazi",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
@@ -462,8 +476,8 @@
       ],
       "body": "From @gloinul on the [list](https://mailarchive.ietf.org/arch/msg/masque/vaL2o4FTvfzJMLYhBie1yIgNwbw/):\r\n\r\n> Both client and proxy can then negotiate even and odd numbered context IDs to send UDP payloads to each other.\r\n\r\nTo me it is unclear what this sentence actually require the proxy to do? If one uses the uncompressed operation, the proxy can forward any arriving traffic to the client, equally the client can send with a target address of any. Is the expectation here to verify that the client is not sending any packets to a destination target that is on a list to be protected? How is the proxy arriving at which addresses are not ok to send to?",
       "createdAt": "2024-07-19T17:33:54Z",
-      "updatedAt": "2024-07-19T17:34:03Z",
-      "closedAt": null,
+      "updatedAt": "2024-11-06T09:59:53Z",
+      "closedAt": "2024-11-06T09:59:52Z",
       "comments": [
         {
           "author": "DavidSchinazi",
@@ -471,6 +485,13 @@
           "body": "The intent here was to remind the reader of how context IDs work per RFC 9298. We'll look into making some editorial improvements.",
           "createdAt": "2024-07-19T17:34:02Z",
           "updatedAt": "2024-07-19T17:34:02Z"
+        },
+        {
+          "author": "asingh-g",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Closing this since #28 corrected this\r\n",
+          "createdAt": "2024-11-06T09:59:53Z",
+          "updatedAt": "2024-11-06T09:59:53Z"
         }
       ]
     }
