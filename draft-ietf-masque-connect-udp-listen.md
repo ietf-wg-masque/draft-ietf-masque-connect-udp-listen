@@ -124,12 +124,15 @@ defined in {{compression}}.
 
 This extension leverages context IDs (see {{Section 4 of CONNECT-UDP}}) to
 compress the target IP address and port when encoding datagrams on the wire.
-Endpoint start by registering a context ID and the IP/ports it's associated
+Endpoint starts by registering a context ID and the IP/ports it's associated
 with by sending a COMPRESSION_ASSIGN capsule to its peer. The peer will then
 echo that capsule to indicate it's received it and estabished its own mapping.
 From then on, both endpoints are aware of the context ID and can send
 compressed datagrams. Later, any endpoint can decide to close the compression
-context by sending a COMPRESSION_CLOSE capsule.
+context by sending a COMPRESSION_CLOSE capsule. Only one such active context
+MUST be registered at a time. When an uncompressed context already exists,
+any further uncompressed COMPRESSION_ASSIGN capsules SHOULD be rejected by the
+peer.
 
 The context ID 0 was reserved by unextended connect-udp and is not used by this
 extension. Once an endpoint has ascertained that the peer supports this
