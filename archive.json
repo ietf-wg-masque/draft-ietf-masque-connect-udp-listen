@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-03-13T00:53:37.289207+00:00",
+  "timestamp": "2025-03-16T00:57:29.409797+00:00",
   "repo": "ietf-wg-masque/draft-ietf-masque-connect-udp-listen",
   "labels": [
     {
@@ -3139,6 +3139,65 @@
               "body": "```suggestion\r\n/* And the rest is dropped at the proxy */\r\n```",
               "createdAt": "2024-10-18T17:24:42Z",
               "updatedAt": "2024-10-18T17:26:26Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 29,
+      "id": "PR_kwDOHnqa9M6OwBBv",
+      "title": "State that only one uncompressed Context can be active at a time",
+      "url": "https://github.com/ietf-wg-masque/draft-ietf-masque-connect-udp-listen/pull/29",
+      "state": "OPEN",
+      "author": "asingh-g",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-03-15T03:08:49Z",
+      "updatedAt": "2025-03-15T03:49:23Z",
+      "baseRepository": "ietf-wg-masque/draft-ietf-masque-connect-udp-listen",
+      "baseRefName": "main",
+      "baseRefOid": "1583a8e39a751af539b142d5b04f746be7b5dbef",
+      "headRepository": "ietf-wg-masque/draft-ietf-masque-connect-udp-listen",
+      "headRefName": "uncompressed-limit",
+      "headRefOid": "0faaa93b09b414cf77f6e9838139a9a54b5e6ae7",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOHnqa9M6gLR4s",
+          "commit": {
+            "abbreviatedOid": "0faaa93"
+          },
+          "author": "DavidSchinazi",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-03-15T03:44:41Z",
+          "updatedAt": "2025-03-15T03:49:23Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "That sounds a little weird grammar-wise? Maybe `Each endpoint starts` or perhaps even better `Endpoints start`",
+              "createdAt": "2025-03-15T03:44:41Z",
+              "updatedAt": "2025-03-15T03:49:23Z"
+            },
+            {
+              "originalPosition": 11,
+              "body": "This isn't very clear to me. It could be parsed to mean \"only one context is allowed at a time\" which right. It could also be parsed as \"you can't have two active contexts for the same address/port combo\" - is that what we mean? Maybe it's simplest to describe this in terms of capsules. Perhaps `Endpoints MUST NOT send two COMPRESSION_ASSIGN capsules with the same context ID. If a recipient detects a repeated context ID, it MUST consider the capsule as malformed\"",
+              "createdAt": "2025-03-15T03:47:27Z",
+              "updatedAt": "2025-03-15T03:49:23Z"
+            },
+            {
+              "originalPosition": 13,
+              "body": "If we say reject multiple uncompressed contexts, we should also ban opening them. And I'd recommend having all these be MUSTs to simplify the protocol. If we make them SHOULD then we need to be able to handle peers that don't respect the SHOULD",
+              "createdAt": "2025-03-15T03:49:17Z",
+              "updatedAt": "2025-03-15T03:49:23Z"
             }
           ]
         }
