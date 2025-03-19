@@ -155,7 +155,7 @@ set to zero. Only a single uncompressed context MUST be requested at a time. If
 the proxy receives a second uncompressed context COMPRESSION_ASSIGN capsule, it MUST be
 considered malformed. Only the client can request uncompressed contexts and if
 the proxy attempts to request uncompressed contexts, the client MUST consider
-the capsule malformed.
+the COMPRESSION_ASSIGN capsule it received malformed.
 
 When HTTP Datagrams {{!HTTP-DGRAM=RFC9297}} are associated with a Bound UDP
 Proxying request, the format of their UDP Proxying Payload field (see {{Section
