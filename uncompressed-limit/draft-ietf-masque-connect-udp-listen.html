@@ -1445,14 +1445,14 @@ COMPRESSION_CLOSE with the context ID (see <a href="#capsulecloseformat" class="
 doesn't wish to support compression for the given Context ID (For example, due
 to the memory cost of establishing a list of mappings per target per client).
 If the compression was rejected, the client and proxy will instead use an
-uncompressed context ID (See <a href="#uncompressed" class="auto internal xref">Section 4</a>) to exhange UDP payloads for the
+uncompressed context ID (See <a href="#uncompressed" class="auto internal xref">Section 4</a>) to exchange UDP payloads for the
 given target, if those have been enabled. Only one Context ID <span class="bcp14">MUST</span> be used per
 IP-port tuple. If both client and server each negotiate a Context ID for the
 same tuple, the server <span class="bcp14">MUST</span> accept the client's request and the client <span class="bcp14">MUST</span>
 reject or close the server's context ID by sending a COMPRESSION_CLOSE. If
 a peer attempts to allocate another Context ID for a tuple which already has
-an active context ID previously requested by the same peer, this
-COMPRESSION_ASSIGN capsule <span class="bcp14">MUST</span> be considered malformed.<a href="#section-5-1" class="pilcrow">¶</a></p>
+an active context ID it previously requested, this COMPRESSION_ASSIGN capsule
+<span class="bcp14">MUST</span> be considered malformed.<a href="#section-5-1" class="pilcrow">¶</a></p>
 <div id="mappings">
 <section id="section-5.1">
         <h3 id="name-compression-mapping">
