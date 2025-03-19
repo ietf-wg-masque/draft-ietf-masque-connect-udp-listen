@@ -129,8 +129,8 @@ with by sending a COMPRESSION_ASSIGN capsule to its peer. The peer will then
 echo that capsule to indicate it's received it and estabished its own mapping.
 From then on, both endpoints are aware of the context ID and can send
 compressed datagrams. Later, any endpoint can decide to close the compression
-context by sending a COMPRESSION_CLOSE capsule. Endpoints MUST NOT send two 
-COMPRESSION_ASSIGN capsules with the same context ID. If a recipient detects 
+context by sending a COMPRESSION_CLOSE capsule. Endpoints MUST NOT send two
+COMPRESSION_ASSIGN capsules with the same context ID. If a recipient detects
 a repeated context ID, it MUST consider the capsule as malformed.
 
 The context ID 0 was reserved by unextended connect-udp and is not used by this
