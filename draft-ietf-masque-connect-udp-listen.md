@@ -219,14 +219,14 @@ COMPRESSION_CLOSE with the context ID (see {{capsulecloseformat}}) if it
 doesn't wish to support compression for the given Context ID (For example, due
 to the memory cost of establishing a list of mappings per target per client).
 If the compression was rejected, the client and proxy will instead use an
-uncompressed context ID (See {{uncompressed}}) to exhange UDP payloads for the
+uncompressed context ID (See {{uncompressed}}) to exchange UDP payloads for the
 given target, if those have been enabled. Only one Context ID MUST be used per
 IP-port tuple. If both client and server each negotiate a Context ID for the
 same tuple, the server MUST accept the client's request and the client MUST
 reject or close the server's context ID by sending a COMPRESSION_CLOSE. If
 a peer attempts to allocate another Context ID for a tuple which already has
-an active context ID previously requested by the same peer, this
-COMPRESSION_ASSIGN capsule MUST be considered malformed.
+an active context ID it previously requested, this COMPRESSION_ASSIGN capsule
+MUST be considered malformed.
 
 ## Compression Mapping {#mappings}
 
