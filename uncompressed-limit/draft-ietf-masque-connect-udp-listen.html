@@ -1356,10 +1356,11 @@ is echoed back.<a href="#section-3-3" class="pilcrow">¶</a></p>
 <p id="section-4-1">If the client wishes to send or receive uncompressed datagrams, it <span class="bcp14">MUST</span> first
 exchange the COMPRESSION_ASSIGN capsule (see <a href="#capsuleassignformat" class="auto internal xref">Figure 3</a>) with the
 proxy with an unused Context ID defined in <a href="#contextid" class="auto internal xref">Section 3</a> with the IP Version
-set to zero. Only a single uncompressed context <span class="bcp14">MUST</span> be exchanged at a time.
-Any additional uncompressed COMPRESSION_ASSIGN capsules sent without closing
-the existing uncompressed context with a COMPRESSION_CLOSE first <span class="bcp14">MUST</span> be
-treated as malformed.<a href="#section-4-1" class="pilcrow">¶</a></p>
+set to zero. Only a single uncompressed context <span class="bcp14">MUST</span> be requested at a time. If
+the proxy receives a second uncompressed context COMPRESSION ASSIGN, it <span class="bcp14">MUST</span> be
+considered malformed. Only the client can request uncompressed contexts and if
+the proxy attempts to request uncompressed contexts, the client <span class="bcp14">MUST</span> consider
+the capsule malformed.<a href="#section-4-1" class="pilcrow">¶</a></p>
 <p id="section-4-2">When HTTP Datagrams <span>[<a href="#HTTP-DGRAM" class="cite xref">HTTP-DGRAM</a>]</span> are associated with a Bound UDP
 Proxying request, the format of their UDP Proxying Payload field (see <span><a href="https://rfc-editor.org/rfc/rfc9298#section-5" class="relref">Section 5</a> of [<a href="#CONNECT-UDP" class="cite xref">CONNECT-UDP</a>]</span>) is defined by <a href="#dgram-format" class="auto internal xref">Figure 1</a> when uncompressed; every
 datagram carries addressing information.<a href="#section-4-2" class="pilcrow">¶</a></p>
@@ -1445,7 +1446,13 @@ doesn't wish to support compression for the given Context ID (For example, due
 to the memory cost of establishing a list of mappings per target per client).
 If the compression was rejected, the client and proxy will instead use an
 uncompressed context ID (See <a href="#uncompressed" class="auto internal xref">Section 4</a>) to exhange UDP payloads for the
-given target, if those have been enabled.<a href="#section-5-1" class="pilcrow">¶</a></p>
+given target, if those have been enabled. Only one Context ID <span class="bcp14">MUST</span> be used per
+IP-port tuple. If both client and server each negotiate a Context ID for the
+same tuple, the server <span class="bcp14">MUST</span> accept the client's request and the client <span class="bcp14">MUST</span>
+reject or close the server's context ID by sending a COMPRESSION_CLOSE. If
+a peer attempts to allocate another Context ID for a tuple which already has
+an active context ID previously requested by the same peer, this
+COMPRESSION_ASSIGN capsule <span class="bcp14">MUST</span> be considered malformed.<a href="#section-5-1" class="pilcrow">¶</a></p>
 <div id="mappings">
 <section id="section-5.1">
         <h3 id="name-compression-mapping">
