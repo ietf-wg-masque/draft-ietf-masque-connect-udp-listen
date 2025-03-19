@@ -193,7 +193,7 @@ Table of Contents
    context COMPRESSION_ASSIGN capsule, it MUST be considered malformed.
    Only the client can request uncompressed contexts and if the proxy
    attempts to request uncompressed contexts, the client MUST consider
-   the capsule malformed.
+   the COMPRESSION_ASSIGN capsule it received malformed.
 
    When HTTP Datagrams [HTTP-DGRAM] are associated with a Bound UDP
    Proxying request, the format of their UDP Proxying Payload field (see

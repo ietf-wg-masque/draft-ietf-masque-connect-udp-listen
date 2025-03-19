@@ -1360,7 +1360,7 @@ set to zero. Only a single uncompressed context <span class="bcp14">MUST</span> 
 the proxy receives a second uncompressed context COMPRESSION_ASSIGN capsule, it <span class="bcp14">MUST</span> be
 considered malformed. Only the client can request uncompressed contexts and if
 the proxy attempts to request uncompressed contexts, the client <span class="bcp14">MUST</span> consider
-the capsule malformed.<a href="#section-4-1" class="pilcrow">¶</a></p>
+the COMPRESSION_ASSIGN capsule it received malformed.<a href="#section-4-1" class="pilcrow">¶</a></p>
 <p id="section-4-2">When HTTP Datagrams <span>[<a href="#HTTP-DGRAM" class="cite xref">HTTP-DGRAM</a>]</span> are associated with a Bound UDP
 Proxying request, the format of their UDP Proxying Payload field (see <span><a href="https://rfc-editor.org/rfc/rfc9298#section-5" class="relref">Section 5</a> of [<a href="#CONNECT-UDP" class="cite xref">CONNECT-UDP</a>]</span>) is defined by <a href="#dgram-format" class="auto internal xref">Figure 1</a> when uncompressed; every
 datagram carries addressing information.<a href="#section-4-2" class="pilcrow">¶</a></p>
