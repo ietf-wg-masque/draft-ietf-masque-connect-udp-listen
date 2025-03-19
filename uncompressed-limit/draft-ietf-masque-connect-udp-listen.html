@@ -34,7 +34,7 @@ HTTP that enables such use-cases.
     ConfigArgParse 1.7
     google-i18n-address 3.1.1
     intervaltree 3.1.0
-    Jinja2 3.1.5
+    Jinja2 3.1.6
     lxml 5.3.0
     platformdirs 4.3.6
     pycountry 24.6.1
@@ -1064,7 +1064,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Schinazi &amp; Singh</td>
-<td class="center">Expires 16 September 2025</td>
+<td class="center">Expires 20 September 2025</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1077,12 +1077,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-masque-connect-udp-listen-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-03-15" class="published">15 March 2025</time>
+<time datetime="2025-03-19" class="published">19 March 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2025-09-16">16 September 2025</time></dd>
+<dd class="expires"><time datetime="2025-09-20">20 September 2025</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1140,7 +1140,7 @@ HTTP that enables such use-cases.<a href="#section-abstract-1" class="pilcrow">�
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 16 September 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 20 September 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1327,15 +1327,14 @@ defined in <a href="#compression" class="auto internal xref">Section 5</a>.<a hr
       </h2>
 <p id="section-3-1">This extension leverages context IDs (see <span><a href="https://rfc-editor.org/rfc/rfc9298#section-4" class="relref">Section 4</a> of [<a href="#CONNECT-UDP" class="cite xref">CONNECT-UDP</a>]</span>) to
 compress the target IP address and port when encoding datagrams on the wire.
-Endpoint starts by registering a context ID and the IP/ports it's associated
+Endpoints start by registering a context ID and the IP/ports it's associated
 with by sending a COMPRESSION_ASSIGN capsule to its peer. The peer will then
 echo that capsule to indicate it's received it and estabished its own mapping.
 From then on, both endpoints are aware of the context ID and can send
 compressed datagrams. Later, any endpoint can decide to close the compression
-context by sending a COMPRESSION_CLOSE capsule. Only one such active context
-<span class="bcp14">MUST</span> be registered at a time. When an uncompressed context already exists,
-any further uncompressed COMPRESSION_ASSIGN capsules <span class="bcp14">SHOULD</span> be rejected by the
-peer.<a href="#section-3-1" class="pilcrow">¶</a></p>
+context by sending a COMPRESSION_CLOSE capsule. Endpoints <span class="bcp14">MUST NOT</span> send two
+COMPRESSION_ASSIGN capsules with the same context ID. If a recipient detects
+a repeated context ID, it <span class="bcp14">MUST</span> consider the capsule as malformed.<a href="#section-3-1" class="pilcrow">¶</a></p>
 <p id="section-3-2">The context ID 0 was reserved by unextended connect-udp and is not used by this
 extension. Once an endpoint has ascertained that the peer supports this
 extension (see <a href="#hdr" class="auto internal xref">Section 7</a>), the endpoint <span class="bcp14">MUST NOT</span> send any datagrams with context
@@ -1357,7 +1356,10 @@ is echoed back.<a href="#section-3-3" class="pilcrow">¶</a></p>
 <p id="section-4-1">If the client wishes to send or receive uncompressed datagrams, it <span class="bcp14">MUST</span> first
 exchange the COMPRESSION_ASSIGN capsule (see <a href="#capsuleassignformat" class="auto internal xref">Figure 3</a>) with the
 proxy with an unused Context ID defined in <a href="#contextid" class="auto internal xref">Section 3</a> with the IP Version
-set to zero.<a href="#section-4-1" class="pilcrow">¶</a></p>
+set to zero. Only a single uncompressed context <span class="bcp14">MUST</span> be exchanged at a time.
+Any additional uncompressed COMPRESSION_ASSIGN capsules sent without closing
+the existing uncompressed context with a COMPRESSION_CLOSE first <span class="bcp14">MUST</span> be
+treated as malformed.<a href="#section-4-1" class="pilcrow">¶</a></p>
 <p id="section-4-2">When HTTP Datagrams <span>[<a href="#HTTP-DGRAM" class="cite xref">HTTP-DGRAM</a>]</span> are associated with a Bound UDP
 Proxying request, the format of their UDP Proxying Payload field (see <span><a href="https://rfc-editor.org/rfc/rfc9298#section-5" class="relref">Section 5</a> of [<a href="#CONNECT-UDP" class="cite xref">CONNECT-UDP</a>]</span>) is defined by <a href="#dgram-format" class="auto internal xref">Figure 1</a> when uncompressed; every
 datagram carries addressing information.<a href="#section-4-2" class="pilcrow">¶</a></p>
