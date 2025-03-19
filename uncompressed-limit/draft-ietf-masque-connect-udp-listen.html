@@ -1328,7 +1328,7 @@ defined in <a href="#compression" class="auto internal xref">Section 5</a>.<a hr
 <p id="section-3-1">This extension leverages context IDs (see <span><a href="https://rfc-editor.org/rfc/rfc9298#section-4" class="relref">Section 4</a> of [<a href="#CONNECT-UDP" class="cite xref">CONNECT-UDP</a>]</span>) to
 compress the target IP address and port when encoding datagrams on the wire.
 Endpoints start by registering a context ID and the IP/ports it's associated
-with by sending a COMPRESSION_ASSIGN capsule to its peer. The peer will then
+with by sending a COMPRESSION_ASSIGN capsule to their peer. The peer will then
 echo that capsule to indicate it's received it and estabished its own mapping.
 From then on, both endpoints are aware of the context ID and can send
 compressed datagrams. Later, any endpoint can decide to close the compression
