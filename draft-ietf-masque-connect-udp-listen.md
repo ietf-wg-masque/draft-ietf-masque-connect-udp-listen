@@ -151,10 +151,11 @@ is echoed back.
 If the client wishes to send or receive uncompressed datagrams, it MUST first
 exchange the COMPRESSION_ASSIGN capsule (see {{capsuleassignformat}}) with the
 proxy with an unused Context ID defined in {{contextid}} with the IP Version
-set to zero. Only a single uncompressed context MUST be exchanged at a time.
-Any additional uncompressed COMPRESSION_ASSIGN capsules sent without closing
-the existing uncompressed context with a COMPRESSION_CLOSE first MUST be
-treated as malformed.
+set to zero. Only a single uncompressed context MUST be requested at a time. If
+the proxy receives a second uncompressed context COMPRESSION ASSIGN, it MUST be
+considered malformed. Only the client can request uncompressed contexts and if
+the proxy attempts to request uncompressed contexts, the client MUST consider
+the capsule malformed.
 
 When HTTP Datagrams {{!HTTP-DGRAM=RFC9297}} are associated with a Bound UDP
 Proxying request, the format of their UDP Proxying Payload field (see {{Section
@@ -219,7 +220,13 @@ doesn't wish to support compression for the given Context ID (For example, due
 to the memory cost of establishing a list of mappings per target per client).
 If the compression was rejected, the client and proxy will instead use an
 uncompressed context ID (See {{uncompressed}}) to exhange UDP payloads for the
-given target, if those have been enabled.
+given target, if those have been enabled. Only one Context ID MUST be used per
+IP-port tuple. If both client and server each negotiate a Context ID for the
+same tuple, the server MUST accept the client's request and the client MUST
+reject or close the server's context ID by sending a COMPRESSION_CLOSE. If
+a peer attempts to allocate another Context ID for a tuple which already has
+an active context ID previously requested by the same peer, this
+COMPRESSION_ASSIGN capsule MUST be considered malformed.
 
 ## Compression Mapping {#mappings}
 
