@@ -152,7 +152,7 @@ If the client wishes to send or receive uncompressed datagrams, it MUST first
 exchange the COMPRESSION_ASSIGN capsule (see {{capsuleassignformat}}) with the
 proxy with an unused Context ID defined in {{contextid}} with the IP Version
 set to zero. Only a single uncompressed context MUST be requested at a time. If
-the proxy receives a second uncompressed context COMPRESSION ASSIGN, it MUST be
+the proxy receives a second uncompressed context COMPRESSION_ASSIGN capsule, it MUST be
 considered malformed. Only the client can request uncompressed contexts and if
 the proxy attempts to request uncompressed contexts, the client MUST consider
 the capsule malformed.
