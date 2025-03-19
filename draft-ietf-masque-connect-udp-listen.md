@@ -125,7 +125,7 @@ defined in {{compression}}.
 This extension leverages context IDs (see {{Section 4 of CONNECT-UDP}}) to
 compress the target IP address and port when encoding datagrams on the wire.
 Endpoints start by registering a context ID and the IP/ports it's associated
-with by sending a COMPRESSION_ASSIGN capsule to its peer. The peer will then
+with by sending a COMPRESSION_ASSIGN capsule to their peer. The peer will then
 echo that capsule to indicate it's received it and estabished its own mapping.
 From then on, both endpoints are aware of the context ID and can send
 compressed datagrams. Later, any endpoint can decide to close the compression
