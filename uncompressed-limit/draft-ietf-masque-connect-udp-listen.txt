@@ -188,7 +188,7 @@ Table of Contents
    If the client wishes to send or receive uncompressed datagrams, it
    MUST first exchange the COMPRESSION_ASSIGN capsule (see Figure 3)
    with the proxy with an unused Context ID defined in Section 3 with
-   the IP Version set to zero.  Clients MUST not open an uncompressed
+   the IP Version set to zero.  Clients MUST NOT open an uncompressed
    context ID if they already have one currently open.  If a server
    receives a request to open an uncompressed context ID and it already
    has one open, then the server MUST treat the second request as

@@ -1356,7 +1356,7 @@ is echoed back.<a href="#section-3-3" class="pilcrow">¶</a></p>
 <p id="section-4-1">If the client wishes to send or receive uncompressed datagrams, it <span class="bcp14">MUST</span> first
 exchange the COMPRESSION_ASSIGN capsule (see <a href="#capsuleassignformat" class="auto internal xref">Figure 3</a>) with the
 proxy with an unused Context ID defined in <a href="#contextid" class="auto internal xref">Section 3</a> with the IP Version
-set to zero. Clients <span class="bcp14">MUST</span> not open an uncompressed context ID if they already
+set to zero. Clients <span class="bcp14">MUST NOT</span> open an uncompressed context ID if they already
 have one currently open. If a server receives a request to open an uncompressed
 context ID and it already has one open, then the server <span class="bcp14">MUST</span> treat the second
 request as malformed. Note that it's possible for the client to close the
