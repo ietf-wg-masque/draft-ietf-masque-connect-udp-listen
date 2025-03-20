@@ -218,7 +218,7 @@ If the compression was rejected, the client and proxy will instead use an
 uncompressed context ID (See {{uncompressed}}) to exchange UDP payloads for the
 given target, if those have been enabled. Only one Context ID can be used per
 IP-port tuple. If an endpoint detects that both itself and its peer have opened a context ID for the same tuple, the endpoint MUST close the context ID that was opened by the server. If
-a peer attempts to allocate another Context ID for a tuple which already has
+a peer attempts to allocate another Context ID for a tuple that already has
 an active context ID it previously requested, this COMPRESSION_ASSIGN capsule
 MUST be considered malformed.
 
