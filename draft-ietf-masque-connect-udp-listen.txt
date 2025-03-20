@@ -5,7 +5,7 @@
 MASQUE                                                       D. Schinazi
 Internet-Draft                                                  A. Singh
 Intended status: Standards Track                              Google LLC
-Expires: 7 May 2025                                      3 November 2024
+Expires: 21 September 2025                                 20 March 2025
 
 
                        Proxying Bound UDP in HTTP
@@ -54,11 +54,11 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 7 May 2025.
+   This Internet-Draft will expire on 21 September 2025.
 
 Copyright Notice
 
-   Copyright (c) 2024 IETF Trust and the persons identified as the
+   Copyright (c) 2025 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
    This document is subject to BCP 78 and the IETF Trust's Legal
@@ -161,13 +161,16 @@ Table of Contents
 
    This extension leverages context IDs (see Section 4 of [CONNECT-UDP])
    to compress the target IP address and port when encoding datagrams on
-   the wire.  Endpoint start by registering a context ID and the IP/
+   the wire.  Endpoints start by registering a context ID and the IP/
    ports it's associated with by sending a COMPRESSION_ASSIGN capsule to
-   its peer.  The peer will then echo that capsule to indicate it's
+   their peer.  The peer will then echo that capsule to indicate it's
    received it and estabished its own mapping.  From then on, both
    endpoints are aware of the context ID and can send compressed
    datagrams.  Later, any endpoint can decide to close the compression
-   context by sending a COMPRESSION_CLOSE capsule.
+   context by sending a COMPRESSION_CLOSE capsule.  Endpoints MUST NOT
+   send two COMPRESSION_ASSIGN capsules with the same context ID.  If a
+   recipient detects a repeated context ID, it MUST consider the capsule
+   as malformed.
 
    The context ID 0 was reserved by unextended connect-udp and is not
    used by this extension.  Once an endpoint has ascertained that the
@@ -187,7 +190,15 @@ Table of Contents
    If the client wishes to send or receive uncompressed datagrams, it
    MUST first exchange the COMPRESSION_ASSIGN capsule (see Figure 3)
    with the proxy with an unused Context ID defined in Section 3 with
-   the IP Version set to zero.
+   the IP Version set to zero.  Clients MUST NOT open an uncompressed
+   context ID if they already have one currently open.  If a server
+   receives a request to open an uncompressed context ID and it already
+   has one open, then the server MUST treat the second request as
+   malformed.  Note that it's possible for the client to close the
+   uncompressed context and reopen it later, as long as there aren't two
+   open at the same time.  Only the client can request uncompressed
+   contexts.  If a client receives a COMPRESSION_ASSIGN capsule with the
+   IP Version set to 0, it MUST treat it as malformed.
 
    When HTTP Datagrams [HTTP-DGRAM] are associated with a Bound UDP
    Proxying request, the format of their UDP Proxying Payload field (see
@@ -246,8 +257,13 @@ Table of Contents
    example, due to the memory cost of establishing a list of mappings
    per target per client).  If the compression was rejected, the client
    and proxy will instead use an uncompressed context ID (See Section 4)
-   to exhange UDP payloads for the given target, if those have been
-   enabled.
+   to exchange UDP payloads for the given target, if those have been
+   enabled.  Only one Context ID can be used per IP-port tuple.  If an
+   endpoint detects that both itself and its peer have opened a context
+   ID for the same tuple, the endpoint MUST close the context ID that
+   was opened by the server.  If an endpoint receives a
+   COMPRESSION_ASSIGN capsule whose tuple matches another open context
+   ID, it MUST treat the capsule as malformed.
 
 5.1.  Compression Mapping
 
