@@ -155,10 +155,11 @@ set to zero. Clients MUST not open an uncompressed context ID if they already
 have one currently open. If a server receives a request to open an uncompressed
 context ID and it already has one open, then the server MUST treat the second
 request as malformed. Note that it's possible for the client to close the
-uncompressed context and reopen it layer, as long as there aren't two open at
+uncompressed context and reopen it later, as long as there aren't two open at
 the same time. Only the client can request uncompressed contexts. If a client
 receives a COMPRESSION_ASSIGN capsule with the IP Version set to 0, it MUST
 treat is as malformed.
+
 
 When HTTP Datagrams {{!HTTP-DGRAM=RFC9297}} are associated with a Bound UDP
 Proxying request, the format of their UDP Proxying Payload field (see {{Section
@@ -226,9 +227,10 @@ uncompressed context ID (See {{uncompressed}}) to exchange UDP payloads for the
 given target, if those have been enabled. Only one Context ID can be used per
 IP-port tuple. If an endpoint detects that both itself and its peer have opened
 a context ID for the same tuple, the endpoint MUST close the context ID that
-was opened by the server. If an endpoint receives a COMPRESSION_ASSIGN capsule
-whose tuple matches another open context ID, it MUST treat the capsule as
-malformed.
+was opened by the server. If a peer attempts to allocate another Context ID
+for a tuple that already has an active context ID it previously requested, this
+COMPRESSION_ASSIGN capsule
+MUST be considered malformed.
 
 ## Compression Mapping {#mappings}
 
