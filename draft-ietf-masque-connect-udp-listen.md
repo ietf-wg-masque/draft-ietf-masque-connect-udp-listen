@@ -158,7 +158,7 @@ request as malformed. Note that it's possible for the client to close the
 uncompressed context and reopen it later, as long as there aren't two open at
 the same time. Only the client can request uncompressed contexts. If a client
 receives a COMPRESSION_ASSIGN capsule with the IP Version set to 0, it MUST
-treat is as malformed.
+treat it as malformed.
 
 
 When HTTP Datagrams {{!HTTP-DGRAM=RFC9297}} are associated with a Bound UDP
