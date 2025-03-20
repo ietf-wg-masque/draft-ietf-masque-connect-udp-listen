@@ -151,7 +151,7 @@ is echoed back.
 If the client wishes to send or receive uncompressed datagrams, it MUST first
 exchange the COMPRESSION_ASSIGN capsule (see {{capsuleassignformat}}) with the
 proxy with an unused Context ID defined in {{contextid}} with the IP Version
-set to zero. Clients MUST not open an uncompressed context ID if they already
+set to zero. Clients MUST NOT open an uncompressed context ID if they already
 have one currently open. If a server receives a request to open an uncompressed
 context ID and it already has one open, then the server MUST treat the second
 request as malformed. Note that it's possible for the client to close the
