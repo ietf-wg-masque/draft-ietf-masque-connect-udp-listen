@@ -229,8 +229,7 @@ IP-port tuple. If an endpoint detects that both itself and its peer have opened
 a context ID for the same tuple, the endpoint MUST close the context ID that
 was opened by the server. If a peer attempts to allocate another Context ID
 for a tuple that already has an active context ID it previously requested, this
-COMPRESSION_ASSIGN capsule
-MUST be considered malformed.
+COMPRESSION_ASSIGN capsule MUST be considered malformed.
 
 ## Compression Mapping {#mappings}
 
