@@ -196,7 +196,7 @@ Table of Contents
    uncompressed context and reopen it later, as long as there aren't two
    open at the same time.  Only the client can request uncompressed
    contexts.  If a client receives a COMPRESSION_ASSIGN capsule with the
-   IP Version set to 0, it MUST treat is as malformed.
+   IP Version set to 0, it MUST treat it as malformed.
 
    When HTTP Datagrams [HTTP-DGRAM] are associated with a Bound UDP
    Proxying request, the format of their UDP Proxying Payload field (see
