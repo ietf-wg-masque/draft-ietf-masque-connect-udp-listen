@@ -124,12 +124,14 @@ defined in {{compression}}.
 
 This extension leverages context IDs (see {{Section 4 of CONNECT-UDP}}) to
 compress the target IP address and port when encoding datagrams on the wire.
-Endpoint start by registering a context ID and the IP/ports it's associated
-with by sending a COMPRESSION_ASSIGN capsule to its peer. The peer will then
+Endpoints start by registering a context ID and the IP/ports it's associated
+with by sending a COMPRESSION_ASSIGN capsule to their peer. The peer will then
 echo that capsule to indicate it's received it and estabished its own mapping.
 From then on, both endpoints are aware of the context ID and can send
 compressed datagrams. Later, any endpoint can decide to close the compression
-context by sending a COMPRESSION_CLOSE capsule.
+context by sending a COMPRESSION_CLOSE capsule. Endpoints MUST NOT send two
+COMPRESSION_ASSIGN capsules with the same context ID. If a recipient detects
+a repeated context ID, it MUST consider the capsule as malformed.
 
 The context ID 0 was reserved by unextended connect-udp and is not used by this
 extension. Once an endpoint has ascertained that the peer supports this
@@ -149,7 +151,15 @@ is echoed back.
 If the client wishes to send or receive uncompressed datagrams, it MUST first
 exchange the COMPRESSION_ASSIGN capsule (see {{capsuleassignformat}}) with the
 proxy with an unused Context ID defined in {{contextid}} with the IP Version
-set to zero.
+set to zero. Clients MUST NOT open an uncompressed context ID if they already
+have one currently open. If a server receives a request to open an uncompressed
+context ID and it already has one open, then the server MUST treat the second
+request as malformed. Note that it's possible for the client to close the
+uncompressed context and reopen it later, as long as there aren't two open at
+the same time. Only the client can request uncompressed contexts. If a client
+receives a COMPRESSION_ASSIGN capsule with the IP Version set to 0, it MUST
+treat it as malformed.
+
 
 When HTTP Datagrams {{!HTTP-DGRAM=RFC9297}} are associated with a Bound UDP
 Proxying request, the format of their UDP Proxying Payload field (see {{Section
@@ -213,8 +223,13 @@ COMPRESSION_CLOSE with the context ID (see {{capsulecloseformat}}) if it
 doesn't wish to support compression for the given Context ID (For example, due
 to the memory cost of establishing a list of mappings per target per client).
 If the compression was rejected, the client and proxy will instead use an
-uncompressed context ID (See {{uncompressed}}) to exhange UDP payloads for the
-given target, if those have been enabled.
+uncompressed context ID (See {{uncompressed}}) to exchange UDP payloads for the
+given target, if those have been enabled. Only one Context ID can be used per
+IP-port tuple. If an endpoint detects that both itself and its peer have opened
+a context ID for the same tuple, the endpoint MUST close the context ID that
+was opened by the server. If an endpoint receives a COMPRESSION_ASSIGN capsule
+whose tuple matches another open context ID, it MUST treat the capsule as
+malformed.
 
 ## Compression Mapping {#mappings}
 
