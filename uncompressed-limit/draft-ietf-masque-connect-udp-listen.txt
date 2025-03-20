@@ -5,7 +5,7 @@
 MASQUE                                                       D. Schinazi
 Internet-Draft                                                  A. Singh
 Intended status: Standards Track                              Google LLC
-Expires: 20 September 2025                                 19 March 2025
+Expires: 21 September 2025                                 20 March 2025
 
 
                        Proxying Bound UDP in HTTP
@@ -54,7 +54,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 20 September 2025.
+   This Internet-Draft will expire on 21 September 2025.
 
 Copyright Notice
 
@@ -188,12 +188,15 @@ Table of Contents
    If the client wishes to send or receive uncompressed datagrams, it
    MUST first exchange the COMPRESSION_ASSIGN capsule (see Figure 3)
    with the proxy with an unused Context ID defined in Section 3 with
-   the IP Version set to zero.  Only a single uncompressed context MUST
-   be requested at a time.  If the proxy receives a second uncompressed
-   context COMPRESSION_ASSIGN capsule, it MUST be considered malformed.
-   Only the client can request uncompressed contexts and if the proxy
-   attempts to request uncompressed contexts, the client MUST consider
-   the COMPRESSION_ASSIGN capsule it received malformed.
+   the IP Version set to zero.  Clients MUST not open an uncompressed
+   context ID if they already have one currently open.  If a server
+   receives a request to open an uncompressed context ID and it already
+   has one open, then the server MUST treat the second request as
+   malformed.  Note that it's possible for the client to close the
+   uncompressed context and reopen it layer, as long as there aren't two
+   open at the same time.  Only the client can request uncompressed
+   contexts.  If a client receives a COMPRESSION_ASSIGN capsule with the
+   IP Version set to 0, it MUST treat is as malformed.
 
    When HTTP Datagrams [HTTP-DGRAM] are associated with a Bound UDP
    Proxying request, the format of their UDP Proxying Payload field (see
@@ -253,14 +256,13 @@ Table of Contents
    per target per client).  If the compression was rejected, the client
    and proxy will instead use an uncompressed context ID (See Section 4)
    to exchange UDP payloads for the given target, if those have been
-   enabled.  Only one Context ID MUST be used per IP-port tuple.  If
-   both client and server each negotiate a Context ID for the same
-   tuple, the server MUST accept the client's request and the client
-   MUST reject or close the server's context ID by sending a
-   COMPRESSION_CLOSE.  If a peer attempts to allocate another Context ID
-   for a tuple which already has an active context ID it previously
-   requested, this COMPRESSION_ASSIGN capsule MUST be considered
-   malformed.
+   enabled.  Only one Context ID can be used per IP-port tuple.  If an
+   endpoint detects that both itself and its peer have opened a context
+   ID for the same tuple, the endpoint MUST close the context ID that
+   was opened by the server.  If a peer attempts to allocate another
+   Context ID for a tuple which already has an active context ID it
+   previously requested, this COMPRESSION_ASSIGN capsule MUST be
+   considered malformed.
 
 5.1.  Compression Mapping
 
