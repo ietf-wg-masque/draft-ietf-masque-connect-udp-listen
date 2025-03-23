@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-03-20T00:53:02.729316+00:00",
+  "timestamp": "2025-03-23T00:57:52.931422+00:00",
   "repo": "ietf-wg-masque/draft-ietf-masque-connect-udp-listen",
   "labels": [
     {
@@ -3149,24 +3149,26 @@
       "id": "PR_kwDOHnqa9M6OwBBv",
       "title": "State that only one uncompressed Context can be active at a time",
       "url": "https://github.com/ietf-wg-masque/draft-ietf-masque-connect-udp-listen/pull/29",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "asingh-g",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2025-03-15T03:08:49Z",
-      "updatedAt": "2025-03-19T07:30:37Z",
+      "updatedAt": "2025-03-20T10:29:50Z",
       "baseRepository": "ietf-wg-masque/draft-ietf-masque-connect-udp-listen",
       "baseRefName": "main",
       "baseRefOid": "1583a8e39a751af539b142d5b04f746be7b5dbef",
       "headRepository": "ietf-wg-masque/draft-ietf-masque-connect-udp-listen",
       "headRefName": "uncompressed-limit",
-      "headRefOid": "1cc48da68bd3c654cb070edfb99f7406535d9aaf",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "1c297192a1521c06f0c1419f6f486fe01d5ba9e7",
+      "closedAt": "2025-03-20T10:29:49Z",
+      "mergedAt": "2025-03-20T10:29:49Z",
+      "mergedBy": "asingh-g",
+      "mergeCommit": {
+        "oid": "e26becad19688a25ed1fd3d7c3ce17b095d4952a"
+      },
       "comments": [],
       "reviews": [
         {
@@ -3198,6 +3200,128 @@
               "body": "If we say reject multiple uncompressed contexts, we should also ban opening them. And I'd recommend having all these be MUSTs to simplify the protocol. If we make them SHOULD then we need to be able to handle peers that don't respect the SHOULD",
               "createdAt": "2025-03-15T03:49:17Z",
               "updatedAt": "2025-03-15T03:49:23Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHnqa9M6gxece",
+          "commit": {
+            "abbreviatedOid": "1cc48da"
+          },
+          "author": "DavidSchinazi",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-03-19T08:05:27Z",
+          "updatedAt": "2025-03-20T02:22:05Z",
+          "comments": [
+            {
+              "originalPosition": 24,
+              "body": "That's not quite right. You're allowed to send two capsules, but not have 2 open at the same time. Perhaps  \"Clients MUST not open an uncompressed context ID if they already have one currently open. If a server receives a request to open an uncompressed context ID and it already has one open, then the server MUST treat the second request as malformed. Note that it's possible for the client to close the uncompressed context and reopen it layer, as long as there aren't two open at the same time.\"",
+              "createdAt": "2025-03-19T08:05:27Z",
+              "updatedAt": "2025-03-20T02:22:05Z"
+            },
+            {
+              "originalPosition": 26,
+              "body": "Phrasing it a bit more strictly: If a client receives a COMPRESSION_ASSIGN capsule with the IP Version set to 0, it MUST treat is as malformed",
+              "createdAt": "2025-03-19T08:06:54Z",
+              "updatedAt": "2025-03-20T02:22:05Z"
+            },
+            {
+              "originalPosition": 39,
+              "body": "\"If both client and server each negotiate\" sounds like you need to know what's going on at both endpoints. A different framing that focuses on an implementation could be: \"If an endpoint detects that both itself and its peer have opened a context ID for the same tuple, the endpoint MUST close the context ID that was opened by the server.\"",
+              "createdAt": "2025-03-20T02:05:09Z",
+              "updatedAt": "2025-03-20T02:22:05Z"
+            },
+            {
+              "originalPosition": 38,
+              "body": "This MUST isn't really normative, we already have a MUST below that accomplishes this. So here I would say \"Only one Context ID can be used...\"",
+              "createdAt": "2025-03-20T02:09:52Z",
+              "updatedAt": "2025-03-20T02:22:05Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHnqa9M6hA-xY",
+          "commit": {
+            "abbreviatedOid": "f0cd44e"
+          },
+          "author": "DavidSchinazi",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-03-20T06:11:13Z",
+          "updatedAt": "2025-03-20T06:16:07Z",
+          "comments": [
+            {
+              "originalPosition": 23,
+              "body": "```suggestion\r\nset to zero. Clients MUST not open an uncompressed context ID if they already have one currently open. If a server receives a request to open an uncompressed context ID and it already has one open, then the server MUST treat the second request as malformed. Note that it's possible for the client to close the uncompressed context and reopen it later, as long as there aren't two open at the same time. Only the client can request uncompressed contexts. If a client receives a COMPRESSION_ASSIGN capsule with the IP Version set to 0, it MUST treat is as malformed.\r\n```",
+              "createdAt": "2025-03-20T06:11:13Z",
+              "updatedAt": "2025-03-20T06:16:07Z"
+            },
+            {
+              "originalPosition": 23,
+              "body": "Please reflow the text to the 80 character per line limit",
+              "createdAt": "2025-03-20T06:12:30Z",
+              "updatedAt": "2025-03-20T06:16:07Z"
+            },
+            {
+              "originalPosition": 35,
+              "body": "Please reflow the text to the 80 character per line limit",
+              "createdAt": "2025-03-20T06:12:49Z",
+              "updatedAt": "2025-03-20T06:16:07Z"
+            },
+            {
+              "originalPosition": 36,
+              "body": "The difference between \"that\" and \"which\" is that if it's \"which\" then you can remove the \"which ...\" clause and the sentence still has the same meaning\r\n\r\n```suggestion\r\na peer attempts to allocate another Context ID for a tuple that already has\r\n```",
+              "createdAt": "2025-03-20T06:13:57Z",
+              "updatedAt": "2025-03-20T06:16:07Z"
+            },
+            {
+              "originalPosition": 38,
+              "body": "Similar to my previous comment, the sentence is phrased in terms of what the peer does, but it's better to phrase it in terms of what the receiver knows/does.\r\n\r\n\"If an endpoint receives a COMPRESSION_ASSIGN capsule whose tuple matches another open context ID, it MUST treat the capsule as malformed.",
+              "createdAt": "2025-03-20T06:16:01Z",
+              "updatedAt": "2025-03-20T06:16:07Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHnqa9M6hDbFr",
+          "commit": {
+            "abbreviatedOid": "f0cd44e"
+          },
+          "author": "asingh-g",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-03-20T10:16:48Z",
+          "updatedAt": "2025-03-20T10:16:48Z",
+          "comments": [
+            {
+              "originalPosition": 35,
+              "body": "Ah I forgot that make fix-lint doesn't fix line lengths",
+              "createdAt": "2025-03-20T10:16:48Z",
+              "updatedAt": "2025-03-20T10:16:48Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHnqa9M6hDgZc",
+          "commit": {
+            "abbreviatedOid": "72c274f"
+          },
+          "author": "DavidSchinazi",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-03-20T10:24:11Z",
+          "updatedAt": "2025-03-20T10:24:57Z",
+          "comments": [
+            {
+              "originalPosition": 23,
+              "body": "```suggestion\r\nset to zero. Clients MUST NOT open an uncompressed context ID if they already\r\n```",
+              "createdAt": "2025-03-20T10:24:12Z",
+              "updatedAt": "2025-03-20T10:24:57Z"
             }
           ]
         }
