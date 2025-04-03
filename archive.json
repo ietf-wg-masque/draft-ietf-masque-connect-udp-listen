@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-04-01T01:01:26.902136+00:00",
+  "timestamp": "2025-04-03T00:54:40.323914+00:00",
   "repo": "ietf-wg-masque/draft-ietf-masque-connect-udp-listen",
   "labels": [
     {
@@ -494,6 +494,22 @@
           "updatedAt": "2024-11-06T09:59:53Z"
         }
       ]
+    },
+    {
+      "number": 30,
+      "id": "I_kwDOHnqa9M6w2kCN",
+      "title": "Percent-encoding the asterisk for target_host and target_port in the URI",
+      "url": "https://github.com/ietf-wg-masque/draft-ietf-masque-connect-udp-listen/issues/30",
+      "state": "OPEN",
+      "author": "DavidSchinazi",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Pointed raised by @Acconut over email:\n\n> I am currently toying around with an implementation of draft-ietf-masque-connect-udp-listen and ran into a small issue regarding the URI template.\n>\n> The example in Appendix A uses the URI Template `https://example.org/.well-known/masque/udp/{target_host}/{target_port}/` and expanded the path to `/.well-known/masque/udp/*/*/` for the initial request. However, if I understand RFC 6570 (URI Template) correctly, `{target_host}` and `{target_port}` are [simple string expansions](https://datatracker.ietf.org/doc/html/rfc6570#autoid-19), so the asterisk has to be percentage encoded, yielding `/.well-known/masque/udp/%2A/%2A/`.\n>\n> The expanded path would be correct if the variables in the template were reserved expansions (i.e. `{+target_host}`). But deviating from the templates introduced in RFC 9298 (Proxying UDP in HTTP) probably doesn't help either.\n> \n> So, if am not mistaken, which could be the case since I am working with URI Template for the first time, the path in Appendix A should be changed to `/.well-known/masque/udp/%2A/%2A/`. It would also be helpful if Section 2 could mention that asterisks have to be percentage encoded if the variables are simple string expansions.",
+      "createdAt": "2025-04-02T17:32:05Z",
+      "updatedAt": "2025-04-02T17:32:05Z",
+      "closedAt": null,
+      "comments": []
     }
   ],
   "pulls": [
