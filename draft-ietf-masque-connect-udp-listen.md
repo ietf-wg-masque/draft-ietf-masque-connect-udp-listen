@@ -97,7 +97,7 @@ This document uses terminology from {{CONNECT-UDP}} and notational conventions
 from {{!QUIC=RFC9000}}. This document uses the terms Boolean, Integer, and List
 from {{Section 3 of !STRUCTURED-FIELDS=RFC8941}} to specify syntax and parsing.
 This document uses Augmented Backus-Naur Form and parsing/serialization
-behaviors from {{!ABNF=RFC5234}}
+behaviors from {{!ABNF=RFC5234}}.
 
 # Proxied UDP Binding Mechanism {#mechanism}
 
@@ -115,7 +115,7 @@ When sending the UDP Proxying request to the proxy, the client adds the
 the CONNECT UDP Bind request, it adds the allocated public IP:port tuples for
 the client to the response; see {{addr-hdr}}.
 
-Endpoints exchange COMPRESSION_ASSIGN capsules in order to establish which IP a
+Endpoints exchange COMPRESSION_ASSIGN capsules in order to establish which IP and port a
 given context ID corresponds to. The context ID can correspond to both
 compressed and uncompressed payloads to/from any target and are configured as
 defined in {{compression}}.
@@ -131,7 +131,9 @@ From then on, both endpoints are aware of the context ID and can send
 compressed datagrams. Later, any endpoint can decide to close the compression
 context by sending a COMPRESSION_CLOSE capsule. Endpoints MUST NOT send two
 COMPRESSION_ASSIGN capsules with the same context ID. If a recipient detects
-a repeated context ID, it MUST consider the capsule as malformed.
+a repeated context ID, it MUST treat the capsule as malformed. Receipt of a
+malformed capsule MUST be treated as an error processing the Capsule Protocol,
+as defined in {{Section 3.3 of !HTTP-DGRAM=RFC9297}}.
 
 The context ID 0 was reserved by unextended connect-udp and is not used by this
 extension. Once an endpoint has ascertained that the peer supports this
@@ -154,14 +156,14 @@ proxy with an unused Context ID defined in {{contextid}} with the IP Version
 set to zero. Clients MUST NOT open an uncompressed context ID if they already
 have one currently open. If a server receives a request to open an uncompressed
 context ID and it already has one open, then the server MUST treat the second
-request as malformed. Note that it's possible for the client to close the
-uncompressed context and reopen it later, as long as there aren't two open at
+capsule as malformed. Note that it's possible for the client to close the
+uncompressed context and reopen it later with a different context ID, as long as there aren't two contexts open at
 the same time. Only the client can request uncompressed contexts. If a client
 receives a COMPRESSION_ASSIGN capsule with the IP Version set to 0, it MUST
 treat it as malformed.
 
 
-When HTTP Datagrams {{!HTTP-DGRAM=RFC9297}} are associated with a Bound UDP
+When HTTP Datagrams {{!HTTP-DGRAM}} are associated with a Bound UDP
 Proxying request, the format of their UDP Proxying Payload field (see {{Section
 5 of CONNECT-UDP}}) is defined by {{dgram-format}} when uncompressed; every
 datagram carries addressing information.
@@ -250,7 +252,7 @@ mapping is unused for a long time). Another potential use is {{restrictingips}}.
 
 ## Compressed Payload Format {#comp-format}
 
-When HTTP Datagrams {{!HTTP-DGRAM=RFC9297}} are associated with this Bound UDP
+When HTTP Datagrams {{!HTTP-DGRAM}} are associated with this Bound UDP
 Proxying request, the format of their UDP Proxying Payload field (see {{Section
 5 of CONNECT-UDP}}) is defined by {{dgram-format}} when the context ID is set
 to one previously registered for compressed payloads. (See {{contextid}} for
@@ -599,4 +601,6 @@ generation, parsing, validation and error handling.
 {:numbered="false"}
 
 This proposal is the result of many conversations with MASQUE working group
-participants.
+participants. In particular, the authors would like to thank {{{Marius
+Kleidl}}}, {{{Tommy Pauly}}}, {{{Lucas Pardue}}}, {{{Ben Schwartz}}}, and
+{{{Magnus Westerlund}}} for their reviews.
