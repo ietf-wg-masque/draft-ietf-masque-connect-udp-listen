@@ -115,10 +115,10 @@ When sending the UDP Proxying request to the proxy, the client adds the
 the CONNECT UDP Bind request, it adds the allocated public IP:port tuples for
 the client to the response; see {{addr-hdr}}.
 
-Endpoints exchange COMPRESSION_ASSIGN capsules in order to establish which IP and port a
-given context ID corresponds to. The context ID can correspond to both
-compressed and uncompressed payloads to/from any target and are configured as
-defined in {{compression}}.
+Endpoints exchange COMPRESSION_ASSIGN capsules in order to establish which IP
+and port a given context ID corresponds to. The context ID can correspond to
+both compressed and uncompressed payloads to/from any target and are configured
+as defined in {{compression}}.
 
 # Context ID {#contextid}
 
@@ -130,8 +130,8 @@ echo that capsule to indicate it's received it and estabished its own mapping.
 From then on, both endpoints are aware of the context ID and can send
 compressed datagrams. Later, any endpoint can decide to close the compression
 context by sending a COMPRESSION_CLOSE capsule. Endpoints MUST NOT send two
-COMPRESSION_ASSIGN capsules with the same context ID. If a recipient detects
-a repeated context ID, it MUST treat the capsule as malformed. Receipt of a
+COMPRESSION_ASSIGN capsules with the same context ID. If a recipient detects a
+repeated context ID, it MUST treat the capsule as malformed. Receipt of a
 malformed capsule MUST be treated as an error processing the Capsule Protocol,
 as defined in {{Section 3.3 of !HTTP-DGRAM=RFC9297}}.
 
@@ -157,16 +157,16 @@ set to zero. Clients MUST NOT open an uncompressed context ID if they already
 have one currently open. If a server receives a request to open an uncompressed
 context ID and it already has one open, then the server MUST treat the second
 capsule as malformed. Note that it's possible for the client to close the
-uncompressed context and reopen it later with a different context ID, as long as there aren't two contexts open at
-the same time. Only the client can request uncompressed contexts. If a client
-receives a COMPRESSION_ASSIGN capsule with the IP Version set to 0, it MUST
-treat it as malformed.
+uncompressed context and reopen it later with a different context ID, as long
+as there aren't two contexts open at the same time. Only the client can request
+uncompressed contexts. If a client receives a COMPRESSION_ASSIGN capsule with
+the IP Version set to 0, it MUST treat it as malformed.
 
 
-When HTTP Datagrams {{!HTTP-DGRAM}} are associated with a Bound UDP
-Proxying request, the format of their UDP Proxying Payload field (see {{Section
-5 of CONNECT-UDP}}) is defined by {{dgram-format}} when uncompressed; every
-datagram carries addressing information.
+When HTTP Datagrams {{!HTTP-DGRAM}} are associated with a Bound UDP Proxying
+request, the format of their UDP Proxying Payload field (see {{Section 5 of
+CONNECT-UDP}}) is defined by {{dgram-format}} when uncompressed; every datagram
+carries addressing information.
 
 ## Uncompressed Payload Format {#uncomp-format}
 
@@ -252,10 +252,10 @@ mapping is unused for a long time). Another potential use is {{restrictingips}}.
 
 ## Compressed Payload Format {#comp-format}
 
-When HTTP Datagrams {{!HTTP-DGRAM}} are associated with this Bound UDP
-Proxying request, the format of their UDP Proxying Payload field (see {{Section
-5 of CONNECT-UDP}}) is defined by {{dgram-format}} when the context ID is set
-to one previously registered for compressed payloads. (See {{contextid}} for
+When HTTP Datagrams {{!HTTP-DGRAM}} are associated with this Bound UDP Proxying
+request, the format of their UDP Proxying Payload field (see {{Section 5 of
+CONNECT-UDP}}) is defined by {{dgram-format}} when the context ID is set to one
+previously registered for compressed payloads. (See {{contextid}} for
 compressed and uncompressed assignments.)
 
 ~~~
@@ -393,8 +393,8 @@ fields. The uncompressed context allows transporting datagrams to and from any
 target. Clients that keep the uncompressed context open need to be able to
 receive from all targets. If the UDP proxy would reject unextended UDP proxying
 requests to some targets (as recommended in {{Section 7 of CONNECT-UDP}}), then
-for bound UDP proxying requests where the uncompressed context is open, the
-UDP proxy needs to perform checks on the target of each uncompressed context
+for bound UDP proxying requests where the uncompressed context is open, the UDP
+proxy needs to perform checks on the target of each uncompressed context
 datagram it receives.
 
 Note that if the compression response (COMPRESSION_ASSIGN OR COMPRESSION_CLOSE)
@@ -464,10 +464,10 @@ Notes:
 # Example
 
 In the example below, the client is configured with URI Template
-"https://example.org/.well-known/masque/udp/{target_host}/{target_port}/"
-and listens for traffic on the proxy, eventually decides that it no
-longer wants to listen for connections from new targets, and limits
-its communication with only 203.0.113.11:4321 and no other UDP target.
+"https://example.org/.well-known/masque/udp/{target_host}/{target_port}/" and
+listens for traffic on the proxy, eventually decides that it no longer wants to
+listen for connections from new targets, and limits its communication with only
+203.0.113.11:4321 and no other UDP target.
 
 ~~~
  Client                                             Server
