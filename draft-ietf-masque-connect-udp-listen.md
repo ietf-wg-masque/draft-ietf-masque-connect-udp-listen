@@ -108,7 +108,7 @@ compressed (see {{comp-format}}).
 
 When performing URI Template Expansion of the UDP Proxying template (see
 {{Section 3 of CONNECT-UDP}}), the client sets both the target_host and the
-target_port variables to the '*' character (ASCII character 0x2A).
+target_port variables to the '_' character (ASCII character 0x5F).
 
 When sending the UDP Proxying request to the proxy, the client adds the
 "Connect-UDP-Bind" header field to identify it as such. If the proxy accepts
@@ -476,7 +476,7 @@ listen for connections from new targets, and limits its communication with only
    :method = CONNECT
    :protocol = connect-udp
    :scheme = https
-   :path = /.well-known/masque/udp/*/*/
+   :path = /.well-known/masque/udp/_/_/
    :authority = proxy.example.org
    connect-udp-bind = ?1
    capsule-protocol = ?1
