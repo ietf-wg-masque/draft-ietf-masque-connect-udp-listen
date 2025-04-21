@@ -5,7 +5,7 @@
 MASQUE                                                       D. Schinazi
 Internet-Draft                                                  A. Singh
 Intended status: Standards Track                              Google LLC
-Expires: 21 September 2025                                 20 March 2025
+Expires: 23 October 2025                                   21 April 2025
 
 
                        Proxying Bound UDP in HTTP
@@ -54,7 +54,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 21 September 2025.
+   This Internet-Draft will expire on 23 October 2025.
 
 Copyright Notice
 
@@ -91,6 +91,8 @@ Table of Contents
    9.  Proxy behavior
    10. Security Considerations
    11. IANA Considerations
+     11.1.  HTTP Fields
+     11.2.  Capsules
    12. References
      12.1.  Normative References
      12.2.  Informative References
@@ -131,7 +133,7 @@ Table of Contents
    conventions from [QUIC].  This document uses the terms Boolean,
    Integer, and List from Section 3 of [STRUCTURED-FIELDS] to specify
    syntax and parsing.  This document uses Augmented Backus-Naur Form
-   and parsing/serialization behaviors from [ABNF]
+   and parsing/serialization behaviors from [ABNF].
 
 2.  Proxied UDP Binding Mechanism
 
@@ -142,8 +144,8 @@ Table of Contents
 
    When performing URI Template Expansion of the UDP Proxying template
    (see Section 3 of [CONNECT-UDP]), the client sets both the
-   target_host and the target_port variables to the '*' character (ASCII
-   character 0x2A).
+   target_host and the target_port variables to the '_' character (ASCII
+   character 0x5F).
 
    When sending the UDP Proxying request to the proxy, the client adds
    the "Connect-UDP-Bind" header field to identify it as such.  If the
@@ -151,9 +153,9 @@ Table of Contents
    public IP:port tuples for the client to the response; see Section 8.
 
    Endpoints exchange COMPRESSION_ASSIGN capsules in order to establish
-   which IP a given context ID corresponds to.  The context ID can
-   correspond to both compressed and uncompressed payloads to/from any
-   target and are configured as defined in Section 5.
+   which IP and port a given context ID corresponds to.  The context ID
+   can correspond to both compressed and uncompressed payloads to/from
+   any target and are configured as defined in Section 5.
 
 3.  Context ID
 
@@ -167,8 +169,10 @@ Table of Contents
    datagrams.  Later, any endpoint can decide to close the compression
    context by sending a COMPRESSION_CLOSE capsule.  Endpoints MUST NOT
    send two COMPRESSION_ASSIGN capsules with the same context ID.  If a
-   recipient detects a repeated context ID, it MUST consider the capsule
-   as malformed.
+   recipient detects a repeated context ID, it MUST treat the capsule as
+   malformed.  Receipt of a malformed capsule MUST be treated as an
+   error processing the Capsule Protocol, as defined in Section 3.3 of
+   [HTTP-DGRAM].
 
    The context ID 0 was reserved by unextended connect-udp and is not
    used by this extension.  Once an endpoint has ascertained that the
@@ -191,12 +195,13 @@ Table of Contents
    the IP Version set to zero.  Clients MUST NOT open an uncompressed
    context ID if they already have one currently open.  If a server
    receives a request to open an uncompressed context ID and it already
-   has one open, then the server MUST treat the second request as
+   has one open, then the server MUST treat the second capsule as
    malformed.  Note that it's possible for the client to close the
-   uncompressed context and reopen it later, as long as there aren't two
-   open at the same time.  Only the client can request uncompressed
-   contexts.  If a client receives a COMPRESSION_ASSIGN capsule with the
-   IP Version set to 0, it MUST treat it as malformed.
+   uncompressed context and reopen it later with a different context ID,
+   as long as there aren't two contexts open at the same time.  Only the
+   client can request uncompressed contexts.  If a client receives a
+   COMPRESSION_ASSIGN capsule with the IP Version set to 0, it MUST
+   treat it as malformed.
 
    When HTTP Datagrams [HTTP-DGRAM] are associated with a Bound UDP
    Proxying request, the format of their UDP Proxying Payload field (see
@@ -378,9 +383,10 @@ Table of Contents
    request.  From then and until the tunnel is closed, the proxy SHALL
    send packets received on these IP-port tuples to the client.  The
    proxy MUST communicate the selected addresses and ports to the client
-   using the "Proxy-Public-Address" header.  The header is defined as a
-   List of IP-Port-tuples.  The format of the tuple is defined using IP-
-   literal, IPv4address, IPv6address and port from Section 3.2 of [URI].
+   using the "Proxy-Public-Address" header field.  The header field is
+   defined as a List of IP-Port-tuples.  The format of the tuple is
+   defined using IP-literal, IPv4address, IPv6address and port from
+   Section 3.2 of [URI].
 
    ip-port-tuple = ( IP-literal / IPv4address ) ":" port
 
@@ -440,16 +446,31 @@ Table of Contents
 
 11.  IANA Considerations
 
-   This document will request IANA to register the following entry in
-   the "HTTP
-   Field Name" registry maintained at
-   <https://www.iana.org/assignments/http-fields>:  Connect-UDP-Bind
-   Template:  None
+11.1.  HTTP Fields
+
+   This document will request IANA to register the following new items
+   in the "HTTP Field Name" registry maintained at
+   <https://www.iana.org/assignments/http-fields>:
+
+                +======================+=================+
+                | Field Name           | Structured Type |
+                +======================+=================+
+                | Connect-UDP-Bind     | Item            |
+                +----------------------+-----------------+
+                | Proxy-Public-Address | List            |
+                +----------------------+-----------------+
+
+                           Table 1: New Fields
+
+   All of these new entries use the following values for these fields:
+
    Status:  provisional (permanent if this document is approved)
    Reference:  This document
    Comments:  None
 
-   This document also requests IANA to register the following new items
+11.2.  Capsules
+
+   This document will request IANA to register the following new items
    to the "HTTP Capsule Types" registry maintained at
    <https://www.iana.org/assignments/masque>:
 
@@ -461,13 +482,16 @@ Table of Contents
                     | 0x1C0FE324 | COMPRESSION_CLOSE  |
                     +------------+--------------------+
 
-                           Table 1: New Capsules
+                           Table 2: New Capsules
 
    All of these new entries use the following values for these fields:
 
    Status:  provisional (permanent if this document is approved)
    Reference:  This document
-   Comments:  None
+   Change Controller:  IETF
+   Contact:  MASQUE Working Group masque@ietf.org
+      (mailto:masque@ietf.org)
+   Notes:  None
 
 12.  References
 
@@ -559,7 +583,7 @@ Appendix A.  Example
       :method = CONNECT
       :protocol = connect-udp
       :scheme = https
-      :path = /.well-known/masque/udp/*/*/
+      :path = /.well-known/masque/udp/_/_/
       :authority = proxy.example.org
       connect-udp-bind = ?1
       capsule-protocol = ?1
@@ -681,7 +705,9 @@ Appendix B.  Comparison with CONNECT-IP
 Acknowledgments
 
    This proposal is the result of many conversations with MASQUE working
-   group participants.
+   group participants.  In particular, the authors would like to thank
+   Marius Kleidl, Tommy Pauly, Lucas Pardue, Ben Schwartz, and Magnus
+   Westerlund for their reviews.
 
 Authors' Addresses
 

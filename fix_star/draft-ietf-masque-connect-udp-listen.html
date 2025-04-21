@@ -14,7 +14,7 @@ protocols such as HTTP/3, but is not sufficient for some UDP peer-to-peer
 protocols like WebRTC. This document proposes an extension to UDP Proxying in
 HTTP that enables such use-cases. 
     " name="description">
-<meta content="xml2rfc 3.28.0" name="generator">
+<meta content="xml2rfc 3.28.1" name="generator">
 <meta content="quic" name="keyword">
 <meta content="http" name="keyword">
 <meta content="datagram" name="keyword">
@@ -29,14 +29,14 @@ HTTP that enables such use-cases.
 <meta content="bind" name="keyword">
 <meta content="draft-ietf-masque-connect-udp-listen-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.28.0
-    Python 3.12.9
+  xml2rfc 3.28.1
+    Python 3.12.10
     ConfigArgParse 1.7
     google-i18n-address 3.1.1
     intervaltree 3.1.0
     Jinja2 3.1.6
     lxml 5.3.0
-    platformdirs 4.3.6
+    platformdirs 4.3.7
     pycountry 24.6.1
     PyYAML 6.0.2
     requests 2.32.3
@@ -1060,11 +1060,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">CONNECT-UDP Bind</td>
-<td class="right">March 2025</td>
+<td class="right">April 2025</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Schinazi &amp; Singh</td>
-<td class="center">Expires 21 September 2025</td>
+<td class="center">Expires 23 October 2025</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1077,12 +1077,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-masque-connect-udp-listen-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-03-20" class="published">20 March 2025</time>
+<time datetime="2025-04-21" class="published">21 April 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2025-09-21">21 September 2025</time></dd>
+<dd class="expires"><time datetime="2025-10-23">23 October 2025</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1140,7 +1140,7 @@ HTTP that enables such use-cases.<a href="#section-abstract-1" class="pilcrow">�
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 21 September 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 23 October 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1233,6 +1233,14 @@ HTTP that enables such use-cases.<a href="#section-abstract-1" class="pilcrow">�
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11">
             <p id="section-toc.1-1.11.1"><a href="#section-11" class="auto internal xref">11</a>. <a href="#name-iana-considerations" class="internal xref">IANA Considerations</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11.2.1">
+                <p id="section-toc.1-1.11.2.1.1"><a href="#section-11.1" class="auto internal xref">11.1</a>.  <a href="#name-http-fields" class="internal xref">HTTP Fields</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11.2.2">
+                <p id="section-toc.1-1.11.2.2.1"><a href="#section-11.2" class="auto internal xref">11.2</a>.  <a href="#name-capsules-2" class="internal xref">Capsules</a></p>
+</li>
+            </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.12">
             <p id="section-toc.1-1.12.1"><a href="#section-12" class="auto internal xref">12</a>. <a href="#name-references" class="internal xref">References</a></p>
@@ -1293,7 +1301,7 @@ appear in all capitals, as shown here.<a href="#section-1.1-1" class="pilcrow">�
 from <span>[<a href="#QUIC" class="cite xref">QUIC</a>]</span>. This document uses the terms Boolean, Integer, and List
 from <span><a href="https://rfc-editor.org/rfc/rfc8941#section-3" class="relref">Section 3</a> of [<a href="#STRUCTURED-FIELDS" class="cite xref">STRUCTURED-FIELDS</a>]</span> to specify syntax and parsing.
 This document uses Augmented Backus-Naur Form and parsing/serialization
-behaviors from <span>[<a href="#ABNF" class="cite xref">ABNF</a>]</span><a href="#section-1.1-2" class="pilcrow">¶</a></p>
+behaviors from <span>[<a href="#ABNF" class="cite xref">ABNF</a>]</span>.<a href="#section-1.1-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1309,15 +1317,15 @@ each HTTP Datagram (see <a href="#uncomp-format" class="auto internal xref">Sect
 compressed (see <a href="#comp-format" class="auto internal xref">Section 5.2</a>).<a href="#section-2-1" class="pilcrow">¶</a></p>
 <p id="section-2-2">When performing URI Template Expansion of the UDP Proxying template (see
 <span><a href="https://rfc-editor.org/rfc/rfc9298#section-3" class="relref">Section 3</a> of [<a href="#CONNECT-UDP" class="cite xref">CONNECT-UDP</a>]</span>), the client sets both the target_host and the
-target_port variables to the '*' character (ASCII character 0x2A).<a href="#section-2-2" class="pilcrow">¶</a></p>
+target_port variables to the '_' character (ASCII character 0x5F).<a href="#section-2-2" class="pilcrow">¶</a></p>
 <p id="section-2-3">When sending the UDP Proxying request to the proxy, the client adds the
 "Connect-UDP-Bind" header field to identify it as such. If the proxy accepts
 the CONNECT UDP Bind request, it adds the allocated public IP:port tuples for
 the client to the response; see <a href="#addr-hdr" class="auto internal xref">Section 8</a>.<a href="#section-2-3" class="pilcrow">¶</a></p>
-<p id="section-2-4">Endpoints exchange COMPRESSION_ASSIGN capsules in order to establish which IP a
-given context ID corresponds to. The context ID can correspond to both
-compressed and uncompressed payloads to/from any target and are configured as
-defined in <a href="#compression" class="auto internal xref">Section 5</a>.<a href="#section-2-4" class="pilcrow">¶</a></p>
+<p id="section-2-4">Endpoints exchange COMPRESSION_ASSIGN capsules in order to establish which IP
+and port a given context ID corresponds to. The context ID can correspond to
+both compressed and uncompressed payloads to/from any target and are configured
+as defined in <a href="#compression" class="auto internal xref">Section 5</a>.<a href="#section-2-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="contextid">
@@ -1333,8 +1341,10 @@ echo that capsule to indicate it's received it and estabished its own mapping.
 From then on, both endpoints are aware of the context ID and can send
 compressed datagrams. Later, any endpoint can decide to close the compression
 context by sending a COMPRESSION_CLOSE capsule. Endpoints <span class="bcp14">MUST NOT</span> send two
-COMPRESSION_ASSIGN capsules with the same context ID. If a recipient detects
-a repeated context ID, it <span class="bcp14">MUST</span> consider the capsule as malformed.<a href="#section-3-1" class="pilcrow">¶</a></p>
+COMPRESSION_ASSIGN capsules with the same context ID. If a recipient detects a
+repeated context ID, it <span class="bcp14">MUST</span> treat the capsule as malformed. Receipt of a
+malformed capsule <span class="bcp14">MUST</span> be treated as an error processing the Capsule Protocol,
+as defined in <span><a href="https://rfc-editor.org/rfc/rfc9297#section-3.3" class="relref">Section 3.3</a> of [<a href="#HTTP-DGRAM" class="cite xref">HTTP-DGRAM</a>]</span>.<a href="#section-3-1" class="pilcrow">¶</a></p>
 <p id="section-3-2">The context ID 0 was reserved by unextended connect-udp and is not used by this
 extension. Once an endpoint has ascertained that the peer supports this
 extension (see <a href="#hdr" class="auto internal xref">Section 7</a>), the endpoint <span class="bcp14">MUST NOT</span> send any datagrams with context
@@ -1359,14 +1369,14 @@ proxy with an unused Context ID defined in <a href="#contextid" class="auto inte
 set to zero. Clients <span class="bcp14">MUST NOT</span> open an uncompressed context ID if they already
 have one currently open. If a server receives a request to open an uncompressed
 context ID and it already has one open, then the server <span class="bcp14">MUST</span> treat the second
-request as malformed. Note that it's possible for the client to close the
-uncompressed context and reopen it later, as long as there aren't two open at
-the same time. Only the client can request uncompressed contexts. If a client
-receives a COMPRESSION_ASSIGN capsule with the IP Version set to 0, it <span class="bcp14">MUST</span>
-treat it as malformed.<a href="#section-4-1" class="pilcrow">¶</a></p>
-<p id="section-4-2">When HTTP Datagrams <span>[<a href="#HTTP-DGRAM" class="cite xref">HTTP-DGRAM</a>]</span> are associated with a Bound UDP
-Proxying request, the format of their UDP Proxying Payload field (see <span><a href="https://rfc-editor.org/rfc/rfc9298#section-5" class="relref">Section 5</a> of [<a href="#CONNECT-UDP" class="cite xref">CONNECT-UDP</a>]</span>) is defined by <a href="#dgram-format" class="auto internal xref">Figure 1</a> when uncompressed; every
-datagram carries addressing information.<a href="#section-4-2" class="pilcrow">¶</a></p>
+capsule as malformed. Note that it's possible for the client to close the
+uncompressed context and reopen it later with a different context ID, as long
+as there aren't two contexts open at the same time. Only the client can request
+uncompressed contexts. If a client receives a COMPRESSION_ASSIGN capsule with
+the IP Version set to 0, it <span class="bcp14">MUST</span> treat it as malformed.<a href="#section-4-1" class="pilcrow">¶</a></p>
+<p id="section-4-2">When HTTP Datagrams <span>[<a href="#HTTP-DGRAM" class="cite xref">HTTP-DGRAM</a>]</span> are associated with a Bound UDP Proxying
+request, the format of their UDP Proxying Payload field (see <span><a href="https://rfc-editor.org/rfc/rfc9298#section-5" class="relref">Section 5</a> of [<a href="#CONNECT-UDP" class="cite xref">CONNECT-UDP</a>]</span>) is defined by <a href="#dgram-format" class="auto internal xref">Figure 1</a> when uncompressed; every datagram
+carries addressing information.<a href="#section-4-2" class="pilcrow">¶</a></p>
 <div id="uncomp-format">
 <section id="section-4.1">
         <h3 id="name-uncompressed-payload-format">
@@ -1484,9 +1494,9 @@ mapping is unused for a long time). Another potential use is <a href="#restricti
         <h3 id="name-compressed-payload-format">
 <a href="#section-5.2" class="section-number selfRef">5.2. </a><a href="#name-compressed-payload-format" class="section-name selfRef">Compressed Payload Format</a>
         </h3>
-<p id="section-5.2-1">When HTTP Datagrams <span>[<a href="#HTTP-DGRAM" class="cite xref">HTTP-DGRAM</a>]</span> are associated with this Bound UDP
-Proxying request, the format of their UDP Proxying Payload field (see <span><a href="https://rfc-editor.org/rfc/rfc9298#section-5" class="relref">Section 5</a> of [<a href="#CONNECT-UDP" class="cite xref">CONNECT-UDP</a>]</span>) is defined by <a href="#dgram-format" class="auto internal xref">Figure 1</a> when the context ID is set
-to one previously registered for compressed payloads. (See <a href="#contextid" class="auto internal xref">Section 3</a> for
+<p id="section-5.2-1">When HTTP Datagrams <span>[<a href="#HTTP-DGRAM" class="cite xref">HTTP-DGRAM</a>]</span> are associated with this Bound UDP Proxying
+request, the format of their UDP Proxying Payload field (see <span><a href="https://rfc-editor.org/rfc/rfc9298#section-5" class="relref">Section 5</a> of [<a href="#CONNECT-UDP" class="cite xref">CONNECT-UDP</a>]</span>) is defined by <a href="#dgram-format" class="auto internal xref">Figure 1</a> when the context ID is set to one
+previously registered for compressed payloads. (See <a href="#contextid" class="auto internal xref">Section 3</a> for
 compressed and uncompressed assignments.)<a href="#section-5.2-1" class="pilcrow">¶</a></p>
 <span id="name-compressed-bound-udp-proxyi"></span><div id="dgram-format-compressed">
 <figure id="figure-2">
@@ -1620,9 +1630,9 @@ address to bind. The proxy <span class="bcp14">MAY</span> assign more addresses.
 address, it <span class="bcp14">MUST</span> select an open port to bind to this request. From then and
 until the tunnel is closed, the proxy <span class="bcp14">SHALL</span> send packets received on these
 IP-port tuples to the client. The proxy <span class="bcp14">MUST</span> communicate the selected addresses
-and ports to the client using the "Proxy-Public-Address" header. The header is
-defined as a List of IP-Port-tuples. The format of the tuple is defined using
-IP-literal, IPv4address, IPv6address and port from <span><a href="https://rfc-editor.org/rfc/rfc3986#section-3.2" class="relref">Section 3.2</a> of [<a href="#URI" class="cite xref">URI</a>]</span>.<a href="#section-8-1" class="pilcrow">¶</a></p>
+and ports to the client using the "Proxy-Public-Address" header field. The
+header field is defined as a List of IP-Port-tuples. The format of the tuple is
+defined using IP-literal, IPv4address, IPv6address and port from <span><a href="https://rfc-editor.org/rfc/rfc3986#section-3.2" class="relref">Section 3.2</a> of [<a href="#URI" class="cite xref">URI</a>]</span>.<a href="#section-8-1" class="pilcrow">¶</a></p>
 <span id="name-proxy-address-format"></span><div id="target-format">
 <figure id="figure-5">
         <div class="alignLeft art-text artwork" id="section-8-2.1">
@@ -1675,8 +1685,8 @@ fields. The uncompressed context allows transporting datagrams to and from any
 target. Clients that keep the uncompressed context open need to be able to
 receive from all targets. If the UDP proxy would reject unextended UDP proxying
 requests to some targets (as recommended in <span><a href="https://rfc-editor.org/rfc/rfc9298#section-7" class="relref">Section 7</a> of [<a href="#CONNECT-UDP" class="cite xref">CONNECT-UDP</a>]</span>), then
-for bound UDP proxying requests where the uncompressed context is open, the
-UDP proxy needs to perform checks on the target of each uncompressed context
+for bound UDP proxying requests where the uncompressed context is open, the UDP
+proxy needs to perform checks on the target of each uncompressed context
 datagram it receives.<a href="#section-10-2" class="pilcrow">¶</a></p>
 <p id="section-10-3">Note that if the compression response (COMPRESSION_ASSIGN OR COMPRESSION_CLOSE)
 cannot be immediately sent due to flow or congestion control, an upper limit on
@@ -1690,88 +1700,120 @@ conditions occur.<a href="#section-10-3" class="pilcrow">¶</a></p>
       <h2 id="name-iana-considerations">
 <a href="#section-11" class="section-number selfRef">11. </a><a href="#name-iana-considerations" class="section-name selfRef">IANA Considerations</a>
       </h2>
-<span class="break"></span><dl class="dlCompact dlParallel" id="section-11-1">
-        <dt id="section-11-1.1">This document will request IANA to register the following entry in the "HTTP</dt>
-        <dd style="margin-left: 1.5em" id="section-11-1.2">
-          <p id="section-11-1.2.1"></p><a href="#section-11-1.2" class="pilcrow">¶</a>
-</dd>
-        <dd class="break"></dd>
-<dt id="section-11-1.3">Field Name" registry maintained at</dt>
-        <dd style="margin-left: 1.5em" id="section-11-1.4">
-          <p id="section-11-1.4.1"></p><a href="#section-11-1.4" class="pilcrow">¶</a>
-</dd>
-        <dd class="break"></dd>
-<dt id="section-11-1.5">&lt;<span><a href="https://www.iana.org/assignments/http-fields">https://www.iana.org/assignments/http-fields</a></span>&gt;:</dt>
-        <dd style="margin-left: 1.5em" id="section-11-1.6">
-          <p id="section-11-1.6.1">Connect-UDP-Bind<a href="#section-11-1.6.1" class="pilcrow">¶</a></p>
-</dd>
-        <dd class="break"></dd>
-<dt id="section-11-1.7">Template:</dt>
-        <dd style="margin-left: 1.5em" id="section-11-1.8">
-          <p id="section-11-1.8.1">None<a href="#section-11-1.8.1" class="pilcrow">¶</a></p>
-</dd>
-        <dd class="break"></dd>
-<dt id="section-11-1.9">Status:</dt>
-        <dd style="margin-left: 1.5em" id="section-11-1.10">
-          <p id="section-11-1.10.1">provisional (permanent if this document is approved)<a href="#section-11-1.10.1" class="pilcrow">¶</a></p>
-</dd>
-        <dd class="break"></dd>
-<dt id="section-11-1.11">Reference:</dt>
-        <dd style="margin-left: 1.5em" id="section-11-1.12">
-          <p id="section-11-1.12.1">This document<a href="#section-11-1.12.1" class="pilcrow">¶</a></p>
-</dd>
-        <dd class="break"></dd>
-<dt id="section-11-1.13">Comments:</dt>
-        <dd style="margin-left: 1.5em" id="section-11-1.14">
-          <p id="section-11-1.14.1">None<a href="#section-11-1.14.1" class="pilcrow">¶</a></p>
-</dd>
-      <dd class="break"></dd>
-</dl>
-<p id="section-11-2">This document also requests IANA to register the following new items to the
-"HTTP Capsule Types" registry maintained at
-&lt;<span><a href="https://www.iana.org/assignments/masque">https://www.iana.org/assignments/masque</a></span>&gt;:<a href="#section-11-2" class="pilcrow">¶</a></p>
-<span id="name-new-capsules"></span><div id="iana-capsules-table">
+<div id="iana-fields">
+<section id="section-11.1">
+        <h3 id="name-http-fields">
+<a href="#section-11.1" class="section-number selfRef">11.1. </a><a href="#name-http-fields" class="section-name selfRef">HTTP Fields</a>
+        </h3>
+<p id="section-11.1-1">This document will request IANA to register the following new items in the
+"HTTP Field Name" registry maintained at
+&lt;<span><a href="https://www.iana.org/assignments/http-fields">https://www.iana.org/assignments/http-fields</a></span>&gt;:<a href="#section-11.1-1" class="pilcrow">¶</a></p>
+<span id="name-new-fields"></span><div id="iana-fields-table">
 <table class="center" id="table-1">
-        <caption>
+          <caption>
 <a href="#table-1" class="selfRef">Table 1</a>:
-<a href="#name-new-capsules" class="selfRef">New Capsules</a>
-        </caption>
+<a href="#name-new-fields" class="selfRef">New Fields</a>
+          </caption>
 <thead>
-          <tr>
-            <th class="text-left" rowspan="1" colspan="1">Value</th>
-            <th class="text-left" rowspan="1" colspan="1">Capsule Type</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td class="text-left" rowspan="1" colspan="1">0x1C0FE323</td>
-            <td class="text-left" rowspan="1" colspan="1">COMPRESSION_ASSIGN</td>
-          </tr>
-          <tr>
-            <td class="text-left" rowspan="1" colspan="1">0x1C0FE324</td>
-            <td class="text-left" rowspan="1" colspan="1">COMPRESSION_CLOSE</td>
-          </tr>
-        </tbody>
-      </table>
+            <tr>
+              <th class="text-left" rowspan="1" colspan="1">Field Name</th>
+              <th class="text-left" rowspan="1" colspan="1">Structured Type</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">Connect-UDP-Bind</td>
+              <td class="text-left" rowspan="1" colspan="1">Item</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">Proxy-Public-Address</td>
+              <td class="text-left" rowspan="1" colspan="1">List</td>
+            </tr>
+          </tbody>
+        </table>
 </div>
-<p id="section-11-4">All of these new entries use the following values for these fields:<a href="#section-11-4" class="pilcrow">¶</a></p>
-<span class="break"></span><dl class="dlCompact dlParallel" id="section-11-5">
-        <dt id="section-11-5.1">Status:</dt>
-        <dd style="margin-left: 1.5em" id="section-11-5.2">
-          <p id="section-11-5.2.1">provisional (permanent if this document is approved)<a href="#section-11-5.2.1" class="pilcrow">¶</a></p>
+<p id="section-11.1-3">All of these new entries use the following values for these fields:<a href="#section-11.1-3" class="pilcrow">¶</a></p>
+<span class="break"></span><dl class="dlCompact dlParallel" id="section-11.1-4">
+          <dt id="section-11.1-4.1">Status:</dt>
+          <dd style="margin-left: 1.5em" id="section-11.1-4.2">
+            <p id="section-11.1-4.2.1">provisional (permanent if this document is approved)<a href="#section-11.1-4.2.1" class="pilcrow">¶</a></p>
+</dd>
+          <dd class="break"></dd>
+<dt id="section-11.1-4.3">Reference:</dt>
+          <dd style="margin-left: 1.5em" id="section-11.1-4.4">
+            <p id="section-11.1-4.4.1">This document<a href="#section-11.1-4.4.1" class="pilcrow">¶</a></p>
+</dd>
+          <dd class="break"></dd>
+<dt id="section-11.1-4.5">Comments:</dt>
+          <dd style="margin-left: 1.5em" id="section-11.1-4.6">
+            <p id="section-11.1-4.6.1">None<a href="#section-11.1-4.6.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
-<dt id="section-11-5.3">Reference:</dt>
-        <dd style="margin-left: 1.5em" id="section-11-5.4">
-          <p id="section-11-5.4.1">This document<a href="#section-11-5.4.1" class="pilcrow">¶</a></p>
-</dd>
-        <dd class="break"></dd>
-<dt id="section-11-5.5">Comments:</dt>
-        <dd style="margin-left: 1.5em" id="section-11-5.6">
-          <p id="section-11-5.6.1">None<a href="#section-11-5.6.1" class="pilcrow">¶</a></p>
-</dd>
-      <dd class="break"></dd>
 </dl>
+</section>
+</div>
+<div id="iana-capsules">
+<section id="section-11.2">
+        <h3 id="name-capsules-2">
+<a href="#section-11.2" class="section-number selfRef">11.2. </a><a href="#name-capsules-2" class="section-name selfRef">Capsules</a>
+        </h3>
+<p id="section-11.2-1">This document will request IANA to register the following new items to the
+"HTTP Capsule Types" registry maintained at
+&lt;<span><a href="https://www.iana.org/assignments/masque">https://www.iana.org/assignments/masque</a></span>&gt;:<a href="#section-11.2-1" class="pilcrow">¶</a></p>
+<span id="name-new-capsules"></span><div id="iana-capsules-table">
+<table class="center" id="table-2">
+          <caption>
+<a href="#table-2" class="selfRef">Table 2</a>:
+<a href="#name-new-capsules" class="selfRef">New Capsules</a>
+          </caption>
+<thead>
+            <tr>
+              <th class="text-left" rowspan="1" colspan="1">Value</th>
+              <th class="text-left" rowspan="1" colspan="1">Capsule Type</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">0x1C0FE323</td>
+              <td class="text-left" rowspan="1" colspan="1">COMPRESSION_ASSIGN</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">0x1C0FE324</td>
+              <td class="text-left" rowspan="1" colspan="1">COMPRESSION_CLOSE</td>
+            </tr>
+          </tbody>
+        </table>
+</div>
+<p id="section-11.2-3">All of these new entries use the following values for these fields:<a href="#section-11.2-3" class="pilcrow">¶</a></p>
+<span class="break"></span><dl class="dlCompact dlParallel" id="section-11.2-4">
+          <dt id="section-11.2-4.1">Status:</dt>
+          <dd style="margin-left: 1.5em" id="section-11.2-4.2">
+            <p id="section-11.2-4.2.1">provisional (permanent if this document is approved)<a href="#section-11.2-4.2.1" class="pilcrow">¶</a></p>
+</dd>
+          <dd class="break"></dd>
+<dt id="section-11.2-4.3">Reference:</dt>
+          <dd style="margin-left: 1.5em" id="section-11.2-4.4">
+            <p id="section-11.2-4.4.1">This document<a href="#section-11.2-4.4.1" class="pilcrow">¶</a></p>
+</dd>
+          <dd class="break"></dd>
+<dt id="section-11.2-4.5">Change Controller:</dt>
+          <dd style="margin-left: 1.5em" id="section-11.2-4.6">
+            <p id="section-11.2-4.6.1">IETF<a href="#section-11.2-4.6.1" class="pilcrow">¶</a></p>
+</dd>
+          <dd class="break"></dd>
+<dt id="section-11.2-4.7">Contact:</dt>
+          <dd style="margin-left: 1.5em" id="section-11.2-4.8">
+            <p id="section-11.2-4.8.1">MASQUE Working Group <a href="mailto:masque@ietf.org">masque@ietf.org</a><a href="#section-11.2-4.8.1" class="pilcrow">¶</a></p>
+</dd>
+          <dd class="break"></dd>
+<dt id="section-11.2-4.9">Notes:</dt>
+          <dd style="margin-left: 1.5em" id="section-11.2-4.10">
+            <p id="section-11.2-4.10.1">None<a href="#section-11.2-4.10.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+</dl>
+</section>
+</div>
 </section>
 </div>
 <div id="sec-combined-references">
@@ -1861,10 +1903,10 @@ conditions occur.<a href="#section-10-3" class="pilcrow">¶</a></p>
 <a href="#appendix-A" class="section-number selfRef">Appendix A. </a><a href="#name-example" class="section-name selfRef">Example</a>
       </h2>
 <p id="appendix-A-1">In the example below, the client is configured with URI Template
-"https://example.org/.well-known/masque/udp/{target_host}/{target_port}/"
-and listens for traffic on the proxy, eventually decides that it no
-longer wants to listen for connections from new targets, and limits
-its communication with only 203.0.113.11:4321 and no other UDP target.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
+"https://example.org/.well-known/masque/udp/{target_host}/{target_port}/" and
+listens for traffic on the proxy, eventually decides that it no longer wants to
+listen for connections from new targets, and limits its communication with only
+203.0.113.11:4321 and no other UDP target.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="appendix-A-2">
 <pre>
  Client                                             Server
@@ -1873,7 +1915,7 @@ its communication with only 203.0.113.11:4321 and no other UDP target.<a href="#
    :method = CONNECT
    :protocol = connect-udp
    :scheme = https
-   :path = /.well-known/masque/udp/*/*/
+   :path = /.well-known/masque/udp/_/_/
    :authority = proxy.example.org
    connect-udp-bind = ?1
    capsule-protocol = ?1
@@ -2006,7 +2048,8 @@ generation, parsing, validation and error handling.<a href="#appendix-B-1" class
 <a href="#name-acknowledgments" class="section-name selfRef">Acknowledgments</a>
       </h2>
 <p id="appendix-C-1">This proposal is the result of many conversations with MASQUE working group
-participants.<a href="#appendix-C-1" class="pilcrow">¶</a></p>
+participants. In particular, the authors would like to thank <span class="contact-name">Marius Kleidl</span>, <span class="contact-name">Tommy Pauly</span>, <span class="contact-name">Lucas Pardue</span>, <span class="contact-name">Ben Schwartz</span>, and
+<span class="contact-name">Magnus Westerlund</span> for their reviews.<a href="#appendix-C-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="authors-addresses">
