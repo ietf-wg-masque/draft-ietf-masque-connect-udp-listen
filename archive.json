@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-04-03T00:54:40.323914+00:00",
+  "timestamp": "2025-04-22T00:55:52.411154+00:00",
   "repo": "ietf-wg-masque/draft-ietf-masque-connect-udp-listen",
   "labels": [
     {
@@ -3342,6 +3342,32 @@
           ]
         }
       ]
+    },
+    {
+      "number": 31,
+      "id": "PR_kwDOHnqa9M6TWjzX",
+      "title": "Replace star with underscore to avoid percent encoding",
+      "url": "https://github.com/ietf-wg-masque/draft-ietf-masque-connect-udp-listen/pull/31",
+      "state": "OPEN",
+      "author": "DavidSchinazi",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "The underscore character `_` is used in multiple programming languages to indicate variables that we don't care about, so it makes sense here. Underscore also has the advantage of being allowed in the path without percent-encoding, but disallowed in IP addresses, hostnames, and port numbers.\r\n\r\nFixes #30 ",
+      "createdAt": "2025-04-21T22:37:20Z",
+      "updatedAt": "2025-04-21T22:37:27Z",
+      "baseRepository": "ietf-wg-masque/draft-ietf-masque-connect-udp-listen",
+      "baseRefName": "main",
+      "baseRefOid": "45dc3cac5da1db3c77e727feb7a3d7fdaf5248b1",
+      "headRepository": "ietf-wg-masque/draft-ietf-masque-connect-udp-listen",
+      "headRefName": "fix_star",
+      "headRefOid": "9f88103f0f7e65084420a926aaa688637c4366f0",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
