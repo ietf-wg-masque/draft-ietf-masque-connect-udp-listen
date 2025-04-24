@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-04-22T00:55:52.411154+00:00",
+  "timestamp": "2025-04-24T00:56:32.325820+00:00",
   "repo": "ietf-wg-masque/draft-ietf-masque-connect-udp-listen",
   "labels": [
     {
@@ -3355,7 +3355,7 @@
       "labels": [],
       "body": "The underscore character `_` is used in multiple programming languages to indicate variables that we don't care about, so it makes sense here. Underscore also has the advantage of being allowed in the path without percent-encoding, but disallowed in IP addresses, hostnames, and port numbers.\r\n\r\nFixes #30 ",
       "createdAt": "2025-04-21T22:37:20Z",
-      "updatedAt": "2025-04-21T22:37:27Z",
+      "updatedAt": "2025-04-22T08:09:51Z",
       "baseRepository": "ietf-wg-masque/draft-ietf-masque-connect-udp-listen",
       "baseRefName": "main",
       "baseRefOid": "45dc3cac5da1db3c77e727feb7a3d7fdaf5248b1",
@@ -3366,7 +3366,22 @@
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
-      "comments": [],
+      "comments": [
+        {
+          "author": "marten-seemann",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "How does this relate to the already published RFCs? For example, CONNECT_IP uses `*`: https://datatracker.ietf.org/doc/html/rfc9484#section-4.4.",
+          "createdAt": "2025-04-22T01:27:51Z",
+          "updatedAt": "2025-04-22T01:27:51Z"
+        },
+        {
+          "author": "Acconut",
+          "authorAssociation": "NONE",
+          "body": "I could live with that change \ud83d\udc4d ",
+          "createdAt": "2025-04-22T08:09:50Z",
+          "updatedAt": "2025-04-22T08:09:50Z"
+        }
+      ],
       "reviews": []
     }
   ]
