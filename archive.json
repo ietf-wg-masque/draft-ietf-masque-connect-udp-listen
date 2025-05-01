@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-04-24T00:56:32.325820+00:00",
+  "timestamp": "2025-05-01T01:02:35.943243+00:00",
   "repo": "ietf-wg-masque/draft-ietf-masque-connect-udp-listen",
   "labels": [
     {
@@ -3348,21 +3348,21 @@
       "id": "PR_kwDOHnqa9M6TWjzX",
       "title": "Replace star with underscore to avoid percent encoding",
       "url": "https://github.com/ietf-wg-masque/draft-ietf-masque-connect-udp-listen/pull/31",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "DavidSchinazi",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "The underscore character `_` is used in multiple programming languages to indicate variables that we don't care about, so it makes sense here. Underscore also has the advantage of being allowed in the path without percent-encoding, but disallowed in IP addresses, hostnames, and port numbers.\r\n\r\nFixes #30 ",
       "createdAt": "2025-04-21T22:37:20Z",
-      "updatedAt": "2025-04-22T08:09:51Z",
+      "updatedAt": "2025-04-30T18:12:14Z",
       "baseRepository": "ietf-wg-masque/draft-ietf-masque-connect-udp-listen",
       "baseRefName": "main",
       "baseRefOid": "45dc3cac5da1db3c77e727feb7a3d7fdaf5248b1",
       "headRepository": "ietf-wg-masque/draft-ietf-masque-connect-udp-listen",
       "headRefName": "fix_star",
       "headRefOid": "9f88103f0f7e65084420a926aaa688637c4366f0",
-      "closedAt": null,
+      "closedAt": "2025-04-30T18:12:13Z",
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
@@ -3380,9 +3380,78 @@
           "body": "I could live with that change \ud83d\udc4d ",
           "createdAt": "2025-04-22T08:09:50Z",
           "updatedAt": "2025-04-22T08:09:50Z"
+        },
+        {
+          "author": "DavidSchinazi",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Based on the discussion here and on the list, it seems best to align with connect-ip. Closing this PR in favor of #32",
+          "createdAt": "2025-04-30T18:12:13Z",
+          "updatedAt": "2025-04-30T18:12:13Z"
         }
       ],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOHnqa9M6nL0ZT",
+          "commit": {
+            "abbreviatedOid": "9f88103"
+          },
+          "author": "asingh-g",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-04-29T20:03:57Z",
+          "updatedAt": "2025-04-29T20:03:57Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 32,
+      "id": "PR_kwDOHnqa9M6UjE43",
+      "title": "Percent encode the asterisk",
+      "url": "https://github.com/ietf-wg-masque/draft-ietf-masque-connect-udp-listen/pull/32",
+      "state": "OPEN",
+      "author": "DavidSchinazi",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Asterisks need to be percent-encoded. Let's do that (instead of picking a different character) to match connect-ip.\r\n\r\nFixes #30",
+      "createdAt": "2025-04-30T18:11:32Z",
+      "updatedAt": "2025-04-30T19:28:01Z",
+      "baseRepository": "ietf-wg-masque/draft-ietf-masque-connect-udp-listen",
+      "baseRefName": "main",
+      "baseRefOid": "45dc3cac5da1db3c77e727feb7a3d7fdaf5248b1",
+      "headRepository": "ietf-wg-masque/draft-ietf-masque-connect-udp-listen",
+      "headRefName": "fix_star2",
+      "headRefOid": "ae170e51ee271df822a712d2feb2c6d59448b264",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "LPardue",
+          "authorAssociation": "NONE",
+          "body": "Fwiw I prefer this ",
+          "createdAt": "2025-04-30T18:30:10Z",
+          "updatedAt": "2025-04-30T18:30:10Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOHnqa9M6nYX0o",
+          "commit": {
+            "abbreviatedOid": "ae170e5"
+          },
+          "author": "Acconut",
+          "authorAssociation": "NONE",
+          "state": "APPROVED",
+          "body": "Looks good to me",
+          "createdAt": "2025-04-30T19:28:01Z",
+          "updatedAt": "2025-04-30T19:28:01Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
