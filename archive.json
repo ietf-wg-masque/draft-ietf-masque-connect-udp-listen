@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-05-01T01:02:35.943243+00:00",
+  "timestamp": "2025-05-22T00:58:31.229365+00:00",
   "repo": "ietf-wg-masque/draft-ietf-masque-connect-udp-listen",
   "labels": [
     {
@@ -500,15 +500,15 @@
       "id": "I_kwDOHnqa9M6w2kCN",
       "title": "Percent-encoding the asterisk for target_host and target_port in the URI",
       "url": "https://github.com/ietf-wg-masque/draft-ietf-masque-connect-udp-listen/issues/30",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "DavidSchinazi",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Pointed raised by @Acconut over email:\n\n> I am currently toying around with an implementation of draft-ietf-masque-connect-udp-listen and ran into a small issue regarding the URI template.\n>\n> The example in Appendix A uses the URI Template `https://example.org/.well-known/masque/udp/{target_host}/{target_port}/` and expanded the path to `/.well-known/masque/udp/*/*/` for the initial request. However, if I understand RFC 6570 (URI Template) correctly, `{target_host}` and `{target_port}` are [simple string expansions](https://datatracker.ietf.org/doc/html/rfc6570#autoid-19), so the asterisk has to be percentage encoded, yielding `/.well-known/masque/udp/%2A/%2A/`.\n>\n> The expanded path would be correct if the variables in the template were reserved expansions (i.e. `{+target_host}`). But deviating from the templates introduced in RFC 9298 (Proxying UDP in HTTP) probably doesn't help either.\n> \n> So, if am not mistaken, which could be the case since I am working with URI Template for the first time, the path in Appendix A should be changed to `/.well-known/masque/udp/%2A/%2A/`. It would also be helpful if Section 2 could mention that asterisks have to be percentage encoded if the variables are simple string expansions.",
       "createdAt": "2025-04-02T17:32:05Z",
-      "updatedAt": "2025-04-02T17:32:05Z",
-      "closedAt": null,
+      "updatedAt": "2025-05-20T16:01:02Z",
+      "closedAt": "2025-05-20T16:01:02Z",
       "comments": []
     }
   ],
@@ -3410,24 +3410,26 @@
       "id": "PR_kwDOHnqa9M6UjE43",
       "title": "Percent encode the asterisk",
       "url": "https://github.com/ietf-wg-masque/draft-ietf-masque-connect-udp-listen/pull/32",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "DavidSchinazi",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Asterisks need to be percent-encoded. Let's do that (instead of picking a different character) to match connect-ip.\r\n\r\nFixes #30",
       "createdAt": "2025-04-30T18:11:32Z",
-      "updatedAt": "2025-04-30T19:28:01Z",
+      "updatedAt": "2025-05-20T16:01:01Z",
       "baseRepository": "ietf-wg-masque/draft-ietf-masque-connect-udp-listen",
       "baseRefName": "main",
       "baseRefOid": "45dc3cac5da1db3c77e727feb7a3d7fdaf5248b1",
       "headRepository": "ietf-wg-masque/draft-ietf-masque-connect-udp-listen",
       "headRefName": "fix_star2",
       "headRefOid": "ae170e51ee271df822a712d2feb2c6d59448b264",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-05-20T16:01:01Z",
+      "mergedAt": "2025-05-20T16:01:01Z",
+      "mergedBy": "asingh-g",
+      "mergeCommit": {
+        "oid": "f19a76f39bc05baffe90540aa7ada8968688ea8b"
+      },
       "comments": [
         {
           "author": "LPardue",
