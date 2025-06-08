@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-05-22T00:58:31.229365+00:00",
+  "timestamp": "2025-06-08T01:05:05.987426+00:00",
   "repo": "ietf-wg-masque/draft-ietf-masque-connect-udp-listen",
   "labels": [
     {
@@ -3454,6 +3454,32 @@
           "comments": []
         }
       ]
+    },
+    {
+      "number": 33,
+      "id": "PR_kwDOHnqa9M6Zdd1d",
+      "title": "Pre-WGLC editorial pass",
+      "url": "https://github.com/ietf-wg-masque/draft-ietf-masque-connect-udp-listen/pull/33",
+      "state": "OPEN",
+      "author": "DavidSchinazi",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "This ended up being a pretty significant refactor. It looks like that completely confused GitHub's diff algorithm - sorry. Please use these rendering instead:\r\n\r\n[Rendered HTML of this PR](https://ietf-wg-masque.github.io/draft-ietf-masque-connect-udp-listen/dschinazi_editorial_pre_wglc/draft-ietf-masque-connect-udp-listen.html)\r\n\r\n[Rendered diff with main](https://author-tools.ietf.org/api/iddiff?url_1=https://ietf-wg-masque.github.io/draft-ietf-masque-connect-udp-listen/draft-ietf-masque-connect-udp-listen.txt&url_2=https://ietf-wg-masque.github.io/draft-ietf-masque-connect-udp-listen/dschinazi_editorial_pre_wglc/draft-ietf-masque-connect-udp-listen.txt)",
+      "createdAt": "2025-06-06T22:54:46Z",
+      "updatedAt": "2025-06-06T22:56:07Z",
+      "baseRepository": "ietf-wg-masque/draft-ietf-masque-connect-udp-listen",
+      "baseRefName": "main",
+      "baseRefOid": "f19a76f39bc05baffe90540aa7ada8968688ea8b",
+      "headRepository": "ietf-wg-masque/draft-ietf-masque-connect-udp-listen",
+      "headRefName": "dschinazi_editorial_pre_wglc",
+      "headRefOid": "280f17f2bbfd34b767b8c3c976a4caaaf520af5d",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
