@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-06-08T01:05:05.987426+00:00",
+  "timestamp": "2025-06-15T01:06:09.991053+00:00",
   "repo": "ietf-wg-masque/draft-ietf-masque-connect-udp-listen",
   "labels": [
     {
@@ -3467,7 +3467,7 @@
       "labels": [],
       "body": "This ended up being a pretty significant refactor. It looks like that completely confused GitHub's diff algorithm - sorry. Please use these rendering instead:\r\n\r\n[Rendered HTML of this PR](https://ietf-wg-masque.github.io/draft-ietf-masque-connect-udp-listen/dschinazi_editorial_pre_wglc/draft-ietf-masque-connect-udp-listen.html)\r\n\r\n[Rendered diff with main](https://author-tools.ietf.org/api/iddiff?url_1=https://ietf-wg-masque.github.io/draft-ietf-masque-connect-udp-listen/draft-ietf-masque-connect-udp-listen.txt&url_2=https://ietf-wg-masque.github.io/draft-ietf-masque-connect-udp-listen/dschinazi_editorial_pre_wglc/draft-ietf-masque-connect-udp-listen.txt)",
       "createdAt": "2025-06-06T22:54:46Z",
-      "updatedAt": "2025-06-06T22:56:07Z",
+      "updatedAt": "2025-06-13T16:23:25Z",
       "baseRepository": "ietf-wg-masque/draft-ietf-masque-connect-udp-listen",
       "baseRefName": "main",
       "baseRefOid": "f19a76f39bc05baffe90540aa7ada8968688ea8b",
@@ -3479,7 +3479,161 @@
       "mergedBy": null,
       "mergeCommit": null,
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOHnqa9M6uXBjr",
+          "commit": {
+            "abbreviatedOid": "280f17f"
+          },
+          "author": "asingh-g",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-06-13T15:37:51Z",
+          "updatedAt": "2025-06-13T15:37:51Z",
+          "comments": [
+            {
+              "originalPosition": 144,
+              "body": "> MUST be treated as an error processing the Capsule Protocol\r\n\r\nWould it make sense to say: \r\n> MUST be treated as a Capsule Protocol processing error",
+              "createdAt": "2025-06-13T15:37:51Z",
+              "updatedAt": "2025-06-13T15:37:51Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHnqa9M6uXC8t",
+          "commit": {
+            "abbreviatedOid": "280f17f"
+          },
+          "author": "asingh-g",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-06-13T15:39:34Z",
+          "updatedAt": "2025-06-13T15:39:34Z",
+          "comments": [
+            {
+              "originalPosition": 148,
+              "body": "```suggestion\r\nboth it and its peer have opened a Context ID for the same tuple, the\r\n```",
+              "createdAt": "2025-06-13T15:39:34Z",
+              "updatedAt": "2025-06-13T15:39:34Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHnqa9M6uXKM9",
+          "commit": {
+            "abbreviatedOid": "280f17f"
+          },
+          "author": "asingh-g",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-06-13T15:45:42Z",
+          "updatedAt": "2025-06-13T15:45:43Z",
+          "comments": [
+            {
+              "originalPosition": 182,
+              "body": "```suggestion\r\nThis is useful for example, when a mapping is unused for a long time. Another\r\n```",
+              "createdAt": "2025-06-13T15:45:42Z",
+              "updatedAt": "2025-06-13T15:45:43Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHnqa9M6uXOSY",
+          "commit": {
+            "abbreviatedOid": "280f17f"
+          },
+          "author": "asingh-g",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-06-13T15:52:04Z",
+          "updatedAt": "2025-06-13T15:52:04Z",
+          "comments": [
+            {
+              "originalPosition": 188,
+              "body": "```suggestion\r\nContext ID to exchange UDP payloads for the given target, if \r\nsuch a context has been registered (see {{uncompressed}}).\r\n```",
+              "createdAt": "2025-06-13T15:52:04Z",
+              "updatedAt": "2025-06-13T15:52:04Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHnqa9M6uXQsn",
+          "commit": {
+            "abbreviatedOid": "280f17f"
+          },
+          "author": "asingh-g",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-06-13T15:54:10Z",
+          "updatedAt": "2025-06-13T15:54:11Z",
+          "comments": [
+            {
+              "originalPosition": 214,
+              "body": "```suggestion\r\nA client MUST NOT open an uncompressed Context ID if one is already\r\nopen. If a server receives a request to open an uncompressed Context\r\n```",
+              "createdAt": "2025-06-13T15:54:11Z",
+              "updatedAt": "2025-06-13T15:56:17Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHnqa9M6uXmbj",
+          "commit": {
+            "abbreviatedOid": "280f17f"
+          },
+          "author": "asingh-g",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-06-13T16:20:17Z",
+          "updatedAt": "2025-06-13T16:20:17Z",
+          "comments": [
+            {
+              "originalPosition": 383,
+              "body": "Would it make sense to hint to looking up the mapping for compressed datagrams here since not every datagram will have a target IP and Port? Or is that too redundant",
+              "createdAt": "2025-06-13T16:20:17Z",
+              "updatedAt": "2025-06-13T16:20:17Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHnqa9M6uXoMa",
+          "commit": {
+            "abbreviatedOid": "280f17f"
+          },
+          "author": "asingh-g",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-06-13T16:22:07Z",
+          "updatedAt": "2025-06-13T16:22:08Z",
+          "comments": [
+            {
+              "originalPosition": 416,
+              "body": "```suggestion\r\nNote that these values will be replaced by lower ones prior to publication.\r\n```",
+              "createdAt": "2025-06-13T16:22:08Z",
+              "updatedAt": "2025-06-13T16:22:08Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHnqa9M6uXpLL",
+          "commit": {
+            "abbreviatedOid": "280f17f"
+          },
+          "author": "asingh-g",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "Everything looks good. The structure makes sense. Left a few comments, mostly nits.",
+          "createdAt": "2025-06-13T16:23:25Z",
+          "updatedAt": "2025-06-13T16:23:25Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
