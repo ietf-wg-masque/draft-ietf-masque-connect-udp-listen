@@ -5,7 +5,7 @@
 MASQUE                                                       D. Schinazi
 Internet-Draft                                                  A. Singh
 Intended status: Standards Track                              Google LLC
-Expires: 8 December 2025                                     6 June 2025
+Expires: 18 December 2025                                   16 June 2025
 
 
                        Proxying Bound UDP in HTTP
@@ -54,7 +54,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 8 December 2025.
+   This Internet-Draft will expire on 18 December 2025.
 
 Copyright Notice
 
@@ -224,11 +224,11 @@ Table of Contents
    Section 3.3 of [HTTP-DGRAM].
 
    Only one Context ID can be used per IP-port tuple.  If an endpoint
-   detects that both itself and its peer have opened a Context ID for
-   the same tuple, the endpoint MUST close the Context ID that was
-   opened by the proxy.  If an endpoint receives a COMPRESSION_ASSIGN
-   capsule whose tuple matches another open Context ID, it MUST treat
-   the capsule as malformed.
+   detects that both it and its peer have opened a Context ID for the
+   same tuple, the endpoint MUST close the Context ID that was opened by
+   the proxy.  If an endpoint receives a COMPRESSION_ASSIGN capsule
+   whose tuple matches another open Context ID, it MUST treat the
+   capsule as malformed.
 
    Endpoints MAY pre-emptively use Context IDs not yet acknowledged by
    the peer, knowing that those HTTP Datagrams can be dropped if they
@@ -255,13 +255,13 @@ Table of Contents
    Context ID.
 
    Endpoints MAY close any context regardless of which endpoint
-   registered it.  This is useful for example when a mapping is unused
+   registered it.  This is useful for example, when a mapping is unused
    for a long time.  Another potential use is restricting some targets
    (see Section 8.1).
 
    Once a registration is closed, endpoints can instead use an
-   uncompressed Context ID (see Section 4) to exchange UDP payloads for
-   the given target, if such a context has been registered.
+   uncompressed Context ID to exchange UDP payloads for the given
+   target, if such a context has been registered (see Section 4).
 
 4.  Uncompressed Operation
 
@@ -301,15 +301,15 @@ Table of Contents
    UDP Payload:  The unmodified UDP Payload of this proxied UDP packet
       (referred to as "data octets" in [UDP]).
 
-   Clients MUST NOT open an uncompressed Context ID if they already have
-   one currently open.  If a server receives a request to open an
-   uncompressed Context ID and it already has one open, then the server
-   MUST treat the second capsule as malformed.  Note that it's possible
-   for the client to close the uncompressed context and reopen it later
-   with a different Context ID, as long as there aren't two uncompressed
-   contexts open at the same time.  Only the client can request
-   uncompressed contexts.  If a client receives a COMPRESSION_ASSIGN
-   capsule with the IP Version set to 0, it MUST treat it as malformed.
+   A client MUST NOT open an uncompressed Context ID if one is already
+   open.  If a server receives a request to open an uncompressed Context
+   ID and it already has one open, then the server MUST treat the second
+   capsule as malformed.  Note that it's possible for the client to
+   close the uncompressed context and reopen it later with a different
+   Context ID, as long as there aren't two uncompressed contexts open at
+   the same time.  Only the client can request uncompressed contexts.
+   If a client receives a COMPRESSION_ASSIGN capsule with the IP Version
+   set to 0, it MUST treat it as malformed.
 
 5.  Compressed Operation
 
@@ -471,7 +471,7 @@ Table of Contents
       (mailto:masque@ietf.org)
    Notes:  None
 
-   Note that these Values will be replaced by lower ones prior to
+   Note that these values will be replaced by lower ones prior to
    publication.
 
 11.  References
