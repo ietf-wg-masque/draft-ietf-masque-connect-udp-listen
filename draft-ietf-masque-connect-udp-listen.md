@@ -230,8 +230,8 @@ This is useful for example, when a mapping is unused for a long time. Another
 potential use is restricting some targets (see {{restricting-ips}}).
 
 Once a registration is closed, endpoints can instead use an uncompressed
-Context ID to exchange UDP payloads for the given target, if 
-such a context has been registered (see {{uncompressed}}).
+Context ID to exchange UDP payloads for the given target, if such a context has
+been registered (see {{uncompressed}}).
 
 # Uncompressed Operation {#uncompressed}
 
