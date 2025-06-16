@@ -1400,10 +1400,10 @@ ID. If a recipient detects a repeated Context ID, it <span class="bcp14">MUST</s
 malformed. Receipt of a malformed capsule <span class="bcp14">MUST</span> be treated as an error
 processing the Capsule Protocol, as defined in <span><a href="https://rfc-editor.org/rfc/rfc9297#section-3.3" class="relref">Section 3.3</a> of [<a href="#HTTP-DGRAM" class="cite xref">HTTP-DGRAM</a>]</span>.<a href="#section-3.1-8" class="pilcrow">¶</a></p>
 <p id="section-3.1-9">Only one Context ID can be used per IP-port tuple. If an endpoint detects that
-both it and its peer have opened a Context ID for the same tuple, the
-endpoint <span class="bcp14">MUST</span> close the Context ID that was opened by the proxy. If an
-endpoint receives a COMPRESSION_ASSIGN capsule whose tuple matches another open
-Context ID, it <span class="bcp14">MUST</span> treat the capsule as malformed.<a href="#section-3.1-9" class="pilcrow">¶</a></p>
+both it and its peer have opened a Context ID for the same tuple, the endpoint
+<span class="bcp14">MUST</span> close the Context ID that was opened by the proxy. If an endpoint receives
+a COMPRESSION_ASSIGN capsule whose tuple matches another open Context ID, it
+<span class="bcp14">MUST</span> treat the capsule as malformed.<a href="#section-3.1-9" class="pilcrow">¶</a></p>
 <p id="section-3.1-10">Endpoints <span class="bcp14">MAY</span> pre-emptively use Context IDs not yet acknowledged by the peer,
 knowing that those HTTP Datagrams can be dropped if they arrive before the
 corresponding COMPRESSION_ASSIGN capsule, or if the peer rejects the
@@ -1503,14 +1503,14 @@ octets" in <span>[<a href="#UDP" class="cite xref">UDP</a>]</span>).<a href="#se
 </dd>
       <dd class="break"></dd>
 </dl>
-<p id="section-4-5">A client <span class="bcp14">MUST NOT</span> open an uncompressed Context ID if one is already
-open. If a server receives a request to open an uncompressed Context
-ID and it already has one open, then the server <span class="bcp14">MUST</span> treat the second capsule
-as malformed. Note that it's possible for the client to close the uncompressed
-context and reopen it later with a different Context ID, as long as there
-aren't two uncompressed contexts open at the same time. Only the client can
-request uncompressed contexts. If a client receives a COMPRESSION_ASSIGN
-capsule with the IP Version set to 0, it <span class="bcp14">MUST</span> treat it as malformed.<a href="#section-4-5" class="pilcrow">¶</a></p>
+<p id="section-4-5">A client <span class="bcp14">MUST NOT</span> open an uncompressed Context ID if one is already open. If a
+server receives a request to open an uncompressed Context ID and it already has
+one open, then the server <span class="bcp14">MUST</span> treat the second capsule as malformed. Note that
+it's possible for the client to close the uncompressed context and reopen it
+later with a different Context ID, as long as there aren't two uncompressed
+contexts open at the same time. Only the client can request uncompressed
+contexts. If a client receives a COMPRESSION_ASSIGN capsule with the IP Version
+set to 0, it <span class="bcp14">MUST</span> treat it as malformed.<a href="#section-4-5" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="compressed-operation">
