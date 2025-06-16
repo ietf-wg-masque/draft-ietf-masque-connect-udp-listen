@@ -196,7 +196,7 @@ processing the Capsule Protocol, as defined in {{Section 3.3 of
 !HTTP-DGRAM=RFC9297}}.
 
 Only one Context ID can be used per IP-port tuple. If an endpoint detects that
-both itself and its peer have opened a Context ID for the same tuple, the
+both it and its peer have opened a Context ID for the same tuple, the
 endpoint MUST close the Context ID that was opened by the proxy. If an
 endpoint receives a COMPRESSION_ASSIGN capsule whose tuple matches another open
 Context ID, it MUST treat the capsule as malformed.
@@ -226,12 +226,12 @@ Once an endpoint has either sent or received a COMPRESSION_CLOSE for a given
 Context ID, it MUST NOT send any further datagrams with that Context ID.
 
 Endpoints MAY close any context regardless of which endpoint registered it.
-This is useful for example when a mapping is unused for a long time. Another
+This is useful for example, when a mapping is unused for a long time. Another
 potential use is restricting some targets (see {{restricting-ips}}).
 
 Once a registration is closed, endpoints can instead use an uncompressed
-Context ID (see {{uncompressed}}) to exchange UDP payloads for the given
-target, if such a context has been registered.
+Context ID to exchange UDP payloads for the given target, if 
+such a context has been registered (see {{uncompressed}}).
 
 # Uncompressed Operation {#uncompressed}
 
@@ -277,8 +277,8 @@ UDP Payload:
 : The unmodified UDP Payload of this proxied UDP packet (referred to as "data
 octets" in {{UDP}}).
 
-Clients MUST NOT open an uncompressed Context ID if they already have one
-currently open. If a server receives a request to open an uncompressed Context
+A client MUST NOT open an uncompressed Context ID if one is already
+open. If a server receives a request to open an uncompressed Context
 ID and it already has one open, then the server MUST treat the second capsule
 as malformed. Note that it's possible for the client to close the uncompressed
 context and reopen it later with a different Context ID, as long as there
@@ -449,7 +449,7 @@ Notes:
 : None
 {: spacing="compact"}
 
-Note that these Values will be replaced by lower ones prior to publication.
+Note that these values will be replaced by lower ones prior to publication.
 
 --- back
 
