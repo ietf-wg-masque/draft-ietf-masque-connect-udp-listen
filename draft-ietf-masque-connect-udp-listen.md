@@ -196,10 +196,10 @@ processing the Capsule Protocol, as defined in {{Section 3.3 of
 !HTTP-DGRAM=RFC9297}}.
 
 Only one Context ID can be used per IP-port tuple. If an endpoint detects that
-both it and its peer have opened a Context ID for the same tuple, the
-endpoint MUST close the Context ID that was opened by the proxy. If an
-endpoint receives a COMPRESSION_ASSIGN capsule whose tuple matches another open
-Context ID, it MUST treat the capsule as malformed.
+both it and its peer have opened a Context ID for the same tuple, the endpoint
+MUST close the Context ID that was opened by the proxy. If an endpoint receives
+a COMPRESSION_ASSIGN capsule whose tuple matches another open Context ID, it
+MUST treat the capsule as malformed.
 
 Endpoints MAY pre-emptively use Context IDs not yet acknowledged by the peer,
 knowing that those HTTP Datagrams can be dropped if they arrive before the
@@ -277,14 +277,14 @@ UDP Payload:
 : The unmodified UDP Payload of this proxied UDP packet (referred to as "data
 octets" in {{UDP}}).
 
-A client MUST NOT open an uncompressed Context ID if one is already
-open. If a server receives a request to open an uncompressed Context
-ID and it already has one open, then the server MUST treat the second capsule
-as malformed. Note that it's possible for the client to close the uncompressed
-context and reopen it later with a different Context ID, as long as there
-aren't two uncompressed contexts open at the same time. Only the client can
-request uncompressed contexts. If a client receives a COMPRESSION_ASSIGN
-capsule with the IP Version set to 0, it MUST treat it as malformed.
+A client MUST NOT open an uncompressed Context ID if one is already open. If a
+server receives a request to open an uncompressed Context ID and it already has
+one open, then the server MUST treat the second capsule as malformed. Note that
+it's possible for the client to close the uncompressed context and reopen it
+later with a different Context ID, as long as there aren't two uncompressed
+contexts open at the same time. Only the client can request uncompressed
+contexts. If a client receives a COMPRESSION_ASSIGN capsule with the IP Version
+set to 0, it MUST treat it as malformed.
 
 # Compressed Operation
 
@@ -301,8 +301,7 @@ Compressed Bound UDP Proxying Payload {
   UDP Payload (..),
 }
 ~~~
-{: #fmt-dgram-comp title="Compressed Bound UDP Proxying HTTP
-Datagram Format"}
+{: #fmt-dgram-comp title="Compressed Bound UDP Proxying HTTP Datagram Format"}
 
 It contains the following field:
 
