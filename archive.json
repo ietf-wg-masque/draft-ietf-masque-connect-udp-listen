@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-06-15T01:06:09.991053+00:00",
+  "timestamp": "2025-06-17T00:59:53.008621+00:00",
   "repo": "ietf-wg-masque/draft-ietf-masque-connect-udp-listen",
   "labels": [
     {
@@ -3460,24 +3460,26 @@
       "id": "PR_kwDOHnqa9M6Zdd1d",
       "title": "Pre-WGLC editorial pass",
       "url": "https://github.com/ietf-wg-masque/draft-ietf-masque-connect-udp-listen/pull/33",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "DavidSchinazi",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "This ended up being a pretty significant refactor. It looks like that completely confused GitHub's diff algorithm - sorry. Please use these rendering instead:\r\n\r\n[Rendered HTML of this PR](https://ietf-wg-masque.github.io/draft-ietf-masque-connect-udp-listen/dschinazi_editorial_pre_wglc/draft-ietf-masque-connect-udp-listen.html)\r\n\r\n[Rendered diff with main](https://author-tools.ietf.org/api/iddiff?url_1=https://ietf-wg-masque.github.io/draft-ietf-masque-connect-udp-listen/draft-ietf-masque-connect-udp-listen.txt&url_2=https://ietf-wg-masque.github.io/draft-ietf-masque-connect-udp-listen/dschinazi_editorial_pre_wglc/draft-ietf-masque-connect-udp-listen.txt)",
       "createdAt": "2025-06-06T22:54:46Z",
-      "updatedAt": "2025-06-13T16:23:25Z",
+      "updatedAt": "2025-06-16T23:54:13Z",
       "baseRepository": "ietf-wg-masque/draft-ietf-masque-connect-udp-listen",
       "baseRefName": "main",
       "baseRefOid": "f19a76f39bc05baffe90540aa7ada8968688ea8b",
       "headRepository": "ietf-wg-masque/draft-ietf-masque-connect-udp-listen",
       "headRefName": "dschinazi_editorial_pre_wglc",
-      "headRefOid": "280f17f2bbfd34b767b8c3c976a4caaaf520af5d",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "0da1d34bfacf0cad214a93db6713783d8388d0fa",
+      "closedAt": "2025-06-16T23:54:13Z",
+      "mergedAt": "2025-06-16T23:54:13Z",
+      "mergedBy": "DavidSchinazi",
+      "mergeCommit": {
+        "oid": "66f06d5c509c6cebbc6a9e0874d5fca12ce208f6"
+      },
       "comments": [],
       "reviews": [
         {
@@ -3632,6 +3634,32 @@
           "createdAt": "2025-06-13T16:23:25Z",
           "updatedAt": "2025-06-13T16:23:25Z",
           "comments": []
+        },
+        {
+          "id": "PRR_kwDOHnqa9M6u3d4K",
+          "commit": {
+            "abbreviatedOid": "0da1d34"
+          },
+          "author": "DavidSchinazi",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-06-16T23:36:35Z",
+          "updatedAt": "2025-06-16T23:53:46Z",
+          "comments": [
+            {
+              "originalPosition": 144,
+              "body": "\"an error processing the Capsule Protocol\" is the specific text from HTTP-DGRAM s3.3, I prefer to keep it to be clear what we're referring to\r\n\r\n> When a receiver encounters an error processing the Capsule Protocol, the receiver MUST treat it as if it had received a malformed or incomplete HTTP message. For HTTP/3, the handling of malformed messages is described in [Section 4.1.2](https://www.rfc-editor.org/rfc/rfc9114#section-4.1.2) of [[HTTP/3](https://www.rfc-editor.org/rfc/rfc9297#RFC9114)]. For HTTP/2, the handling of malformed messages is described in [Section 8.1.1](https://www.rfc-editor.org/rfc/rfc9113#section-8.1.1) of [[HTTP/2](https://www.rfc-editor.org/rfc/rfc9297#RFC9113)]. For HTTP/1.x, the handling of incomplete messages is described in [Section 8](https://www.rfc-editor.org/rfc/rfc9112#section-8) of [[HTTP/1.1](https://www.rfc-editor.org/rfc/rfc9297#RFC9112)].",
+              "createdAt": "2025-06-16T23:36:35Z",
+              "updatedAt": "2025-06-16T23:53:46Z"
+            },
+            {
+              "originalPosition": 383,
+              "body": "My gut is that it's redundant",
+              "createdAt": "2025-06-16T23:41:56Z",
+              "updatedAt": "2025-06-16T23:53:46Z"
+            }
+          ]
         }
       ]
     }
