@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-06-17T00:59:53.008621+00:00",
+  "timestamp": "2025-07-13T01:08:17.244676+00:00",
   "repo": "ietf-wg-masque/draft-ietf-masque-connect-udp-listen",
   "labels": [
     {
@@ -509,6 +509,40 @@
       "createdAt": "2025-04-02T17:32:05Z",
       "updatedAt": "2025-05-20T16:01:02Z",
       "closedAt": "2025-05-20T16:01:02Z",
+      "comments": []
+    },
+    {
+      "number": 34,
+      "id": "I_kwDOHnqa9M6_6RxK",
+      "title": "Clarify that Proxies must not allocate new contexts, and add MTU considerations",
+      "url": "https://github.com/ietf-wg-masque/draft-ietf-masque-connect-udp-listen/issues/34",
+      "state": "OPEN",
+      "author": "asingh-g",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [
+        "asingh-g"
+      ],
+      "labels": [],
+      "body": "From Ben Schwartz on the Masque Mailing List\n\n> The proxy's compression context allocation behaviors are not clearly specified.  Section 3.1 allows the proxy to allocate additional compressed contexts at any time.  However, Section 8.1 says \"If a client does not wish to receive datagrams from unknown senders, it can close the uncompressed registration\".  Taken together, there must be a requirement that proxies MUST NOT allocate new compressed contexts to represent incoming packets that don't match an existing context.  However, I do not see this requirement stated anywhere in the draft.\n\n> Moving flows between compressed and uncompressed contexts will change their effective MTU, which could mess with E2E DPLPMTUD.  The draft should note this concern in Operational Considerations.  The desire to provide consistent MTU could explain why the proxy needs the ability to send COMPRESSION_ASSIGN (which otherwise could reasonably be left exclusively to the client).",
+      "createdAt": "2025-07-10T15:04:58Z",
+      "updatedAt": "2025-07-10T15:05:03Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 35,
+      "id": "I_kwDOHnqa9M6_6TE2",
+      "title": "Allow Mixed Mode Requests",
+      "url": "https://github.com/ietf-wg-masque/draft-ietf-masque-connect-udp-listen/issues/35",
+      "state": "OPEN",
+      "author": "asingh-g",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "From Ben Schwartz on the Mailing list:\n\n<blockquote>\nI think the request construction as specified could easily be made dramatically better by allowing mixed-mode requests.  Specifically, we should allow the client to send a request like\n\nCONNECT [/udp?target_host=2001:db8::1&port=443](https://example/udp?target_host=2001:db8::1&port=443) HTTP/3\n:scheme = https\n:host = proxy.example\n:protocol = connect-udp\ncapsule-protocol = ?1\nconnect-udp-bind = ?1\n\nIf the response omits \"connect-udp-bind = ?1\", it is an unextended connect proxy, and can be used with this single destination.  Future destinations will need additional CONNECT requests.\n\nIf the response includes \"connect-udp-bind = ?1\", then Context ID 0 represents [2001:db8::1]:443, and connections to additional destinations can be enabled using COMPRESSION_ASSIGN capsules. \n\nThe client can set target_host=\"*\" if it knows connect-udp-bind is supported and there is no sensible default destination.\n\nThis would solve some discoverability problems, provide graceful upgrade/downgrade, and make the \"connect-udp-bind\" header much more useful.\n</blockquote>",
+      "createdAt": "2025-07-10T15:06:44Z",
+      "updatedAt": "2025-07-10T15:06:44Z",
+      "closedAt": null,
       "comments": []
     }
   ],
