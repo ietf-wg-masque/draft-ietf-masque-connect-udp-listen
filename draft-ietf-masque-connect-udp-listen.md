@@ -194,7 +194,7 @@ Context IDs, while proxies can only allocate odd ones. This makes the
 registration capsules from this document unambiguous. For example, if a client
 receives a COMPRESSION_ASSIGN capsule with an even Context ID, that has to be
 an echo of a capsule that the client initially sent, indicating that the proxy
-accepted the registration. The Context ID value of COMPRESSION_ASSIGN can
+accepted the registration. Since the value 0 was reserved by unextended connect-udp, the Context ID value of COMPRESSION_ASSIGN can
 never be zero.
 
 Endpoints MUST NOT send two COMPRESSION_ASSIGN capsules with the same Context
