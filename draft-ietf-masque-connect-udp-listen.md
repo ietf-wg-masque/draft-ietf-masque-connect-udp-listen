@@ -395,9 +395,9 @@ limit is reached.
 # Operational Considerations
 
 When moving traffic between uncompressed and compressed contexts, the effective
-MTU will change. The proxy MAY wish to maintain consistent MTU by requesting
-compression assignments for uncompressed traffic to the client.
-
+MTU will change. Therefore if the proxy intends to use compression, it SHOULD
+request compression to the client at the earliest, before Path MTU Discovery is
+completed between the client and target {{?PMTUD=RFC8201}}.
 
 # IANA Considerations
 
