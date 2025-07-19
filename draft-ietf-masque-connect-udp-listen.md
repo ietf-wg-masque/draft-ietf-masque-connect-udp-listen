@@ -396,8 +396,9 @@ limit is reached.
 
 When moving traffic between uncompressed and compressed contexts, the effective
 MTU will change. Therefore if the proxy intends to use compression, it SHOULD
-request compression to the client at the earliest, before Path MTU Discovery is
-completed between the client and target {{?PMTUD=RFC8201}}.
+request it to the client at the earliest to avoid hindering Datagram
+Packetization Layer PMTU Discovery (DPLPMTUD) between the client and the target
+{{?DPLPMTUD=RFC8899}}.
 
 # IANA Considerations
 
