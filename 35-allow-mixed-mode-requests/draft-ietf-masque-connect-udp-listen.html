@@ -1304,9 +1304,21 @@ request path or query. For Bound UDP Proxying, the target is either conveyed in
 each HTTP Datagram (see <a href="#fmt-dgram-uncomp" class="auto internal xref">Figure 3</a>), or registered via capsules and
 then compressed (see <a href="#fmt-capsule-assign" class="auto internal xref">Figure 1</a>).<a href="#section-2-1" class="pilcrow">¶</a></p>
 <p id="section-2-2">When performing URI Template Expansion of the UDP Proxying template (see
-<span><a href="https://rfc-editor.org/rfc/rfc9298#section-3" class="relref">Section 3</a> of [<a href="#CONNECT-UDP" class="cite xref">CONNECT-UDP</a>]</span>), the client sets both the "target_host" and the
-"target_port" variables to the '*' character (ASCII character 0x2A). Note that
-the '*' character <span class="bcp14">MUST</span> be percent-encoded before sending, per <span><a href="https://rfc-editor.org/rfc/rfc6570#section-3.2.2" class="relref">Section 3.2.2</a> of [<a href="#TEMPLATE" class="cite xref">TEMPLATE</a>]</span>.<a href="#section-2-2" class="pilcrow">¶</a></p>
+<span><a href="https://rfc-editor.org/rfc/rfc9298#section-3" class="relref">Section 3</a> of [<a href="#CONNECT-UDP" class="cite xref">CONNECT-UDP</a>]</span>), the client follows the same template as
+CONNECT-UDP and sets the "target_host" and the "target_port" variables
+to one of its targets. It adds the connect-udp-bind header as specified in
+<a href="#hdr" class="auto internal xref">Section 6</a> to indicate that it prefers bind but would accept regular
+CONNECT-UDP to the target in case the proxy does not support it.
+If the proxy supports CONNECT-UDP Bind, it returns the connect-udp-bind
+response header value set to true and the proxy allocates context ID 0
+to the target and compressed datagrams {#compressed-operation} are transmitted
+between the client and proxy. On the other hand, if the proxy does not support
+bind, it sets the connect-udp-bind response header to false or omits it
+altogether.<a href="#section-2-2" class="pilcrow">¶</a></p>
+<p id="section-2-3">If the client intends to do CONNECT-UDP bind without a fallback to regular
+CONNECT-UDP, it sets both the "target_host" and the "target_port" variables to
+the '*'  character (ASCII character 0x2A). Note that the '*' character <span class="bcp14">MUST</span>
+be percent-encoded before sending, per <span><a href="https://rfc-editor.org/rfc/rfc6570#section-3.2.2" class="relref">Section 3.2.2</a> of [<a href="#TEMPLATE" class="cite xref">TEMPLATE</a>]</span>.<a href="#section-2-3" class="pilcrow">¶</a></p>
 <div id="mixed-mode">
 <section id="section-2.1">
         <h3 id="name-mixed-mode-operation">
