@@ -413,11 +413,6 @@ Table of Contents
    target and forwards them to the client by encapsulating them in HTTP
    Datagrams, using the corresponding Context ID.
 
-   When Mixed mode operation Section 2.1 is accepted by the proxy, The
-   proxy MUST request compression of the target specified in the
-   CONNECT-UDP header using the COMPRESSION_ASSIGN capsule.
-   Section 3.1.
-
    If the proxy receives UDP payloads that don't correspond to any
    registration (i.e., no compression for the given target was ever
    established and there is no uncompressed registration), the proxy

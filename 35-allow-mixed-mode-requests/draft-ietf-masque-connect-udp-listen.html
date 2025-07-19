@@ -1642,13 +1642,10 @@ to the target IP Address and UDP Port specified in each HTTP Datagram received
 from the client. The proxy uses the same ports to listen for UDP packets from
 any authorized target and forwards them to the client by encapsulating them in
 HTTP Datagrams, using the corresponding Context ID.<a href="#section-8-1" class="pilcrow">¶</a></p>
-<p id="section-8-2">When Mixed mode operation <a href="#mixed-mode" class="auto internal xref">Section 2.1</a> is accepted by the proxy, The proxy
-<span class="bcp14">MUST</span> request compression of the target specified in the CONNECT-UDP header
-using the COMPRESSION_ASSIGN capsule. <a href="#capsule-assign" class="auto internal xref">Section 3.1</a>.<a href="#section-8-2" class="pilcrow">¶</a></p>
-<p id="section-8-3">If the proxy receives UDP payloads that don't correspond to any registration
+<p id="section-8-2">If the proxy receives UDP payloads that don't correspond to any registration
 (i.e., no compression for the given target was ever established and there is no
 uncompressed registration), the proxy will either drop the datagram or
-temporarily buffer it (see <span><a href="https://rfc-editor.org/rfc/rfc9298#section-5" class="relref">Section 5</a> of [<a href="#CONNECT-UDP" class="cite xref">CONNECT-UDP</a>]</span>).<a href="#section-8-3" class="pilcrow">¶</a></p>
+temporarily buffer it (see <span><a href="https://rfc-editor.org/rfc/rfc9298#section-5" class="relref">Section 5</a> of [<a href="#CONNECT-UDP" class="cite xref">CONNECT-UDP</a>]</span>).<a href="#section-8-2" class="pilcrow">¶</a></p>
 <div id="restricting-ips">
 <section id="section-8.1">
         <h3 id="name-restricting-ips">
