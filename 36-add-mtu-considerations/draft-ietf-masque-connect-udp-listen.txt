@@ -426,9 +426,10 @@ Table of Contents
 10.  Operational Considerations
 
    When moving traffic between uncompressed and compressed contexts, the
-   effective MTU will change.  The proxy MAY wish to maintain consistent
-   MTU by requesting compression assignments for uncompressed traffic to
-   the client.
+   effective MTU will change.  Therefore if the proxy intends to use
+   compression, it SHOULD request compression to the client at the
+   earliest, before Path MTU Discovery is completed between the client
+   and target [PMTUD].
 
 11.  IANA Considerations
 
@@ -552,6 +553,11 @@ Table of Contents
               Address Translator (NAT) Traversal", RFC 8445,
               DOI 10.17487/RFC8445, July 2018,
               <https://www.rfc-editor.org/rfc/rfc8445>.
+
+   [PMTUD]    McCann, J., Deering, S., Mogul, J., and R. Hinden, Ed.,
+              "Path MTU Discovery for IP version 6", STD 87, RFC 8201,
+              DOI 10.17487/RFC8201, July 2017,
+              <https://www.rfc-editor.org/rfc/rfc8201>.
 
    [TURN]     Reddy, T., Ed., Johnston, A., Ed., Matthews, P., and J.
               Rosenberg, "Traversal Using Relays around NAT (TURN):
