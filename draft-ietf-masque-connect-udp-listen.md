@@ -384,10 +384,6 @@ from the client. The proxy uses the same ports to listen for UDP packets from
 any authorized target and forwards them to the client by encapsulating them in
 HTTP Datagrams, using the corresponding Context ID.
 
-When Mixed mode operation {{mixed-mode}} is accepted by the proxy, The proxy
-MUST request compression of the target specified in the CONNECT-UDP header
-using the COMPRESSION_ASSIGN capsule. {{capsule-assign}}.
-
 If the proxy receives UDP payloads that don't correspond to any registration
 (i.e., no compression for the given target was ever established and there is no
 uncompressed registration), the proxy will either drop the datagram or
