@@ -1398,18 +1398,20 @@ accepted the registration.<a href="#section-3.1-7" class="pilcrow">¶</a></p>
 <p id="section-3.1-8">Endpoints <span class="bcp14">MUST NOT</span> send two COMPRESSION_ASSIGN capsules with the same Context
 ID. If a recipient detects a repeated Context ID, it <span class="bcp14">MUST</span> treat the capsule as
 malformed. Receipt of a malformed capsule <span class="bcp14">MUST</span> be treated as an error
-processing the Capsule Protocol, as defined in <span><a href="https://rfc-editor.org/rfc/rfc9297#section-3.3" class="relref">Section 3.3</a> of [<a href="#HTTP-DGRAM" class="cite xref">HTTP-DGRAM</a>]</span>. The proxy <span class="bcp14">MUST NOT</span> request compression for IP-port
-tuples that haven't previously been observed on a previously opened uncompressed
-context.<a href="#section-3.1-8" class="pilcrow">¶</a></p>
-<p id="section-3.1-9">Only one Context ID can be used per IP-port tuple. If an endpoint detects that
+processing the Capsule Protocol, as defined in <span><a href="https://rfc-editor.org/rfc/rfc9297#section-3.3" class="relref">Section 3.3</a> of [<a href="#HTTP-DGRAM" class="cite xref">HTTP-DGRAM</a>]</span>.<a href="#section-3.1-8" class="pilcrow">¶</a></p>
+<p id="section-3.1-9">If the uncompressed context is closed, the proxy <span class="bcp14">MUST NOT</span> open new compressed
+contexts. In such a case, the proxy opening contexts results in tuples not
+desired by the client reaching it thereby nullifying the IP restriction
+property of compression as described in <a href="#restricting-ips" class="auto internal xref">Section 8.1</a>.<a href="#section-3.1-9" class="pilcrow">¶</a></p>
+<p id="section-3.1-10">Only one Context ID can be used per IP-port tuple. If an endpoint detects that
 both it and its peer have opened a Context ID for the same tuple, the endpoint
 <span class="bcp14">MUST</span> close the Context ID that was opened by the proxy. If an endpoint receives
 a COMPRESSION_ASSIGN capsule whose tuple matches another open Context ID, it
-<span class="bcp14">MUST</span> treat the capsule as malformed.<a href="#section-3.1-9" class="pilcrow">¶</a></p>
-<p id="section-3.1-10">Endpoints <span class="bcp14">MAY</span> pre-emptively use Context IDs not yet acknowledged by the peer,
+<span class="bcp14">MUST</span> treat the capsule as malformed.<a href="#section-3.1-10" class="pilcrow">¶</a></p>
+<p id="section-3.1-11">Endpoints <span class="bcp14">MAY</span> pre-emptively use Context IDs not yet acknowledged by the peer,
 knowing that those HTTP Datagrams can be dropped if they arrive before the
 corresponding COMPRESSION_ASSIGN capsule, or if the peer rejects the
-registration.<a href="#section-3.1-10" class="pilcrow">¶</a></p>
+registration.<a href="#section-3.1-11" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="capsule-close">

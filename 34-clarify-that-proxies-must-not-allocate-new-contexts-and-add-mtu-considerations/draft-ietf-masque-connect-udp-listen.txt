@@ -221,9 +221,13 @@ Table of Contents
    Context ID.  If a recipient detects a repeated Context ID, it MUST
    treat the capsule as malformed.  Receipt of a malformed capsule MUST
    be treated as an error processing the Capsule Protocol, as defined in
-   Section 3.3 of [HTTP-DGRAM].  The proxy MUST NOT request compression
-   for IP-port tuples that haven't previously been observed on a
-   previously opened uncompressed context.
+   Section 3.3 of [HTTP-DGRAM].
+
+   If the uncompressed context is closed, the proxy MUST NOT open new
+   compressed contexts.  In such a case, the proxy opening contexts
+   results in tuples not desired by the client reaching it thereby
+   nullifying the IP restriction property of compression as described in
+   Section 8.1.
 
    Only one Context ID can be used per IP-port tuple.  If an endpoint
    detects that both it and its peer have opened a Context ID for the
