@@ -118,10 +118,10 @@ Alternatively, the client can request mixed mode operation where the client is
 willing to accept non-bind CONNECT-UDP if bind is unavailable. In such an
 instance, the client provides the target_host and target_port of a single
 target as specfied in {{Section 3 of CONNECT-UDP}} with the addition of
-the connect-udp-bind header field as defined in {{#hdr}}. If the proxy supports
+the connect-udp-bind header field as defined in {{hdr}}. If the proxy supports
 CONNECT-UDP Bind, it will return the connect-udp-bind response header value
 set to true and the proxy will request a closed context for said target using
-a COMPRESSION_ASSIGN capsule {{#capsule-assign}}. If the connect-udp-bind
+a COMPRESSION_ASSIGN capsule {{capsule-assign}}. If the connect-udp-bind
 header is unset false in the response, the client and proxy must operate in
 regular, non-bind CONNECT-UDP mode as stated in {{CONNECT-UDP}}.
 
@@ -371,9 +371,9 @@ from the client. The proxy uses the same ports to listen for UDP packets from
 any authorized target and forwards them to the client by encapsulating them in
 HTTP Datagrams, using the corresponding Context ID.
 
-When Mixed mode operation {{#mixed-mode}} is accepted by the proxy, The proxy
+When Mixed mode operation {{mixed-mode}} is accepted by the proxy, The proxy
 MUST request compression of the target specified in the CONNECT-UDP header
-using the COMPRESSION_ASSIGN capsule. {{#capsule-assign}}.
+using the COMPRESSION_ASSIGN capsule. {{capsule-assign}}.
 
 If the proxy receives UDP payloads that don't correspond to any registration
 (i.e., no compression for the given target was ever established and there is no
