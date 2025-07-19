@@ -1308,7 +1308,7 @@ the connect-udp-bind response header value set to true and compressed datagrams
 context ID 0.<a href="#section-2-2" class="pilcrow">¶</a></p>
 <p id="section-2-3">When target_host and target_port are set to a valid target, the client is
 requesting CONNECT-UDP Bind but would accept fallback to unextended
-CONNECT-UDP, If the client wants CONNECT-UDP bind without fallback, it sets
+CONNECT-UDP to that target. If the client doesn't have a specific target, or if it wants CONNECT-UDP bind without fallback, it sets
 both the "target_host" and the "target_port" variables to the '*'
 character (ASCII character 0x2A). Note that the '*' character <span class="bcp14">MUST</span>
 be percent-encoded before sending, per <span><a href="https://rfc-editor.org/rfc/rfc6570#section-3.2.2" class="relref">Section 3.2.2</a> of [<a href="#TEMPLATE" class="cite xref">TEMPLATE</a>]</span>.<a href="#section-2-3" class="pilcrow">¶</a></p>
