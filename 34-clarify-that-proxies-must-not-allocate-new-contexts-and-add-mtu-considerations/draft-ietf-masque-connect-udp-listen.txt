@@ -5,7 +5,7 @@
 MASQUE                                                       D. Schinazi
 Internet-Draft                                                  A. Singh
 Intended status: Standards Track                              Google LLC
-Expires: 18 December 2025                                   16 June 2025
+Expires: 20 January 2026                                    19 July 2025
 
 
                        Proxying Bound UDP in HTTP
@@ -54,7 +54,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 18 December 2025.
+   This Internet-Draft will expire on 20 January 2026.
 
 Copyright Notice
 
@@ -221,7 +221,9 @@ Table of Contents
    Context ID.  If a recipient detects a repeated Context ID, it MUST
    treat the capsule as malformed.  Receipt of a malformed capsule MUST
    be treated as an error processing the Capsule Protocol, as defined in
-   Section 3.3 of [HTTP-DGRAM].
+   Section 3.3 of [HTTP-DGRAM].  The proxy MUST NOT request compression
+   for IP-port tuples that haven't previously been observed on a
+   previously opened uncompressed context.
 
    Only one Context ID can be used per IP-port tuple.  If an endpoint
    detects that both it and its peer have opened a Context ID for the
