@@ -1660,8 +1660,9 @@ limit is reached.<a href="#section-9-3" class="pilcrow">¶</a></p>
       </h2>
 <p id="section-10-1">When moving traffic between uncompressed and compressed contexts, the effective
 MTU will change. Therefore if the proxy intends to use compression, it <span class="bcp14">SHOULD</span>
-request compression to the client at the earliest, before Path MTU Discovery is
-completed between the client and target <span>[<a href="#PMTUD" class="cite xref">PMTUD</a>]</span>.<a href="#section-10-1" class="pilcrow">¶</a></p>
+request it to the client at the earliest to avoid hindering Datagram
+Packetization Layer PMTU Discovery (DPLPMTUD) between the client and the target
+<span>[<a href="#DPLPMTUD" class="cite xref">DPLPMTUD</a>]</span>.<a href="#section-10-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="iana-considerations">
@@ -1854,13 +1855,13 @@ completed between the client and target <span>[<a href="#PMTUD" class="cite xref
         <dd>
 <span class="refAuthor">Pauly, T., Ed.</span>, <span class="refAuthor">Schinazi, D.</span>, <span class="refAuthor">Chernyakhovsky, A.</span>, <span class="refAuthor">Kühlewind, M.</span>, and <span class="refAuthor">M. Westerlund</span>, <span class="refTitle">"Proxying IP in HTTP"</span>, <span class="seriesInfo">RFC 9484</span>, <span class="seriesInfo">DOI 10.17487/RFC9484</span>, <time datetime="2023-10" class="refDate">October 2023</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9484">https://www.rfc-editor.org/rfc/rfc9484</a>&gt;</span>. </dd>
 <dd class="break"></dd>
+<dt id="DPLPMTUD">[DPLPMTUD]</dt>
+        <dd>
+<span class="refAuthor">Fairhurst, G.</span>, <span class="refAuthor">Jones, T.</span>, <span class="refAuthor">Tüxen, M.</span>, <span class="refAuthor">Rüngeler, I.</span>, and <span class="refAuthor">T. Völker</span>, <span class="refTitle">"Packetization Layer Path MTU Discovery for Datagram Transports"</span>, <span class="seriesInfo">RFC 8899</span>, <span class="seriesInfo">DOI 10.17487/RFC8899</span>, <time datetime="2020-09" class="refDate">September 2020</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8899">https://www.rfc-editor.org/rfc/rfc8899</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="ICE">[ICE]</dt>
         <dd>
 <span class="refAuthor">Keranen, A.</span>, <span class="refAuthor">Holmberg, C.</span>, and <span class="refAuthor">J. Rosenberg</span>, <span class="refTitle">"Interactive Connectivity Establishment (ICE): A Protocol for Network Address Translator (NAT) Traversal"</span>, <span class="seriesInfo">RFC 8445</span>, <span class="seriesInfo">DOI 10.17487/RFC8445</span>, <time datetime="2018-07" class="refDate">July 2018</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8445">https://www.rfc-editor.org/rfc/rfc8445</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-<dt id="PMTUD">[PMTUD]</dt>
-        <dd>
-<span class="refAuthor">McCann, J.</span>, <span class="refAuthor">Deering, S.</span>, <span class="refAuthor">Mogul, J.</span>, and <span class="refAuthor">R. Hinden, Ed.</span>, <span class="refTitle">"Path MTU Discovery for IP version 6"</span>, <span class="seriesInfo">STD 87</span>, <span class="seriesInfo">RFC 8201</span>, <span class="seriesInfo">DOI 10.17487/RFC8201</span>, <time datetime="2017-07" class="refDate">July 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8201">https://www.rfc-editor.org/rfc/rfc8201</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="TURN">[TURN]</dt>
         <dd>

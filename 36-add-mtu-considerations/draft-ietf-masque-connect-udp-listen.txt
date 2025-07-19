@@ -427,9 +427,9 @@ Table of Contents
 
    When moving traffic between uncompressed and compressed contexts, the
    effective MTU will change.  Therefore if the proxy intends to use
-   compression, it SHOULD request compression to the client at the
-   earliest, before Path MTU Discovery is completed between the client
-   and target [PMTUD].
+   compression, it SHOULD request it to the client at the earliest to
+   avoid hindering Datagram Packetization Layer PMTU Discovery
+   (DPLPMTUD) between the client and the target [DPLPMTUD].
 
 11.  IANA Considerations
 
@@ -548,16 +548,16 @@ Table of Contents
               RFC 9484, DOI 10.17487/RFC9484, October 2023,
               <https://www.rfc-editor.org/rfc/rfc9484>.
 
+   [DPLPMTUD] Fairhurst, G., Jones, T., Tüxen, M., Rüngeler, I., and T.
+              Völker, "Packetization Layer Path MTU Discovery for
+              Datagram Transports", RFC 8899, DOI 10.17487/RFC8899,
+              September 2020, <https://www.rfc-editor.org/rfc/rfc8899>.
+
    [ICE]      Keranen, A., Holmberg, C., and J. Rosenberg, "Interactive
               Connectivity Establishment (ICE): A Protocol for Network
               Address Translator (NAT) Traversal", RFC 8445,
               DOI 10.17487/RFC8445, July 2018,
               <https://www.rfc-editor.org/rfc/rfc8445>.
-
-   [PMTUD]    McCann, J., Deering, S., Mogul, J., and R. Hinden, Ed.,
-              "Path MTU Discovery for IP version 6", STD 87, RFC 8201,
-              DOI 10.17487/RFC8201, July 2017,
-              <https://www.rfc-editor.org/rfc/rfc8201>.
 
    [TURN]     Reddy, T., Ed., Johnston, A., Ed., Matthews, P., and J.
               Rosenberg, "Traversal Using Relays around NAT (TURN):
