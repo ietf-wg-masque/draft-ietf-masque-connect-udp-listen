@@ -198,7 +198,8 @@ processing the Capsule Protocol, as defined in {{Section 3.3 of
 If the uncompressed context is closed, the proxy MUST NOT open new compressed
 contexts. In such a case, the proxy opening contexts results in tuples not
 desired by the client reaching it thereby nullifying the IP restriction
-property of compression as described in {{restricting-ips}}.
+property of uncompressed compression close as described in
+{{restricting-ips}}.
 
 Only one Context ID can be used per IP-port tuple. If an endpoint detects that
 both it and its peer have opened a Context ID for the same tuple, the endpoint
