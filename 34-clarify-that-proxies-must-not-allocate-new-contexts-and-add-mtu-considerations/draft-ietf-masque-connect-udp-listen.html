@@ -1402,7 +1402,8 @@ processing the Capsule Protocol, as defined in <span><a href="https://rfc-editor
 <p id="section-3.1-9">If the uncompressed context is closed, the proxy <span class="bcp14">MUST NOT</span> open new compressed
 contexts. In such a case, the proxy opening contexts results in tuples not
 desired by the client reaching it thereby nullifying the IP restriction
-property of compression as described in <a href="#restricting-ips" class="auto internal xref">Section 8.1</a>.<a href="#section-3.1-9" class="pilcrow">¶</a></p>
+property of uncompressed compression close as described in
+<a href="#restricting-ips" class="auto internal xref">Section 8.1</a>.<a href="#section-3.1-9" class="pilcrow">¶</a></p>
 <p id="section-3.1-10">Only one Context ID can be used per IP-port tuple. If an endpoint detects that
 both it and its peer have opened a Context ID for the same tuple, the endpoint
 <span class="bcp14">MUST</span> close the Context ID that was opened by the proxy. If an endpoint receives
