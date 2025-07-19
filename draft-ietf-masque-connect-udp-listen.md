@@ -111,9 +111,7 @@ When performing URI Template Expansion of the UDP Proxying template (see
 CONNECT-UDP and sets the "target_host" and the "target_port" variables
 to one of its targets. It adds the connect-udp-bind header as specified in
 {{hdr}} to request bind. If the proxy supports CONNECT-UDP Bind, it returns
-the connect-udp-bind response header value set to true and compressed datagrams
-{#compressed-operation} are transmitted between the client and proxy on
-context ID 0.
+the connect-udp-bind response header value set to true.
 
 When target_host and target_port are set to a valid target, the client is
 requesting CONNECT-UDP Bind but would accept fallback to unextended
