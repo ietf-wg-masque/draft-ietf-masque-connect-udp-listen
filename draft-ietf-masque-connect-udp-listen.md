@@ -395,7 +395,7 @@ limit is reached.
 # Operational Considerations
 
 When moving traffic between uncompressed and compressed contexts, the effective
-MTU will change. This can hinder Datagram Packetization Layer PMTU Discovery 
+MTU will change. This can hinder Datagram Packetization Layer PMTU Discovery
 (DPLPMTUD) between the client and the target {{?DPLPMTUD=RFC8899}}.
 To avoid that, if an endpoint intends to use compression, it SHOULD request it
 as early as possible.
