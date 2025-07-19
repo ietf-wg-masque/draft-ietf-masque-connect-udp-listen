@@ -193,7 +193,9 @@ Endpoints MUST NOT send two COMPRESSION_ASSIGN capsules with the same Context
 ID. If a recipient detects a repeated Context ID, it MUST treat the capsule as
 malformed. Receipt of a malformed capsule MUST be treated as an error
 processing the Capsule Protocol, as defined in {{Section 3.3 of
-!HTTP-DGRAM=RFC9297}}.
+!HTTP-DGRAM=RFC9297}}. The proxy MUST NOT request compression for IP-port
+tuples that haven't previously been observed on a previously opened uncompressed
+context.
 
 Only one Context ID can be used per IP-port tuple. If an endpoint detects that
 both it and its peer have opened a Context ID for the same tuple, the endpoint
