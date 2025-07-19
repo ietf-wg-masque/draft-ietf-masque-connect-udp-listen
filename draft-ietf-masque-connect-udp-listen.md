@@ -392,6 +392,13 @@ how many compression responses the endpoint is willing to buffer MUST be set to
 prevent memory exhaustion. The proxy MUST abort the request stream if this
 limit is reached.
 
+# Operational Considerations
+
+When moving traffic between uncompressed and compressed contexts, the effective
+MTU will change. The proxy MAY wish to maintain consistent MTU by requesting
+compression assignments for uncompressed traffic to the client.
+
+
 # IANA Considerations
 
 ## HTTP Fields {#iana-fields}
