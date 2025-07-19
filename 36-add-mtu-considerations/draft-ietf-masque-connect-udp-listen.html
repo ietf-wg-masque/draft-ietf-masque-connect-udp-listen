@@ -1659,10 +1659,10 @@ limit is reached.<a href="#section-9-3" class="pilcrow">¶</a></p>
 <a href="#section-10" class="section-number selfRef">10. </a><a href="#name-operational-considerations" class="section-name selfRef">Operational Considerations</a>
       </h2>
 <p id="section-10-1">When moving traffic between uncompressed and compressed contexts, the effective
-MTU will change. Therefore if the proxy intends to use compression, it <span class="bcp14">SHOULD</span>
-request it to the client at the earliest to avoid changing the MTU after Datagram
-Packetization Layer PMTU Discovery (DPLPMTUD) between the client and the target
-has already occured. <span>[<a href="#DPLPMTUD" class="cite xref">DPLPMTUD</a>]</span>.<a href="#section-10-1" class="pilcrow">¶</a></p>
+MTU will change. This can hinder Datagram Packetization Layer PMTU Discovery
+(DPLPMTUD) between the client and the target <span>[<a href="#DPLPMTUD" class="cite xref">DPLPMTUD</a>]</span>.
+To avoid that, if an endpoint intends to use compression, it <span class="bcp14">SHOULD</span> request it
+as early as possible.<a href="#section-10-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="iana-considerations">

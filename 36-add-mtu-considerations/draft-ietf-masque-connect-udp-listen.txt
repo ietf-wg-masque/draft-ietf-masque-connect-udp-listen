@@ -426,11 +426,10 @@ Table of Contents
 10.  Operational Considerations
 
    When moving traffic between uncompressed and compressed contexts, the
-   effective MTU will change.  Therefore if the proxy intends to use
-   compression, it SHOULD request it to the client at the earliest to
-   avoid changing the MTU after Datagram Packetization Layer PMTU
-   Discovery (DPLPMTUD) between the client and the target has already
-   occured.  [DPLPMTUD].
+   effective MTU will change.  This can hinder Datagram Packetization
+   Layer PMTU Discovery (DPLPMTUD) between the client and the target
+   [DPLPMTUD].  To avoid that, if an endpoint intends to use
+   compression, it SHOULD request it as early as possible.
 
 11.  IANA Considerations
 
