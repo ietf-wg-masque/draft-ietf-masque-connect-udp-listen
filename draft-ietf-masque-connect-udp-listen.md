@@ -107,9 +107,22 @@ each HTTP Datagram (see {{fmt-dgram-uncomp}}), or registered via capsules and
 then compressed (see {{fmt-capsule-assign}}).
 
 When performing URI Template Expansion of the UDP Proxying template (see
-{{Section 3 of CONNECT-UDP}}), the client sets both the "target_host" and the
-"target_port" variables to the '\*' character (ASCII character 0x2A). Note that
-the '\*' character MUST be percent-encoded before sending, per {{Section 3.2.2
+{{Section 3 of CONNECT-UDP}}), the client follows the same template as
+CONNECT-UDP and sets the "target_host" and the "target_port" variables
+to one of its targets. It adds the connect-udp-bind header as specified in
+{{hdr}} to indicate that it prefers bind but would accept regular
+CONNECT-UDP to the target in case the proxy does not support it.
+If the proxy supports CONNECT-UDP Bind, it returns the connect-udp-bind
+response header value set to true and the proxy allocates context ID 0
+to the target and compressed datagrams {#compressed-operation} are transmitted
+between the client and proxy. On the other hand, if the proxy does not support
+bind, it sets the connect-udp-bind response header to false or omits it
+altogether.
+
+If the client intends to do CONNECT-UDP bind without a fallback to regular
+CONNECT-UDP, it sets both the "target_host" and the "target_port" variables to
+the '\*'  character (ASCII character 0x2A). Note that the '\*' character MUST
+be percent-encoded before sending, per {{Section 3.2.2
 of !TEMPLATE=RFC6570}}.
 
 ## Mixed Mode Operation {#mixed-mode}
@@ -300,7 +313,7 @@ contexts open at the same time. Only the client can request uncompressed
 contexts. If a client receives a COMPRESSION_ASSIGN capsule with the IP Version
 set to 0, it MUST treat it as malformed.
 
-# Compressed Operation
+# Compressed Operation {#compressed-operation}
 
 Endpoints MAY choose to compress the IP and port information per datagram for a
 given target using Context IDs. This is accomplished by registering a
