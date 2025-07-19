@@ -117,7 +117,7 @@ context ID 0.
 
 When target_host and target_port are set to a valid target, the client is
 requesting CONNECT-UDP Bind but would accept fallback to unextended
-CONNECT-UDP, If the client wants CONNECT-UDP bind without fallback, it sets
+CONNECT-UDP to that target. If the client doesn't have a specific target, or if it wants CONNECT-UDP bind without fallback, it sets
 both the "target_host" and the "target_port" variables to the '\*'
 character (ASCII character 0x2A). Note that the '\*' character MUST
 be percent-encoded before sending, per {{Section 3.2.2
