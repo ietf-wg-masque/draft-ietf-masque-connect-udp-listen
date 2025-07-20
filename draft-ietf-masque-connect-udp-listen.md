@@ -111,13 +111,11 @@ When performing URI Template Expansion of the UDP Proxying template (see
 CONNECT-UDP and sets the "target_host" and the "target_port" variables
 to one of its targets. It adds the connect-udp-bind header as specified in
 {{hdr}} to request bind. If the proxy supports CONNECT-UDP Bind, it returns
-the connect-udp-bind response header value set to true and compressed datagrams
-{#compressed-operation} are transmitted between the client and proxy on
-context ID 0.
+the connect-udp-bind response header value set to true.
 
 When target_host and target_port are set to a valid target, the client is
 requesting CONNECT-UDP Bind but would accept fallback to unextended
-CONNECT-UDP, If the client wants CONNECT-UDP bind without fallback, it sets
+CONNECT-UDP to that target. If the client doesn't have a specific target, or if it wants CONNECT-UDP bind without fallback, it sets
 both the "target_host" and the "target_port" variables to the '\*'
 character (ASCII character 0x2A). Note that the '\*' character MUST
 be percent-encoded before sending, per {{Section 3.2.2
@@ -200,7 +198,7 @@ Context IDs, while proxies can only allocate odd ones. This makes the
 registration capsules from this document unambiguous. For example, if a client
 receives a COMPRESSION_ASSIGN capsule with an even Context ID, that has to be
 an echo of a capsule that the client initially sent, indicating that the proxy
-accepted the registration. The Context ID value of COMPRESSION_ASSIGN can
+accepted the registration. Since the value 0 was reserved by unextended connect-udp, the Context ID value of COMPRESSION_ASSIGN can
 never be zero.
 
 Endpoints MUST NOT send two COMPRESSION_ASSIGN capsules with the same Context
