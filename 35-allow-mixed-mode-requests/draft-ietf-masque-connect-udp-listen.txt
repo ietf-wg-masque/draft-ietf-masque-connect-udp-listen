@@ -5,7 +5,7 @@
 MASQUE                                                       D. Schinazi
 Internet-Draft                                                  A. Singh
 Intended status: Standards Track                              Google LLC
-Expires: 20 January 2026                                    19 July 2025
+Expires: 21 January 2026                                    20 July 2025
 
 
                        Proxying Bound UDP in HTTP
@@ -54,7 +54,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 20 January 2026.
+   This Internet-Draft will expire on 21 January 2026.
 
 Copyright Notice
 
@@ -169,6 +169,12 @@ Table of Contents
    HTTP Datagram.  Conversely, the compressed variant exchanges the
    target IP and port once in the capsule during registration, and then
    relies on shared state to map from the Context ID to the IP and port.
+
+   Context ID 0 was reserved by unextended connect-udp and when used in
+   bind with a valid target hostname and port, means the same thing as
+   unextended i.e. to allow traffic between the client and target via
+   the proxy tunnel.  When the * character is used for the target host
+   and port instead, Context ID 0 MUST NOT be used.
 
 3.1.  The COMPRESSION_ASSIGN capsule
 
