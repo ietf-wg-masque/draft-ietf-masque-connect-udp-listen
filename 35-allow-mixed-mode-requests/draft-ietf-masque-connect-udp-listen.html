@@ -1446,7 +1446,9 @@ COMPRESSION_CLOSE Capsule {
           </figcaption></figure>
 </div>
 <p id="section-3.2-3">Once an endpoint has either sent or received a COMPRESSION_CLOSE for a given
-Context ID, it <span class="bcp14">MUST NOT</span> send any further datagrams with that Context ID.<a href="#section-3.2-3" class="pilcrow">¶</a></p>
+Context ID, it <span class="bcp14">MUST NOT</span> send any further datagrams with that Context ID.
+Since the value 0 was reserved by unextended connect-udp, the Context ID
+value of COMPRESSION_CLOSE can never be zero.<a href="#section-3.2-3" class="pilcrow">¶</a></p>
 <p id="section-3.2-4">Endpoints <span class="bcp14">MAY</span> close any context regardless of which endpoint registered it.
 This is useful for example, when a mapping is unused for a long time. Another
 potential use is restricting some targets (see <a href="#restricting-ips" class="auto internal xref">Section 8.1</a>).<a href="#section-3.2-4" class="pilcrow">¶</a></p>
