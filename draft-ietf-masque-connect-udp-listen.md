@@ -115,11 +115,11 @@ the connect-udp-bind response header value set to true.
 
 When target_host and target_port are set to a valid target, the client is
 requesting CONNECT-UDP Bind but would accept fallback to unextended
-CONNECT-UDP to that target. If the client doesn't have a specific target, or if it wants CONNECT-UDP bind without fallback, it sets
-both the "target_host" and the "target_port" variables to the '\*'
-character (ASCII character 0x2A). Note that the '\*' character MUST
-be percent-encoded before sending, per {{Section 3.2.2
-of !TEMPLATE=RFC6570}}.
+CONNECT-UDP to that target. If the client doesn't have a specific target, or if
+it wants CONNECT-UDP bind without fallback, it sets both the "target_host" and
+the "target_port" variables to the '\*' character (ASCII character 0x2A). Note
+that the '\*' character MUST be percent-encoded before sending, per {{Section
+3.2.2 of !TEMPLATE=RFC6570}}.
 
 
 # Context Identifiers {#contextid}
@@ -140,7 +140,7 @@ Context ID to the IP and port.
 Context ID 0 was reserved by unextended connect-udp and when used in bind
 with a valid target hostname and port, means the same thing as unextended i.e.
 to allow traffic between the client and target via the proxy tunnel. When the *
-character is used for the target host and port instead, Context ID 0 MUST NOT 
+character is used for the target host and port instead, Context ID 0 MUST NOT
 be used.
 
 
@@ -198,8 +198,8 @@ Context IDs, while proxies can only allocate odd ones. This makes the
 registration capsules from this document unambiguous. For example, if a client
 receives a COMPRESSION_ASSIGN capsule with an even Context ID, that has to be
 an echo of a capsule that the client initially sent, indicating that the proxy
-accepted the registration. Since the value 0 was reserved by unextended connect-udp, the Context ID value of COMPRESSION_ASSIGN can
-never be zero.
+accepted the registration. Since the value 0 was reserved by unextended
+connect-udp, the Context ID value of COMPRESSION_ASSIGN can never be zero.
 
 Endpoints MUST NOT send two COMPRESSION_ASSIGN capsules with the same Context
 ID. If a recipient detects a repeated Context ID, it MUST treat the capsule as
