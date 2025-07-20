@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-07-13T01:08:17.244676+00:00",
+  "timestamp": "2025-07-20T01:09:42.098451+00:00",
   "repo": "ietf-wg-masque/draft-ietf-masque-connect-udp-listen",
   "labels": [
     {
@@ -514,7 +514,7 @@
     {
       "number": 34,
       "id": "I_kwDOHnqa9M6_6RxK",
-      "title": "Clarify that Proxies must not allocate new contexts, and add MTU considerations",
+      "title": "Clarify that Proxies must not allocate new contexts when tuples haven't been seen in uncompressed contexts",
       "url": "https://github.com/ietf-wg-masque/draft-ietf-masque-connect-udp-listen/issues/34",
       "state": "OPEN",
       "author": "asingh-g",
@@ -523,9 +523,9 @@
         "asingh-g"
       ],
       "labels": [],
-      "body": "From Ben Schwartz on the Masque Mailing List\n\n> The proxy's compression context allocation behaviors are not clearly specified.  Section 3.1 allows the proxy to allocate additional compressed contexts at any time.  However, Section 8.1 says \"If a client does not wish to receive datagrams from unknown senders, it can close the uncompressed registration\".  Taken together, there must be a requirement that proxies MUST NOT allocate new compressed contexts to represent incoming packets that don't match an existing context.  However, I do not see this requirement stated anywhere in the draft.\n\n> Moving flows between compressed and uncompressed contexts will change their effective MTU, which could mess with E2E DPLPMTUD.  The draft should note this concern in Operational Considerations.  The desire to provide consistent MTU could explain why the proxy needs the ability to send COMPRESSION_ASSIGN (which otherwise could reasonably be left exclusively to the client).",
+      "body": "From Ben Schwartz on the Masque Mailing List\n\n> The proxy's compression context allocation behaviors are not clearly specified.  Section 3.1 allows the proxy to allocate additional compressed contexts at any time.  However, Section 8.1 says \"If a client does not wish to receive datagrams from unknown senders, it can close the uncompressed registration\".  Taken together, there must be a requirement that proxies MUST NOT allocate new compressed contexts to represent incoming packets that don't match an existing context.  However, I do not see this requirement stated anywhere in the draft.",
       "createdAt": "2025-07-10T15:04:58Z",
-      "updatedAt": "2025-07-10T15:05:03Z",
+      "updatedAt": "2025-07-19T09:59:01Z",
       "closedAt": null,
       "comments": []
     },
@@ -542,6 +542,24 @@
       "body": "From Ben Schwartz on the Mailing list:\n\n<blockquote>\nI think the request construction as specified could easily be made dramatically better by allowing mixed-mode requests.  Specifically, we should allow the client to send a request like\n\nCONNECT [/udp?target_host=2001:db8::1&port=443](https://example/udp?target_host=2001:db8::1&port=443) HTTP/3\n:scheme = https\n:host = proxy.example\n:protocol = connect-udp\ncapsule-protocol = ?1\nconnect-udp-bind = ?1\n\nIf the response omits \"connect-udp-bind = ?1\", it is an unextended connect proxy, and can be used with this single destination.  Future destinations will need additional CONNECT requests.\n\nIf the response includes \"connect-udp-bind = ?1\", then Context ID 0 represents [2001:db8::1]:443, and connections to additional destinations can be enabled using COMPRESSION_ASSIGN capsules. \n\nThe client can set target_host=\"*\" if it knows connect-udp-bind is supported and there is no sensible default destination.\n\nThis would solve some discoverability problems, provide graceful upgrade/downgrade, and make the \"connect-udp-bind\" header much more useful.\n</blockquote>",
       "createdAt": "2025-07-10T15:06:44Z",
       "updatedAt": "2025-07-10T15:06:44Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 36,
+      "id": "I_kwDOHnqa9M7BbVaZ",
+      "title": "Add MTU considerations",
+      "url": "https://github.com/ietf-wg-masque/draft-ietf-masque-connect-udp-listen/issues/36",
+      "state": "OPEN",
+      "author": "asingh-g",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [
+        "asingh-g"
+      ],
+      "labels": [],
+      "body": "From Ben Schwartz on the Masque Mailing List\n\n> Moving flows between compressed and uncompressed contexts will change their effective MTU, which could mess with E2E DPLPMTUD. The draft should note this concern in Operational Considerations. The desire to provide consistent MTU could explain why the proxy needs the ability to send COMPRESSION_ASSIGN (which otherwise could reasonably be left exclusively to the client).",
+      "createdAt": "2025-07-19T09:58:11Z",
+      "updatedAt": "2025-07-19T10:07:51Z",
       "closedAt": null,
       "comments": []
     }
@@ -3692,6 +3710,467 @@
               "body": "My gut is that it's redundant",
               "createdAt": "2025-06-16T23:41:56Z",
               "updatedAt": "2025-06-16T23:53:46Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 37,
+      "id": "PR_kwDOHnqa9M6frWKE",
+      "title": "Require that proxy cannot request compression assigns for un-observed tuples",
+      "url": "https://github.com/ietf-wg-masque/draft-ietf-masque-connect-udp-listen/pull/37",
+      "state": "OPEN",
+      "author": "asingh-g",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Fixes #34",
+      "createdAt": "2025-07-19T10:07:20Z",
+      "updatedAt": "2025-07-19T13:56:53Z",
+      "baseRepository": "ietf-wg-masque/draft-ietf-masque-connect-udp-listen",
+      "baseRefName": "main",
+      "baseRefOid": "21d58aafbd2adc1e0d2fdcefb4fbef8fa176aa5d",
+      "headRepository": "ietf-wg-masque/draft-ietf-masque-connect-udp-listen",
+      "headRefName": "34-clarify-that-proxies-must-not-allocate-new-contexts-and-add-mtu-considerations",
+      "headRefOid": "c76dbad3f023435f404bc1e773b0a271448b0c12",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOHnqa9M606_lS",
+          "commit": {
+            "abbreviatedOid": "8c1e1a9"
+          },
+          "author": "DavidSchinazi",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-07-19T12:37:09Z",
+          "updatedAt": "2025-07-19T12:37:13Z",
+          "comments": [
+            {
+              "originalPosition": 6,
+              "body": "I'm not sure this is the right rule. Because if the client opens a context and then closes it, it probably doesn't want the proxy to reopen it back up. Maybe we just say \"if the uncompressed context is closes, the proxy MUST NOT open new compressed contexts\"?\r\n\r\nWe'll also want to add text explaining the rationale behind this",
+              "createdAt": "2025-07-19T12:37:09Z",
+              "updatedAt": "2025-07-19T12:37:13Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHnqa9M606_8r",
+          "commit": {
+            "abbreviatedOid": "8c1e1a9"
+          },
+          "author": "asingh-g",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-07-19T12:44:51Z",
+          "updatedAt": "2025-07-19T12:44:51Z",
+          "comments": [
+            {
+              "originalPosition": 6,
+              "body": "I think we need both. Server cannot open contexts that aren't seen in the uncompressed traffic, nor can it reopen tuples that were closed by the client",
+              "createdAt": "2025-07-19T12:44:51Z",
+              "updatedAt": "2025-07-19T12:44:52Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHnqa9M607Ak2",
+          "commit": {
+            "abbreviatedOid": "8c1e1a9"
+          },
+          "author": "DavidSchinazi",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-07-19T12:57:55Z",
+          "updatedAt": "2025-07-19T12:57:55Z",
+          "comments": [
+            {
+              "originalPosition": 6,
+              "body": "Doesn't \"can't open contexts\" cover both?",
+              "createdAt": "2025-07-19T12:57:55Z",
+              "updatedAt": "2025-07-19T12:57:56Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHnqa9M607Cfn",
+          "commit": {
+            "abbreviatedOid": "8c1e1a9"
+          },
+          "author": "asingh-g",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-07-19T13:38:25Z",
+          "updatedAt": "2025-07-19T13:38:25Z",
+          "comments": [
+            {
+              "originalPosition": 6,
+              "body": "Updated it with explanation. Thanks",
+              "createdAt": "2025-07-19T13:38:25Z",
+              "updatedAt": "2025-07-19T13:38:25Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHnqa9M607Dbn",
+          "commit": {
+            "abbreviatedOid": "c76dbad"
+          },
+          "author": "DavidSchinazi",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-07-19T13:56:53Z",
+          "updatedAt": "2025-07-19T13:56:53Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 38,
+      "id": "PR_kwDOHnqa9M6frW34",
+      "title": "Add operational consideration for MTU",
+      "url": "https://github.com/ietf-wg-masque/draft-ietf-masque-connect-udp-listen/pull/38",
+      "state": "OPEN",
+      "author": "asingh-g",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Fixes #36 ",
+      "createdAt": "2025-07-19T10:10:48Z",
+      "updatedAt": "2025-07-19T13:57:35Z",
+      "baseRepository": "ietf-wg-masque/draft-ietf-masque-connect-udp-listen",
+      "baseRefName": "main",
+      "baseRefOid": "21d58aafbd2adc1e0d2fdcefb4fbef8fa176aa5d",
+      "headRepository": "ietf-wg-masque/draft-ietf-masque-connect-udp-listen",
+      "headRefName": "36-add-mtu-considerations",
+      "headRefOid": "bef09d7f67ae5d647e654385a331c69f3d2c12a7",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOHnqa9M606_Yl",
+          "commit": {
+            "abbreviatedOid": "049d285"
+          },
+          "author": "DavidSchinazi",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-07-19T12:32:45Z",
+          "updatedAt": "2025-07-19T12:34:26Z",
+          "comments": [
+            {
+              "originalPosition": 7,
+              "body": "Let's mention that this gets in the way of DPLPMTUD",
+              "createdAt": "2025-07-19T12:32:45Z",
+              "updatedAt": "2025-07-19T12:34:26Z"
+            },
+            {
+              "originalPosition": 8,
+              "body": "I'm not sure I understand the advice here. It's OK for the MTU to be different for different targets, what we want to avoid is having the MTU change for a given target. So the advice would be to say something like \"if you're going to use compression for a target, start doing it ASAP so it doesn't change the MTU after PMTUD has happened\"",
+              "createdAt": "2025-07-19T12:34:21Z",
+              "updatedAt": "2025-07-19T12:34:26Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHnqa9M607Aoc",
+          "commit": {
+            "abbreviatedOid": "049d285"
+          },
+          "author": "asingh-g",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-07-19T12:59:08Z",
+          "updatedAt": "2025-07-19T12:59:09Z",
+          "comments": [
+            {
+              "originalPosition": 8,
+              "body": "Updated the draft. Thanks",
+              "createdAt": "2025-07-19T12:59:08Z",
+              "updatedAt": "2025-07-19T12:59:09Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHnqa9M607BX1",
+          "commit": {
+            "abbreviatedOid": "049d285"
+          },
+          "author": "asingh-g",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-07-19T13:14:01Z",
+          "updatedAt": "2025-07-19T13:14:01Z",
+          "comments": [
+            {
+              "originalPosition": 7,
+              "body": "added",
+              "createdAt": "2025-07-19T13:14:01Z",
+              "updatedAt": "2025-07-19T13:14:01Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHnqa9M607Big",
+          "commit": {
+            "abbreviatedOid": "e7c0e91"
+          },
+          "author": "DavidSchinazi",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-07-19T13:17:42Z",
+          "updatedAt": "2025-07-19T13:17:42Z",
+          "comments": [
+            {
+              "originalPosition": 10,
+              "body": "I think it would flow better to flip these too.\r\n\r\nAlso I did an `s/proxy/endpoint/` since in theory this is bidirectional - and will happen if the e2e client is a different piece of software from the connect-udp vlient\r\n\r\n```suggestion\r\nWhen moving traffic between uncompressed and compressed contexts, the effective\r\nMTU will change. This can hinder Datagram Packetization Layer PMTU Discovery \r\n(DPLPMTUD) between the client and the target {{?DPLPMTUD=RFC8899}}.\r\nTo avoid that, if and endpoint intends to use compression, it SHOULD request it\r\nas early as possible.\r\n```",
+              "createdAt": "2025-07-19T13:17:42Z",
+              "updatedAt": "2025-07-19T13:17:43Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHnqa9M607CpX",
+          "commit": {
+            "abbreviatedOid": "e7c0e91"
+          },
+          "author": "asingh-g",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-07-19T13:41:42Z",
+          "updatedAt": "2025-07-19T13:41:42Z",
+          "comments": [
+            {
+              "originalPosition": 10,
+              "body": "Added this in the last commit",
+              "createdAt": "2025-07-19T13:41:42Z",
+              "updatedAt": "2025-07-19T13:41:42Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHnqa9M607Dd5",
+          "commit": {
+            "abbreviatedOid": "bef09d7"
+          },
+          "author": "DavidSchinazi",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-07-19T13:57:35Z",
+          "updatedAt": "2025-07-19T13:57:35Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 39,
+      "id": "PR_kwDOHnqa9M6frhwH",
+      "title": "add support for non-bind mixed mode CONNECT-UDP",
+      "url": "https://github.com/ietf-wg-masque/draft-ietf-masque-connect-udp-listen/pull/39",
+      "state": "OPEN",
+      "author": "asingh-g",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Fixes #35",
+      "createdAt": "2025-07-19T11:18:46Z",
+      "updatedAt": "2025-07-19T17:44:58Z",
+      "baseRepository": "ietf-wg-masque/draft-ietf-masque-connect-udp-listen",
+      "baseRefName": "main",
+      "baseRefOid": "21d58aafbd2adc1e0d2fdcefb4fbef8fa176aa5d",
+      "headRepository": "ietf-wg-masque/draft-ietf-masque-connect-udp-listen",
+      "headRefName": "35-allow-mixed-mode-requests",
+      "headRefOid": "cd7447335b22fe8742da9a8872413b625c787274",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOHnqa9M606_Nj",
+          "commit": {
+            "abbreviatedOid": "0d80fa6"
+          },
+          "author": "DavidSchinazi",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-07-19T12:28:52Z",
+          "updatedAt": "2025-07-19T12:31:28Z",
+          "comments": [
+            {
+              "originalPosition": 25,
+              "body": "Why is this necessary? Can't we just use context ID zero for this?",
+              "createdAt": "2025-07-19T12:28:52Z",
+              "updatedAt": "2025-07-19T12:31:28Z"
+            },
+            {
+              "originalPosition": 4,
+              "body": "I don't think we should call this mixed mode - I think it's more of a change to the negotiation. I would swap the framing around:\r\n* since the client doesn't know if the server supports this extension to connect-udp, it needs to negotiate it via the connect-udp-bind header\r\n* if the server doesn't support it, the connect-udp-bind request falls back to regular connect-udp\r\n* if the client doesn't want to fallback, it sets the target_host and target_port to `*`",
+              "createdAt": "2025-07-19T12:31:21Z",
+              "updatedAt": "2025-07-19T12:31:28Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHnqa9M607ICw",
+          "commit": {
+            "abbreviatedOid": "8bd710e"
+          },
+          "author": "DavidSchinazi",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-07-19T15:12:49Z",
+          "updatedAt": "2025-07-19T15:15:27Z",
+          "comments": [
+            {
+              "originalPosition": 10,
+              "body": "Let's not mention \"would accept regular\" here. Let's keep it simple at first, and introduce that complexity later on when we define what `*` means",
+              "createdAt": "2025-07-19T15:12:49Z",
+              "updatedAt": "2025-07-19T15:15:27Z"
+            },
+            {
+              "originalPosition": 13,
+              "body": "The proxy doesn't allocate 0, that value is already reserved",
+              "createdAt": "2025-07-19T15:13:10Z",
+              "updatedAt": "2025-07-19T15:15:27Z"
+            },
+            {
+              "originalPosition": 15,
+              "body": "I don't think we need this last sentence here - we're just explaining the concept, no need to say what the proxy should do if it doesn't support it",
+              "createdAt": "2025-07-19T15:14:05Z",
+              "updatedAt": "2025-07-19T15:15:27Z"
+            },
+            {
+              "originalPosition": 38,
+              "body": "We need to modify ever instance of \"context ID 0\" in the doc now. I see one for example on line 157",
+              "createdAt": "2025-07-19T15:15:04Z",
+              "updatedAt": "2025-07-19T15:15:27Z"
+            },
+            {
+              "originalPosition": 27,
+              "body": "We can remove this paragraph now right?",
+              "createdAt": "2025-07-19T15:15:23Z",
+              "updatedAt": "2025-07-19T15:15:27Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHnqa9M607J94",
+          "commit": {
+            "abbreviatedOid": "8bd710e"
+          },
+          "author": "asingh-g",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-07-19T15:41:45Z",
+          "updatedAt": "2025-07-19T15:41:45Z",
+          "comments": [
+            {
+              "originalPosition": 10,
+              "body": "Moved it down to the paragraph with *",
+              "createdAt": "2025-07-19T15:41:45Z",
+              "updatedAt": "2025-07-19T15:41:45Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHnqa9M607KJQ",
+          "commit": {
+            "abbreviatedOid": "8bd710e"
+          },
+          "author": "asingh-g",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-07-19T15:43:35Z",
+          "updatedAt": "2025-07-19T15:43:35Z",
+          "comments": [
+            {
+              "originalPosition": 38,
+              "body": "I've mentioned that Context ID can never be zero in the COMPRESSION_ASSIGN capsule section instead and removed the other references",
+              "createdAt": "2025-07-19T15:43:35Z",
+              "updatedAt": "2025-07-19T15:43:35Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHnqa9M607N4A",
+          "commit": {
+            "abbreviatedOid": "e02aa7a"
+          },
+          "author": "DavidSchinazi",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-07-19T16:18:59Z",
+          "updatedAt": "2025-07-19T16:23:24Z",
+          "comments": [
+            {
+              "originalPosition": 31,
+              "body": "Instead of deleting this, let's say\r\n* context ID 0 was reserved by unextended\r\n* if target is a valid hostname or address and port, then it means the same thing as unextended\r\n* if target was `*` then context ID 0 MUST NOT be sued",
+              "createdAt": "2025-07-19T16:18:59Z",
+              "updatedAt": "2025-07-19T16:23:24Z"
+            },
+            {
+              "originalPosition": 13,
+              "body": "Let's leave the context usage to that section\r\n\r\n```suggestion\r\nthe connect-udp-bind response header value set to true.\r\n```",
+              "createdAt": "2025-07-19T16:19:43Z",
+              "updatedAt": "2025-07-19T16:23:24Z"
+            },
+            {
+              "originalPosition": 17,
+              "body": "```suggestion\r\nCONNECT-UDP to that target. If the client doesn't have a specific target, or if it wants CONNECT-UDP bind without fallback, it sets\r\n```",
+              "createdAt": "2025-07-19T16:22:08Z",
+              "updatedAt": "2025-07-19T16:23:24Z"
+            },
+            {
+              "originalPosition": 44,
+              "body": "```suggestion\r\naccepted the registration. Since the value 0 was reserved by unextended connect-udp, the Context ID value of COMPRESSION_ASSIGN can\r\n```",
+              "createdAt": "2025-07-19T16:23:20Z",
+              "updatedAt": "2025-07-19T16:23:24Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHnqa9M607YLh",
+          "commit": {
+            "abbreviatedOid": "cd74473"
+          },
+          "author": "DavidSchinazi",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-07-19T17:44:58Z",
+          "updatedAt": "2025-07-19T17:44:58Z",
+          "comments": [
+            {
+              "originalPosition": 31,
+              "body": "Looks like this comment was missed?",
+              "createdAt": "2025-07-19T17:44:58Z",
+              "updatedAt": "2025-07-19T17:44:58Z"
             }
           ]
         }
