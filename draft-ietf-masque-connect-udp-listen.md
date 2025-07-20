@@ -139,6 +139,12 @@ Conversely, the compressed variant exchanges the target IP and port once in the
 capsule during registration, and then relies on shared state to map from the
 Context ID to the IP and port.
 
+Context ID 0 was reserved by unextended connect-udp and when used in bind
+with a valid target hostname and port, means the same thing as unextended i.e.
+to allow traffic between the client and target via the proxy tunnel. When the *
+character is used for the target host and port instead, Context ID 0 MUST NOT 
+be used.
+
 
 ## The COMPRESSION_ASSIGN capsule {#capsule-assign}
 
