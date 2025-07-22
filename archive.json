@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-07-20T01:09:42.098451+00:00",
+  "timestamp": "2025-07-22T01:03:35.283994+00:00",
   "repo": "ietf-wg-masque/draft-ietf-masque-connect-udp-listen",
   "labels": [
     {
@@ -514,7 +514,7 @@
     {
       "number": 34,
       "id": "I_kwDOHnqa9M6_6RxK",
-      "title": "Clarify that Proxies must not allocate new contexts when tuples haven't been seen in uncompressed contexts",
+      "title": "Require that proxies MUST NOT allocate new compressed contexts to represent incoming packets that don't match an existing context",
       "url": "https://github.com/ietf-wg-masque/draft-ietf-masque-connect-udp-listen/issues/34",
       "state": "OPEN",
       "author": "asingh-g",
@@ -523,9 +523,9 @@
         "asingh-g"
       ],
       "labels": [],
-      "body": "From Ben Schwartz on the Masque Mailing List\n\n> The proxy's compression context allocation behaviors are not clearly specified.  Section 3.1 allows the proxy to allocate additional compressed contexts at any time.  However, Section 8.1 says \"If a client does not wish to receive datagrams from unknown senders, it can close the uncompressed registration\".  Taken together, there must be a requirement that proxies MUST NOT allocate new compressed contexts to represent incoming packets that don't match an existing context.  However, I do not see this requirement stated anywhere in the draft.",
+      "body": "From @bemasc on the Masque Mailing List\n\n> The proxy's compression context allocation behaviors are not clearly specified.  Section 3.1 allows the proxy to allocate additional compressed contexts at any time.  However, Section 8.1 says \"If a client does not wish to receive datagrams from unknown senders, it can close the uncompressed registration\".  Taken together, there must be a requirement that proxies MUST NOT allocate new compressed contexts to represent incoming packets that don't match an existing context.  However, I do not see this requirement stated anywhere in the draft.",
       "createdAt": "2025-07-10T15:04:58Z",
-      "updatedAt": "2025-07-19T09:59:01Z",
+      "updatedAt": "2025-07-20T15:09:14Z",
       "closedAt": null,
       "comments": []
     },
@@ -539,11 +539,19 @@
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
-      "body": "From Ben Schwartz on the Mailing list:\n\n<blockquote>\nI think the request construction as specified could easily be made dramatically better by allowing mixed-mode requests.  Specifically, we should allow the client to send a request like\n\nCONNECT [/udp?target_host=2001:db8::1&port=443](https://example/udp?target_host=2001:db8::1&port=443) HTTP/3\n:scheme = https\n:host = proxy.example\n:protocol = connect-udp\ncapsule-protocol = ?1\nconnect-udp-bind = ?1\n\nIf the response omits \"connect-udp-bind = ?1\", it is an unextended connect proxy, and can be used with this single destination.  Future destinations will need additional CONNECT requests.\n\nIf the response includes \"connect-udp-bind = ?1\", then Context ID 0 represents [2001:db8::1]:443, and connections to additional destinations can be enabled using COMPRESSION_ASSIGN capsules. \n\nThe client can set target_host=\"*\" if it knows connect-udp-bind is supported and there is no sensible default destination.\n\nThis would solve some discoverability problems, provide graceful upgrade/downgrade, and make the \"connect-udp-bind\" header much more useful.\n</blockquote>",
+      "body": "From @bemasc on the Mailing list:\n\n<blockquote>\nI think the request construction as specified could easily be made dramatically better by allowing mixed-mode requests.  Specifically, we should allow the client to send a request like\n\nCONNECT [/udp?target_host=2001:db8::1&port=443](https://example/udp?target_host=2001:db8::1&port=443) HTTP/3\n:scheme = https\n:host = proxy.example\n:protocol = connect-udp\ncapsule-protocol = ?1\nconnect-udp-bind = ?1\n\nIf the response omits \"connect-udp-bind = ?1\", it is an unextended connect proxy, and can be used with this single destination.  Future destinations will need additional CONNECT requests.\n\nIf the response includes \"connect-udp-bind = ?1\", then Context ID 0 represents [2001:db8::1]:443, and connections to additional destinations can be enabled using COMPRESSION_ASSIGN capsules. \n\nThe client can set target_host=\"*\" if it knows connect-udp-bind is supported and there is no sensible default destination.\n\nThis would solve some discoverability problems, provide graceful upgrade/downgrade, and make the \"connect-udp-bind\" header much more useful.\n</blockquote>",
       "createdAt": "2025-07-10T15:06:44Z",
-      "updatedAt": "2025-07-10T15:06:44Z",
+      "updatedAt": "2025-07-20T15:57:30Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "asingh-g",
+          "authorAssociation": "COLLABORATOR",
+          "body": "More useful context from @bemasc\n\n```\nMixed-mode can be useful when trying to do WebRTC through a proxy whose support for connect-udp-bind (and even connect-udp) is initially unknown.\n\nExample:\n\n1. A client learns about a preferred HTTP CONNECT proxy \"proxy.example:8443\" via a legacy configuration mechanism.  It has no other information about the proxy.\n2. The client is instructed to perform ICE for WebRTC with the following remote candidates:\n\n# Most-preferred: UDP STUN\n1 UDP 111 192.0.2.1 45111 typ srflx \n# Second-best: UDP TURN\n1 UDP 222 2001:db8::1 45222 typ relay\n# Third-best: TCP TURN\n1 TCP 333 2001:db8::1 45333 typ relay\n\n2. The client races the following requests to the proxy (after HTTP version negotiation):\n2a. Non-extended \"legacy\" CONNECT for TCP\n\nCONNECT [2001:db8::1]:45333 HTTP/3\n:authority = [2001:db8::1]:45333\n\nThis request should succeed (for some negotiated HTTP version), because the proxy is known to support CONNECT.\n\n2b. connect-udp via the default template:\n\nCONNECT /.well-known/masque/udp/192.0.2.1/45111 HTTP/3\n:scheme = https\n:authority = proxy.example:8443\n:protocol = connect-udp\ncapsule-protocol = ?1\nconnect-udp-bind = ?1\n\nIt includes three optimistic capsules:\n- A DATAGRAM capsule with Context ID = 0 containing an ICE ping for 192.0.2.1:45111\n- An optimistic COMPRESSION_ASSIGN capsule for Context ID 1 with IP Version = 0.\n- A DATAGRAM capsule with Context ID = 1 containing an ICE ping for [2001:db8::1]:45222\n\nThis request might (i) fail, because connect-udp is not supported, (ii) succeed without a \"connect-udp-bind\" response header (COMPRESSION_ASSIGN is ignored), or (iii) succeed with \"connect-udp-bind = ?1\".\n\n3. Suppose connect-udp-bind is supported (iii).  The client receives a Proxy-Public-Address header of 192.0.2.99:12345.  A response is received quickly via the relay candidate, and the WebRTC session is established.  The client closes the TCP CONNECT request, as it is no longer needed.  However, the optimistic ICE ping is dropped by the peer's firewall, as it arrives from an unrecognized remote address.\n\n4. The client generates a new ICE candidate from Proxy-Public-Address and shares it with the peer\n\n1 UDP 111 192.0.2.99 12345 typ host\n\n5. The peer sends an ICE ping to 192.0.2.99:12345.  The client receives it on Context ID 0.  Connection migrates seamlessly to the 192.0.2.1:45111<->192.0.2.99:12345 5-tuple (reducing latency).\n\n----------------\n\nIn this example, \"mixed mode\" simplified the client's behavior by removing the need to probe the proxy for connect-udp-bind support, while still enabling the fastest possible connection setup.  This behavior also removes the assumption that the proxy's support for connect-udp-bind is consistent over time, which could be helpful during gradual rollouts.\n```",
+          "createdAt": "2025-07-20T15:57:30Z",
+          "updatedAt": "2025-07-20T15:57:30Z"
+        }
+      ]
     },
     {
       "number": 36,
@@ -557,11 +565,42 @@
         "asingh-g"
       ],
       "labels": [],
-      "body": "From Ben Schwartz on the Masque Mailing List\n\n> Moving flows between compressed and uncompressed contexts will change their effective MTU, which could mess with E2E DPLPMTUD. The draft should note this concern in Operational Considerations. The desire to provide consistent MTU could explain why the proxy needs the ability to send COMPRESSION_ASSIGN (which otherwise could reasonably be left exclusively to the client).",
+      "body": "From @bemasc on the Masque Mailing List\n\n> Moving flows between compressed and uncompressed contexts will change their effective MTU, which could mess with E2E DPLPMTUD. The draft should note this concern in Operational Considerations. The desire to provide consistent MTU could explain why the proxy needs the ability to send COMPRESSION_ASSIGN (which otherwise could reasonably be left exclusively to the client).",
       "createdAt": "2025-07-19T09:58:11Z",
-      "updatedAt": "2025-07-19T10:07:51Z",
+      "updatedAt": "2025-07-20T15:07:01Z",
       "closedAt": null,
       "comments": []
+    },
+    {
+      "number": 40,
+      "id": "I_kwDOHnqa9M7Bm7Ao",
+      "title": "echoing COMPRESSION_ASSIGN is wasteful and error-prone",
+      "url": "https://github.com/ietf-wg-masque/draft-ietf-masque-connect-udp-listen/issues/40",
+      "state": "OPEN",
+      "author": "marten-seemann",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "The receiver echoes the capsule to signal that a compression context for a certain context ID was established. It would be nice if we didn't have to check that the context ID matches the IP address and version sent in the original capsule.",
+      "createdAt": "2025-07-21T11:09:58Z",
+      "updatedAt": "2025-07-21T14:16:50Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "DavidSchinazi",
+          "authorAssociation": "COLLABORATOR",
+          "body": "What is your specific concern? Sure we could have used a third COMPRESSION_ACK capsule type, but the echo and check have worked well in practice, and were trivial to implement",
+          "createdAt": "2025-07-21T14:07:27Z",
+          "updatedAt": "2025-07-21T14:07:27Z"
+        },
+        {
+          "author": "marten-seemann",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "I'd prefer a COMPRESSION_ACK capsule. Fewer bytes (probably doesn't matter too much), and fewer ways to send an invalid capsule which the receiver has to check for and then handle.",
+          "createdAt": "2025-07-21T14:16:50Z",
+          "updatedAt": "2025-07-21T14:16:50Z"
+        }
+      ]
     }
   ],
   "pulls": [
@@ -3847,7 +3886,7 @@
       "labels": [],
       "body": "Fixes #36 ",
       "createdAt": "2025-07-19T10:10:48Z",
-      "updatedAt": "2025-07-19T13:57:35Z",
+      "updatedAt": "2025-07-21T19:18:52Z",
       "baseRepository": "ietf-wg-masque/draft-ietf-masque-connect-udp-listen",
       "baseRefName": "main",
       "baseRefOid": "21d58aafbd2adc1e0d2fdcefb4fbef8fa176aa5d",
@@ -3978,6 +4017,19 @@
           "createdAt": "2025-07-19T13:57:35Z",
           "updatedAt": "2025-07-19T13:57:35Z",
           "comments": []
+        },
+        {
+          "id": "PRR_kwDOHnqa9M61KVds",
+          "commit": {
+            "abbreviatedOid": "bef09d7"
+          },
+          "author": "bemasc",
+          "authorAssociation": "NONE",
+          "state": "APPROVED",
+          "body": "This could also say that moving live 5-tuples from compressed to uncompressed is bad, but maybe that's obvious... ",
+          "createdAt": "2025-07-21T19:18:52Z",
+          "updatedAt": "2025-07-21T19:18:52Z",
+          "comments": []
         }
       ]
     },
@@ -3993,13 +4045,13 @@
       "labels": [],
       "body": "Fixes #35",
       "createdAt": "2025-07-19T11:18:46Z",
-      "updatedAt": "2025-07-19T17:44:58Z",
+      "updatedAt": "2025-07-21T19:11:49Z",
       "baseRepository": "ietf-wg-masque/draft-ietf-masque-connect-udp-listen",
       "baseRefName": "main",
       "baseRefOid": "21d58aafbd2adc1e0d2fdcefb4fbef8fa176aa5d",
       "headRepository": "ietf-wg-masque/draft-ietf-masque-connect-udp-listen",
       "headRefName": "35-allow-mixed-mode-requests",
-      "headRefOid": "cd7447335b22fe8742da9a8872413b625c787274",
+      "headRefOid": "b58dd84fad52a5f8916ed10c0260bb7c7a10fc8f",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
@@ -4173,6 +4225,58 @@
               "updatedAt": "2025-07-19T17:44:58Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOHnqa9M609R9o",
+          "commit": {
+            "abbreviatedOid": "ab1e4e2"
+          },
+          "author": "DavidSchinazi",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-07-20T10:25:26Z",
+          "updatedAt": "2025-07-20T10:28:23Z",
+          "comments": [
+            {
+              "originalPosition": 38,
+              "body": "This is good, small editorial tweak:\r\n\r\n```suggestion\r\nContext ID 0 was reserved by unextended connect-udp to represent UDP\r\npayloads sent to and from the \"target_host\" and \"target_port\" from the\r\nURI template. When the mechanism from this document is in use:\r\n* if the \"target_host\" and \"target_port\" variables are set to `\\*`, then\r\ncontext ID 0 MUST NOT be used in HTTP Datagrams.\r\n* otherwise, HTTP Datagrams with context ID 0 have the same semantics\r\nas in unextended connect-udp.\r\n```",
+              "createdAt": "2025-07-20T10:25:26Z",
+              "updatedAt": "2025-07-20T10:28:23Z"
+            },
+            {
+              "originalPosition": 48,
+              "body": "Can you add the same sentence to COMPRESSION_CLOSE?",
+              "createdAt": "2025-07-20T10:26:16Z",
+              "updatedAt": "2025-07-20T10:28:23Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHnqa9M61DMrQ",
+          "commit": {
+            "abbreviatedOid": "b58dd84"
+          },
+          "author": "DavidSchinazi",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-07-21T10:46:49Z",
+          "updatedAt": "2025-07-21T10:46:49Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOHnqa9M61KRZp",
+          "commit": {
+            "abbreviatedOid": "b58dd84"
+          },
+          "author": "bemasc",
+          "authorAssociation": "NONE",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-07-21T19:11:49Z",
+          "updatedAt": "2025-07-21T19:11:49Z",
+          "comments": []
         }
       ]
     }
