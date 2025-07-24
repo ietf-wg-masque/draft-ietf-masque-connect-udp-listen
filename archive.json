@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-07-22T01:03:35.283994+00:00",
+  "timestamp": "2025-07-24T01:03:51.154880+00:00",
   "repo": "ietf-wg-masque/draft-ietf-masque-connect-udp-listen",
   "labels": [
     {
@@ -567,9 +567,31 @@
       "labels": [],
       "body": "From @bemasc on the Masque Mailing List\n\n> Moving flows between compressed and uncompressed contexts will change their effective MTU, which could mess with E2E DPLPMTUD. The draft should note this concern in Operational Considerations. The desire to provide consistent MTU could explain why the proxy needs the ability to send COMPRESSION_ASSIGN (which otherwise could reasonably be left exclusively to the client).",
       "createdAt": "2025-07-19T09:58:11Z",
-      "updatedAt": "2025-07-20T15:07:01Z",
+      "updatedAt": "2025-07-22T15:06:20Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "Acconut",
+          "authorAssociation": "NONE",
+          "body": "The MASQUE can anticipate a smaller effective MTU and might be able to signal its application to send smaller datagrams. The other peer that is talking to the MASQUE proxy is not aware that the effective MTU might be smaller, especially when the uncompressed context and IPv6 addresses are in use.\n\nTo reduce the likelihood that such datagrams are dropped on the way from proxy to client, the proxy could start a compression context before forwarding the datagram. Would it make sense adding this as a recommendation/consideration?",
+          "createdAt": "2025-07-22T13:07:19Z",
+          "updatedAt": "2025-07-22T13:07:19Z"
+        },
+        {
+          "author": "DavidSchinazi",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Starting the compressed context to reduce the MTU is a good idea. The question is what the endpoint should do between the time it sends the compressed context registration capsule and the time it gets an ack. It can either\n* send using uncompressed context\n* optimistically use the new un-ack-ed compressed context\n\nThe first has a higher MTU, the second has a higher risk of loss. It's a tradeoff, so the optimal answer might depend on the use case",
+          "createdAt": "2025-07-22T13:13:15Z",
+          "updatedAt": "2025-07-22T13:13:15Z"
+        },
+        {
+          "author": "bemasc",
+          "authorAssociation": "NONE",
+          "body": "And for either of those choices, it can forward it as a Datagram or as a DATAGRAM capsule...\n\n> Would it make sense adding this as a recommendation/consideration?\n\nI think #38 does pretty much cover this.",
+          "createdAt": "2025-07-22T15:06:20Z",
+          "updatedAt": "2025-07-22T15:06:20Z"
+        }
+      ]
     },
     {
       "number": 40,
@@ -579,11 +601,13 @@
       "state": "OPEN",
       "author": "marten-seemann",
       "authorAssociation": "CONTRIBUTOR",
-      "assignees": [],
+      "assignees": [
+        "asingh-g"
+      ],
       "labels": [],
       "body": "The receiver echoes the capsule to signal that a compression context for a certain context ID was established. It would be nice if we didn't have to check that the context ID matches the IP address and version sent in the original capsule.",
       "createdAt": "2025-07-21T11:09:58Z",
-      "updatedAt": "2025-07-21T14:16:50Z",
+      "updatedAt": "2025-07-23T07:41:59Z",
       "closedAt": null,
       "comments": [
         {
@@ -599,6 +623,72 @@
           "body": "I'd prefer a COMPRESSION_ACK capsule. Fewer bytes (probably doesn't matter too much), and fewer ways to send an invalid capsule which the receiver has to check for and then handle.",
           "createdAt": "2025-07-21T14:16:50Z",
           "updatedAt": "2025-07-21T14:16:50Z"
+        }
+      ]
+    },
+    {
+      "number": 41,
+      "id": "I_kwDOHnqa9M7B3maa",
+      "title": "Unclear definition of Proxy-Public-Address",
+      "url": "https://github.com/ietf-wg-masque/draft-ietf-masque-connect-udp-listen/issues/41",
+      "state": "OPEN",
+      "author": "Acconut",
+      "authorAssociation": "NONE",
+      "assignees": [
+        "asingh-g"
+      ],
+      "labels": [],
+      "body": "The current draft says the following regrading the definition of the Proxy-Public-Address header field:\n\n> The header field is defined as a List of ip-port-tuples. The format of the tuple is defined using IP-literal, IPv4address, and port from [Section 3.2](https://rfc-editor.org/rfc/rfc3986#section-3.2) of [[URI](https://www.ietf.org/archive/id/draft-ietf-masque-connect-udp-listen-07.html#URI)].\n> \n> ip-port-tuple = ( IP-literal / IPv4address ) \":\" port\n\nIt defines the header as a structured field list, but not what types the list items are (tokens or strings). They could be tokens, but RFC 9651 discourages that in favor of strings:\n\n> Note that Tokens are defined largely for compatibility with the data model of existing HTTP fields and may require additional steps to use in some implementations. As a result, new fields are encouraged to use Strings.\n\nIn general, the definition should include all the information required by https://www.rfc-editor.org/rfc/rfc9651.html#name-defining-new-structured-fie",
+      "createdAt": "2025-07-22T12:53:31Z",
+      "updatedAt": "2025-07-23T07:41:47Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "DavidSchinazi",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I agree. We should make it clear that these MUST be Strings (and mention that this means that the ip-port-tuple's always need to be enclosed in double-quotes).",
+          "createdAt": "2025-07-22T13:16:26Z",
+          "updatedAt": "2025-07-22T13:16:26Z"
+        }
+      ]
+    },
+    {
+      "number": 42,
+      "id": "I_kwDOHnqa9M7B3uxp",
+      "title": "Recommend checking the Proxy-Public-Address",
+      "url": "https://github.com/ietf-wg-masque/draft-ietf-masque-connect-udp-listen/issues/42",
+      "state": "OPEN",
+      "author": "Acconut",
+      "authorAssociation": "NONE",
+      "assignees": [
+        "asingh-g"
+      ],
+      "labels": [],
+      "body": "When the proxy binds to an IPv4 address and the MASQUE client attempts to send datagrams with IPv6 addresses (or vice versa), the datagrams will be lost without further notice. To anticipate and prevent this, the MASQUE client could check the Proxy-Public-Address in the response to see whether the addresses are compatible with the datagrams it wants to send.\n\nWould it make sense adding this as a consideration/recommendation?",
+      "createdAt": "2025-07-22T13:03:49Z",
+      "updatedAt": "2025-07-23T07:49:03Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "DavidSchinazi",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I think adding this recommendation is a good idea. I'd make it a SHOULD because if we make it a MUST then there's a race condition when the client sends packets to the proxy before it receives the response headers.",
+          "createdAt": "2025-07-22T13:09:25Z",
+          "updatedAt": "2025-07-22T13:09:25Z"
+        },
+        {
+          "author": "Acconut",
+          "authorAssociation": "NONE",
+          "body": "Yes, I don't think this has to be a MUST.",
+          "createdAt": "2025-07-22T13:49:14Z",
+          "updatedAt": "2025-07-22T13:49:14Z"
+        },
+        {
+          "author": "asingh-g",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Thanks for adding these issues @Acconut ",
+          "createdAt": "2025-07-23T07:49:03Z",
+          "updatedAt": "2025-07-23T07:49:03Z"
         }
       ]
     }
@@ -3766,7 +3856,7 @@
       "labels": [],
       "body": "Fixes #34",
       "createdAt": "2025-07-19T10:07:20Z",
-      "updatedAt": "2025-07-19T13:56:53Z",
+      "updatedAt": "2025-07-22T09:48:54Z",
       "baseRepository": "ietf-wg-masque/draft-ietf-masque-connect-udp-listen",
       "baseRefName": "main",
       "baseRefOid": "21d58aafbd2adc1e0d2fdcefb4fbef8fa176aa5d",
@@ -3870,6 +3960,19 @@
           "body": "",
           "createdAt": "2025-07-19T13:56:53Z",
           "updatedAt": "2025-07-19T13:56:53Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOHnqa9M61U7ju",
+          "commit": {
+            "abbreviatedOid": "c76dbad"
+          },
+          "author": "bemasc",
+          "authorAssociation": "NONE",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-07-22T09:48:54Z",
+          "updatedAt": "2025-07-22T09:48:54Z",
           "comments": []
         }
       ]
