@@ -1302,9 +1302,17 @@ request path or query. For Bound UDP Proxying, the target is either conveyed in
 each HTTP Datagram (see <a href="#fmt-dgram-uncomp" class="auto internal xref">Figure 3</a>), or registered via capsules and
 then compressed (see <a href="#fmt-capsule-assign" class="auto internal xref">Figure 1</a>).<a href="#section-2-1" class="pilcrow">¶</a></p>
 <p id="section-2-2">When performing URI Template Expansion of the UDP Proxying template (see
-<span><a href="https://rfc-editor.org/rfc/rfc9298#section-3" class="relref">Section 3</a> of [<a href="#CONNECT-UDP" class="cite xref">CONNECT-UDP</a>]</span>), the client sets both the "target_host" and the
-"target_port" variables to the '*' character (ASCII character 0x2A). Note that
-the '*' character <span class="bcp14">MUST</span> be percent-encoded before sending, per <span><a href="https://rfc-editor.org/rfc/rfc6570#section-3.2.2" class="relref">Section 3.2.2</a> of [<a href="#TEMPLATE" class="cite xref">TEMPLATE</a>]</span>.<a href="#section-2-2" class="pilcrow">¶</a></p>
+<span><a href="https://rfc-editor.org/rfc/rfc9298#section-3" class="relref">Section 3</a> of [<a href="#CONNECT-UDP" class="cite xref">CONNECT-UDP</a>]</span>), the client follows the same template as
+CONNECT-UDP and sets the "target_host" and the "target_port" variables
+to one of its targets. It adds the connect-udp-bind header as specified in
+<a href="#hdr" class="auto internal xref">Section 6</a> to request bind. If the proxy supports CONNECT-UDP Bind, it returns
+the connect-udp-bind response header value set to true.<a href="#section-2-2" class="pilcrow">¶</a></p>
+<p id="section-2-3">When target_host and target_port are set to a valid target, the client is
+requesting CONNECT-UDP Bind but would accept fallback to unextended
+CONNECT-UDP to that target. If the client doesn't have a specific target, or if
+it wants CONNECT-UDP bind without fallback, it sets both the "target_host" and
+the "target_port" variables to the '*' character (ASCII character 0x2A). Note
+that the '*' character <span class="bcp14">MUST</span> be percent-encoded before sending, per <span><a href="https://rfc-editor.org/rfc/rfc6570#section-3.2.2" class="relref">Section 3.2.2</a> of [<a href="#TEMPLATE" class="cite xref">TEMPLATE</a>]</span>.<a href="#section-2-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="contextid">
@@ -1323,11 +1331,13 @@ uncompressed variant encodes the target IP and port into each HTTP Datagram.
 Conversely, the compressed variant exchanges the target IP and port once in the
 capsule during registration, and then relies on shared state to map from the
 Context ID to the IP and port.<a href="#section-3-2" class="pilcrow">¶</a></p>
-<p id="section-3-3">The Context ID 0 was reserved by unextended connect-udp and is not used by this
-extension. Once an endpoint has ascertained that the peer supports this
-extension (see <a href="#hdr" class="auto internal xref">Section 6</a>), the endpoint <span class="bcp14">MUST NOT</span> send any datagrams with Context
-ID set to 0, and <span class="bcp14">MUST</span> silently drop any received datagrams with Context ID set
-to 0.<a href="#section-3-3" class="pilcrow">¶</a></p>
+<p id="section-3-3">Context ID 0 was reserved by unextended connect-udp to represent UDP
+payloads sent to and from the "target_host" and "target_port" from the
+URI template. When the mechanism from this document is in use:
+* if the "target_host" and "target_port" variables are set to <code>\*</code>, then
+context ID 0 <span class="bcp14">MUST NOT</span> be used in HTTP Datagrams.
+* otherwise, HTTP Datagrams with context ID 0 have the same semantics
+as in unextended connect-udp.<a href="#section-3-3" class="pilcrow">¶</a></p>
 <div id="capsule-assign">
 <section id="section-3.1">
         <h3 id="name-the-compression_assign-caps">
@@ -1397,7 +1407,8 @@ Context IDs, while proxies can only allocate odd ones. This makes the
 registration capsules from this document unambiguous. For example, if a client
 receives a COMPRESSION_ASSIGN capsule with an even Context ID, that has to be
 an echo of a capsule that the client initially sent, indicating that the proxy
-accepted the registration.<a href="#section-3.1-7" class="pilcrow">¶</a></p>
+accepted the registration. Since the value 0 was reserved by unextended
+connect-udp, the Context ID value of COMPRESSION_ASSIGN can never be zero.<a href="#section-3.1-7" class="pilcrow">¶</a></p>
 <p id="section-3.1-8">Endpoints <span class="bcp14">MUST NOT</span> send two COMPRESSION_ASSIGN capsules with the same Context
 ID. If a recipient detects a repeated Context ID, it <span class="bcp14">MUST</span> treat the capsule as
 malformed. Receipt of a malformed capsule <span class="bcp14">MUST</span> be treated as an error
@@ -1443,7 +1454,9 @@ COMPRESSION_CLOSE Capsule {
           </figcaption></figure>
 </div>
 <p id="section-3.2-3">Once an endpoint has either sent or received a COMPRESSION_CLOSE for a given
-Context ID, it <span class="bcp14">MUST NOT</span> send any further datagrams with that Context ID.<a href="#section-3.2-3" class="pilcrow">¶</a></p>
+Context ID, it <span class="bcp14">MUST NOT</span> send any further datagrams with that Context ID.
+Since the value 0 was reserved by unextended connect-udp, the Context ID
+value of COMPRESSION_CLOSE can never be zero.<a href="#section-3.2-3" class="pilcrow">¶</a></p>
 <p id="section-3.2-4">Endpoints <span class="bcp14">MAY</span> close any context regardless of which endpoint registered it.
 This is useful for example, when a mapping is unused for a long time. Another
 potential use is restricting some targets (see <a href="#restricting-ips" class="auto internal xref">Section 8.1</a>).<a href="#section-3.2-4" class="pilcrow">¶</a></p>
