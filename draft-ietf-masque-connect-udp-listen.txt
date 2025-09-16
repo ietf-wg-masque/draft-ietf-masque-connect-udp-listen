@@ -5,7 +5,7 @@
 MASQUE                                                       D. Schinazi
 Internet-Draft                                                  A. Singh
 Intended status: Standards Track                              Google LLC
-Expires: 18 December 2025                                   16 June 2025
+Expires: 20 March 2026                                 16 September 2025
 
 
                        Proxying Bound UDP in HTTP
@@ -54,7 +54,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 18 December 2025.
+   This Internet-Draft will expire on 20 March 2026.
 
 Copyright Notice
 
@@ -222,6 +222,12 @@ Table of Contents
    treat the capsule as malformed.  Receipt of a malformed capsule MUST
    be treated as an error processing the Capsule Protocol, as defined in
    Section 3.3 of [HTTP-DGRAM].
+
+   If the uncompressed context is closed, the proxy MUST NOT open new
+   compressed contexts.  In such a case, the proxy opening contexts
+   results in tuples not desired by the client reaching it thereby
+   nullifying the IP restriction property of uncompressed compression
+   close as described in Section 8.1.
 
    Only one Context ID can be used per IP-port tuple.  If an endpoint
    detects that both it and its peer have opened a Context ID for the
