@@ -85,12 +85,13 @@ Table of Contents
    8.  Proxy behavior
      8.1.  Restricting IPs
    9.  Security Considerations
-   10. IANA Considerations
-     10.1.  HTTP Fields
-     10.2.  Capsules
-   11. References
-     11.1.  Normative References
-     11.2.  Informative References
+   10. Operational Considerations
+   11. IANA Considerations
+     11.1.  HTTP Fields
+     11.2.  Capsules
+   12. References
+     12.1.  Normative References
+     12.2.  Informative References
    Appendix A.  Example
    Appendix B.  Comparison with CONNECT-IP
    Acknowledgments
@@ -428,9 +429,17 @@ Table of Contents
    exhaustion.  The proxy MUST abort the request stream if this limit is
    reached.
 
-10.  IANA Considerations
+10.  Operational Considerations
 
-10.1.  HTTP Fields
+   When moving traffic between uncompressed and compressed contexts, the
+   effective MTU will change.  This can hinder Datagram Packetization
+   Layer PMTU Discovery (DPLPMTUD) between the client and the target
+   [DPLPMTUD].  To avoid that, if an endpoint intends to use
+   compression, it SHOULD request it as early as possible.
+
+11.  IANA Considerations
+
+11.1.  HTTP Fields
 
    This document will request IANA to register the following new items
    in the "HTTP Field Name" registry maintained at
@@ -452,7 +461,7 @@ Table of Contents
    Reference:  This document
    Comments:  None
 
-10.2.  Capsules
+11.2.  Capsules
 
    This document will request IANA to register the following new items
    to the "HTTP Capsule Types" registry maintained at
@@ -480,9 +489,9 @@ Table of Contents
    Note that these values will be replaced by lower ones prior to
    publication.
 
-11.  References
+12.  References
 
-11.1.  Normative References
+12.1.  Normative References
 
    [ABNF]     Crocker, D., Ed. and P. Overell, "Augmented BNF for Syntax
               Specifications: ABNF", STD 68, RFC 5234,
@@ -537,13 +546,18 @@ Table of Contents
               RFC 3986, DOI 10.17487/RFC3986, January 2005,
               <https://www.rfc-editor.org/rfc/rfc3986>.
 
-11.2.  Informative References
+12.2.  Informative References
 
    [CONNECT-IP]
               Pauly, T., Ed., Schinazi, D., Chernyakhovsky, A.,
               Kühlewind, M., and M. Westerlund, "Proxying IP in HTTP",
               RFC 9484, DOI 10.17487/RFC9484, October 2023,
               <https://www.rfc-editor.org/rfc/rfc9484>.
+
+   [DPLPMTUD] Fairhurst, G., Jones, T., Tüxen, M., Rüngeler, I., and T.
+              Völker, "Packetization Layer Path MTU Discovery for
+              Datagram Transports", RFC 8899, DOI 10.17487/RFC8899,
+              September 2020, <https://www.rfc-editor.org/rfc/rfc8899>.
 
    [ICE]      Keranen, A., Holmberg, C., and J. Rosenberg, "Interactive
               Connectivity Establishment (ICE): A Protocol for Network
