@@ -107,10 +107,20 @@ each HTTP Datagram (see {{fmt-dgram-uncomp}}), or registered via capsules and
 then compressed (see {{fmt-capsule-assign}}).
 
 When performing URI Template Expansion of the UDP Proxying template (see
-{{Section 3 of CONNECT-UDP}}), the client sets both the "target_host" and the
-"target_port" variables to the '\*' character (ASCII character 0x2A). Note that
-the '\*' character MUST be percent-encoded before sending, per {{Section 3.2.2
-of !TEMPLATE=RFC6570}}.
+{{Section 3 of CONNECT-UDP}}), the client follows the same template as
+CONNECT-UDP and sets the "target_host" and the "target_port" variables
+to one of its targets. It adds the connect-udp-bind header as specified in
+{{hdr}} to request bind. If the proxy supports CONNECT-UDP Bind, it returns
+the connect-udp-bind response header value set to true.
+
+When target_host and target_port are set to a valid target, the client is
+requesting CONNECT-UDP Bind but would accept fallback to unextended
+CONNECT-UDP to that target. If the client doesn't have a specific target, or if
+it wants CONNECT-UDP bind without fallback, it sets both the "target_host" and
+the "target_port" variables to the '\*' character (ASCII character 0x2A). Note
+that the '\*' character MUST be percent-encoded before sending, per {{Section
+3.2.2 of !TEMPLATE=RFC6570}}.
+
 
 # Context Identifiers {#contextid}
 
@@ -127,11 +137,14 @@ Conversely, the compressed variant exchanges the target IP and port once in the
 capsule during registration, and then relies on shared state to map from the
 Context ID to the IP and port.
 
-The Context ID 0 was reserved by unextended connect-udp and is not used by this
-extension. Once an endpoint has ascertained that the peer supports this
-extension (see {{hdr}}), the endpoint MUST NOT send any datagrams with Context
-ID set to 0, and MUST silently drop any received datagrams with Context ID set
-to 0.
+Context ID 0 was reserved by unextended connect-udp to represent UDP
+payloads sent to and from the "target_host" and "target_port" from the
+URI template. When the mechanism from this document is in use:
+* if the "target_host" and "target_port" variables are set to `\*`, then
+context ID 0 MUST NOT be used in HTTP Datagrams.
+* otherwise, HTTP Datagrams with context ID 0 have the same semantics
+as in unextended connect-udp.
+
 
 ## The COMPRESSION_ASSIGN capsule {#capsule-assign}
 
@@ -187,7 +200,8 @@ Context IDs, while proxies can only allocate odd ones. This makes the
 registration capsules from this document unambiguous. For example, if a client
 receives a COMPRESSION_ASSIGN capsule with an even Context ID, that has to be
 an echo of a capsule that the client initially sent, indicating that the proxy
-accepted the registration.
+accepted the registration. Since the value 0 was reserved by unextended
+connect-udp, the Context ID value of COMPRESSION_ASSIGN can never be zero.
 
 Endpoints MUST NOT send two COMPRESSION_ASSIGN capsules with the same Context
 ID. If a recipient detects a repeated Context ID, it MUST treat the capsule as
@@ -230,6 +244,8 @@ COMPRESSION_CLOSE Capsule {
 
 Once an endpoint has either sent or received a COMPRESSION_CLOSE for a given
 Context ID, it MUST NOT send any further datagrams with that Context ID.
+Since the value 0 was reserved by unextended connect-udp, the Context ID
+value of COMPRESSION_CLOSE can never be zero.
 
 Endpoints MAY close any context regardless of which endpoint registered it.
 This is useful for example, when a mapping is unused for a long time. Another
@@ -292,7 +308,7 @@ contexts open at the same time. Only the client can request uncompressed
 contexts. If a client receives a COMPRESSION_ASSIGN capsule with the IP Version
 set to 0, it MUST treat it as malformed.
 
-# Compressed Operation
+# Compressed Operation {#compressed-operation}
 
 Endpoints MAY choose to compress the IP and port information per datagram for a
 given target using Context IDs. This is accomplished by registering a
