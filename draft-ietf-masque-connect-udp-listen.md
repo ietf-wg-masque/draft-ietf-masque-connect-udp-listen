@@ -370,6 +370,12 @@ family is RECOMMENDED.
 Note that since the addresses are conveyed in HTTP response headers, a
 subsequent change of addresses on the proxy cannot be conveyed to the client.
 
+The client SHOULD use the addresses received in the Proxy-Public-Address header
+to identify the IP versions the proxy supports. If a client tries to register
+or send datagrams to a target whose IP version does not correspond to the ones
+provided in the header, the proxy MAY drop the capsule or datagram it received
+altogether.
+
 # Proxy behavior {#behavior}
 
 After accepting the Connect-UDP Binding proxying request, the proxy uses an
