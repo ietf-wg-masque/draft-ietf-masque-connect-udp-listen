@@ -400,7 +400,8 @@ Table of Contents
    Address header to identify the IP versions the proxy supports.  If a
    client tries to register or send datagrams to a target whose IP
    version does not correspond to the ones provided in the header, the
-   proxy MAY drop the capsule or datagram it received altogether.
+   proxy MAY drop the capsule or datagram received from the client
+   altogether.
 
 8.  Proxy behavior
 
