@@ -397,8 +397,8 @@ Table of Contents
    the client.
 
    The client SHOULD use the addresses received in the Proxy-Public-
-   Address header to identify the IP versions the proxy supports.  If a
-   client tries to register or send datagrams to a target whose IP
+   Address header to identify the IP versions that the proxy supports.
+   If a client tries to register or send datagrams to a target whose IP
    version does not correspond to the ones provided in the header, the
    proxy MAY drop the capsule or datagram received from the client
    altogether.
