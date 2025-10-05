@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-09-18T00:53:10.285103+00:00",
+  "timestamp": "2025-10-05T00:59:17.412942+00:00",
   "repo": "ietf-wg-masque/draft-ietf-masque-connect-udp-listen",
   "labels": [
     {
@@ -4386,6 +4386,53 @@
           "createdAt": "2025-07-21T19:11:49Z",
           "updatedAt": "2025-07-21T19:11:49Z",
           "comments": []
+        }
+      ]
+    },
+    {
+      "number": 43,
+      "id": "PR_kwDOHnqa9M6sBmPh",
+      "title": "Add recommendation for checking proxy public address",
+      "url": "https://github.com/ietf-wg-masque/draft-ietf-masque-connect-udp-listen/pull/43",
+      "state": "OPEN",
+      "author": "asingh-g",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-10-03T20:12:17Z",
+      "updatedAt": "2025-10-03T20:51:56Z",
+      "baseRepository": "ietf-wg-masque/draft-ietf-masque-connect-udp-listen",
+      "baseRefName": "main",
+      "baseRefOid": "0b86f1b44ebbacc4cdc1def33f8f6fa864b943fd",
+      "headRepository": "ietf-wg-masque/draft-ietf-masque-connect-udp-listen",
+      "headRefName": "42-recommend-checking-the-proxy-public-address",
+      "headRefOid": "f7790867df08f2e0682d1b69206942f5db0ae02e",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOHnqa9M7Ev_iB",
+          "commit": {
+            "abbreviatedOid": "f779086"
+          },
+          "author": "DavidSchinazi",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-10-03T20:51:56Z",
+          "updatedAt": "2025-10-03T20:51:56Z",
+          "comments": [
+            {
+              "originalPosition": 7,
+              "body": "MAY doesn't feel right here, since it's more a matter of fact that proxies can't forward for address families they don't support. Maybe something like \"If the proxy only shares IP addresses from a single address family, that indicates that it does not support other address families. Clients SHOULD NOT send UDP payloads intended for address families that it knows the proxy doesn't support, as the proxy will drop them.\"",
+              "createdAt": "2025-10-03T20:51:56Z",
+              "updatedAt": "2025-10-03T20:51:56Z"
+            }
+          ]
         }
       ]
     }
