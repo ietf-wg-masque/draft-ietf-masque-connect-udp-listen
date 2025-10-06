@@ -224,7 +224,7 @@ MUST treat the capsule as malformed.
 
 Endpoints MAY pre-emptively use Context IDs not yet acknowledged by the peer
 via COMPRESSION_ACK, knowing that those HTTP Datagrams can be dropped if they
-are arrive/ or are processed before the corresponding COMPRESSION_ASSIGN
+are arrive or are processed before the corresponding COMPRESSION_ASSIGN
 capsule, or if the peer rejects the registration.
 
 ## The COMPRESSION_CLOSE capsule {#capsule-close}
