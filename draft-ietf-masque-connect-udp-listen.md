@@ -370,11 +370,12 @@ family is RECOMMENDED.
 Note that since the addresses are conveyed in HTTP response headers, a
 subsequent change of addresses on the proxy cannot be conveyed to the client.
 
-The client SHOULD use the addresses received in the Proxy-Public-Address header
-to identify the IP versions that the proxy supports. If a client tries to
-register or send datagrams to a target whose IP version does not correspond to
-the ones provided in the header, the proxy MAY drop the capsule or datagram
-received from the client altogether.
+If the proxy only shares IP addresses from a single address family, it
+indicates that the proxy only supports that family. The client SHOULD NOT
+attempt to register compressed contexts or send uncompressed datagrams
+intended for targets whose ip address families were not indicated via the
+IP addresses listed in the Proxy-Public-Address header field, as the proxy
+will drop said datagrams or capsules.
 
 # Proxy behavior {#behavior}
 
