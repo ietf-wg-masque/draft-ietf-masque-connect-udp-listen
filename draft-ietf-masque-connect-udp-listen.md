@@ -256,7 +256,7 @@ Once a registration is closed, endpoints can instead use an uncompressed
 Context ID to exchange UDP payloads for the given target, if such a context has
 been registered (see {{uncompressed}}).
 
-## The COMPRESSION_ACK capsule {#capsule-close}
+## The COMPRESSION_ACK capsule {#capsule-ack}
 
 The Compression ACK capsule serves to confirm registration of a context ID
 that was received via a COMPRESSION_ASSIGN capsule.
