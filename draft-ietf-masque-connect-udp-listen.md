@@ -502,8 +502,6 @@ Notes:
 : None
 {: spacing="compact"}
 
-Note that these values will be replaced by lower ones prior to publication.
-
 --- back
 
 # Example
