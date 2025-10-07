@@ -478,9 +478,9 @@ This document will request IANA to register the following new items to the
 
 |   Value    |    Capsule Type    |
 |:-----------|:-------------------|
-| 0x1C0FE323 | COMPRESSION_ASSIGN |
-| 0x1C0FE324 | COMPRESSION_CLOSE  |
-| 0x1C0FE325 | COMPRESSION_ACK    |
+| 0x11 | COMPRESSION_ASSIGN |
+| 0x12 | COMPRESSION_CLOSE  |
+| 0x13 | COMPRESSION_ACK    |
 {: #iana-capsules-table title="New Capsules"}
 
 All of these new entries use the following values for these fields:
@@ -601,9 +601,6 @@ listen for connections from new targets, and limits its communication with only
             <-------- CAPSULE
                         Type = COMPRESSION_ACK
                         Context ID = 4
-                        IP Version = 4
-                        IP Address = 203.0.113.11
-                        UDP Port = 4321
 
 /* Omit IP and Port for future packets intended for */
 /* 203.0.113.11:4321 hereon */
