@@ -1650,6 +1650,12 @@ When multiple tuples are provided, maintaining address stability per address
 family is <span class="bcp14">RECOMMENDED</span>.<a href="#section-7-3" class="pilcrow">¶</a></p>
 <p id="section-7-4">Note that since the addresses are conveyed in HTTP response headers, a
 subsequent change of addresses on the proxy cannot be conveyed to the client.<a href="#section-7-4" class="pilcrow">¶</a></p>
+<p id="section-7-5">If the proxy only shares IP addresses from a single address family, that
+indicates that the proxy only supports that family. The client <span class="bcp14">SHOULD NOT</span>
+attempt to register compressed contexts or send uncompressed datagrams
+intended for targets whose IP address families were not indicated via the
+IP addresses listed in the Proxy-Public-Address header field, as the proxy
+will drop said datagrams or capsules.<a href="#section-7-5" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="behavior">
