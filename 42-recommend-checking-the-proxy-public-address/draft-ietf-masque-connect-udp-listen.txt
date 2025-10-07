@@ -5,7 +5,7 @@
 MASQUE                                                       D. Schinazi
 Internet-Draft                                                  A. Singh
 Intended status: Standards Track                              Google LLC
-Expires: 9 April 2026                                     6 October 2025
+Expires: 10 April 2026                                    7 October 2025
 
 
                        Proxying Bound UDP in HTTP
@@ -54,7 +54,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 9 April 2026.
+   This Internet-Draft will expire on 10 April 2026.
 
 Copyright Notice
 
@@ -397,7 +397,7 @@ Table of Contents
    the client.
 
    If the proxy only shares IP addresses from a single address family,
-   it indicates that the proxy only supports that family.  The client
+   that indicates that the proxy only supports that family.  The client
    SHOULD NOT attempt to register compressed contexts or send
    uncompressed datagrams intended for targets whose ip address families
    were not indicated via the IP addresses listed in the Proxy-Public-
