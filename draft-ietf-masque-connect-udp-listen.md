@@ -188,8 +188,9 @@ or reject the corresponding registration:
 
 * if it accepts the registration, first the receiver MUST save the mapping from
   Context ID to address and port (or save the fact that this context ID is
-  uncompressed). Second, the receiver MUST echo an identical COMPRESSION_ASSIGN
-  capsule back to its peer, to indicate it has accepted the registration.
+  uncompressed). Second, the receiver MUST return a COMPRESSION_ACK capsule
+  with the Context ID set to the one from the received COMPRESSION_ASSIGN
+  capsule back to its peer, indicating it has accepted the registration.
 
 * if it rejects the registration, the receiver MUST respond by sending a
   COMPRESSION_CLOSE capsule with the Context ID set to the one from the
@@ -221,10 +222,10 @@ MUST close the Context ID that was opened by the proxy. If an endpoint receives
 a COMPRESSION_ASSIGN capsule whose tuple matches another open Context ID, it
 MUST treat the capsule as malformed.
 
-Endpoints MAY pre-emptively use Context IDs not yet acknowledged by the peer,
-knowing that those HTTP Datagrams can be dropped if they arrive before the
-corresponding COMPRESSION_ASSIGN capsule, or if the peer rejects the
-registration.
+Endpoints MAY pre-emptively use Context IDs not yet acknowledged by the peer
+via COMPRESSION_ACK, knowing that those HTTP Datagrams can be dropped if they
+arrive before the corresponding COMPRESSION_ASSIGN
+capsule, or if the peer rejects the registration.
 
 ## The COMPRESSION_CLOSE capsule {#capsule-close}
 
@@ -254,6 +255,27 @@ potential use is restricting some targets (see {{restricting-ips}}).
 Once a registration is closed, endpoints can instead use an uncompressed
 Context ID to exchange UDP payloads for the given target, if such a context has
 been registered (see {{uncompressed}}).
+
+## The COMPRESSION_ACK capsule {#capsule-ack}
+
+The Compression ACK capsule serves to confirm registration of a context ID
+that was received via a COMPRESSION_ASSIGN capsule.
+
+~~~
+COMPRESSION_ASSIGN Capsule {
+  Type (i) = 0x1C0FE325,
+  Length (i),
+  Context ID (i),
+}
+~~~
+{: #fmt-capsule-ack title="Compression Ack Capsule Format"}
+
+An endpoint can only send a COMPRESSION_ACK capsule if it received a
+COMPRESSION_ASSIGN capsule and said COMPRESSION_ACK MUST contain the same
+Context ID value as the one it received via COMPRESSION_ASSIGN. If an
+endpoint receives COMPRESSION_ACK capsule for a context ID it did not
+attempt to register via COMPRESSION_ASSIGN, that capsule is considered
+malformed.
 
 # Uncompressed Operation {#uncompressed}
 
@@ -408,7 +430,7 @@ for bound UDP proxying requests where the uncompressed context is open, the UDP
 proxy needs to perform checks on the target of each uncompressed context
 datagram it receives.
 
-Note that if the compression response (COMPRESSION_ASSIGN OR COMPRESSION_CLOSE)
+Note that if the compression response (COMPRESSION_ACK OR COMPRESSION_CLOSE)
 cannot be immediately sent due to flow or congestion control, an upper limit on
 how many compression responses the endpoint is willing to buffer MUST be set to
 prevent memory exhaustion. The proxy MUST abort the request stream if this
@@ -456,8 +478,9 @@ This document will request IANA to register the following new items to the
 
 |   Value    |    Capsule Type    |
 |:-----------|:-------------------|
-| 0x1C0FE323 | COMPRESSION_ASSIGN |
-| 0x1C0FE324 | COMPRESSION_CLOSE  |
+| 0x11 | COMPRESSION_ASSIGN |
+| 0x12 | COMPRESSION_CLOSE  |
+| 0x13 | COMPRESSION_ACK    |
 {: #iana-capsules-table title="New Capsules"}
 
 All of these new entries use the following values for these fields:
@@ -521,9 +544,8 @@ listen for connections from new targets, and limits its communication with only
 /* Proxy confirms registration */
 
             <-------- CAPSULE
-                        Type = COMPRESSION_ASSIGN
+                        Type = COMPRESSION_ACK
                         Context ID = 2
-                        IP Version = 0
 
 /* Target talks to Client using the uncompressed context */
 
@@ -577,11 +599,8 @@ listen for connections from new targets, and limits its communication with only
 /* Proxy confirms registration */
 
             <-------- CAPSULE
-                        Type = COMPRESSION_ASSIGN
+                        Type = COMPRESSION_ACK
                         Context ID = 4
-                        IP Version = 4
-                        IP Address = 203.0.113.11
-                        UDP Port = 4321
 
 /* Omit IP and Port for future packets intended for */
 /* 203.0.113.11:4321 hereon */
