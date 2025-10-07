@@ -128,9 +128,9 @@ Table of Contents
 
    This document uses terminology from [CONNECT-UDP] and notational
    conventions from [QUIC].  This document uses the terms Boolean,
-   Integer, and List from Section 3 of [STRUCTURED-FIELDS] to specify
-   syntax and parsing.  This document uses Augmented Backus-Naur Form
-   and parsing/serialization behaviors from [ABNF].
+   Integer, String, and List from Section 3 of [STRUCTURED-FIELDS] to
+   specify syntax and parsing.  This document uses Augmented Backus-Naur
+   Form and parsing/serialization behaviors from [ABNF].
 
 2.  Proxied UDP Binding Mechanism
 
@@ -400,12 +400,12 @@ Table of Contents
    request.  From then and until the tunnel is closed, the proxy SHALL
    send packets received on these IP-port tuples to the client.  The
    proxy MUST communicate the selected addresses and ports to the client
-   using the "Proxy-Public-Address" header field.  The header field is
-   defined as a List of ip-port-tuples.  The format of the tuple is
-   defined using IP-literal, IPv4address, and port from Section 3.2 of
-   [URI].
+   using the "Proxy-Public-Address" header field.  The header field is a
+   List.  Each member of the List is a String, comprised of the ip-port
+   tuple.  The format of the String is defined using IP-literal,
+   IPv4address, and port from Section 3.2 of [URI].
 
-   ip-port-tuple = ( IP-literal / IPv4address ) ":" port
+   ip-port-tuple = DQUOTE ( IP-literal / IPv4address ) ":" port DQUOTE
 
                        Figure 6: Proxy Address Format
 
@@ -577,8 +577,8 @@ Table of Contents
 
    [STRUCTURED-FIELDS]
               Nottingham, M. and P. Kamp, "Structured Field Values for
-              HTTP", RFC 8941, DOI 10.17487/RFC8941, February 2021,
-              <https://www.rfc-editor.org/rfc/rfc8941>.
+              HTTP", RFC 9651, DOI 10.17487/RFC9651, September 2024,
+              <https://www.rfc-editor.org/rfc/rfc9651>.
 
    [TEMPLATE] Gregorio, J., Fielding, R., Hadley, M., Nottingham, M.,
               and D. Orchard, "URI Template", RFC 6570,

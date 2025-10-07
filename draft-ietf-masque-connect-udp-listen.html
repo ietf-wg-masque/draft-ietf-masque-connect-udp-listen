@@ -1287,8 +1287,8 @@ single UDP Proxying HTTP request.<a href="#section-1-2" class="pilcrow">¶</a></
 described in BCP 14 <span>[<a href="#RFC2119" class="cite xref">RFC2119</a>]</span> <span>[<a href="#RFC8174" class="cite xref">RFC8174</a>]</span> when, and only when, they
 appear in all capitals, as shown here.<a href="#section-1.1-1" class="pilcrow">¶</a></p>
 <p id="section-1.1-2">This document uses terminology from <span>[<a href="#CONNECT-UDP" class="cite xref">CONNECT-UDP</a>]</span> and notational conventions
-from <span>[<a href="#QUIC" class="cite xref">QUIC</a>]</span>. This document uses the terms Boolean, Integer, and List
-from <span><a href="https://rfc-editor.org/rfc/rfc8941#section-3" class="relref">Section 3</a> of [<a href="#STRUCTURED-FIELDS" class="cite xref">STRUCTURED-FIELDS</a>]</span> to specify syntax and parsing.
+from <span>[<a href="#QUIC" class="cite xref">QUIC</a>]</span>. This document uses the terms Boolean, Integer, String, and List
+from <span><a href="https://rfc-editor.org/rfc/rfc9651#section-3" class="relref">Section 3</a> of [<a href="#STRUCTURED-FIELDS" class="cite xref">STRUCTURED-FIELDS</a>]</span> to specify syntax and parsing.
 This document uses Augmented Backus-Naur Form and parsing/serialization
 behaviors from <span>[<a href="#ABNF" class="cite xref">ABNF</a>]</span>.<a href="#section-1.1-2" class="pilcrow">¶</a></p>
 </section>
@@ -1631,13 +1631,14 @@ address, it <span class="bcp14">MUST</span> select an open port to bind to this 
 until the tunnel is closed, the proxy <span class="bcp14">SHALL</span> send packets received on these
 IP-port tuples to the client. The proxy <span class="bcp14">MUST</span> communicate the selected addresses
 and ports to the client using the "Proxy-Public-Address" header field. The
-header field is defined as a List of ip-port-tuples. The format of the tuple is
-defined using IP-literal, IPv4address, and port from <span><a href="https://rfc-editor.org/rfc/rfc3986#section-3.2" class="relref">Section 3.2</a> of [<a href="#URI" class="cite xref">URI</a>]</span>.<a href="#section-7-1" class="pilcrow">¶</a></p>
+header field is a List. Each member of the List is a String, comprised of the
+ip-port tuple. The format of the String is defined using IP-literal,
+IPv4address, and port from <span><a href="https://rfc-editor.org/rfc/rfc3986#section-3.2" class="relref">Section 3.2</a> of [<a href="#URI" class="cite xref">URI</a>]</span>.<a href="#section-7-1" class="pilcrow">¶</a></p>
 <span id="name-proxy-address-format"></span><div id="target-format">
 <figure id="figure-6">
         <div class="alignLeft art-text artwork" id="section-7-2.1">
 <pre>
-ip-port-tuple = ( IP-literal / IPv4address ) ":" port
+ip-port-tuple = DQUOTE ( IP-literal / IPv4address ) ":" port DQUOTE
 </pre>
 </div>
 <figcaption><a href="#figure-6" class="selfRef">Figure 6</a>:
@@ -1890,7 +1891,7 @@ as early as possible.<a href="#section-10-1" class="pilcrow">¶</a></p>
 <dd class="break"></dd>
 <dt id="STRUCTURED-FIELDS">[STRUCTURED-FIELDS]</dt>
         <dd>
-<span class="refAuthor">Nottingham, M.</span> and <span class="refAuthor">P. Kamp</span>, <span class="refTitle">"Structured Field Values for HTTP"</span>, <span class="seriesInfo">RFC 8941</span>, <span class="seriesInfo">DOI 10.17487/RFC8941</span>, <time datetime="2021-02" class="refDate">February 2021</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8941">https://www.rfc-editor.org/rfc/rfc8941</a>&gt;</span>. </dd>
+<span class="refAuthor">Nottingham, M.</span> and <span class="refAuthor">P. Kamp</span>, <span class="refTitle">"Structured Field Values for HTTP"</span>, <span class="seriesInfo">RFC 9651</span>, <span class="seriesInfo">DOI 10.17487/RFC9651</span>, <time datetime="2024-09" class="refDate">September 2024</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9651">https://www.rfc-editor.org/rfc/rfc9651</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="TEMPLATE">[TEMPLATE]</dt>
         <dd>
