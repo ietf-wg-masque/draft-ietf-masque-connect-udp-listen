@@ -94,7 +94,7 @@ single UDP Proxying HTTP request.
 {::boilerplate bcp14-tagged}
 
 This document uses terminology from {{CONNECT-UDP}} and notational conventions
-from {{!QUIC=RFC9000}}. This document uses the terms Boolean, Integer, and List
+from {{!QUIC=RFC9000}}. This document uses the terms Boolean, Integer, String, and List
 from {{Section 3 of !STRUCTURED-FIELDS=RFC9651}} to specify syntax and parsing.
 This document uses Augmented Backus-Naur Form and parsing/serialization
 behaviors from {{!ABNF=RFC5234}}.
