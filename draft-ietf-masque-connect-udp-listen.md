@@ -95,7 +95,7 @@ single UDP Proxying HTTP request.
 
 This document uses terminology from {{CONNECT-UDP}} and notational conventions
 from {{!QUIC=RFC9000}}. This document uses the terms Boolean, Integer, and List
-from {{Section 3 of !STRUCTURED-FIELDS=RFC8941}} to specify syntax and parsing.
+from {{Section 3 of !STRUCTURED-FIELDS=RFC9651}} to specify syntax and parsing.
 This document uses Augmented Backus-Naur Form and parsing/serialization
 behaviors from {{!ABNF=RFC5234}}.
 
@@ -353,11 +353,9 @@ address, it MUST select an open port to bind to this request. From then and
 until the tunnel is closed, the proxy SHALL send packets received on these
 IP-port tuples to the client. The proxy MUST communicate the selected addresses
 and ports to the client using the "Proxy-Public-Address" header field. The
-header field is a List as defined in {{Section 3.1 of !STRUCTURED-FIELDS=RFC8941}}.
-Each member of the List is a Quoted String
-{{Section 3.2.4 of !INTERNET-MESSAGE-FORMAT=RFC5322}} comprised of the ip-port tuple . The
-format of the Quoted String is defined using IP-literal, IPv4address, and port
-from {{Section 3.2 of !URI=RFC3986}}.
+header field is a List. Each member of the List is a String, comprised of the
+ip-port tuple. The format of the String is defined using IP-literal,
+IPv4address, and port from {{Section 3.2 of !URI=RFC3986}}.
 
 ~~~
 ip-port-tuple = DQUOTE ( IP-literal / IPv4address ) ":" port DQUOTE
