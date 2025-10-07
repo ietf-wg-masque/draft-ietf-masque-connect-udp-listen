@@ -373,7 +373,7 @@ subsequent change of addresses on the proxy cannot be conveyed to the client.
 If the proxy only shares IP addresses from a single address family, that
 indicates that the proxy only supports that family. The client SHOULD NOT
 attempt to register compressed contexts or send uncompressed datagrams
-intended for targets whose ip address families were not indicated via the
+intended for targets whose IP address families were not indicated via the
 IP addresses listed in the Proxy-Public-Address header field, as the proxy
 will drop said datagrams or capsules.
 
