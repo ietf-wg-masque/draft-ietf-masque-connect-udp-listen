@@ -360,7 +360,7 @@ format of the Quoted String is defined using IP-literal, IPv4address, and port
 from {{Section 3.2 of !URI=RFC3986}}.
 
 ~~~
-ip-port-tuple = <"> ( IP-literal / IPv4address ) ":" port <">
+ip-port-tuple = DQUOTE ( IP-literal / IPv4address ) ":" port DQUOTE
 ~~~
 {: #target-format title="Proxy Address Format"}
 
