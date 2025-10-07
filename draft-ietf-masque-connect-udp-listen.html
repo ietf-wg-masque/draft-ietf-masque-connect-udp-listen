@@ -1661,7 +1661,7 @@ indicates that the proxy only supports that family. The client <span class="bcp1
 attempt to register compressed contexts or send uncompressed datagrams
 intended for targets whose IP address families were not indicated via the IP
 addresses listed in the Proxy-Public-Address header field, as the proxy will
-drop said datagrams or capsules.<a href="#section-7-5" class="pilcrow">¶</a></p>
+drop those datagrams and reject those registrations.<a href="#section-7-5" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="behavior">
@@ -1969,8 +1969,8 @@ communication with only 203.0.113.11:4321 and no other UDP target.<a href="#appe
                          :status = 200
                          connect-udp-bind = ?1
                          capsule-protocol = ?1
-                         proxy-public-address = 192.0.2.45:54321,  \
-                                            [2001:db8::1234]:54321
+                         proxy-public-address = "192.0.2.45:54321",  \
+                                            "[2001:db8::1234]:54321"
 
 /* Register Context ID 2 to be used for uncompressed UDP payloads
  to/from any target */
