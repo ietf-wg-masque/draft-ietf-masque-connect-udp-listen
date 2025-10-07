@@ -127,9 +127,9 @@ Table of Contents
 
    This document uses terminology from [CONNECT-UDP] and notational
    conventions from [QUIC].  This document uses the terms Boolean,
-   Integer, and List from Section 3 of [STRUCTURED-FIELDS] to specify
-   syntax and parsing.  This document uses Augmented Backus-Naur Form
-   and parsing/serialization behaviors from [ABNF].
+   Integer, String, and List from Section 3 of [STRUCTURED-FIELDS] to
+   specify syntax and parsing.  This document uses Augmented Backus-Naur
+   Form and parsing/serialization behaviors from [ABNF].
 
 2.  Proxied UDP Binding Mechanism
 
