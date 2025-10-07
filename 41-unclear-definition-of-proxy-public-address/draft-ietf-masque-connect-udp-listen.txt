@@ -5,7 +5,7 @@
 MASQUE                                                       D. Schinazi
 Internet-Draft                                                  A. Singh
 Intended status: Standards Track                              Google LLC
-Expires: 9 April 2026                                     6 October 2025
+Expires: 10 April 2026                                    7 October 2025
 
 
                        Proxying Bound UDP in HTTP
@@ -54,7 +54,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 9 April 2026.
+   This Internet-Draft will expire on 10 April 2026.
 
 Copyright Notice
 
@@ -385,7 +385,7 @@ Table of Contents
    of the Quoted String is defined using IP-literal, IPv4address, and
    port from Section 3.2 of [URI].
 
-   ip-port-tuple = <"> ( IP-literal / IPv4address ) ":" port <">
+   ip-port-tuple = DQUOTE ( IP-literal / IPv4address ) ":" port DQUOTE
 
                        Figure 5: Proxy Address Format
 
