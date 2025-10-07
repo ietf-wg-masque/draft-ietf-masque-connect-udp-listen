@@ -176,7 +176,7 @@ Table of Contents
    payloads sent to and from the "target_host" and "target_port" from
    the URI template.  When the mechanism from this document is in use:
 
-   *  if the "target_host" and "target_port" variables are set to \*,
+   *  if the "target_host" and "target_port" variables are set to '*',
       then context ID 0 MUST NOT be used in HTTP Datagrams.
 
    *  otherwise, HTTP Datagrams with context ID 0 have the same
@@ -648,22 +648,21 @@ Appendix A.  Example
                            proxy-public-address = "192.0.2.45:54321",  \
                                               "[2001:db8::1234]:54321"
 
-  /* Register Context ID 2 to be used for uncompressed UDP payloads
-   to/from any target */
+  // Register Context ID 2 to be used for uncompressed UDP payloads
+  // to/from any target.
 
    CAPSULE                       -------->
      Type = COMPRESSION_ASSIGN
      Context ID = 2
      IP Version = 0
 
-
-  /* Proxy confirms registration */
+  // Proxy confirms registration.
 
               <-------- CAPSULE
                           Type = COMPRESSION_ACK
                           Context ID = 2
 
-  /* Target talks to Client using the uncompressed context */
+  // Target talks to Client using the uncompressed context.
 
               <--------  DATAGRAM
                            Quarter Stream ID = 11
@@ -673,7 +672,7 @@ Appendix A.  Example
                            UDP Port = 1234
                            UDP Payload = Encapsulated UDP Payload
 
-  /* Client responds on the same uncompressed context */
+  // Client responds on the same uncompressed context.
 
    DATAGRAM                       -------->
      Quarter Stream ID = 11
@@ -683,7 +682,8 @@ Appendix A.  Example
      UDP Port = 1234
      UDP Payload = Encapsulated UDP Payload
 
-  /* Another target talks to Client using the uncompressed context */
+  // Another target talks to Client using the uncompressed context.
+
               <--------  DATAGRAM
                            Quarter Stream ID = 11
                            Context ID = 2
@@ -692,7 +692,7 @@ Appendix A.  Example
                            UDP Port = 4321
                            UDP Payload = Encapsulated UDP Payload
 
-  /* Client responds on the same uncompressed context */
+  // Client responds on the same uncompressed context.
 
    DATAGRAM                       -------->
      Quarter Stream ID = 11
@@ -702,7 +702,7 @@ Appendix A.  Example
      UDP Port = 4321
      UDP Payload = Encapsulated UDP Payload
 
-  /* Register 203.0.113.11:4321 to compress it in the future */
+  // Register 203.0.113.11:4321 to compress it in the future.
 
    CAPSULE                       -------->
      Type = COMPRESSION_ASSIGN
@@ -712,14 +712,14 @@ Appendix A.  Example
      UDP Port = 4321
 
 
-  /* Proxy confirms registration */
+  // Proxy confirms registration.
 
               <-------- CAPSULE
                           Type = COMPRESSION_ACK
                           Context ID = 4
 
-  /* Omit IP and Port for future packets intended for */
-  /* 203.0.113.11:4321 hereon */
+  // Omit IP and Port for future packets intended for
+  // 203.0.113.11:4321 hereon.
 
    DATAGRAM                       -------->
      Context ID = 4
@@ -729,15 +729,15 @@ Appendix A.  Example
                           Context ID = 4
                           UDP Payload = Encapsulated UDP Payload
 
-  /* Request packets without a corresponding compressed Context */
-  /* to be dropped by closing the uncompressed Context */
+  // Request packets without a corresponding compressed Context
+  // to be dropped by closing the uncompressed Context.
 
    CAPSULE                       -------->
      Type = COMPRESSION_CLOSE
      Context ID = 2
 
-  /* Context ID 4 = 203.0.113.11:4321 traffic is accepted, */
-  /* And the rest is dropped at the proxy */
+  // Context ID 4 = 203.0.113.11:4321 traffic is accepted,
+  // and other traffic is dropped at the proxy.
 
 Appendix B.  Comparison with CONNECT-IP
 
