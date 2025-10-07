@@ -142,12 +142,12 @@ template. When the mechanism from this document is in use:
 
 ## The COMPRESSION_ASSIGN capsule {#capsule-assign}
 
-The Compression Assign capsule is used to register the semantics of a
-Context ID. It has the following format:
+The Compression Assign capsule (capsule type 0x11) is used to register the
+semantics of a Context ID. It has the following format:
 
 ~~~
 COMPRESSION_ASSIGN Capsule {
-  Type (i) = 0x1C0FE323,
+  Type (i) = 0x11,
   Length (i),
   Context ID (i),
   IP Version (8),
@@ -223,16 +223,36 @@ via COMPRESSION_ACK, knowing that those HTTP Datagrams can be dropped if
 they arrive before the corresponding COMPRESSION_ASSIGN capsule, or if the
 peer rejects the registration.
 
+## The COMPRESSION_ACK capsule {#capsule-ack}
+
+The Compression Acknowledgment capsule (capsule type 0x12) serves to confirm
+registration of a context ID that was received via a COMPRESSION_ASSIGN
+capsule.
+
+~~~
+COMPRESSION_ACK Capsule {
+  Type (i) = 0x12,
+  Length (i),
+  Context ID (i),
+}
+~~~
+{: #fmt-capsule-ack title="Compression Acknowledgment Capsule Format"}
+
+An endpoint can only send a COMPRESSION_ACK capsule if it received a
+COMPRESSION_ASSIGN capsule with the same Context ID. If an endpoint receives
+COMPRESSION_ACK capsule for a context ID it did not attempt to register via
+COMPRESSION_ASSIGN, that capsule is considered malformed.
+
 ## The COMPRESSION_CLOSE capsule {#capsule-close}
 
-The Compression Close capsule serves two purposes. It can be sent as a
-direct response to a received COMPRESSION_ASSIGN capsule, to indicate that
-the registration was rejected. It can also be sent later to indicate the
-closure of a previously assigned registration.
+The Compression Close capsule (capsule type 0x13) serves two purposes. It
+can be sent as a direct response to a received COMPRESSION_ASSIGN capsule,
+to indicate that the registration was rejected. It can also be sent later to
+indicate the closure of a previously assigned registration.
 
 ~~~
 COMPRESSION_CLOSE Capsule {
-  Type (i) = 0x1C0FE324,
+  Type (i) = 0x13,
   Length (i),
   Context ID (i),
 }
@@ -251,27 +271,6 @@ Another potential use is restricting some targets (see {{restricting-ips}}).
 Once a registration is closed, endpoints can instead use an uncompressed
 Context ID to exchange UDP payloads for the given target, if such a context
 has been registered (see {{uncompressed}}).
-
-## The COMPRESSION_ACK capsule {#capsule-ack}
-
-The Compression ACK capsule serves to confirm registration of a context ID
-that was received via a COMPRESSION_ASSIGN capsule.
-
-~~~
-COMPRESSION_ASSIGN Capsule {
-  Type (i) = 0x1C0FE325,
-  Length (i),
-  Context ID (i),
-}
-~~~
-{: #fmt-capsule-ack title="Compression Ack Capsule Format"}
-
-An endpoint can only send a COMPRESSION_ACK capsule if it received a
-COMPRESSION_ASSIGN capsule and said COMPRESSION_ACK MUST contain the same
-Context ID value as the one it received via COMPRESSION_ASSIGN. If an
-endpoint receives COMPRESSION_ACK capsule for a context ID it did not
-attempt to register via COMPRESSION_ASSIGN, that capsule is considered
-malformed.
 
 # Uncompressed Operation {#uncompressed}
 
@@ -483,8 +482,8 @@ This document will request IANA to register the following new items to the
 | Value |    Capsule Type    |
 |:------|:-------------------|
 |  0x11 | COMPRESSION_ASSIGN |
-|  0x12 | COMPRESSION_CLOSE  |
 |  0x13 | COMPRESSION_ACK    |
+|  0x14 | COMPRESSION_CLOSE  |
 {: #iana-capsules-table title="New Capsules"}
 
 All of these new entries use the following values for these fields:
