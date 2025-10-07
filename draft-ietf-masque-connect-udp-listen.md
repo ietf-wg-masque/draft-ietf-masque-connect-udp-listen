@@ -104,8 +104,8 @@ one of its targets. It adds the connect-udp-bind header as specified in
 {{hdr}} to request bind. If the proxy supports CONNECT-UDP Bind, it returns
 the connect-udp-bind response header value set to true.
 
-When target_host and target_port are set to a valid target, the client is
-requesting CONNECT-UDP Bind but would accept fallback to unextended
+When "target_host" and "target_port" are set to a valid target, the client
+is requesting CONNECT-UDP Bind but would accept fallback to unextended
 CONNECT-UDP to that target. If the client doesn't have a specific target, or
 if it wants CONNECT-UDP bind without fallback, it sets both the
 "target_host" and the "target_port" variables to the '\*' character (ASCII
