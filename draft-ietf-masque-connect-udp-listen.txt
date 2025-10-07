@@ -128,7 +128,7 @@ Table of Contents
 
    This document uses terminology from [CONNECT-UDP] and notational
    conventions from [QUIC].  This document uses the terms Boolean,
-   Integer, String, and List from Section 3 of [STRUCTURED-FIELDS] to
+   Integer, List, and String from Section 3 of [STRUCTURED-FIELDS] to
    specify syntax and parsing.  This document uses Augmented Backus-Naur
    Form and parsing/serialization behaviors from [ABNF].
 
@@ -534,9 +534,6 @@ Table of Contents
       (mailto:masque@ietf.org)
    Notes:  None
 
-   Note that these values will be replaced by lower ones prior to
-   publication.
-
 12.  References
 
 12.1.  Normative References
@@ -754,22 +751,16 @@ Acknowledgments
 
    This proposal is the result of many conversations with MASQUE working
    group participants.  In particular, the authors would like to thank
-   Marius Kleidl, Tommy Pauly, Lucas Pardue, Ben Schwartz, and Magnus
-   Westerlund for their reviews.
+   Marius Kleidl, Tommy Pauly, Lucas Pardue, Ben Schwartz, Marten
+   Seemann, and Magnus Westerlund for their reviews.
 
 Authors' Addresses
 
    David Schinazi
    Google LLC
-   1600 Amphitheatre Parkway
-   Mountain View, CA 94043
-   United States of America
    Email: dschinazi.ietf@gmail.com
 
 
    Abhi Singh
    Google LLC
-   1600 Amphitheatre Parkway
-   Mountain View, CA 94043
-   United States of America
    Email: abhisinghietf@gmail.com
