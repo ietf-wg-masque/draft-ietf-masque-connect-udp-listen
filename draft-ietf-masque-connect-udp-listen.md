@@ -270,7 +270,7 @@ COMPRESSION_ASSIGN Capsule {
 ~~~
 {: #fmt-capsule-ack title="Compression Ack Capsule Format"}
 
-An endpoint can only send a COMPRESSION_ACK capsule, if it received a
+An endpoint can only send a COMPRESSION_ACK capsule if it received a
 COMPRESSION_ASSIGN capsule and said COMPRESSION_ACK MUST contain the same
 Context ID value as the one it received via COMPRESSION_ASSIGN. If an
 endpoint receives COMPRESSION_ACK capsule for a context ID it did not
