@@ -131,10 +131,13 @@ the Context ID to the IP and port.
 
 Context ID 0 was reserved by unextended connect-udp to represent UDP
 payloads sent to and from the "target_host" and "target_port" from the URI
-template. When the mechanism from this document is in use: * if the
-"target_host" and "target_port" variables are set to `\*`, then context ID 0
-MUST NOT be used in HTTP Datagrams. * otherwise, HTTP Datagrams with context
-ID 0 have the same semantics as in unextended connect-udp.
+template. When the mechanism from this document is in use:
+
+* if the "target_host" and "target_port" variables are set to `\*`, then
+  context ID 0 MUST NOT be used in HTTP Datagrams.
+
+* otherwise, HTTP Datagrams with context ID 0 have the same semantics as in
+  unextended connect-udp.
 
 
 ## The COMPRESSION_ASSIGN capsule {#capsule-assign}
