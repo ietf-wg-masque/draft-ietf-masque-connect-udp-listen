@@ -370,7 +370,7 @@ family is RECOMMENDED.
 Note that since the addresses are conveyed in HTTP response headers, a
 subsequent change of addresses on the proxy cannot be conveyed to the client.
 
-If the proxy only shares IP addresses from a single address family, it
+If the proxy only shares IP addresses from a single address family, that
 indicates that the proxy only supports that family. The client SHOULD NOT
 attempt to register compressed contexts or send uncompressed datagrams
 intended for targets whose ip address families were not indicated via the
