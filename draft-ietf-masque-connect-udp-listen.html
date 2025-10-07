@@ -1187,10 +1187,10 @@ UDP Proxying in HTTP that enables such use-cases.<a href="#section-abstract-1" c
                 <p id="section-toc.1-1.3.2.1.1"><a href="#section-3.1" class="auto internal xref">3.1</a>.  <a href="#name-the-compression_assign-caps" class="internal xref">The COMPRESSION_ASSIGN capsule</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.2">
-                <p id="section-toc.1-1.3.2.2.1"><a href="#section-3.2" class="auto internal xref">3.2</a>.  <a href="#name-the-compression_close-capsu" class="internal xref">The COMPRESSION_CLOSE capsule</a></p>
+                <p id="section-toc.1-1.3.2.2.1"><a href="#section-3.2" class="auto internal xref">3.2</a>.  <a href="#name-the-compression_ack-capsule" class="internal xref">The COMPRESSION_ACK capsule</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.3">
-                <p id="section-toc.1-1.3.2.3.1"><a href="#section-3.3" class="auto internal xref">3.3</a>.  <a href="#name-the-compression_ack-capsule" class="internal xref">The COMPRESSION_ACK capsule</a></p>
+                <p id="section-toc.1-1.3.2.3.1"><a href="#section-3.3" class="auto internal xref">3.3</a>.  <a href="#name-the-compression_close-capsu" class="internal xref">The COMPRESSION_CLOSE capsule</a></p>
 </li>
             </ul>
 </li>
@@ -1355,14 +1355,14 @@ unextended connect-udp.<a href="#section-3-4.2.1" class="pilcrow">¶</a></p>
         <h3 id="name-the-compression_assign-caps">
 <a href="#section-3.1" class="section-number selfRef">3.1. </a><a href="#name-the-compression_assign-caps" class="section-name selfRef">The COMPRESSION_ASSIGN capsule</a>
         </h3>
-<p id="section-3.1-1">The Compression Assign capsule is used to register the semantics of a
-Context ID. It has the following format:<a href="#section-3.1-1" class="pilcrow">¶</a></p>
+<p id="section-3.1-1">The Compression Assign capsule (capsule type 0x11) is used to register the
+semantics of a Context ID. It has the following format:<a href="#section-3.1-1" class="pilcrow">¶</a></p>
 <span id="name-compression-assign-capsule-"></span><div id="fmt-capsule-assign">
 <figure id="figure-1">
           <div class="alignLeft art-text artwork" id="section-3.1-2.1">
 <pre>
 COMPRESSION_ASSIGN Capsule {
-  Type (i) = 0x1C0FE323,
+  Type (i) = 0x11,
   Length (i),
   Context ID (i),
   IP Version (8),
@@ -1444,70 +1444,69 @@ they arrive before the corresponding COMPRESSION_ASSIGN capsule, or if the
 peer rejects the registration.<a href="#section-3.1-11" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="capsule-close">
+<div id="capsule-ack">
 <section id="section-3.2">
-        <h3 id="name-the-compression_close-capsu">
-<a href="#section-3.2" class="section-number selfRef">3.2. </a><a href="#name-the-compression_close-capsu" class="section-name selfRef">The COMPRESSION_CLOSE capsule</a>
+        <h3 id="name-the-compression_ack-capsule">
+<a href="#section-3.2" class="section-number selfRef">3.2. </a><a href="#name-the-compression_ack-capsule" class="section-name selfRef">The COMPRESSION_ACK capsule</a>
         </h3>
-<p id="section-3.2-1">The Compression Close capsule serves two purposes. It can be sent as a
-direct response to a received COMPRESSION_ASSIGN capsule, to indicate that
-the registration was rejected. It can also be sent later to indicate the
-closure of a previously assigned registration.<a href="#section-3.2-1" class="pilcrow">¶</a></p>
-<span id="name-compression-close-capsule-f"></span><div id="fmt-capsule-close">
+<p id="section-3.2-1">The Compression Acknowledgment capsule (capsule type 0x12) serves to confirm
+registration of a context ID that was received via a COMPRESSION_ASSIGN
+capsule.<a href="#section-3.2-1" class="pilcrow">¶</a></p>
+<span id="name-compression-acknowledgment-"></span><div id="fmt-capsule-ack">
 <figure id="figure-2">
           <div class="alignLeft art-text artwork" id="section-3.2-2.1">
 <pre>
-COMPRESSION_CLOSE Capsule {
-  Type (i) = 0x1C0FE324,
+COMPRESSION_ACK Capsule {
+  Type (i) = 0x12,
   Length (i),
   Context ID (i),
 }
 </pre>
 </div>
 <figcaption><a href="#figure-2" class="selfRef">Figure 2</a>:
-<a href="#name-compression-close-capsule-f" class="selfRef">Compression Close Capsule Format</a>
+<a href="#name-compression-acknowledgment-" class="selfRef">Compression Acknowledgment Capsule Format</a>
           </figcaption></figure>
 </div>
-<p id="section-3.2-3">Once an endpoint has either sent or received a COMPRESSION_CLOSE for a given
-Context ID, it <span class="bcp14">MUST NOT</span> send any further datagrams with that Context ID.
-Since the value 0 was reserved by unextended connect-udp, the Context ID
-value of COMPRESSION_CLOSE can never be zero.<a href="#section-3.2-3" class="pilcrow">¶</a></p>
-<p id="section-3.2-4">Endpoints <span class="bcp14">MAY</span> close any context regardless of which endpoint registered it.
-This is useful for example, when a mapping is unused for a long time.
-Another potential use is restricting some targets (see <a href="#restricting-ips" class="auto internal xref">Section 8.1</a>).<a href="#section-3.2-4" class="pilcrow">¶</a></p>
-<p id="section-3.2-5">Once a registration is closed, endpoints can instead use an uncompressed
-Context ID to exchange UDP payloads for the given target, if such a context
-has been registered (see <a href="#uncompressed" class="auto internal xref">Section 4</a>).<a href="#section-3.2-5" class="pilcrow">¶</a></p>
+<p id="section-3.2-3">An endpoint can only send a COMPRESSION_ACK capsule if it received a
+COMPRESSION_ASSIGN capsule with the same Context ID. If an endpoint receives
+COMPRESSION_ACK capsule for a context ID it did not attempt to register via
+COMPRESSION_ASSIGN, that capsule is considered malformed.<a href="#section-3.2-3" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="capsule-ack">
+<div id="capsule-close">
 <section id="section-3.3">
-        <h3 id="name-the-compression_ack-capsule">
-<a href="#section-3.3" class="section-number selfRef">3.3. </a><a href="#name-the-compression_ack-capsule" class="section-name selfRef">The COMPRESSION_ACK capsule</a>
+        <h3 id="name-the-compression_close-capsu">
+<a href="#section-3.3" class="section-number selfRef">3.3. </a><a href="#name-the-compression_close-capsu" class="section-name selfRef">The COMPRESSION_CLOSE capsule</a>
         </h3>
-<p id="section-3.3-1">The Compression ACK capsule serves to confirm registration of a context ID
-that was received via a COMPRESSION_ASSIGN capsule.<a href="#section-3.3-1" class="pilcrow">¶</a></p>
-<span id="name-compression-ack-capsule-for"></span><div id="fmt-capsule-ack">
+<p id="section-3.3-1">The Compression Close capsule (capsule type 0x13) serves two purposes. It
+can be sent as a direct response to a received COMPRESSION_ASSIGN capsule,
+to indicate that the registration was rejected. It can also be sent later to
+indicate the closure of a previously assigned registration.<a href="#section-3.3-1" class="pilcrow">¶</a></p>
+<span id="name-compression-close-capsule-f"></span><div id="fmt-capsule-close">
 <figure id="figure-3">
           <div class="alignLeft art-text artwork" id="section-3.3-2.1">
 <pre>
-COMPRESSION_ASSIGN Capsule {
-  Type (i) = 0x1C0FE325,
+COMPRESSION_CLOSE Capsule {
+  Type (i) = 0x13,
   Length (i),
   Context ID (i),
 }
 </pre>
 </div>
 <figcaption><a href="#figure-3" class="selfRef">Figure 3</a>:
-<a href="#name-compression-ack-capsule-for" class="selfRef">Compression Ack Capsule Format</a>
+<a href="#name-compression-close-capsule-f" class="selfRef">Compression Close Capsule Format</a>
           </figcaption></figure>
 </div>
-<p id="section-3.3-3">An endpoint can only send a COMPRESSION_ACK capsule if it received a
-COMPRESSION_ASSIGN capsule and said COMPRESSION_ACK <span class="bcp14">MUST</span> contain the same
-Context ID value as the one it received via COMPRESSION_ASSIGN. If an
-endpoint receives COMPRESSION_ACK capsule for a context ID it did not
-attempt to register via COMPRESSION_ASSIGN, that capsule is considered
-malformed.<a href="#section-3.3-3" class="pilcrow">¶</a></p>
+<p id="section-3.3-3">Once an endpoint has either sent or received a COMPRESSION_CLOSE for a given
+Context ID, it <span class="bcp14">MUST NOT</span> send any further datagrams with that Context ID.
+Since the value 0 was reserved by unextended connect-udp, the Context ID
+value of COMPRESSION_CLOSE can never be zero.<a href="#section-3.3-3" class="pilcrow">¶</a></p>
+<p id="section-3.3-4">Endpoints <span class="bcp14">MAY</span> close any context regardless of which endpoint registered it.
+This is useful for example, when a mapping is unused for a long time.
+Another potential use is restricting some targets (see <a href="#restricting-ips" class="auto internal xref">Section 8.1</a>).<a href="#section-3.3-4" class="pilcrow">¶</a></p>
+<p id="section-3.3-5">Once a registration is closed, endpoints can instead use an uncompressed
+Context ID to exchange UDP payloads for the given target, if such a context
+has been registered (see <a href="#uncompressed" class="auto internal xref">Section 4</a>).<a href="#section-3.3-5" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1818,12 +1817,12 @@ compression, it <span class="bcp14">SHOULD</span> request it as early as possibl
               <td class="text-left" rowspan="1" colspan="1">COMPRESSION_ASSIGN</td>
             </tr>
             <tr>
-              <td class="text-left" rowspan="1" colspan="1">0x12</td>
-              <td class="text-left" rowspan="1" colspan="1">COMPRESSION_CLOSE</td>
-            </tr>
-            <tr>
               <td class="text-left" rowspan="1" colspan="1">0x13</td>
               <td class="text-left" rowspan="1" colspan="1">COMPRESSION_ACK</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">0x14</td>
+              <td class="text-left" rowspan="1" colspan="1">COMPRESSION_CLOSE</td>
             </tr>
           </tbody>
         </table>

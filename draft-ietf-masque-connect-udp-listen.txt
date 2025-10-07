@@ -77,8 +77,8 @@ Table of Contents
    2.  Proxied UDP Binding Mechanism
    3.  Context Identifiers
      3.1.  The COMPRESSION_ASSIGN capsule
-     3.2.  The COMPRESSION_CLOSE capsule
-     3.3.  The COMPRESSION_ACK capsule
+     3.2.  The COMPRESSION_ACK capsule
+     3.3.  The COMPRESSION_CLOSE capsule
    4.  Uncompressed Operation
    5.  Compressed Operation
    6.  The Connect-UDP-Bind Header Field
@@ -184,11 +184,11 @@ Table of Contents
 
 3.1.  The COMPRESSION_ASSIGN capsule
 
-   The Compression Assign capsule is used to register the semantics of a
-   Context ID.  It has the following format:
+   The Compression Assign capsule (capsule type 0x11) is used to
+   register the semantics of a Context ID.  It has the following format:
 
    COMPRESSION_ASSIGN Capsule {
-     Type (i) = 0x1C0FE323,
+     Type (i) = 0x11,
      Length (i),
      Context ID (i),
      IP Version (8),
@@ -261,20 +261,41 @@ Table of Contents
    be dropped if they arrive before the corresponding COMPRESSION_ASSIGN
    capsule, or if the peer rejects the registration.
 
-3.2.  The COMPRESSION_CLOSE capsule
+3.2.  The COMPRESSION_ACK capsule
 
-   The Compression Close capsule serves two purposes.  It can be sent as
-   a direct response to a received COMPRESSION_ASSIGN capsule, to
-   indicate that the registration was rejected.  It can also be sent
-   later to indicate the closure of a previously assigned registration.
+   The Compression Acknowledgment capsule (capsule type 0x12) serves to
+   confirm registration of a context ID that was received via a
+   COMPRESSION_ASSIGN capsule.
 
-   COMPRESSION_CLOSE Capsule {
-     Type (i) = 0x1C0FE324,
+   COMPRESSION_ACK Capsule {
+     Type (i) = 0x12,
      Length (i),
      Context ID (i),
    }
 
-                 Figure 2: Compression Close Capsule Format
+            Figure 2: Compression Acknowledgment Capsule Format
+
+   An endpoint can only send a COMPRESSION_ACK capsule if it received a
+   COMPRESSION_ASSIGN capsule with the same Context ID.  If an endpoint
+   receives COMPRESSION_ACK capsule for a context ID it did not attempt
+   to register via COMPRESSION_ASSIGN, that capsule is considered
+   malformed.
+
+3.3.  The COMPRESSION_CLOSE capsule
+
+   The Compression Close capsule (capsule type 0x13) serves two
+   purposes.  It can be sent as a direct response to a received
+   COMPRESSION_ASSIGN capsule, to indicate that the registration was
+   rejected.  It can also be sent later to indicate the closure of a
+   previously assigned registration.
+
+   COMPRESSION_CLOSE Capsule {
+     Type (i) = 0x13,
+     Length (i),
+     Context ID (i),
+   }
+
+                 Figure 3: Compression Close Capsule Format
 
    Once an endpoint has either sent or received a COMPRESSION_CLOSE for
    a given Context ID, it MUST NOT send any further datagrams with that
@@ -289,26 +310,6 @@ Table of Contents
    Once a registration is closed, endpoints can instead use an
    uncompressed Context ID to exchange UDP payloads for the given
    target, if such a context has been registered (see Section 4).
-
-3.3.  The COMPRESSION_ACK capsule
-
-   The Compression ACK capsule serves to confirm registration of a
-   context ID that was received via a COMPRESSION_ASSIGN capsule.
-
-   COMPRESSION_ASSIGN Capsule {
-     Type (i) = 0x1C0FE325,
-     Length (i),
-     Context ID (i),
-   }
-
-                  Figure 3: Compression Ack Capsule Format
-
-   An endpoint can only send a COMPRESSION_ACK capsule if it received a
-   COMPRESSION_ASSIGN capsule and said COMPRESSION_ACK MUST contain the
-   same Context ID value as the one it received via COMPRESSION_ASSIGN.
-   If an endpoint receives COMPRESSION_ACK capsule for a context ID it
-   did not attempt to register via COMPRESSION_ASSIGN, that capsule is
-   considered malformed.
 
 4.  Uncompressed Operation
 
@@ -520,9 +521,9 @@ Table of Contents
                       +=======+====================+
                       | 0x11  | COMPRESSION_ASSIGN |
                       +-------+--------------------+
-                      | 0x12  | COMPRESSION_CLOSE  |
-                      +-------+--------------------+
                       | 0x13  | COMPRESSION_ACK    |
+                      +-------+--------------------+
+                      | 0x14  | COMPRESSION_CLOSE  |
                       +-------+--------------------+
 
                           Table 2: New Capsules
