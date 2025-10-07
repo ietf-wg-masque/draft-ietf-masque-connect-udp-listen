@@ -108,9 +108,9 @@ When "target_host" and "target_port" are set to a valid target, the client
 is requesting CONNECT-UDP Bind but would accept fallback to unextended
 CONNECT-UDP to that target. If the client doesn't have a specific target, or
 if it wants CONNECT-UDP bind without fallback, it sets both the
-"target_host" and the "target_port" variables to the '\*' character (ASCII
-character 0x2A). Note that the '\*' character MUST be percent-encoded before
-sending, per {{Section 3.2.2 of !TEMPLATE=RFC6570}}.
+"target_host" and the "target_port" variables to the '`*`' character (ASCII
+character 0x2A). Note that the '`*`' character MUST be percent-encoded
+before sending, per {{Section 3.2.2 of !TEMPLATE=RFC6570}}.
 
 
 # Context Identifiers {#contextid}
@@ -133,7 +133,7 @@ Context ID 0 was reserved by unextended connect-udp to represent UDP
 payloads sent to and from the "target_host" and "target_port" from the URI
 template. When the mechanism from this document is in use:
 
-* if the "target_host" and "target_port" variables are set to `\*`, then
+* if the "target_host" and "target_port" variables are set to '`*`', then
   context ID 0 MUST NOT be used in HTTP Datagrams.
 
 * otherwise, HTTP Datagrams with context ID 0 have the same semantics as in
@@ -534,22 +534,21 @@ communication with only 203.0.113.11:4321 and no other UDP target.
                          proxy-public-address = "192.0.2.45:54321",  \
                                             "[2001:db8::1234]:54321"
 
-/* Register Context ID 2 to be used for uncompressed UDP payloads
- to/from any target */
+// Register Context ID 2 to be used for uncompressed UDP payloads
+// to/from any target.
 
  CAPSULE                       -------->
    Type = COMPRESSION_ASSIGN
    Context ID = 2
    IP Version = 0
 
-
-/* Proxy confirms registration */
+// Proxy confirms registration.
 
             <-------- CAPSULE
                         Type = COMPRESSION_ACK
                         Context ID = 2
 
-/* Target talks to Client using the uncompressed context */
+// Target talks to Client using the uncompressed context.
 
             <--------  DATAGRAM
                          Quarter Stream ID = 11
@@ -559,7 +558,7 @@ communication with only 203.0.113.11:4321 and no other UDP target.
                          UDP Port = 1234
                          UDP Payload = Encapsulated UDP Payload
 
-/* Client responds on the same uncompressed context */
+// Client responds on the same uncompressed context.
 
  DATAGRAM                       -------->
    Quarter Stream ID = 11
@@ -569,7 +568,8 @@ communication with only 203.0.113.11:4321 and no other UDP target.
    UDP Port = 1234
    UDP Payload = Encapsulated UDP Payload
 
-/* Another target talks to Client using the uncompressed context */
+// Another target talks to Client using the uncompressed context.
+
             <--------  DATAGRAM
                          Quarter Stream ID = 11
                          Context ID = 2
@@ -578,7 +578,7 @@ communication with only 203.0.113.11:4321 and no other UDP target.
                          UDP Port = 4321
                          UDP Payload = Encapsulated UDP Payload
 
-/* Client responds on the same uncompressed context */
+// Client responds on the same uncompressed context.
 
  DATAGRAM                       -------->
    Quarter Stream ID = 11
@@ -588,7 +588,7 @@ communication with only 203.0.113.11:4321 and no other UDP target.
    UDP Port = 4321
    UDP Payload = Encapsulated UDP Payload
 
-/* Register 203.0.113.11:4321 to compress it in the future */
+// Register 203.0.113.11:4321 to compress it in the future.
 
  CAPSULE                       -------->
    Type = COMPRESSION_ASSIGN
@@ -598,14 +598,14 @@ communication with only 203.0.113.11:4321 and no other UDP target.
    UDP Port = 4321
 
 
-/* Proxy confirms registration */
+// Proxy confirms registration.
 
             <-------- CAPSULE
                         Type = COMPRESSION_ACK
                         Context ID = 4
 
-/* Omit IP and Port for future packets intended for */
-/* 203.0.113.11:4321 hereon */
+// Omit IP and Port for future packets intended for
+// 203.0.113.11:4321 hereon.
 
  DATAGRAM                       -------->
    Context ID = 4
@@ -615,15 +615,15 @@ communication with only 203.0.113.11:4321 and no other UDP target.
                         Context ID = 4
                         UDP Payload = Encapsulated UDP Payload
 
-/* Request packets without a corresponding compressed Context */
-/* to be dropped by closing the uncompressed Context */
+// Request packets without a corresponding compressed Context
+// to be dropped by closing the uncompressed Context.
 
  CAPSULE                       -------->
    Type = COMPRESSION_CLOSE
    Context ID = 2
 
-/* Context ID 4 = 203.0.113.11:4321 traffic is accepted, */
-/* And the rest is dropped at the proxy */
+// Context ID 4 = 203.0.113.11:4321 traffic is accepted,
+// and other traffic is dropped at the proxy.
 ~~~
 
 # Comparison with CONNECT-IP
