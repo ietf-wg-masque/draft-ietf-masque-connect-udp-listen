@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-10-05T00:59:17.412942+00:00",
+  "timestamp": "2025-10-07T00:54:22.682517+00:00",
   "repo": "ietf-wg-masque/draft-ietf-masque-connect-udp-listen",
   "labels": [
     {
@@ -4401,13 +4401,13 @@
       "labels": [],
       "body": "",
       "createdAt": "2025-10-03T20:12:17Z",
-      "updatedAt": "2025-10-03T20:51:56Z",
+      "updatedAt": "2025-10-06T18:59:19Z",
       "baseRepository": "ietf-wg-masque/draft-ietf-masque-connect-udp-listen",
       "baseRefName": "main",
       "baseRefOid": "0b86f1b44ebbacc4cdc1def33f8f6fa864b943fd",
       "headRepository": "ietf-wg-masque/draft-ietf-masque-connect-udp-listen",
       "headRefName": "42-recommend-checking-the-proxy-public-address",
-      "headRefOid": "f7790867df08f2e0682d1b69206942f5db0ae02e",
+      "headRefOid": "c31bd1eea5df9664d00b5e7cabc2268a7d51cebc",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
@@ -4431,6 +4431,210 @@
               "body": "MAY doesn't feel right here, since it's more a matter of fact that proxies can't forward for address families they don't support. Maybe something like \"If the proxy only shares IP addresses from a single address family, that indicates that it does not support other address families. Clients SHOULD NOT send UDP payloads intended for address families that it knows the proxy doesn't support, as the proxy will drop them.\"",
               "createdAt": "2025-10-03T20:51:56Z",
               "updatedAt": "2025-10-03T20:51:56Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHnqa9M7FCtrh",
+          "commit": {
+            "abbreviatedOid": "f779086"
+          },
+          "author": "asingh-g",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-10-06T16:23:44Z",
+          "updatedAt": "2025-10-06T16:23:44Z",
+          "comments": [
+            {
+              "originalPosition": 7,
+              "body": "I think that's right. Fixed",
+              "createdAt": "2025-10-06T16:23:44Z",
+              "updatedAt": "2025-10-06T16:23:44Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHnqa9M7FF8Eg",
+          "commit": {
+            "abbreviatedOid": "c31bd1e"
+          },
+          "author": "DavidSchinazi",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-10-06T18:58:46Z",
+          "updatedAt": "2025-10-06T18:59:19Z",
+          "comments": [
+            {
+              "originalPosition": 7,
+              "body": "```suggestion\nintended for targets whose IP address families were not indicated via the\n```",
+              "createdAt": "2025-10-06T18:58:46Z",
+              "updatedAt": "2025-10-06T18:59:19Z"
+            },
+            {
+              "originalPosition": 4,
+              "body": "```suggestion\nIf the proxy only shares IP addresses from a single address family, that\n```",
+              "createdAt": "2025-10-06T18:58:58Z",
+              "updatedAt": "2025-10-06T18:59:19Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 44,
+      "id": "PR_kwDOHnqa9M6sTJDa",
+      "title": "Update definition of Proxy Public address to be list of quoted strings",
+      "url": "https://github.com/ietf-wg-masque/draft-ietf-masque-connect-udp-listen/pull/44",
+      "state": "OPEN",
+      "author": "asingh-g",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-10-06T15:15:37Z",
+      "updatedAt": "2025-10-06T19:03:52Z",
+      "baseRepository": "ietf-wg-masque/draft-ietf-masque-connect-udp-listen",
+      "baseRefName": "main",
+      "baseRefOid": "0b86f1b44ebbacc4cdc1def33f8f6fa864b943fd",
+      "headRepository": "ietf-wg-masque/draft-ietf-masque-connect-udp-listen",
+      "headRefName": "41-unclear-definition-of-proxy-public-address",
+      "headRefOid": "ee87e064bd1870b9c1ef57e8ecc866bcb70955f2",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOHnqa9M7FF-xs",
+          "commit": {
+            "abbreviatedOid": "ee87e06"
+          },
+          "author": "DavidSchinazi",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-10-06T19:00:49Z",
+          "updatedAt": "2025-10-06T19:03:52Z",
+          "comments": [
+            {
+              "originalPosition": 7,
+              "body": "8941 has been replaced by 9651",
+              "createdAt": "2025-10-06T19:00:50Z",
+              "updatedAt": "2025-10-06T19:03:52Z"
+            },
+            {
+              "originalPosition": 9,
+              "body": "Where did this reference come from? Why not use String from Section 3.3.3 of RFC 9651?",
+              "createdAt": "2025-10-06T19:01:25Z",
+              "updatedAt": "2025-10-06T19:03:52Z"
+            },
+            {
+              "originalPosition": 15,
+              "body": "```suggestion\nip-port-tuple = DQUOTE ( IP-literal / IPv4address ) \":\" port DQUOTE\n```",
+              "createdAt": "2025-10-06T19:02:47Z",
+              "updatedAt": "2025-10-06T19:03:52Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 45,
+      "id": "PR_kwDOHnqa9M6sTtlf",
+      "title": "Add a new COMPRESSION_ACK capsule instead of echoing COMPRESSION_ASSIGN for acknowledgement",
+      "url": "https://github.com/ietf-wg-masque/draft-ietf-masque-connect-udp-listen/pull/45",
+      "state": "OPEN",
+      "author": "asingh-g",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-10-06T15:55:56Z",
+      "updatedAt": "2025-10-06T22:06:33Z",
+      "baseRepository": "ietf-wg-masque/draft-ietf-masque-connect-udp-listen",
+      "baseRefName": "main",
+      "baseRefOid": "0b86f1b44ebbacc4cdc1def33f8f6fa864b943fd",
+      "headRepository": "ietf-wg-masque/draft-ietf-masque-connect-udp-listen",
+      "headRefName": "40-echoing-compression_assign-is-wasteful-and-error-prone",
+      "headRefOid": "6e7e966f524893d48ae2271fd82a7982d9eff628",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOHnqa9M7FGEau",
+          "commit": {
+            "abbreviatedOid": "6e7e966"
+          },
+          "author": "DavidSchinazi",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-10-06T19:05:17Z",
+          "updatedAt": "2025-10-06T19:07:43Z",
+          "comments": [
+            {
+              "originalPosition": 22,
+              "body": "What was the intent of this change?\n\n```suggestion\narrive before the corresponding COMPRESSION_ASSIGN\n```",
+              "createdAt": "2025-10-06T19:05:18Z",
+              "updatedAt": "2025-10-06T19:07:43Z"
+            },
+            {
+              "originalPosition": 66,
+              "body": "We need to pick new values for COMPRESSION_ASSIGN and COMPRESSION_CLOSE because we changed the semantics of COMPRESSION_ASSIGN. But while we're at it, I would say let's switch to one-byte values - I think this is the last compatibility-breaking change. You have any number you like in particular?",
+              "createdAt": "2025-10-06T19:07:10Z",
+              "updatedAt": "2025-10-06T19:07:43Z"
+            },
+            {
+              "originalPosition": 90,
+              "body": "We need to drop the IP Version and IP Address from this example",
+              "createdAt": "2025-10-06T19:07:38Z",
+              "updatedAt": "2025-10-06T19:07:43Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHnqa9M7FJRqZ",
+          "commit": {
+            "abbreviatedOid": "6e7e966"
+          },
+          "author": "asingh-g",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-10-06T21:40:23Z",
+          "updatedAt": "2025-10-06T21:40:23Z",
+          "comments": [
+            {
+              "originalPosition": 22,
+              "body": "I meant \"arrived or are processed\". Its a nit but I suppose arrive by itself implies the same thing",
+              "createdAt": "2025-10-06T21:40:23Z",
+              "updatedAt": "2025-10-06T21:40:23Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHnqa9M7FJuAG",
+          "commit": {
+            "abbreviatedOid": "6e7e966"
+          },
+          "author": "DavidSchinazi",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-10-06T22:06:33Z",
+          "updatedAt": "2025-10-06T22:06:33Z",
+          "comments": [
+            {
+              "originalPosition": 22,
+              "body": "Yeah I don't think it changes the message",
+              "createdAt": "2025-10-06T22:06:33Z",
+              "updatedAt": "2025-10-06T22:06:34Z"
             }
           ]
         }
