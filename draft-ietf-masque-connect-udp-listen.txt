@@ -5,7 +5,7 @@
 MASQUE                                                       D. Schinazi
 Internet-Draft                                                  A. Singh
 Intended status: Standards Track                              Google LLC
-Expires: 20 March 2026                                 16 September 2025
+Expires: 10 April 2026                                    7 October 2025
 
 
                        Proxying Bound UDP in HTTP
@@ -54,7 +54,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 20 March 2026.
+   This Internet-Draft will expire on 10 April 2026.
 
 Copyright Notice
 
@@ -78,6 +78,7 @@ Table of Contents
    3.  Context Identifiers
      3.1.  The COMPRESSION_ASSIGN capsule
      3.2.  The COMPRESSION_CLOSE capsule
+     3.3.  The COMPRESSION_ACK capsule
    4.  Uncompressed Operation
    5.  Compressed Operation
    6.  The Connect-UDP-Bind Header Field
@@ -135,7 +136,7 @@ Table of Contents
 
    In unextended UDP Proxying requests, the target host is encoded in
    the HTTP request path or query.  For Bound UDP Proxying, the target
-   is either conveyed in each HTTP Datagram (see Figure 3), or
+   is either conveyed in each HTTP Datagram (see Figure 4), or
    registered via capsules and then compressed (see Figure 1).
 
    When performing URI Template Expansion of the UDP Proxying template
@@ -216,9 +217,10 @@ Table of Contents
 
    *  if it accepts the registration, first the receiver MUST save the
       mapping from Context ID to address and port (or save the fact that
-      this context ID is uncompressed).  Second, the receiver MUST echo
-      an identical COMPRESSION_ASSIGN capsule back to its peer, to
-      indicate it has accepted the registration.
+      this context ID is uncompressed).  Second, the receiver MUST
+      return a COMPRESSION_ACK capsule with the Context ID set to the
+      one from the received COMPRESSION_ASSIGN capsule back to its peer,
+      indicating it has accepted the registration.
 
    *  if it rejects the registration, the receiver MUST respond by
       sending a COMPRESSION_CLOSE capsule with the Context ID set to the
@@ -253,9 +255,9 @@ Table of Contents
    capsule as malformed.
 
    Endpoints MAY pre-emptively use Context IDs not yet acknowledged by
-   the peer, knowing that those HTTP Datagrams can be dropped if they
-   arrive before the corresponding COMPRESSION_ASSIGN capsule, or if the
-   peer rejects the registration.
+   the peer via COMPRESSION_ACK, knowing that those HTTP Datagrams can
+   be dropped if they arrive before the corresponding COMPRESSION_ASSIGN
+   capsule, or if the peer rejects the registration.
 
 3.2.  The COMPRESSION_CLOSE capsule
 
@@ -286,6 +288,26 @@ Table of Contents
    uncompressed Context ID to exchange UDP payloads for the given
    target, if such a context has been registered (see Section 4).
 
+3.3.  The COMPRESSION_ACK capsule
+
+   The Compression ACK capsule serves to confirm registration of a
+   context ID that was received via a COMPRESSION_ASSIGN capsule.
+
+   COMPRESSION_ASSIGN Capsule {
+     Type (i) = 0x1C0FE325,
+     Length (i),
+     Context ID (i),
+   }
+
+                  Figure 3: Compression Ack Capsule Format
+
+   An endpoint can only send a COMPRESSION_ACK capsule if it received a
+   COMPRESSION_ASSIGN capsule and said COMPRESSION_ACK MUST contain the
+   same Context ID value as the one it received via COMPRESSION_ASSIGN.
+   If an endpoint receives COMPRESSION_ACK capsule for a context ID it
+   did not attempt to register via COMPRESSION_ASSIGN, that capsule is
+   considered malformed.
+
 4.  Uncompressed Operation
 
    If the client wishes to send or receive uncompressed datagrams, it
@@ -301,7 +323,7 @@ Table of Contents
      UDP Payload (..),
    }
 
-       Figure 3: Uncompressed Bound UDP Proxying HTTP Datagram Format
+       Figure 4: Uncompressed Bound UDP Proxying HTTP Datagram Format
 
    It contains the following fields:
 
@@ -349,7 +371,7 @@ Table of Contents
      UDP Payload (..),
    }
 
-        Figure 4: Compressed Bound UDP Proxying HTTP Datagram Format
+        Figure 5: Compressed Bound UDP Proxying HTTP Datagram Format
 
    It contains the following field:
 
@@ -385,7 +407,7 @@ Table of Contents
 
    ip-port-tuple = ( IP-literal / IPv4address ) ":" port
 
-                       Figure 5: Proxy Address Format
+                       Figure 6: Proxy Address Format
 
    When a single IP-Port tuple is provided in the Proxy-Public-Address
    field, the proxy MUST use the same public IP and Port for the
@@ -438,7 +460,7 @@ Table of Contents
    uncompressed context is open, the UDP proxy needs to perform checks
    on the target of each uncompressed context datagram it receives.
 
-   Note that if the compression response (COMPRESSION_ASSIGN OR
+   Note that if the compression response (COMPRESSION_ACK OR
    COMPRESSION_CLOSE) cannot be immediately sent due to flow or
    congestion control, an upper limit on how many compression responses
    the endpoint is willing to buffer MUST be set to prevent memory
@@ -483,15 +505,17 @@ Table of Contents
    to the "HTTP Capsule Types" registry maintained at
    <https://www.iana.org/assignments/masque>:
 
-                    +============+====================+
-                    | Value      | Capsule Type       |
-                    +============+====================+
-                    | 0x1C0FE323 | COMPRESSION_ASSIGN |
-                    +------------+--------------------+
-                    | 0x1C0FE324 | COMPRESSION_CLOSE  |
-                    +------------+--------------------+
+                      +=======+====================+
+                      | Value | Capsule Type       |
+                      +=======+====================+
+                      | 0x11  | COMPRESSION_ASSIGN |
+                      +-------+--------------------+
+                      | 0x12  | COMPRESSION_CLOSE  |
+                      +-------+--------------------+
+                      | 0x13  | COMPRESSION_ACK    |
+                      +-------+--------------------+
 
-                           Table 2: New Capsules
+                          Table 2: New Capsules
 
    All of these new entries use the following values for these fields:
 
@@ -629,9 +653,8 @@ Appendix A.  Example
    /* Proxy confirms registration */
 
                <-------- CAPSULE
-                           Type = COMPRESSION_ASSIGN
+                           Type = COMPRESSION_ACK
                            Context ID = 2
-                           IP Version = 0
 
    /* Target talks to Client using the uncompressed context */
 
@@ -685,11 +708,8 @@ Appendix A.  Example
    /* Proxy confirms registration */
 
                <-------- CAPSULE
-                           Type = COMPRESSION_ASSIGN
+                           Type = COMPRESSION_ACK
                            Context ID = 4
-                           IP Version = 4
-                           IP Address = 203.0.113.11
-                           UDP Port = 4321
 
    /* Omit IP and Port for future packets intended for */
    /* 203.0.113.11:4321 hereon */
