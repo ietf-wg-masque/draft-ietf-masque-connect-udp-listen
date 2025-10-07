@@ -379,11 +379,9 @@ Table of Contents
    send packets received on these IP-port tuples to the client.  The
    proxy MUST communicate the selected addresses and ports to the client
    using the "Proxy-Public-Address" header field.  The header field is a
-   List as defined in Section 3.1 of [STRUCTURED-FIELDS].  Each member
-   of the List is a Quoted String Section 3.2.4 of
-   [INTERNET-MESSAGE-FORMAT] comprised of the ip-port tuple . The format
-   of the Quoted String is defined using IP-literal, IPv4address, and
-   port from Section 3.2 of [URI].
+   List.  Each member of the List is a String, comprised of the ip-port
+   tuple.  The format of the String is defined using IP-literal,
+   IPv4address, and port from Section 3.2 of [URI].
 
    ip-port-tuple = DQUOTE ( IP-literal / IPv4address ) ":" port DQUOTE
 
@@ -531,11 +529,6 @@ Table of Contents
               Capsule Protocol", RFC 9297, DOI 10.17487/RFC9297, August
               2022, <https://www.rfc-editor.org/rfc/rfc9297>.
 
-   [INTERNET-MESSAGE-FORMAT]
-              Resnick, P., Ed., "Internet Message Format", RFC 5322,
-              DOI 10.17487/RFC5322, October 2008,
-              <https://www.rfc-editor.org/rfc/rfc5322>.
-
    [QUIC]     Iyengar, J., Ed. and M. Thomson, Ed., "QUIC: A UDP-Based
               Multiplexed and Secure Transport", RFC 9000,
               DOI 10.17487/RFC9000, May 2021,
@@ -552,8 +545,8 @@ Table of Contents
 
    [STRUCTURED-FIELDS]
               Nottingham, M. and P. Kamp, "Structured Field Values for
-              HTTP", RFC 8941, DOI 10.17487/RFC8941, February 2021,
-              <https://www.rfc-editor.org/rfc/rfc8941>.
+              HTTP", RFC 9651, DOI 10.17487/RFC9651, September 2024,
+              <https://www.rfc-editor.org/rfc/rfc9651>.
 
    [TEMPLATE] Gregorio, J., Fielding, R., Hadley, M., Nottingham, M.,
               and D. Orchard, "URI Template", RFC 6570,
