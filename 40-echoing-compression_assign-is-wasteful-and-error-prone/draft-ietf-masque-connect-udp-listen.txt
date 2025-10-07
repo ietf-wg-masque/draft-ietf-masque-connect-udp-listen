@@ -5,7 +5,7 @@
 MASQUE                                                       D. Schinazi
 Internet-Draft                                                  A. Singh
 Intended status: Standards Track                              Google LLC
-Expires: 9 April 2026                                     6 October 2025
+Expires: 10 April 2026                                    7 October 2025
 
 
                        Proxying Bound UDP in HTTP
@@ -54,7 +54,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 9 April 2026.
+   This Internet-Draft will expire on 10 April 2026.
 
 Copyright Notice
 
@@ -256,9 +256,8 @@ Table of Contents
 
    Endpoints MAY pre-emptively use Context IDs not yet acknowledged by
    the peer via COMPRESSION_ACK, knowing that those HTTP Datagrams can
-   be dropped if they are arrive or are processed before the
-   corresponding COMPRESSION_ASSIGN capsule, or if the peer rejects the
-   registration.
+   be dropped if they arrive before the corresponding COMPRESSION_ASSIGN
+   capsule, or if the peer rejects the registration.
 
 3.2.  The COMPRESSION_CLOSE capsule
 
