@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-10-07T00:54:22.682517+00:00",
+  "timestamp": "2025-10-09T00:54:59.112141+00:00",
   "repo": "ietf-wg-masque/draft-ietf-masque-connect-udp-listen",
   "labels": [
     {
@@ -598,7 +598,7 @@
       "id": "I_kwDOHnqa9M7Bm7Ao",
       "title": "echoing COMPRESSION_ASSIGN is wasteful and error-prone",
       "url": "https://github.com/ietf-wg-masque/draft-ietf-masque-connect-udp-listen/issues/40",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "marten-seemann",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [
@@ -607,8 +607,8 @@
       "labels": [],
       "body": "The receiver echoes the capsule to signal that a compression context for a certain context ID was established. It would be nice if we didn't have to check that the context ID matches the IP address and version sent in the original capsule.",
       "createdAt": "2025-07-21T11:09:58Z",
-      "updatedAt": "2025-07-23T07:41:59Z",
-      "closedAt": null,
+      "updatedAt": "2025-10-07T20:41:32Z",
+      "closedAt": "2025-10-07T20:41:32Z",
       "comments": [
         {
           "author": "DavidSchinazi",
@@ -631,7 +631,7 @@
       "id": "I_kwDOHnqa9M7B3maa",
       "title": "Unclear definition of Proxy-Public-Address",
       "url": "https://github.com/ietf-wg-masque/draft-ietf-masque-connect-udp-listen/issues/41",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "Acconut",
       "authorAssociation": "NONE",
       "assignees": [
@@ -640,8 +640,8 @@
       "labels": [],
       "body": "The current draft says the following regrading the definition of the Proxy-Public-Address header field:\n\n> The header field is defined as a List of ip-port-tuples. The format of the tuple is defined using IP-literal, IPv4address, and port from [Section 3.2](https://rfc-editor.org/rfc/rfc3986#section-3.2) of [[URI](https://www.ietf.org/archive/id/draft-ietf-masque-connect-udp-listen-07.html#URI)].\n> \n> ip-port-tuple = ( IP-literal / IPv4address ) \":\" port\n\nIt defines the header as a structured field list, but not what types the list items are (tokens or strings). They could be tokens, but RFC 9651 discourages that in favor of strings:\n\n> Note that Tokens are defined largely for compatibility with the data model of existing HTTP fields and may require additional steps to use in some implementations. As a result, new fields are encouraged to use Strings.\n\nIn general, the definition should include all the information required by https://www.rfc-editor.org/rfc/rfc9651.html#name-defining-new-structured-fie",
       "createdAt": "2025-07-22T12:53:31Z",
-      "updatedAt": "2025-07-23T07:41:47Z",
-      "closedAt": null,
+      "updatedAt": "2025-10-07T20:50:07Z",
+      "closedAt": "2025-10-07T20:50:07Z",
       "comments": [
         {
           "author": "DavidSchinazi",
@@ -657,7 +657,7 @@
       "id": "I_kwDOHnqa9M7B3uxp",
       "title": "Recommend checking the Proxy-Public-Address",
       "url": "https://github.com/ietf-wg-masque/draft-ietf-masque-connect-udp-listen/issues/42",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "Acconut",
       "authorAssociation": "NONE",
       "assignees": [
@@ -666,8 +666,8 @@
       "labels": [],
       "body": "When the proxy binds to an IPv4 address and the MASQUE client attempts to send datagrams with IPv6 addresses (or vice versa), the datagrams will be lost without further notice. To anticipate and prevent this, the MASQUE client could check the Proxy-Public-Address in the response to see whether the addresses are compatible with the datagrams it wants to send.\n\nWould it make sense adding this as a consideration/recommendation?",
       "createdAt": "2025-07-22T13:03:49Z",
-      "updatedAt": "2025-07-23T07:49:03Z",
-      "closedAt": null,
+      "updatedAt": "2025-10-07T20:42:12Z",
+      "closedAt": "2025-10-07T20:42:12Z",
       "comments": [
         {
           "author": "DavidSchinazi",
@@ -4394,24 +4394,26 @@
       "id": "PR_kwDOHnqa9M6sBmPh",
       "title": "Add recommendation for checking proxy public address",
       "url": "https://github.com/ietf-wg-masque/draft-ietf-masque-connect-udp-listen/pull/43",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "asingh-g",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2025-10-03T20:12:17Z",
-      "updatedAt": "2025-10-06T18:59:19Z",
+      "updatedAt": "2025-10-07T20:42:11Z",
       "baseRepository": "ietf-wg-masque/draft-ietf-masque-connect-udp-listen",
       "baseRefName": "main",
       "baseRefOid": "0b86f1b44ebbacc4cdc1def33f8f6fa864b943fd",
       "headRepository": "ietf-wg-masque/draft-ietf-masque-connect-udp-listen",
       "headRefName": "42-recommend-checking-the-proxy-public-address",
-      "headRefOid": "c31bd1eea5df9664d00b5e7cabc2268a7d51cebc",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "03eb280f149b096b9b6d85b9a225a69983f634c1",
+      "closedAt": "2025-10-07T20:42:11Z",
+      "mergedAt": "2025-10-07T20:42:11Z",
+      "mergedBy": "DavidSchinazi",
+      "mergeCommit": {
+        "oid": "43713ba75e5223fd440cc4be76c7237f0ef7ebff"
+      },
       "comments": [],
       "reviews": [
         {
@@ -4487,24 +4489,26 @@
       "id": "PR_kwDOHnqa9M6sTJDa",
       "title": "Update definition of Proxy Public address to be list of quoted strings",
       "url": "https://github.com/ietf-wg-masque/draft-ietf-masque-connect-udp-listen/pull/44",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "asingh-g",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2025-10-06T15:15:37Z",
-      "updatedAt": "2025-10-06T19:03:52Z",
+      "updatedAt": "2025-10-07T20:50:06Z",
       "baseRepository": "ietf-wg-masque/draft-ietf-masque-connect-udp-listen",
       "baseRefName": "main",
       "baseRefOid": "0b86f1b44ebbacc4cdc1def33f8f6fa864b943fd",
       "headRepository": "ietf-wg-masque/draft-ietf-masque-connect-udp-listen",
       "headRefName": "41-unclear-definition-of-proxy-public-address",
-      "headRefOid": "ee87e064bd1870b9c1ef57e8ecc866bcb70955f2",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "0288821128fbe043b40b5434467e6a5ce9cba41c",
+      "closedAt": "2025-10-07T20:50:06Z",
+      "mergedAt": "2025-10-07T20:50:06Z",
+      "mergedBy": "DavidSchinazi",
+      "mergeCommit": {
+        "oid": "bd737e418b0fd2edf580408e3d33f5eca1383d8a"
+      },
       "comments": [],
       "reviews": [
         {
@@ -4538,6 +4542,86 @@
               "updatedAt": "2025-10-06T19:03:52Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOHnqa9M7FX8f7",
+          "commit": {
+            "abbreviatedOid": "ee87e06"
+          },
+          "author": "asingh-g",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-10-07T18:24:58Z",
+          "updatedAt": "2025-10-07T18:24:59Z",
+          "comments": [
+            {
+              "originalPosition": 9,
+              "body": "I don't remember, I might have gone too far back reading older RFCs. I'll reference RFC9651 for both",
+              "createdAt": "2025-10-07T18:24:58Z",
+              "updatedAt": "2025-10-07T18:28:52Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHnqa9M7FYBpQ",
+          "commit": {
+            "abbreviatedOid": "ee87e06"
+          },
+          "author": "asingh-g",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-10-07T18:31:50Z",
+          "updatedAt": "2025-10-07T18:31:50Z",
+          "comments": [
+            {
+              "originalPosition": 9,
+              "body": "Actually, since we mention that we use Boolean, Integer, and List from Structured fields before, I think it makes sense to just remove those references here",
+              "createdAt": "2025-10-07T18:31:50Z",
+              "updatedAt": "2025-10-07T18:31:51Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHnqa9M7FZuZh",
+          "commit": {
+            "abbreviatedOid": "7c3c56c"
+          },
+          "author": "DavidSchinazi",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-10-07T20:43:13Z",
+          "updatedAt": "2025-10-07T20:43:30Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "Add String",
+              "createdAt": "2025-10-07T20:43:13Z",
+              "updatedAt": "2025-10-07T20:43:31Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHnqa9M7FZ269",
+          "commit": {
+            "abbreviatedOid": "7c3c56c"
+          },
+          "author": "DavidSchinazi",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-10-07T20:49:28Z",
+          "updatedAt": "2025-10-07T20:49:29Z",
+          "comments": [
+            {
+              "originalPosition": 3,
+              "body": "```suggestion\nfrom {{!QUIC=RFC9000}}. This document uses the terms Boolean, Integer, String, and List\n```",
+              "createdAt": "2025-10-07T20:49:28Z",
+              "updatedAt": "2025-10-07T20:49:28Z"
+            }
+          ]
         }
       ]
     },
@@ -4546,24 +4630,26 @@
       "id": "PR_kwDOHnqa9M6sTtlf",
       "title": "Add a new COMPRESSION_ACK capsule instead of echoing COMPRESSION_ASSIGN for acknowledgement",
       "url": "https://github.com/ietf-wg-masque/draft-ietf-masque-connect-udp-listen/pull/45",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "asingh-g",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2025-10-06T15:55:56Z",
-      "updatedAt": "2025-10-06T22:06:33Z",
+      "updatedAt": "2025-10-07T20:41:31Z",
       "baseRepository": "ietf-wg-masque/draft-ietf-masque-connect-udp-listen",
       "baseRefName": "main",
       "baseRefOid": "0b86f1b44ebbacc4cdc1def33f8f6fa864b943fd",
       "headRepository": "ietf-wg-masque/draft-ietf-masque-connect-udp-listen",
       "headRefName": "40-echoing-compression_assign-is-wasteful-and-error-prone",
-      "headRefOid": "6e7e966f524893d48ae2271fd82a7982d9eff628",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "a0abd5191d5ca2d0726a9b00b1f09304f32b130b",
+      "closedAt": "2025-10-07T20:41:31Z",
+      "mergedAt": "2025-10-07T20:41:31Z",
+      "mergedBy": "DavidSchinazi",
+      "mergeCommit": {
+        "oid": "787a9db06a7a8b97300bf635ca58703754b66a04"
+      },
       "comments": [],
       "reviews": [
         {
@@ -4635,6 +4721,46 @@
               "body": "Yeah I don't think it changes the message",
               "createdAt": "2025-10-06T22:06:33Z",
               "updatedAt": "2025-10-06T22:06:34Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHnqa9M7FXu43",
+          "commit": {
+            "abbreviatedOid": "6e7e966"
+          },
+          "author": "asingh-g",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-10-07T18:08:25Z",
+          "updatedAt": "2025-10-07T18:08:25Z",
+          "comments": [
+            {
+              "originalPosition": 66,
+              "body": "Thoughts on 0x11 to 0x13?",
+              "createdAt": "2025-10-07T18:08:25Z",
+              "updatedAt": "2025-10-07T18:08:26Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHnqa9M7FZrww",
+          "commit": {
+            "abbreviatedOid": "4ff6669"
+          },
+          "author": "DavidSchinazi",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-10-07T20:40:50Z",
+          "updatedAt": "2025-10-07T20:41:13Z",
+          "comments": [
+            {
+              "originalPosition": 45,
+              "body": "```suggestion\nAn endpoint can only send a COMPRESSION_ACK capsule if it received a\n```",
+              "createdAt": "2025-10-07T20:40:50Z",
+              "updatedAt": "2025-10-07T20:41:13Z"
             }
           ]
         }
