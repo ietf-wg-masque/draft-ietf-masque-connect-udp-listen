@@ -52,11 +52,11 @@ informative:
 
 --- abstract
 
-The mechanism to proxy UDP in HTTP only allows each UDP Proxying request to
+The mechanism to proxy UDP in HTTP only allows each UDP proxying request to
 transmit to a specific host and port. This is well suited for UDP
 client-server protocols such as HTTP/3, but is not sufficient for some UDP
 peer-to-peer protocols like WebRTC. This document proposes an extension to
-UDP Proxying in HTTP that enables such use-cases.
+UDP proxying in HTTP that enables such use-cases.
 
 --- middle
 
@@ -69,16 +69,16 @@ port. Combined with the HTTP CONNECT method (see {{Section 9.3.6 of
 traffic. However WebRTC {{WebRTC}} relies on ICE {{?ICE=RFC8445}} to provide
 connectivity between two Web browsers, and ICE relies on the ability to send
 and receive UDP packets to multiple hosts. While in theory it might be
-possible to accomplish this using multiple UDP Proxying HTTP requests, HTTP
+possible to accomplish this using multiple UDP proxying HTTP requests, HTTP
 semantics {{HTTP}} do not guarantee that distinct requests will be handled
 by the same server. This can lead to the UDP packets being sent from
 distinct IP addresses, thereby preventing ICE from operating correctly.
-Consequently, UDP Proxying requests cannot enable WebRTC connectivity
+Consequently, UDP proxying requests cannot enable WebRTC connectivity
 between peers.
 
 This document describes an extension to UDP Proxying in HTTP that allows
 sending and receiving UDP payloads to multiple hosts within the scope of a
-single UDP Proxying HTTP request.
+single UDP proxying HTTP request.
 
 ## Conventions and Definitions
 
@@ -90,19 +90,19 @@ Integer, List, and String from {{Section 3 of !STRUCTURED-FIELDS=RFC9651}}
 to specify syntax and parsing. This document uses Augmented Backus-Naur Form
 and parsing/serialization behaviors from {{!ABNF=RFC5234}}.
 
-# Proxied UDP Binding Mechanism {#mechanism}
+# Bound UDP Proxying Mechanism {#mechanism}
 
-In unextended UDP Proxying requests, the target host is encoded in the HTTP
-request path or query. For Bound UDP Proxying, the target is either conveyed
+In unextended UDP proxying requests, the target host is encoded in the HTTP
+request path or query. For bound UDP proxying, the target is either conveyed
 in each HTTP Datagram (see {{fmt-dgram-uncomp}}), or registered via capsules
 and then compressed (see {{fmt-capsule-assign}}).
 
-When performing URI Template Expansion of the UDP Proxying template (see
+When performing URI Template Expansion of the UDP proxying template (see
 {{Section 3 of CONNECT-UDP}}), the client follows the same template as
-unextended UDP Proxying and sets the "target_host" and the "target_port"
-variables to one of its targets. It adds the connect-udp-bind header as
+unextended UDP proxying and sets the "target_host" and the "target_port"
+variables to one of its targets. It adds the Connect-UDP-Bind header as
 specified in {{hdr}} to request bind. If the proxy supports bound UDP
-proxying, it returns the connect-udp-bind response header value set to true.
+proxying, it returns the Connect-UDP-Bind response header value set to true.
 
 When "target_host" and "target_port" are set to a valid target, the client
 is requesting bound UDP proxying but would accept fallback to unextended
@@ -257,8 +257,8 @@ COMPRESSION_CLOSE Capsule {
 
 Once an endpoint has either sent or received a COMPRESSION_CLOSE for a given
 Context ID, it MUST NOT send any further datagrams with that Context ID.
-Since the value 0 was reserved by unextended connect-udp, a COMPRESSION_CLOSE
-capsule with Context ID set to zero is malformed.
+Since the value 0 was reserved by unextended UDP proxying, a
+COMPRESSION_CLOSE capsule with Context ID set to zero is malformed.
 
 Endpoints MAY close any context regardless of which endpoint registered it.
 This is useful for example, when a mapping is unused for a long time.
@@ -350,7 +350,7 @@ UDP Payload:
 
 The "Connect-UDP-Bind" header field’s value is a Boolean Structured Field
 set to true. Clients and proxy both indicate support for this extension by
-sending the Connect-UDP-Bind header field with a value of ?1. Once an
+sending the Connect-UDP-Bind header field with a value of `?1`. Once an
 endpoint has both sent and received the Connect-UDP-Bind header field set to
 true, this extension is enabled. Any other value type MUST be handled as if
 the field were not present by the recipients (for example, if this field is
@@ -391,7 +391,7 @@ intended for targets whose IP address families were not indicated via the IP
 addresses listed in the Proxy-Public-Address header field, as the proxy will
 drop those datagrams and reject those registrations.
 
-# Proxy behavior {#behavior}
+# Proxy Behavior {#behavior}
 
 After accepting the bound UDP proxying request, the proxy uses an assigned
 IP address and port to transmit UDP payloads received from the client to the
@@ -418,7 +418,7 @@ The security considerations described in {{Section 7 of CONNECT-UDP}} also
 apply here. Since TURN can be run over this mechanism, implementors should
 review the security considerations in {{Section 21 of ?TURN=RFC8656}}.
 
-Since unextended UDP Proxying requests carry the target as part of the
+Since unextended UDP proxying requests carry the target as part of the
 request, the proxy can protect unauthorized targets by rejecting requests
 before creating the tunnel, and communicate the rejection reason in response
 header fields. The uncompressed context allows transporting datagrams to and
@@ -624,7 +624,7 @@ communication with only 203.0.113.11:4321 and no other UDP target.
 # Comparison with CONNECT-IP
 
 While the use-cases described in {{intro}} could be supported using IP
-Proxying in HTTP {{?CONNECT-IP=RFC9484}}, it would require that every HTTP
+proxying in HTTP {{?CONNECT-IP=RFC9484}}, it would require that every HTTP
 Datagram carries a complete IP header. This would lead to both
 inefficiencies in the wire encoding and reduction in available Maximum
 Transmission Unit (MTU). Furthermore, Web browsers would need to support
