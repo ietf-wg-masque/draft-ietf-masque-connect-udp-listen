@@ -150,10 +150,11 @@ Table of Contents
    When "target_host" and "target_port" are set to a valid target, the
    client is requesting bound UDP proxying but would accept fallback to
    unextended UDP proxying to that target.  If the client doesn't have a
-   specific target, or if it wants Bound UDP without fallback, it sets
-   both the "target_host" and the "target_port" variables to the '*'
-   character (ASCII character 0x2A).  Note that the '*' character MUST
-   be percent-encoded before sending, per Section 3.2.2 of [TEMPLATE].
+   specific target, or if it wants bound UDP proxying without fallback,
+   it sets both the "target_host" and the "target_port" variables to the
+   '*' character (ASCII character 0x2A).  Note that the '*' character
+   MUST be percent-encoded before sending, per Section 3.2.2 of
+   [TEMPLATE].
 
 3.  Context Identifiers
 
@@ -171,7 +172,7 @@ Table of Contents
    target IP and port once in the capsule during registration, and then
    relies on shared state to map from the Context ID to the IP and port.
 
-   Context ID 0 was reserved by unextended UDP Proxying to represent UDP
+   Context ID 0 was reserved by unextended UDP proxying to represent UDP
    payloads sent to and from the "target_host" and "target_port" from
    the URI template.  When the mechanism from this document is in use:
 
