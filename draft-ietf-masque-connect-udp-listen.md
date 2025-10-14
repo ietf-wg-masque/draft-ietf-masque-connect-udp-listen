@@ -129,7 +129,7 @@ Conversely, the compressed variant exchanges the target IP and port once in
 the capsule during registration, and then relies on shared state to map from
 the Context ID to the IP and port.
 
-Context ID 0 was reserved by unextended UDP Proxying to represent UDP
+Context ID 0 was reserved by unextended UDP proxying to represent UDP
 payloads sent to and from the "target_host" and "target_port" from the URI
 template. When the mechanism from this document is in use:
 
