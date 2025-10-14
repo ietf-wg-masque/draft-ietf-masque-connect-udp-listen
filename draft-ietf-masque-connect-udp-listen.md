@@ -393,7 +393,7 @@ drop those datagrams and reject those registrations.
 
 # Proxy behavior {#behavior}
 
-After accepting the Bound UDP proxying request, the proxy uses an assigned
+After accepting the bound UDP proxying request, the proxy uses an assigned
 IP address and port to transmit UDP payloads received from the client to the
 target IP Address and UDP Port specified in each HTTP Datagram received from
 the client. The proxy uses the same ports to listen for UDP packets from any
