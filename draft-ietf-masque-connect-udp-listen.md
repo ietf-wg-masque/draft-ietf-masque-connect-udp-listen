@@ -137,7 +137,7 @@ template. When the mechanism from this document is in use:
   context ID 0 MUST NOT be used in HTTP Datagrams.
 
 * otherwise, HTTP Datagrams with context ID 0 have the same semantics as in
-  unextended UDP Proxying.
+  unextended UDP proxying.
 
 
 ## The COMPRESSION_ASSIGN capsule {#capsule-assign}
