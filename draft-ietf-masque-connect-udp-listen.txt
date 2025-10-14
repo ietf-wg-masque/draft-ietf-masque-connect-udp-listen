@@ -5,7 +5,7 @@
 MASQUE                                                       D. Schinazi
 Internet-Draft                                                  A. Singh
 Intended status: Standards Track                              Google LLC
-Expires: 10 April 2026                                    7 October 2025
+Expires: 17 April 2026                                   14 October 2025
 
 
                        Proxying Bound UDP in HTTP
@@ -54,7 +54,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 10 April 2026.
+   This Internet-Draft will expire on 17 April 2026.
 
 Copyright Notice
 
@@ -300,7 +300,8 @@ Table of Contents
    Once an endpoint has either sent or received a COMPRESSION_CLOSE for
    a given Context ID, it MUST NOT send any further datagrams with that
    Context ID.  Since the value 0 was reserved by unextended connect-
-   udp, the Context ID value of COMPRESSION_CLOSE can never be zero.
+   udp, a COMPRESSION_CLOSE capsule with Context ID set to zero is
+   malformed.
 
    Endpoints MAY close any context regardless of which endpoint
    registered it.  This is useful for example, when a mapping is unused
