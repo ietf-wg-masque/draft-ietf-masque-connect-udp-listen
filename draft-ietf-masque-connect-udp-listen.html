@@ -8,11 +8,11 @@
 <meta content="David Schinazi" name="author">
 <meta content="Abhi Singh" name="author">
 <meta content="
-       The mechanism to proxy UDP in HTTP only allows each UDP Proxying request to
+       The mechanism to proxy UDP in HTTP only allows each UDP proxying request to
 transmit to a specific host and port. This is well suited for UDP
 client-server protocols such as HTTP/3, but is not sufficient for some UDP
 peer-to-peer protocols like WebRTC. This document proposes an extension to
-UDP Proxying in HTTP that enables such use-cases. 
+UDP proxying in HTTP that enables such use-cases. 
     " name="description">
 <meta content="xml2rfc 3.30.2" name="generator">
 <meta content="quic" name="keyword">
@@ -1099,11 +1099,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <h1 id="title">Proxying Bound UDP in HTTP</h1>
 <section id="section-abstract">
       <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
-<p id="section-abstract-1">The mechanism to proxy UDP in HTTP only allows each UDP Proxying request to
+<p id="section-abstract-1">The mechanism to proxy UDP in HTTP only allows each UDP proxying request to
 transmit to a specific host and port. This is well suited for UDP
 client-server protocols such as HTTP/3, but is not sufficient for some UDP
 peer-to-peer protocols like WebRTC. This document proposes an extension to
-UDP Proxying in HTTP that enables such use-cases.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
+UDP proxying in HTTP that enables such use-cases.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
 </section>
 <section class="note rfcEditorRemove" id="section-note.1">
       <h2 id="name-about-this-document">
@@ -1178,7 +1178,7 @@ UDP Proxying in HTTP that enables such use-cases.<a href="#section-abstract-1" c
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2">
-            <p id="section-toc.1-1.2.1" class="keepWithNext"><a href="#section-2" class="auto internal xref">2</a>.  <a href="#name-proxied-udp-binding-mechani" class="internal xref">Proxied UDP Binding Mechanism</a></p>
+            <p id="section-toc.1-1.2.1" class="keepWithNext"><a href="#section-2" class="auto internal xref">2</a>.  <a href="#name-bound-udp-proxying-mechanis" class="internal xref">Bound UDP Proxying Mechanism</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3">
             <p id="section-toc.1-1.3.1"><a href="#section-3" class="auto internal xref">3</a>.  <a href="#name-context-identifiers" class="internal xref">Context Identifiers</a></p>
@@ -1207,7 +1207,7 @@ UDP Proxying in HTTP that enables such use-cases.<a href="#section-abstract-1" c
             <p id="section-toc.1-1.7.1"><a href="#section-7" class="auto internal xref">7</a>.  <a href="#name-the-proxy-public-address-re" class="internal xref">The Proxy-Public-Address Response Header Field</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8">
-            <p id="section-toc.1-1.8.1"><a href="#section-8" class="auto internal xref">8</a>.  <a href="#name-proxy-behavior" class="internal xref">Proxy behavior</a></p>
+            <p id="section-toc.1-1.8.1"><a href="#section-8" class="auto internal xref">8</a>.  <a href="#name-proxy-behavior" class="internal xref">Proxy Behavior</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.1">
                 <p id="section-toc.1-1.8.2.1.1"><a href="#section-8.1" class="auto internal xref">8.1</a>.  <a href="#name-restricting-ips" class="internal xref">Restricting IPs</a></p>
@@ -1269,15 +1269,15 @@ port. Combined with the HTTP CONNECT method (see <span><a href="https://rfc-edit
 traffic. However WebRTC <span>[<a href="#WebRTC" class="cite xref">WebRTC</a>]</span> relies on ICE <span>[<a href="#ICE" class="cite xref">ICE</a>]</span> to provide
 connectivity between two Web browsers, and ICE relies on the ability to send
 and receive UDP packets to multiple hosts. While in theory it might be
-possible to accomplish this using multiple UDP Proxying HTTP requests, HTTP
+possible to accomplish this using multiple UDP proxying HTTP requests, HTTP
 semantics <span>[<a href="#HTTP" class="cite xref">HTTP</a>]</span> do not guarantee that distinct requests will be handled
 by the same server. This can lead to the UDP packets being sent from
 distinct IP addresses, thereby preventing ICE from operating correctly.
-Consequently, UDP Proxying requests cannot enable WebRTC connectivity
+Consequently, UDP proxying requests cannot enable WebRTC connectivity
 between peers.<a href="#section-1-1" class="pilcrow">¶</a></p>
 <p id="section-1-2">This document describes an extension to UDP Proxying in HTTP that allows
 sending and receiving UDP payloads to multiple hosts within the scope of a
-single UDP Proxying HTTP request.<a href="#section-1-2" class="pilcrow">¶</a></p>
+single UDP proxying HTTP request.<a href="#section-1-2" class="pilcrow">¶</a></p>
 <div id="conventions-and-definitions">
 <section id="section-1.1">
         <h3 id="name-conventions-and-definitions">
@@ -1298,19 +1298,19 @@ and parsing/serialization behaviors from <span>[<a href="#ABNF" class="cite xref
 </div>
 <div id="mechanism">
 <section id="section-2">
-      <h2 id="name-proxied-udp-binding-mechani">
-<a href="#section-2" class="section-number selfRef">2. </a><a href="#name-proxied-udp-binding-mechani" class="section-name selfRef">Proxied UDP Binding Mechanism</a>
+      <h2 id="name-bound-udp-proxying-mechanis">
+<a href="#section-2" class="section-number selfRef">2. </a><a href="#name-bound-udp-proxying-mechanis" class="section-name selfRef">Bound UDP Proxying Mechanism</a>
       </h2>
-<p id="section-2-1">In unextended UDP Proxying requests, the target host is encoded in the HTTP
-request path or query. For Bound UDP Proxying, the target is either conveyed
+<p id="section-2-1">In unextended UDP proxying requests, the target host is encoded in the HTTP
+request path or query. For bound UDP proxying, the target is either conveyed
 in each HTTP Datagram (see <a href="#fmt-dgram-uncomp" class="auto internal xref">Figure 4</a>), or registered via capsules
 and then compressed (see <a href="#fmt-capsule-assign" class="auto internal xref">Figure 1</a>).<a href="#section-2-1" class="pilcrow">¶</a></p>
-<p id="section-2-2">When performing URI Template Expansion of the UDP Proxying template (see
+<p id="section-2-2">When performing URI Template Expansion of the UDP proxying template (see
 <span><a href="https://rfc-editor.org/rfc/rfc9298#section-3" class="relref">Section 3</a> of [<a href="#CONNECT-UDP" class="cite xref">CONNECT-UDP</a>]</span>), the client follows the same template as
-unextended UDP Proxying and sets the "target_host" and the "target_port"
-variables to one of its targets. It adds the connect-udp-bind header as
+unextended UDP proxying and sets the "target_host" and the "target_port"
+variables to one of its targets. It adds the Connect-UDP-Bind header as
 specified in <a href="#hdr" class="auto internal xref">Section 6</a> to request bind. If the proxy supports bound UDP
-proxying, it returns the connect-udp-bind response header value set to true.<a href="#section-2-2" class="pilcrow">¶</a></p>
+proxying, it returns the Connect-UDP-Bind response header value set to true.<a href="#section-2-2" class="pilcrow">¶</a></p>
 <p id="section-2-3">When "target_host" and "target_port" are set to a valid target, the client
 is requesting bound UDP proxying but would accept fallback to unextended
 UDP proxying to that target. If the client doesn't have a specific target, or
@@ -1495,8 +1495,8 @@ COMPRESSION_CLOSE Capsule {
 </div>
 <p id="section-3.3-3">Once an endpoint has either sent or received a COMPRESSION_CLOSE for a given
 Context ID, it <span class="bcp14">MUST NOT</span> send any further datagrams with that Context ID.
-Since the value 0 was reserved by unextended connect-udp, a COMPRESSION_CLOSE
-capsule with Context ID set to zero is malformed.<a href="#section-3.3-3" class="pilcrow">¶</a></p>
+Since the value 0 was reserved by unextended UDP proxying, a
+COMPRESSION_CLOSE capsule with Context ID set to zero is malformed.<a href="#section-3.3-3" class="pilcrow">¶</a></p>
 <p id="section-3.3-4">Endpoints <span class="bcp14">MAY</span> close any context regardless of which endpoint registered it.
 This is useful for example, when a mapping is unused for a long time.
 Another potential use is restricting some targets (see <a href="#restricting-ips" class="auto internal xref">Section 8.1</a>).<a href="#section-3.3-4" class="pilcrow">¶</a></p>
@@ -1617,7 +1617,7 @@ Compressed Bound UDP Proxying Payload {
       </h2>
 <p id="section-6-1">The "Connect-UDP-Bind" header field’s value is a Boolean Structured Field
 set to true. Clients and proxy both indicate support for this extension by
-sending the Connect-UDP-Bind header field with a value of ?1. Once an
+sending the Connect-UDP-Bind header field with a value of <code>?1</code>. Once an
 endpoint has both sent and received the Connect-UDP-Bind header field set to
 true, this extension is enabled. Any other value type <span class="bcp14">MUST</span> be handled as if
 the field were not present by the recipients (for example, if this field is
@@ -1669,7 +1669,7 @@ drop those datagrams and reject those registrations.<a href="#section-7-5" class
 <div id="behavior">
 <section id="section-8">
       <h2 id="name-proxy-behavior">
-<a href="#section-8" class="section-number selfRef">8. </a><a href="#name-proxy-behavior" class="section-name selfRef">Proxy behavior</a>
+<a href="#section-8" class="section-number selfRef">8. </a><a href="#name-proxy-behavior" class="section-name selfRef">Proxy Behavior</a>
       </h2>
 <p id="section-8-1">After accepting the bound UDP proxying request, the proxy uses an assigned
 IP address and port to transmit UDP payloads received from the client to the
@@ -1702,7 +1702,7 @@ unknown IPs.<a href="#section-8.1-1" class="pilcrow">¶</a></p>
 <p id="section-9-1">The security considerations described in <span><a href="https://rfc-editor.org/rfc/rfc9298#section-7" class="relref">Section 7</a> of [<a href="#CONNECT-UDP" class="cite xref">CONNECT-UDP</a>]</span> also
 apply here. Since TURN can be run over this mechanism, implementors should
 review the security considerations in <span><a href="https://rfc-editor.org/rfc/rfc8656#section-21" class="relref">Section 21</a> of [<a href="#TURN" class="cite xref">TURN</a>]</span>.<a href="#section-9-1" class="pilcrow">¶</a></p>
-<p id="section-9-2">Since unextended UDP Proxying requests carry the target as part of the
+<p id="section-9-2">Since unextended UDP proxying requests carry the target as part of the
 request, the proxy can protect unauthorized targets by rejecting requests
 before creating the tunnel, and communicate the rejection reason in response
 header fields. The uncompressed context allows transporting datagrams to and
@@ -2074,7 +2074,7 @@ communication with only 203.0.113.11:4321 and no other UDP target.<a href="#appe
 <a href="#appendix-B" class="section-number selfRef">Appendix B. </a><a href="#name-comparison-with-connect-ip" class="section-name selfRef">Comparison with CONNECT-IP</a>
       </h2>
 <p id="appendix-B-1">While the use-cases described in <a href="#intro" class="auto internal xref">Section 1</a> could be supported using IP
-Proxying in HTTP <span>[<a href="#CONNECT-IP" class="cite xref">CONNECT-IP</a>]</span>, it would require that every HTTP
+proxying in HTTP <span>[<a href="#CONNECT-IP" class="cite xref">CONNECT-IP</a>]</span>, it would require that every HTTP
 Datagram carries a complete IP header. This would lead to both
 inefficiencies in the wire encoding and reduction in available Maximum
 Transmission Unit (MTU). Furthermore, Web browsers would need to support
