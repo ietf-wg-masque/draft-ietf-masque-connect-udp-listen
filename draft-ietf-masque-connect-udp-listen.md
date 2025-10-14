@@ -107,7 +107,7 @@ proxying, it returns the connect-udp-bind response header value set to true.
 When "target_host" and "target_port" are set to a valid target, the client
 is requesting bound UDP proxying but would accept fallback to unextended
 UDP proxying to that target. If the client doesn't have a specific target, or
-if it wants Bound UDP without fallback, it sets both the "target_host" and
+if it wants bound UDP proxying without fallback, it sets both the "target_host" and
 the "target_port" variables to the '`*`' character (ASCII
 character 0x2A). Note that the '`*`' character MUST be percent-encoded
 before sending, per {{Section 3.2.2 of !TEMPLATE=RFC6570}}.
