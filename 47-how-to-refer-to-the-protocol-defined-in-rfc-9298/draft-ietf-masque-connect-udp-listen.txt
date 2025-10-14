@@ -180,7 +180,7 @@ Table of Contents
       then context ID 0 MUST NOT be used in HTTP Datagrams.
 
    *  otherwise, HTTP Datagrams with context ID 0 have the same
-      semantics as in unextended UDP Proxying.
+      semantics as in unextended UDP proxying.
 
 3.1.  The COMPRESSION_ASSIGN capsule
 
