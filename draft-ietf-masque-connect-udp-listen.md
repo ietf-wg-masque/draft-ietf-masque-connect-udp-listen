@@ -261,8 +261,8 @@ COMPRESSION_CLOSE Capsule {
 
 Once an endpoint has either sent or received a COMPRESSION_CLOSE for a given
 Context ID, it MUST NOT send any further datagrams with that Context ID.
-Since the value 0 was reserved by unextended connect-udp, the Context ID
-value of COMPRESSION_CLOSE can never be zero.
+Since the value 0 was reserved by unextended connect-udp, a COMPRESSION_CLOSE
+capsule with Context ID set to zero is malformed.
 
 Endpoints MAY close any context regardless of which endpoint registered it.
 This is useful for example, when a mapping is unused for a long time.
