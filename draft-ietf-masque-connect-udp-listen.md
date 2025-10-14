@@ -99,7 +99,7 @@ and then compressed (see {{fmt-capsule-assign}}).
 
 When performing URI Template Expansion of the UDP Proxying template (see
 {{Section 3 of CONNECT-UDP}}), the client follows the same template as
-Unextended UDP Proxying and sets the "target_host" and the "target_port"
+unextended UDP Proxying and sets the "target_host" and the "target_port"
 variables to one of its targets. It adds the connect-udp-bind header as
 specified in {{hdr}} to request bind. If the proxy supports Proxying Bound
 UDP, it returns the connect-udp-bind response header value set to true.
