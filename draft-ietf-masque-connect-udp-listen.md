@@ -105,7 +105,7 @@ specified in {{hdr}} to request bind. If the proxy supports bound UDP
 proxying, it returns the connect-udp-bind response header value set to true.
 
 When "target_host" and "target_port" are set to a valid target, the client
-is requesting Bound UDP Proxying but would accept fallback to unextended
+is requesting bound UDP proxying but would accept fallback to unextended
 UDP Proxying to that target. If the client doesn't have a specific target, or
 if it wants Bound UDP without fallback, it sets both the "target_host" and
 the "target_port" variables to the '`*`' character (ASCII
