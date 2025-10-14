@@ -193,7 +193,7 @@ accept or reject the corresponding registration:
 
 As mandated in {{Section 4 of CONNECT-UDP}}, clients can only allocate even
 Context IDs, while proxies can only allocate odd ones. Since the value 0 was
-reserved by unextended connect-udp, the Context ID value of
+reserved by unextended UDP proxying, the Context ID value of
 COMPRESSION_ASSIGN can never be zero.
 
 Endpoints MUST NOT send two COMPRESSION_ASSIGN capsules with the same
