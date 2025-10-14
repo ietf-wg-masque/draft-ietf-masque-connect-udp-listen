@@ -99,16 +99,16 @@ and then compressed (see {{fmt-capsule-assign}}).
 
 When performing URI Template Expansion of the UDP Proxying template (see
 {{Section 3 of CONNECT-UDP}}), the client follows the same template as
-CONNECT-UDP and sets the "target_host" and the "target_port" variables to
-one of its targets. It adds the connect-udp-bind header as specified in
-{{hdr}} to request bind. If the proxy supports CONNECT-UDP Bind, it returns
-the connect-udp-bind response header value set to true.
+Unextended UDP Proxying and sets the "target_host" and the "target_port"
+variables to one of its targets. It adds the connect-udp-bind header as
+specified in {{hdr}} to request bind. If the proxy supports Proxying Bound
+UDP, it returns the connect-udp-bind response header value set to true.
 
 When "target_host" and "target_port" are set to a valid target, the client
-is requesting CONNECT-UDP Bind but would accept fallback to unextended
-CONNECT-UDP to that target. If the client doesn't have a specific target, or
-if it wants CONNECT-UDP bind without fallback, it sets both the
-"target_host" and the "target_port" variables to the '`*`' character (ASCII
+is requesting Bound UDP Proxying but would accept fallback to unextended
+UDP Proxying to that target. If the client doesn't have a specific target, or
+if it wants Bound UDP without fallback, it sets both the "target_host" and
+the "target_port" variables to the '`*`' character (ASCII
 character 0x2A). Note that the '`*`' character MUST be percent-encoded
 before sending, per {{Section 3.2.2 of !TEMPLATE=RFC6570}}.
 
@@ -129,7 +129,7 @@ Conversely, the compressed variant exchanges the target IP and port once in
 the capsule during registration, and then relies on shared state to map from
 the Context ID to the IP and port.
 
-Context ID 0 was reserved by unextended connect-udp to represent UDP
+Context ID 0 was reserved by unextended UDP Proxying to represent UDP
 payloads sent to and from the "target_host" and "target_port" from the URI
 template. When the mechanism from this document is in use:
 
@@ -137,7 +137,7 @@ template. When the mechanism from this document is in use:
   context ID 0 MUST NOT be used in HTTP Datagrams.
 
 * otherwise, HTTP Datagrams with context ID 0 have the same semantics as in
-  unextended connect-udp.
+  unextended UDP Proxying.
 
 
 ## The COMPRESSION_ASSIGN capsule {#capsule-assign}
@@ -192,13 +192,9 @@ accept or reject the corresponding registration:
   received COMPRESSION_ASSIGN capsule.
 
 As mandated in {{Section 4 of CONNECT-UDP}}, clients can only allocate even
-Context IDs, while proxies can only allocate odd ones. This makes the
-registration capsules from this document unambiguous. For example, if a
-client receives a COMPRESSION_ASSIGN capsule with an even Context ID, that
-has to be an echo of a capsule that the client initially sent, indicating
-that the proxy accepted the registration. Since the value 0 was reserved by
-unextended connect-udp, the Context ID value of COMPRESSION_ASSIGN can never
-be zero.
+Context IDs, while proxies can only allocate odd ones. Since the value 0 was
+reserved by unextended connect-udp, the Context ID value of
+COMPRESSION_ASSIGN can never be zero.
 
 Endpoints MUST NOT send two COMPRESSION_ASSIGN capsules with the same
 Context ID. If a recipient detects a repeated Context ID, it MUST treat the
@@ -397,12 +393,12 @@ drop those datagrams and reject those registrations.
 
 # Proxy behavior {#behavior}
 
-After accepting the Connect-UDP Binding proxying request, the proxy uses an
-assigned IP address and port to transmit UDP payloads received from the
-client to the target IP Address and UDP Port specified in each HTTP Datagram
-received from the client. The proxy uses the same ports to listen for UDP
-packets from any authorized target and forwards them to the client by
-encapsulating them in HTTP Datagrams, using the corresponding Context ID.
+After accepting the Bound UDP proxying request, the proxy uses an assigned 
+IP address and port to transmit UDP payloads received from the client to the
+target IP Address and UDP Port specified in each HTTP Datagram received from
+the client. The proxy uses the same ports to listen for UDP packets from any
+authorized target and forwards them to the client by encapsulating them in
+HTTP Datagrams, using the corresponding Context ID.
 
 If the proxy receives UDP payloads that don't correspond to any registration
 (i.e., no compression for the given target was ever established and there is
