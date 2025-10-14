@@ -101,8 +101,8 @@ When performing URI Template Expansion of the UDP Proxying template (see
 {{Section 3 of CONNECT-UDP}}), the client follows the same template as
 unextended UDP Proxying and sets the "target_host" and the "target_port"
 variables to one of its targets. It adds the connect-udp-bind header as
-specified in {{hdr}} to request bind. If the proxy supports Proxying Bound
-UDP, it returns the connect-udp-bind response header value set to true.
+specified in {{hdr}} to request bind. If the proxy supports bound UDP
+proxying, it returns the connect-udp-bind response header value set to true.
 
 When "target_host" and "target_port" are set to a valid target, the client
 is requesting Bound UDP Proxying but would accept fallback to unextended
