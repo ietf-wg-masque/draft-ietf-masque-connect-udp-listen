@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-10-09T00:54:59.112141+00:00",
+  "timestamp": "2025-10-16T00:55:52.373661+00:00",
   "repo": "ietf-wg-masque/draft-ietf-masque-connect-udp-listen",
   "labels": [
     {
@@ -691,6 +691,24 @@
           "updatedAt": "2025-07-23T07:49:03Z"
         }
       ]
+    },
+    {
+      "number": 47,
+      "id": "I_kwDOHnqa9M7RVfT6",
+      "title": "How to refer to the protocol defined in RFC 9298?",
+      "url": "https://github.com/ietf-wg-masque/draft-ietf-masque-connect-udp-listen/issues/47",
+      "state": "CLOSED",
+      "author": "marten-seemann",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [
+        "asingh-g"
+      ],
+      "labels": [],
+      "body": "Colloquially, we call it CONNECT-UDP, but the name of the protocol is \"Proxying UDP in HTTP\" (\"connect-udp\" is the name of the HTTP upgrade token). Halfway through the document, this draft starts calling it \"connect-udp\" (not capitalized).\n\nMaybe that's fine and we don't need to do anything.\n\nIf we want to be more consistent, here are some options:\n* Always refer to it as `[CONNECT-UDP]`, i.e. link to RFC 9298\n* Somewhere towards the beginning of the document, announce that from now on, you'll call this protocol connect-udp (or maybe Connect-UDP or CONNECT-UDP).",
+      "createdAt": "2025-10-14T01:57:30Z",
+      "updatedAt": "2025-10-14T21:57:48Z",
+      "closedAt": "2025-10-14T21:57:48Z",
+      "comments": []
     }
   ],
   "pulls": [
@@ -4761,6 +4779,205 @@
               "body": "```suggestion\nAn endpoint can only send a COMPRESSION_ACK capsule if it received a\n```",
               "createdAt": "2025-10-07T20:40:50Z",
               "updatedAt": "2025-10-07T20:41:13Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 46,
+      "id": "PR_kwDOHnqa9M6tkUE4",
+      "title": "COMPRESSION_CLOSE with Context ID 0 is malformed",
+      "url": "https://github.com/ietf-wg-masque/draft-ietf-masque-connect-udp-listen/pull/46",
+      "state": "MERGED",
+      "author": "marten-seemann",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "I think this is slightly more prescriptive, as receiving a malformed capsule is grounds for immediately terminating the connection.",
+      "createdAt": "2025-10-14T01:21:53Z",
+      "updatedAt": "2025-10-14T20:35:30Z",
+      "baseRepository": "ietf-wg-masque/draft-ietf-masque-connect-udp-listen",
+      "baseRefName": "main",
+      "baseRefOid": "e1bc8b97090c5076e5ce9f8cf44bf29860f1fb52",
+      "headRepository": "marten-seemann/draft-ietf-masque-connect-udp-listen",
+      "headRefName": "patch-1",
+      "headRefOid": "5379f55aa47debfd71587e1e3f7a4b6c4b3e9eb3",
+      "closedAt": "2025-10-14T20:35:30Z",
+      "mergedAt": "2025-10-14T20:35:30Z",
+      "mergedBy": "DavidSchinazi",
+      "mergeCommit": {
+        "oid": "83f12c7700b696ebc8a51bb1883f45303b3ec8f8"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOHnqa9M7Gske7",
+          "commit": {
+            "abbreviatedOid": "96d3b44"
+          },
+          "author": "marten-seemann",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-10-14T01:22:11Z",
+          "updatedAt": "2025-10-14T01:22:11Z",
+          "comments": [
+            {
+              "originalPosition": 7,
+              "body": "```suggestion\ncapsule with Context ID is malformed.\n```",
+              "createdAt": "2025-10-14T01:22:11Z",
+              "updatedAt": "2025-10-14T01:22:11Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHnqa9M7Gskpy",
+          "commit": {
+            "abbreviatedOid": "45f0d53"
+          },
+          "author": "marten-seemann",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-10-14T01:22:38Z",
+          "updatedAt": "2025-10-14T01:22:38Z",
+          "comments": [
+            {
+              "originalPosition": 7,
+              "body": "```suggestion\ncapsule with Context ID zero is malformed.\n```",
+              "createdAt": "2025-10-14T01:22:38Z",
+              "updatedAt": "2025-10-14T01:22:38Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHnqa9M7G7G_T",
+          "commit": {
+            "abbreviatedOid": "91f96ba"
+          },
+          "author": "DavidSchinazi",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-10-14T20:34:51Z",
+          "updatedAt": "2025-10-14T20:34:51Z",
+          "comments": [
+            {
+              "originalPosition": 7,
+              "body": "```suggestion\ncapsule with Context ID set to zero is malformed.\n```",
+              "createdAt": "2025-10-14T20:34:51Z",
+              "updatedAt": "2025-10-14T20:34:51Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHnqa9M7G7HKh",
+          "commit": {
+            "abbreviatedOid": "5379f55"
+          },
+          "author": "DavidSchinazi",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-10-14T20:35:00Z",
+          "updatedAt": "2025-10-14T20:35:00Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 48,
+      "id": "PR_kwDOHnqa9M6twDuk",
+      "title": "Fix references to Bound CONNECT UDP and remove reference to COMPRESSI\u2026",
+      "url": "https://github.com/ietf-wg-masque/draft-ietf-masque-connect-udp-listen/pull/48",
+      "state": "MERGED",
+      "author": "asingh-g",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "\u2026ON_ASSIGN echos",
+      "createdAt": "2025-10-14T21:00:18Z",
+      "updatedAt": "2025-10-14T21:57:47Z",
+      "baseRepository": "ietf-wg-masque/draft-ietf-masque-connect-udp-listen",
+      "baseRefName": "main",
+      "baseRefOid": "83f12c7700b696ebc8a51bb1883f45303b3ec8f8",
+      "headRepository": "ietf-wg-masque/draft-ietf-masque-connect-udp-listen",
+      "headRefName": "47-how-to-refer-to-the-protocol-defined-in-rfc-9298",
+      "headRefOid": "817c54372d908bb2727dde4b640d061cad28e580",
+      "closedAt": "2025-10-14T21:57:47Z",
+      "mergedAt": "2025-10-14T21:57:47Z",
+      "mergedBy": "DavidSchinazi",
+      "mergeCommit": {
+        "oid": "94145b67d7d5c663388902295e1182b92ea789aa"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOHnqa9M7G8Dm5",
+          "commit": {
+            "abbreviatedOid": "444a10b"
+          },
+          "author": "DavidSchinazi",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM, adding some suggestions to nomralize capitalization",
+          "createdAt": "2025-10-14T21:51:09Z",
+          "updatedAt": "2025-10-14T21:55:45Z",
+          "comments": [
+            {
+              "originalPosition": 8,
+              "body": "```suggestion\nunextended UDP Proxying and sets the \"target_host\" and the \"target_port\"\n```",
+              "createdAt": "2025-10-14T21:51:10Z",
+              "updatedAt": "2025-10-14T21:55:45Z"
+            },
+            {
+              "originalPosition": 11,
+              "body": "```suggestion\nspecified in {{hdr}} to request bind. If the proxy supports bound UDP\nproxying, it returns the connect-udp-bind response header value set to true.\n```",
+              "createdAt": "2025-10-14T21:53:20Z",
+              "updatedAt": "2025-10-14T21:55:45Z"
+            },
+            {
+              "originalPosition": 18,
+              "body": "```suggestion\nis requesting bound UDP proxying but would accept fallback to unextended\n```",
+              "createdAt": "2025-10-14T21:53:35Z",
+              "updatedAt": "2025-10-14T21:55:45Z"
+            },
+            {
+              "originalPosition": 19,
+              "body": "```suggestion\nUDP proxying to that target. If the client doesn't have a specific target, or\n```",
+              "createdAt": "2025-10-14T21:53:45Z",
+              "updatedAt": "2025-10-14T21:55:45Z"
+            },
+            {
+              "originalPosition": 20,
+              "body": "```suggestion\nif it wants bound UDP proxying without fallback, it sets both the \"target_host\" and\n```",
+              "createdAt": "2025-10-14T21:54:01Z",
+              "updatedAt": "2025-10-14T21:55:45Z"
+            },
+            {
+              "originalPosition": 30,
+              "body": "```suggestion\nContext ID 0 was reserved by unextended UDP proxying to represent UDP\n```",
+              "createdAt": "2025-10-14T21:54:28Z",
+              "updatedAt": "2025-10-14T21:55:45Z"
+            },
+            {
+              "originalPosition": 39,
+              "body": "```suggestion\n  unextended UDP proxying.\n```",
+              "createdAt": "2025-10-14T21:54:36Z",
+              "updatedAt": "2025-10-14T21:55:45Z"
+            },
+            {
+              "originalPosition": 55,
+              "body": "```suggestion\nreserved by unextended UDP proxying, the Context ID value of\n```",
+              "createdAt": "2025-10-14T21:54:49Z",
+              "updatedAt": "2025-10-14T21:55:45Z"
+            },
+            {
+              "originalPosition": 70,
+              "body": "```suggestion\nAfter accepting the bound UDP proxying request, the proxy uses an assigned\n```",
+              "createdAt": "2025-10-14T21:55:10Z",
+              "updatedAt": "2025-10-14T21:55:45Z"
             }
           ]
         }
