@@ -478,8 +478,8 @@ This document will request IANA to register the following new items to the
 | Value |    Capsule Type    |
 |:------|:-------------------|
 |  0x11 | COMPRESSION_ASSIGN |
-|  0x13 | COMPRESSION_ACK    |
-|  0x14 | COMPRESSION_CLOSE  |
+|  0x12 | COMPRESSION_ACK    |
+|  0x13 | COMPRESSION_CLOSE  |
 {: #iana-capsules-table title="New Capsules"}
 
 All of these new entries use the following values for these fields:
