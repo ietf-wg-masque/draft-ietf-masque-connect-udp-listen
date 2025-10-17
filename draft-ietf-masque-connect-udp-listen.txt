@@ -5,7 +5,7 @@
 MASQUE                                                       D. Schinazi
 Internet-Draft                                                  A. Singh
 Intended status: Standards Track                              Google LLC
-Expires: 17 April 2026                                   14 October 2025
+Expires: 20 April 2026                                   17 October 2025
 
 
                        Proxying Bound UDP in HTTP
@@ -54,7 +54,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 17 April 2026.
+   This Internet-Draft will expire on 20 April 2026.
 
 Copyright Notice
 
@@ -518,9 +518,9 @@ Table of Contents
                       +=======+====================+
                       | 0x11  | COMPRESSION_ASSIGN |
                       +-------+--------------------+
-                      | 0x13  | COMPRESSION_ACK    |
+                      | 0x12  | COMPRESSION_ACK    |
                       +-------+--------------------+
-                      | 0x14  | COMPRESSION_CLOSE  |
+                      | 0x13  | COMPRESSION_CLOSE  |
                       +-------+--------------------+
 
                           Table 2: New Capsules
