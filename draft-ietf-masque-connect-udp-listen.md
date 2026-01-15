@@ -66,17 +66,16 @@ The mechanism to proxy UDP in HTTP {{!CONNECT-UDP=RFC9298}} allows creating
 tunnels for communicating UDP payloads {{!UDP=RFC0768}} to a fixed host and
 port; this enables proxying of HTTP/3 connections, since they run over UDP.
 Similarly, the HTTP CONNECT method (see {{Section 9.3.6 of !HTTP=RFC9110}})
-allows proxying HTTP/1.x and HTTP/2, which run over TCP.
-Combining both allows proxying the majority of a Web Browser's HTTP
-traffic. However WebRTC {{WebRTC}} relies on ICE {{?ICE=RFC8445}} to provide
-connectivity between two Web browsers, and ICE relies on the ability to send
-and receive UDP packets to multiple hosts. While in theory it might be
-possible to accomplish this using multiple UDP proxying HTTP requests, HTTP
-semantics {{HTTP}} do not guarantee that distinct requests will be handled
-by the same server. This can lead to the UDP packets being sent from
-distinct IP addresses, thereby preventing ICE from operating correctly.
-Consequently, UDP proxying requests cannot enable WebRTC connectivity
-between peers.
+allows proxying HTTP/1.x and HTTP/2, which run over TCP. Combining both
+allows proxying the majority of a Web Browser's HTTP traffic. However WebRTC
+{{WebRTC}} relies on ICE {{?ICE=RFC8445}} to provide connectivity between
+two Web browsers, and ICE relies on the ability to send and receive UDP
+packets to multiple hosts. While in theory it might be possible to
+accomplish this using multiple UDP proxying HTTP requests, HTTP semantics
+{{HTTP}} do not guarantee that distinct requests will be handled by the same
+server. This can lead to the UDP packets being sent from distinct IP
+addresses, thereby preventing ICE from operating correctly. Consequently,
+UDP proxying requests cannot enable WebRTC connectivity between peers.
 
 This document describes an extension to UDP Proxying in HTTP that allows
 sending and receiving UDP payloads to multiple hosts within the scope of a
@@ -88,9 +87,9 @@ single UDP proxying HTTP request.
 
 This document uses terminology from {{CONNECT-UDP}} and notational
 conventions from {{!QUIC=RFC9000}}. This document uses the terms Boolean,
-List, and String from {{Section 3 of !STRUCTURED-FIELDS=RFC9651}}
-to specify syntax and parsing. This document uses Augmented Backus-Naur Form
-and parsing/serialization behaviors from {{!ABNF=RFC5234}}.
+List, and String from {{Section 3 of !STRUCTURED-FIELDS=RFC9651}} to specify
+syntax and parsing. This document uses Augmented Backus-Naur Form and
+parsing/serialization behaviors from {{!ABNF=RFC5234}}.
 
 # Bound UDP Proxying Mechanism {#mechanism}
 
@@ -108,12 +107,12 @@ proxying, it returns the Connect-UDP-Bind response header field value set to
 true.
 
 When "target_host" and "target_port" are set to a valid target, the client
-is requesting bound UDP proxying but would accept fallback to unextended
-UDP proxying to that target. If the client doesn't have a specific target, or
-if it wants bound UDP proxying without fallback, it sets both the "target_host" and
-the "target_port" variables to the '`*`' character (ASCII
-character 0x2A). Note that the '`*`' character MUST be percent-encoded
-before sending, per {{Section 3.2.2 of !TEMPLATE=RFC6570}}.
+is requesting bound UDP proxying but would accept fallback to unextended UDP
+proxying to that target. If the client doesn't have a specific target, or if
+it wants bound UDP proxying without fallback, it sets both the "target_host"
+and the "target_port" variables to the '`*`' character (ASCII character
+0x2A). Note that the '`*`' character MUST be percent-encoded before sending,
+per {{Section 3.2.2 of !TEMPLATE=RFC6570}}.
 
 
 # Context Identifiers {#contextid}
