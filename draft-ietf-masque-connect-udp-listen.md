@@ -64,8 +64,10 @@ UDP proxying in HTTP that enables such use-cases.
 
 The mechanism to proxy UDP in HTTP {{!CONNECT-UDP=RFC9298}} allows creating
 tunnels for communicating UDP payloads {{!UDP=RFC0768}} to a fixed host and
-port. Combined with the HTTP CONNECT method (see {{Section 9.3.6 of
-!HTTP=RFC9110}}), it allows proxying the majority of a Web Browser's HTTP
+port; this enables proxying of HTTP/3 connections, since they run over UDP.
+Similarly, the HTTP CONNECT method (see {{Section 9.3.6 of !HTTP=RFC9110}})
+allows proxying HTTP/1.x and HTTP/2, which run over TCP.
+Combining both allows proxying the majority of a Web Browser's HTTP
 traffic. However WebRTC {{WebRTC}} relies on ICE {{?ICE=RFC8445}} to provide
 connectivity between two Web browsers, and ICE relies on the ability to send
 and receive UDP packets to multiple hosts. While in theory it might be
@@ -86,7 +88,7 @@ single UDP proxying HTTP request.
 
 This document uses terminology from {{CONNECT-UDP}} and notational
 conventions from {{!QUIC=RFC9000}}. This document uses the terms Boolean,
-Integer, List, and String from {{Section 3 of !STRUCTURED-FIELDS=RFC9651}}
+List, and String from {{Section 3 of !STRUCTURED-FIELDS=RFC9651}}
 to specify syntax and parsing. This document uses Augmented Backus-Naur Form
 and parsing/serialization behaviors from {{!ABNF=RFC5234}}.
 
@@ -100,9 +102,10 @@ and then compressed (see {{fmt-capsule-assign}}).
 When performing URI Template Expansion of the UDP proxying template (see
 {{Section 3 of CONNECT-UDP}}), the client follows the same template as
 unextended UDP proxying and sets the "target_host" and the "target_port"
-variables to one of its targets. It adds the Connect-UDP-Bind header as
-specified in {{hdr}} to request bind. If the proxy supports bound UDP
-proxying, it returns the Connect-UDP-Bind response header value set to true.
+variables to one of its targets. It adds the Connect-UDP-Bind header field
+as specified in {{hdr}} to request bind. If the proxy supports bound UDP
+proxying, it returns the Connect-UDP-Bind response header field value set to
+true.
 
 When "target_host" and "target_port" are set to a valid target, the client
 is requesting bound UDP proxying but would accept fallback to unextended
@@ -415,8 +418,9 @@ unknown IPs.
 # Security Considerations
 
 The security considerations described in {{Section 7 of CONNECT-UDP}} also
-apply here. Since TURN can be run over this mechanism, implementors should
-review the security considerations in {{Section 21 of ?TURN=RFC8656}}.
+apply here. Since TURN can be run over this mechanism, implementors will
+benefit from reviewing the security considerations in {{Section 21 of
+?TURN=RFC8656}}.
 
 Since unextended UDP proxying requests carry the target as part of the
 request, the proxy can protect unauthorized targets by rejecting requests
