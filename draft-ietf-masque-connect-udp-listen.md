@@ -637,6 +637,7 @@ IPv4 and IPv6 header generation, parsing, validation and error handling.
 {:numbered="false"}
 
 This proposal is the result of many conversations with MASQUE working group
-participants. In particular, the authors would like to thank {{{Marius
-Kleidl}}}, {{{Tommy Pauly}}}, {{{Lucas Pardue}}}, {{{Ben Schwartz}}},
-{{{Marten Seemann}}}, and {{{Magnus Westerlund}}} for their reviews.
+participants. In particular, the authors would like to thank {{{Alejandro
+Sedeño}}}, {{{Ben Schwartz}}}, {{{Lucas Pardue}}}, {{{Magnus Westerlund}}},
+{{{Marius Kleidl}}}, {{{Mark Nottingham}}} {{{Marten Seemann}}}, and
+{{{Tommy Pauly}}} for their reviews.
