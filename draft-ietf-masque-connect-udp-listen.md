@@ -64,8 +64,10 @@ UDP proxying in HTTP that enables such use-cases.
 
 The mechanism to proxy UDP in HTTP {{!CONNECT-UDP=RFC9298}} allows creating
 tunnels for communicating UDP payloads {{!UDP=RFC0768}} to a fixed host and
-port. Combined with the HTTP CONNECT method (see {{Section 9.3.6 of
-!HTTP=RFC9110}}), it allows proxying the majority of a Web Browser's HTTP
+port; this enables proxying of HTTP/3 connections, since they run over UDP.
+Similarly, the HTTP CONNECT method (see {{Section 9.3.6 of !HTTP=RFC9110}})
+allows proxying HTTP/1.x and HTTP/2, which run over TCP.
+Combining both allows proxying the majority of a Web Browser's HTTP
 traffic. However WebRTC {{WebRTC}} relies on ICE {{?ICE=RFC8445}} to provide
 connectivity between two Web browsers, and ICE relies on the ability to send
 and receive UDP packets to multiple hosts. While in theory it might be
