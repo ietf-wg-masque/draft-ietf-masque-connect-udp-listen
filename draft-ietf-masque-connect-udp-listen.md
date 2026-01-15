@@ -100,9 +100,10 @@ and then compressed (see {{fmt-capsule-assign}}).
 When performing URI Template Expansion of the UDP proxying template (see
 {{Section 3 of CONNECT-UDP}}), the client follows the same template as
 unextended UDP proxying and sets the "target_host" and the "target_port"
-variables to one of its targets. It adds the Connect-UDP-Bind header as
-specified in {{hdr}} to request bind. If the proxy supports bound UDP
-proxying, it returns the Connect-UDP-Bind response header value set to true.
+variables to one of its targets. It adds the Connect-UDP-Bind header field
+as specified in {{hdr}} to request bind. If the proxy supports bound UDP
+proxying, it returns the Connect-UDP-Bind response header field value set to
+true.
 
 When "target_host" and "target_port" are set to a valid target, the client
 is requesting bound UDP proxying but would accept fallback to unextended
