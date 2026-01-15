@@ -754,7 +754,7 @@ Acknowledgments
    This proposal is the result of many conversations with MASQUE working
    group participants.  In particular, the authors would like to thank
    Alejandro Sedeño, Ben Schwartz, Lucas Pardue, Magnus Westerlund,
-   Marius Kleidl, Mark Nottingham Marten Seemann, and Tommy Pauly for
+   Marius Kleidl, Mark Nottingham, Marten Seemann, and Tommy Pauly for
    their reviews.
 
 Authors' Addresses
