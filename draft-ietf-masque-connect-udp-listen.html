@@ -1266,17 +1266,16 @@ UDP proxying in HTTP that enables such use-cases.<a href="#section-abstract-1" c
 tunnels for communicating UDP payloads <span>[<a href="#UDP" class="cite xref">UDP</a>]</span> to a fixed host and
 port; this enables proxying of HTTP/3 connections, since they run over UDP.
 Similarly, the HTTP CONNECT method (see <span><a href="https://rfc-editor.org/rfc/rfc9110#section-9.3.6" class="relref">Section 9.3.6</a> of [<a href="#HTTP" class="cite xref">HTTP</a>]</span>)
-allows proxying HTTP/1.x and HTTP/2, which run over TCP.
-Combining both allows proxying the majority of a Web Browser's HTTP
-traffic. However WebRTC <span>[<a href="#WebRTC" class="cite xref">WebRTC</a>]</span> relies on ICE <span>[<a href="#ICE" class="cite xref">ICE</a>]</span> to provide
-connectivity between two Web browsers, and ICE relies on the ability to send
-and receive UDP packets to multiple hosts. While in theory it might be
-possible to accomplish this using multiple UDP proxying HTTP requests, HTTP
-semantics <span>[<a href="#HTTP" class="cite xref">HTTP</a>]</span> do not guarantee that distinct requests will be handled
-by the same server. This can lead to the UDP packets being sent from
-distinct IP addresses, thereby preventing ICE from operating correctly.
-Consequently, UDP proxying requests cannot enable WebRTC connectivity
-between peers.<a href="#section-1-1" class="pilcrow">¶</a></p>
+allows proxying HTTP/1.x and HTTP/2, which run over TCP. Combining both
+allows proxying the majority of a Web Browser's HTTP traffic. However WebRTC
+<span>[<a href="#WebRTC" class="cite xref">WebRTC</a>]</span> relies on ICE <span>[<a href="#ICE" class="cite xref">ICE</a>]</span> to provide connectivity between
+two Web browsers, and ICE relies on the ability to send and receive UDP
+packets to multiple hosts. While in theory it might be possible to
+accomplish this using multiple UDP proxying HTTP requests, HTTP semantics
+<span>[<a href="#HTTP" class="cite xref">HTTP</a>]</span> do not guarantee that distinct requests will be handled by the same
+server. This can lead to the UDP packets being sent from distinct IP
+addresses, thereby preventing ICE from operating correctly. Consequently,
+UDP proxying requests cannot enable WebRTC connectivity between peers.<a href="#section-1-1" class="pilcrow">¶</a></p>
 <p id="section-1-2">This document describes an extension to UDP Proxying in HTTP that allows
 sending and receiving UDP payloads to multiple hosts within the scope of a
 single UDP proxying HTTP request.<a href="#section-1-2" class="pilcrow">¶</a></p>
@@ -1291,9 +1290,9 @@ described in BCP 14 <span>[<a href="#RFC2119" class="cite xref">RFC2119</a>]</s
 appear in all capitals, as shown here.<a href="#section-1.1-1" class="pilcrow">¶</a></p>
 <p id="section-1.1-2">This document uses terminology from <span>[<a href="#CONNECT-UDP" class="cite xref">CONNECT-UDP</a>]</span> and notational
 conventions from <span>[<a href="#QUIC" class="cite xref">QUIC</a>]</span>. This document uses the terms Boolean,
-List, and String from <span><a href="https://rfc-editor.org/rfc/rfc9651#section-3" class="relref">Section 3</a> of [<a href="#STRUCTURED-FIELDS" class="cite xref">STRUCTURED-FIELDS</a>]</span>
-to specify syntax and parsing. This document uses Augmented Backus-Naur Form
-and parsing/serialization behaviors from <span>[<a href="#ABNF" class="cite xref">ABNF</a>]</span>.<a href="#section-1.1-2" class="pilcrow">¶</a></p>
+List, and String from <span><a href="https://rfc-editor.org/rfc/rfc9651#section-3" class="relref">Section 3</a> of [<a href="#STRUCTURED-FIELDS" class="cite xref">STRUCTURED-FIELDS</a>]</span> to specify
+syntax and parsing. This document uses Augmented Backus-Naur Form and
+parsing/serialization behaviors from <span>[<a href="#ABNF" class="cite xref">ABNF</a>]</span>.<a href="#section-1.1-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1315,12 +1314,12 @@ as specified in <a href="#hdr" class="auto internal xref">Section 6</a> to reque
 proxying, it returns the Connect-UDP-Bind response header field value set to
 true.<a href="#section-2-2" class="pilcrow">¶</a></p>
 <p id="section-2-3">When "target_host" and "target_port" are set to a valid target, the client
-is requesting bound UDP proxying but would accept fallback to unextended
-UDP proxying to that target. If the client doesn't have a specific target, or
-if it wants bound UDP proxying without fallback, it sets both the "target_host" and
-the "target_port" variables to the '<code>*</code>' character (ASCII
-character 0x2A). Note that the '<code>*</code>' character <span class="bcp14">MUST</span> be percent-encoded
-before sending, per <span><a href="https://rfc-editor.org/rfc/rfc6570#section-3.2.2" class="relref">Section 3.2.2</a> of [<a href="#TEMPLATE" class="cite xref">TEMPLATE</a>]</span>.<a href="#section-2-3" class="pilcrow">¶</a></p>
+is requesting bound UDP proxying but would accept fallback to unextended UDP
+proxying to that target. If the client doesn't have a specific target, or if
+it wants bound UDP proxying without fallback, it sets both the "target_host"
+and the "target_port" variables to the '<code>*</code>' character (ASCII character
+0x2A). Note that the '<code>*</code>' character <span class="bcp14">MUST</span> be percent-encoded before sending,
+per <span><a href="https://rfc-editor.org/rfc/rfc6570#section-3.2.2" class="relref">Section 3.2.2</a> of [<a href="#TEMPLATE" class="cite xref">TEMPLATE</a>]</span>.<a href="#section-2-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="contextid">
