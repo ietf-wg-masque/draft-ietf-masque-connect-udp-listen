@@ -5,7 +5,7 @@
 MASQUE                                                       D. Schinazi
 Internet-Draft                                                  A. Singh
 Intended status: Standards Track                              Google LLC
-Expires: 20 April 2026                                   17 October 2025
+Expires: 19 July 2026                                    15 January 2026
 
 
                        Proxying Bound UDP in HTTP
@@ -54,11 +54,11 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 20 April 2026.
+   This Internet-Draft will expire on 19 July 2026.
 
 Copyright Notice
 
-   Copyright (c) 2025 IETF Trust and the persons identified as the
+   Copyright (c) 2026 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
    This document is subject to BCP 78 and the IETF Trust's Legal
@@ -102,8 +102,10 @@ Table of Contents
 
    The mechanism to proxy UDP in HTTP [CONNECT-UDP] allows creating
    tunnels for communicating UDP payloads [UDP] to a fixed host and
-   port.  Combined with the HTTP CONNECT method (see Section 9.3.6 of
-   [HTTP]), it allows proxying the majority of a Web Browser's HTTP
+   port; this enables proxying of HTTP/3 connections, since they run
+   over UDP.  Similarly, the HTTP CONNECT method (see Section 9.3.6 of
+   [HTTP]) allows proxying HTTP/1.x and HTTP/2, which run over TCP.
+   Combining both allows proxying the majority of a Web Browser's HTTP
    traffic.  However WebRTC [WebRTC] relies on ICE [ICE] to provide
    connectivity between two Web browsers, and ICE relies on the ability
    to send and receive UDP packets to multiple hosts.  While in theory
@@ -127,10 +129,10 @@ Table of Contents
    capitals, as shown here.
 
    This document uses terminology from [CONNECT-UDP] and notational
-   conventions from [QUIC].  This document uses the terms Boolean,
-   Integer, List, and String from Section 3 of [STRUCTURED-FIELDS] to
-   specify syntax and parsing.  This document uses Augmented Backus-Naur
-   Form and parsing/serialization behaviors from [ABNF].
+   conventions from [QUIC].  This document uses the terms Boolean, List,
+   and String from Section 3 of [STRUCTURED-FIELDS] to specify syntax
+   and parsing.  This document uses Augmented Backus-Naur Form and
+   parsing/serialization behaviors from [ABNF].
 
 2.  Bound UDP Proxying Mechanism
 
@@ -143,9 +145,9 @@ Table of Contents
    (see Section 3 of [CONNECT-UDP]), the client follows the same
    template as unextended UDP proxying and sets the "target_host" and
    the "target_port" variables to one of its targets.  It adds the
-   Connect-UDP-Bind header as specified in Section 6 to request bind.
-   If the proxy supports bound UDP proxying, it returns the Connect-UDP-
-   Bind response header value set to true.
+   Connect-UDP-Bind header field as specified in Section 6 to request
+   bind.  If the proxy supports bound UDP proxying, it returns the
+   Connect-UDP-Bind response header field value set to true.
 
    When "target_host" and "target_port" are set to a valid target, the
    client is requesting bound UDP proxying but would accept fallback to
@@ -453,8 +455,8 @@ Table of Contents
 
    The security considerations described in Section 7 of [CONNECT-UDP]
    also apply here.  Since TURN can be run over this mechanism,
-   implementors should review the security considerations in Section 21
-   of [TURN].
+   implementors will benefit from reviewing the security considerations
+   in Section 21 of [TURN].
 
    Since unextended UDP proxying requests carry the target as part of
    the request, the proxy can protect unauthorized targets by rejecting
