@@ -55,7 +55,7 @@ informative:
 The mechanism to proxy UDP in HTTP only allows each UDP proxying request to
 transmit to a specific host and port. This is well suited for UDP
 client-server protocols such as HTTP/3, but is not sufficient for some UDP
-peer-to-peer protocols like WebRTC. This document proposes an extension to
+peer-to-peer protocols like WebRTC. This document defines an extension to
 UDP proxying in HTTP that enables such use-cases.
 
 --- middle
@@ -67,7 +67,7 @@ tunnels for communicating UDP payloads {{!UDP=RFC0768}} to a fixed host and
 port; this enables proxying of HTTP/3 connections, since they run over UDP.
 Similarly, the HTTP CONNECT method (see {{Section 9.3.6 of !HTTP=RFC9110}})
 allows proxying HTTP/1.x and HTTP/2, which run over TCP. Combining both
-allows proxying the majority of a Web Browser's HTTP traffic. However WebRTC
+allows proxying the majority of a Web browser's HTTP traffic. However, WebRTC
 {{WebRTC}} relies on ICE {{?ICE=RFC8445}} to provide connectivity between
 two Web browsers, and ICE relies on the ability to send and receive UDP
 packets to multiple hosts. While in theory it might be possible to
@@ -95,8 +95,9 @@ parsing/serialization behaviors from {{!ABNF=RFC5234}}.
 
 In unextended UDP proxying requests, the target host is encoded in the HTTP
 request path or query. For bound UDP proxying, the target is either conveyed
-in each HTTP Datagram (see {{fmt-dgram-uncomp}}), or registered via capsules
-and then compressed (see {{fmt-capsule-assign}}).
+in each HTTP Datagram (see {{uncompressed}}), or registered via capsules
+and then compressed (see Sections {{<contextid}} and
+{{<compressed-operation}}).
 
 When performing URI Template Expansion of the UDP proxying template (see
 {{Section 3 of CONNECT-UDP}}), the client follows the same template as
@@ -114,6 +115,10 @@ and the "target_port" variables to the '`*`' character (ASCII character
 0x2A). Note that the '`*`' character MUST be percent-encoded before sending,
 per {{Section 3.2.2 of !TEMPLATE=RFC6570}}.
 
+If only one of the "target_host" and the "target_port" variables is set to
+the '`*`' character, the request is malformed. The recipient of such a
+malformed request MUST respond with an error and SHOULD use the 400
+(Bad Request) status code.
 
 # Context Identifiers {#contextid}
 
@@ -136,7 +141,8 @@ payloads sent to and from the "target_host" and "target_port" from the URI
 template. When the mechanism from this document is in use:
 
 * if the "target_host" and "target_port" variables are set to '`*`', then
-  context ID 0 MUST NOT be used in HTTP Datagrams.
+  context ID 0 MUST NOT be used in HTTP Datagrams. If one is received, the
+  recipient MUST abort the request stream.
 
 * otherwise, HTTP Datagrams with context ID 0 have the same semantics as in
   unextended UDP proxying.
@@ -214,7 +220,8 @@ Only one Context ID can be used per IP-port tuple. If an endpoint detects
 that both it and its peer have opened a Context ID for the same tuple, the
 endpoint MUST close the Context ID that was opened by the proxy. If an
 endpoint receives a COMPRESSION_ASSIGN capsule whose tuple matches another
-open Context ID, it MUST treat the capsule as malformed.
+open Context ID that was opened by its peer, it MUST treat the capsule as
+malformed.
 
 Endpoints MAY pre-emptively use Context IDs not yet acknowledged by the peer
 via COMPRESSION_ACK, knowing that those HTTP Datagrams can be dropped if
@@ -275,7 +282,7 @@ has been registered (see {{uncompressed}}).
 If the client wishes to send or receive uncompressed datagrams, it MUST
 first send a COMPRESSION_ASSIGN capsule (see {{fmt-capsule-assign}}) to the
 proxy with the IP Version set to zero. This registers the Context ID as
-being uncompressed semantics: all HTTP Datagrams with this Context ID have
+having uncompressed semantics: all HTTP Datagrams with this Context ID have
 the following format:
 
 ~~~
@@ -379,8 +386,8 @@ ip-port-tuple = DQUOTE ( IP-literal / IPv4address ) ":" port DQUOTE
 {: #target-format title="Proxy Address Format"}
 
 When a single IP-Port tuple is provided in the Proxy-Public-Address field,
-the proxy MUST use the same public IP and Port for the remainder of the
-connection. When multiple tuples are provided, maintaining address stability
+the proxy MUST use the same public IP and Port for the lifetime of the
+tunnel. When multiple tuples are provided, maintaining address stability
 per address family is RECOMMENDED.
 
 Note that since the addresses are conveyed in HTTP response headers, a
@@ -426,7 +433,7 @@ request, the proxy can protect unauthorized targets by rejecting requests
 before creating the tunnel, and communicate the rejection reason in response
 header fields. The uncompressed context allows transporting datagrams to and
 from any target. Clients that keep the uncompressed context open need to be
-able to receive from all targets. If the UDP proxy would reject unextended
+able to receive from all targets. If the UDP proxy were to reject unextended
 UDP proxying requests to some targets (as recommended in {{Section 7 of
 CONNECT-UDP}}), then for bound UDP proxying requests where the uncompressed
 context is open, the UDP proxy needs to perform checks on the target of each
@@ -450,7 +457,7 @@ compression, it SHOULD request it as early as possible.
 
 ## HTTP Fields {#iana-fields}
 
-This document will request IANA to register the following new items in the
+This document requests IANA to register the following new items in the
 "HTTP Field Name" registry maintained at
 <[](https://www.iana.org/assignments/http-fields)>:
 
@@ -474,7 +481,7 @@ Comments:
 
 ## Capsules {#iana-capsules}
 
-This document will request IANA to register the following new items to the
+This document requests IANA to register the following new items to the
 "HTTP Capsule Types" registry maintained at
 <[](https://www.iana.org/assignments/masque)>:
 
