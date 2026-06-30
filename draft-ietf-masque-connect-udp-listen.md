@@ -109,7 +109,7 @@ true.
 
 When "target_host" and "target_port" are set to a valid target, the client
 is requesting bound UDP proxying but would accept fallback to unextended UDP
-proxying to that target. If the client doesn't have a specific target, or if
+proxying to that target. If the client does not have a specific target, or if
 it wants bound UDP proxying without fallback, it sets both the "target_host"
 and the "target_port" variables to the '`*`' character (ASCII character
 0x2A). Note that the '`*`' character MUST be percent-encoded before sending,
@@ -437,15 +437,16 @@ benefit from reviewing the security considerations in {{Section 21 of
 ?TURN=RFC8656}}.
 
 Since unextended UDP proxying requests carry the target as part of the
-request, the proxy can protect unauthorized targets by rejecting requests
-before creating the tunnel, and communicate the rejection reason in response
-header fields. The uncompressed Context ID allows transporting datagrams to
-and from any target. Clients that keep the uncompressed Context ID open need
-to be able to receive from all targets. If the UDP proxy were to reject
-unextended UDP proxying requests to some targets (as recommended in
-{{Section 7 of CONNECT-UDP}}), then for bound UDP proxying requests where
-the uncompressed Context ID is open, the UDP proxy needs to perform checks
-on the target of each uncompressed Context ID datagram it receives.
+request, the proxy can protect against unauthorized targets by rejecting
+requests before creating the tunnel, and communicate the rejection reason
+in response header fields. The uncompressed Context ID allows transporting
+datagrams to and from any target. Clients that keep the uncompressed
+Context ID open need to be able to receive from all targets. If the UDP
+proxy were to reject unextended UDP proxying requests to some targets
+(as recommended in {{Section 7 of CONNECT-UDP}}), then for bound UDP
+proxying requests where the uncompressed Context ID is open, the UDP
+proxy needs to perform checks on the target of each uncompressed Context
+ID datagram it receives.
 
 Note that if the compression response (COMPRESSION_ACK OR COMPRESSION_CLOSE)
 cannot be immediately sent due to flow or congestion control, an upper limit
@@ -641,7 +642,7 @@ communication with only 203.0.113.11:4321 and no other UDP target.
 
 # Comparison with CONNECT-IP
 
-While the use-cases described in {{intro}} could be supported using IP
+While the use cases described in {{intro}} could be supported using IP
 proxying in HTTP {{?CONNECT-IP=RFC9484}}, it would require that every HTTP
 Datagram carries a complete IP header. This would lead to both
 inefficiencies in the wire encoding and reduction in available Maximum
