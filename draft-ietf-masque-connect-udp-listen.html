@@ -1434,11 +1434,11 @@ Context ID. If a recipient detects a repeated Context ID, it <span class="bcp14"
 capsule as malformed. Receipt of a malformed capsule <span class="bcp14">MUST</span> be treated as an
 error processing the Capsule Protocol, as defined in <span><a href="https://rfc-editor.org/rfc/rfc9297#section-3.3" class="relref">Section 3.3</a> of [<a href="#HTTP-DGRAM" class="cite xref">HTTP-DGRAM</a>]</span>.<a href="#section-3.1-8" class="pilcrow">¶</a></p>
 <p id="section-3.1-9">If the uncompressed Context ID is closed, the proxy <span class="bcp14">MUST NOT</span> open new
-compressed Context IDs. This would otherwise result in the proxy opening
-Context IDs not desired by the client, and nullify the IP restriction
-property of closing the uncompressed Context ID as described in
-<a href="#restricting-ips" class="auto internal xref">Section 8.1</a>. Note that compressed Context IDs that were established
-prior to the closing of the uncompressed Context ID are not impacted.<a href="#section-3.1-9" class="pilcrow">¶</a></p>
+compressed Context IDs. Allowing the proxy to do so would permit
+traffic from source tuples not selected by the client, defeating the
+IP restriction described in <a href="#restricting-ips" class="auto internal xref">Section 8.1</a>. Note that compressed
+Context IDs that were established prior to the closing of the
+uncompressed Context ID are not impacted.<a href="#section-3.1-9" class="pilcrow">¶</a></p>
 <p id="section-3.1-10">Only one Context ID can be used per IP-port tuple. Endpoints <span class="bcp14">MUST NOT</span>
 register a Context ID for a tuple for which there is already an existing
 Context ID. This can however happen if both endpoints register Context IDs
@@ -1729,12 +1729,18 @@ proxy were to reject unextended UDP proxying requests to some targets
 (as recommended in <span><a href="https://rfc-editor.org/rfc/rfc9298#section-7" class="relref">Section 7</a> of [<a href="#CONNECT-UDP" class="cite xref">CONNECT-UDP</a>]</span>), then for bound UDP
 proxying requests where the uncompressed Context ID is open, the UDP
 proxy needs to perform checks on the target of each uncompressed Context
-ID datagram it receives.<a href="#section-9-2" class="pilcrow">¶</a></p>
-<p id="section-9-3">Note that if the compression response (COMPRESSION_ACK OR COMPRESSION_CLOSE)
+ID datagram it receives. Similarly, the UDP proxy needs to perform checks
+on the IP address and port of received COMPRESSION_ASSIGN capsules and
+reject the registration of compressed Context IDs to disallowed targets.<a href="#section-9-2" class="pilcrow">¶</a></p>
+<p id="section-9-3">When an endpoint accepts the registration of a Context ID, it will need to
+store it in memory. To prevent unbounded memory growth, endpoints <span class="bcp14">MUST</span>
+place a limit on how many Context IDs can be open simultaneously and reject
+registrations beyond the limit.<a href="#section-9-3" class="pilcrow">¶</a></p>
+<p id="section-9-4">Note that if the compression response (COMPRESSION_ACK or COMPRESSION_CLOSE)
 cannot be immediately sent due to flow or congestion control, an upper limit
 on how many compression responses the endpoint is willing to buffer <span class="bcp14">MUST</span> be
 set to prevent memory exhaustion. The proxy <span class="bcp14">MUST</span> abort the request stream if
-this limit is reached.<a href="#section-9-3" class="pilcrow">¶</a></p>
+this limit is reached.<a href="#section-9-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="operational-considerations">

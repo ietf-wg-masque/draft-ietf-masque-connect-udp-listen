@@ -248,12 +248,11 @@ Table of Contents
    Section 3.3 of [HTTP-DGRAM].
 
    If the uncompressed Context ID is closed, the proxy MUST NOT open new
-   compressed Context IDs.  This would otherwise result in the proxy
-   opening Context IDs not desired by the client, and nullify the IP
-   restriction property of closing the uncompressed Context ID as
-   described in Section 8.1.  Note that compressed Context IDs that were
-   established prior to the closing of the uncompressed Context ID are
-   not impacted.
+   compressed Context IDs.  Allowing the proxy to do so would permit
+   traffic from source tuples not selected by the client, defeating the
+   IP restriction described in Section 8.1.  Note that compressed
+   Context IDs that were established prior to the closing of the
+   uncompressed Context ID are not impacted.
 
    Only one Context ID can be used per IP-port tuple.  Endpoints MUST
    NOT register a Context ID for a tuple for which there is already an
@@ -485,9 +484,16 @@ Table of Contents
    [CONNECT-UDP]), then for bound UDP proxying requests where the
    uncompressed Context ID is open, the UDP proxy needs to perform
    checks on the target of each uncompressed Context ID datagram it
-   receives.
+   receives.  Similarly, the UDP proxy needs to perform checks on the IP
+   address and port of received COMPRESSION_ASSIGN capsules and reject
+   the registration of compressed Context IDs to disallowed targets.
 
-   Note that if the compression response (COMPRESSION_ACK OR
+   When an endpoint accepts the registration of a Context ID, it will
+   need to store it in memory.  To prevent unbounded memory growth,
+   endpoints MUST place a limit on how many Context IDs can be open
+   simultaneously and reject registrations beyond the limit.
+
+   Note that if the compression response (COMPRESSION_ACK or
    COMPRESSION_CLOSE) cannot be immediately sent due to flow or
    congestion control, an upper limit on how many compression responses
    the endpoint is willing to buffer MUST be set to prevent memory
