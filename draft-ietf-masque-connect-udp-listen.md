@@ -527,7 +527,7 @@ In the example below, the client is configured with URI Template
 "https://example.org/.well-known/masque/udp/{target_host}/{target_port}/"
 and listens for traffic on the proxy, eventually decides that it no longer
 wants to listen for connections from new targets, and limits its
-communication with only 203.0.113.11:4321 and no other UDP target.
+communication with only 203.0.113.11:60000 and no other UDP target.
 
 ~~~
  Client                                             Server
@@ -569,7 +569,7 @@ communication with only 203.0.113.11:4321 and no other UDP target.
                          Context ID = 2
                          IP Version = 4
                          IP Address = 192.0.2.42
-                         UDP Port = 1234
+                         UDP Port = 50000
                          UDP Payload = Encapsulated UDP Payload
 
 // Client responds on the same uncompressed Context ID.
@@ -579,7 +579,7 @@ communication with only 203.0.113.11:4321 and no other UDP target.
    Context ID = 2
    IP Version = 4
    IP Address = 192.0.2.42
-   UDP Port = 1234
+   UDP Port = 50000
    UDP Payload = Encapsulated UDP Payload
 
 // Another target talks to Client using the uncompressed Context ID.
@@ -589,7 +589,7 @@ communication with only 203.0.113.11:4321 and no other UDP target.
                          Context ID = 2
                          IP Version = 4
                          IP Address = 203.0.113.11
-                         UDP Port = 4321
+                         UDP Port = 60000
                          UDP Payload = Encapsulated UDP Payload
 
 // Client responds on the same uncompressed Context ID.
@@ -599,17 +599,17 @@ communication with only 203.0.113.11:4321 and no other UDP target.
    Context ID = 2
    IP Version = 4
    IP Address = 203.0.113.11
-   UDP Port = 4321
+   UDP Port = 60000
    UDP Payload = Encapsulated UDP Payload
 
-// Register 203.0.113.11:4321 to compress it in the future.
+// Register 203.0.113.11:60000 to compress it in the future.
 
  CAPSULE                       -------->
    Type = COMPRESSION_ASSIGN
    Context ID = 4
    IP Version = 4
    IP Address = 203.0.113.11
-   UDP Port = 4321
+   UDP Port = 60000
 
 
 // Proxy confirms registration.
@@ -619,7 +619,7 @@ communication with only 203.0.113.11:4321 and no other UDP target.
                         Context ID = 4
 
 // Omit IP and Port for future packets intended for
-// 203.0.113.11:4321 hereon.
+// 203.0.113.11:60000 hereon.
 
  DATAGRAM                       -------->
    Context ID = 4
@@ -636,7 +636,7 @@ communication with only 203.0.113.11:4321 and no other UDP target.
    Type = COMPRESSION_CLOSE
    Context ID = 2
 
-// Context ID 4 = 203.0.113.11:4321 traffic is accepted,
+// Context ID 4 = 203.0.113.11:60000 traffic is accepted,
 // and other traffic is dropped at the proxy.
 ~~~
 
