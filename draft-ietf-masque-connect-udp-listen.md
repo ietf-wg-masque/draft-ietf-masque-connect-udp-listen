@@ -141,10 +141,10 @@ payloads sent to and from the "target_host" and "target_port" from the URI
 template. When the mechanism from this document is in use:
 
 * if the "target_host" and "target_port" variables are set to '`*`', then
-  context ID 0 MUST NOT be used in HTTP Datagrams. If one is received, the
+  Context ID 0 MUST NOT be used in HTTP Datagrams. If one is received, the
   recipient MUST abort the request stream.
 
-* otherwise, HTTP Datagrams with context ID 0 have the same semantics as in
+* otherwise, HTTP Datagrams with Context ID 0 have the same semantics as in
   unextended UDP proxying.
 
 
@@ -171,8 +171,8 @@ IP Version:
 
 : The IP Version of the following IP Address field. MUST be 0, 4 or 6.
 Setting this to zero indicates that this capsule registers an uncompressed
-context. Otherwise, the capsule registers a compressed context for the IP
-address and UDP port it carries.
+Context ID. Otherwise, the capsule registers a compressed Context ID for
+the IP address and UDP port it carries.
 
 IP Address:
 
@@ -189,7 +189,7 @@ When an endpoint receives a COMPRESSION_ASSIGN capsule, it MUST either
 accept or reject the corresponding registration:
 
 * if it accepts the registration, first the receiver MUST save the mapping
-  from Context ID to address and port (or save the fact that this context ID
+  from Context ID to address and port (or save the fact that this Context ID
   is uncompressed). Second, the receiver MUST return a COMPRESSION_ACK
   capsule with the Context ID set to the one from the received
   COMPRESSION_ASSIGN capsule back to its peer, indicating it has accepted
@@ -210,18 +210,22 @@ capsule as malformed. Receipt of a malformed capsule MUST be treated as an
 error processing the Capsule Protocol, as defined in {{Section 3.3 of
 !HTTP-DGRAM=RFC9297}}.
 
-If the uncompressed context is closed, the proxy MUST NOT open new
-compressed contexts. In such a case, the proxy opening contexts results in
-tuples not desired by the client reaching it thereby nullifying the IP
-restriction property of uncompressed compression close as described in
-{{restricting-ips}}.
+If the uncompressed Context ID is closed, the proxy MUST NOT open new
+compressed Context IDs. This would otherwise result in the proxy opening
+Context IDs not desired by the client, and nullify the IP restriction
+property of closing the uncompressed Context ID as described in
+{{restricting-ips}}. Note that compressed Context IDs that were established
+prior to the closing of the uncompressed Context ID are not impacted.
 
-Only one Context ID can be used per IP-port tuple. If an endpoint detects
-that both it and its peer have opened a Context ID for the same tuple, the
-endpoint MUST close the Context ID that was opened by the proxy. If an
-endpoint receives a COMPRESSION_ASSIGN capsule whose tuple matches another
-open Context ID that was opened by its peer, it MUST treat the capsule as
-malformed.
+Only one Context ID can be used per IP-port tuple. Endpoints MUST NOT
+register a Context ID for a tuple for which there is already an existing
+Context ID. This can however happen if both endpoints register Context IDs
+simultaneously for the same tuple before learning that the peer also
+opened one. If an endpoint detects that both it and its peer have opened a
+Context ID for the same tuple, the endpoint MUST close the Context ID that
+was opened by the proxy. If an endpoint receives a COMPRESSION_ASSIGN
+capsule whose tuple matches another open Context ID that was opened by its
+peer, it MUST treat the capsule as malformed.
 
 Endpoints MAY pre-emptively use Context IDs not yet acknowledged by the peer
 via COMPRESSION_ACK, knowing that those HTTP Datagrams can be dropped if
@@ -231,7 +235,7 @@ peer rejects the registration.
 ## The COMPRESSION_ACK capsule {#capsule-ack}
 
 The Compression Acknowledgment capsule (capsule type 0x12) serves to confirm
-registration of a context ID that was received via a COMPRESSION_ASSIGN
+registration of a Context ID that was received via a COMPRESSION_ASSIGN
 capsule.
 
 ~~~
@@ -245,7 +249,7 @@ COMPRESSION_ACK Capsule {
 
 An endpoint can only send a COMPRESSION_ACK capsule if it received a
 COMPRESSION_ASSIGN capsule with the same Context ID. If an endpoint receives
-COMPRESSION_ACK capsule for a context ID it did not attempt to register via
+COMPRESSION_ACK capsule for a Context ID it did not attempt to register via
 COMPRESSION_ASSIGN, that capsule is considered malformed.
 
 ## The COMPRESSION_CLOSE capsule {#capsule-close}
@@ -269,13 +273,16 @@ Context ID, it MUST NOT send any further datagrams with that Context ID.
 Since the value 0 was reserved by unextended UDP proxying, a
 COMPRESSION_CLOSE capsule with Context ID set to zero is malformed.
 
-Endpoints MAY close any context regardless of which endpoint registered it.
-This is useful for example, when a mapping is unused for a long time.
+Endpoints MAY close any Context ID regardless of which endpoint registered
+it. This is useful for example, when a mapping is unused for a long time.
 Another potential use is restricting some targets (see {{restricting-ips}}).
 
 Once a registration is closed, endpoints can instead use an uncompressed
-Context ID to exchange UDP payloads for the given target, if such a context
+Context ID to exchange UDP payloads for the given target, if such a Context
 has been registered (see {{uncompressed}}).
+
+Once a Context ID has been closed, that ID cannot be reused; see
+{{Section 4 of CONNECT-UDP}}.
 
 # Uncompressed Operation {#uncompressed}
 
@@ -325,10 +332,11 @@ A client MUST NOT open an uncompressed Context ID if one is already open. If
 a server receives a request to open an uncompressed Context ID and it
 already has one open, then the server MUST treat the second capsule as
 malformed. Note that it's possible for the client to close the uncompressed
-context and reopen it later with a different Context ID, as long as there
-aren't two uncompressed contexts open at the same time. Only the client can
-request uncompressed contexts. If a client receives a COMPRESSION_ASSIGN
-capsule with the IP Version set to 0, it MUST treat it as malformed.
+Context ID and reopen it later with a different Context ID, as long as there
+aren't two uncompressed Context IDs open at the same time. Only the client
+can request uncompressed Context IDs. If a client receives a
+COMPRESSION_ASSIGN capsule with the IP Version set to 0, it MUST treat it
+as malformed.
 
 # Compressed Operation {#compressed-operation}
 
@@ -388,14 +396,14 @@ ip-port-tuple = DQUOTE ( IP-literal / IPv4address ) ":" port DQUOTE
 When a single IP-Port tuple is provided in the Proxy-Public-Address field,
 the proxy MUST use the same public IP and Port for the lifetime of the
 tunnel. When multiple tuples are provided, maintaining address stability
-per address family is RECOMMENDED.
+per address family for the duration of the tunnel is RECOMMENDED.
 
 Note that since the addresses are conveyed in HTTP response headers, a
 subsequent change of addresses on the proxy cannot be conveyed to the client.
 
 If the proxy only shares IP addresses from a single address family, that
 indicates that the proxy only supports that family. The client SHOULD NOT
-attempt to register compressed contexts or send uncompressed datagrams
+attempt to register compressed Context IDs or send uncompressed datagrams
 intended for targets whose IP address families were not indicated via the IP
 addresses listed in the Proxy-Public-Address header field, as the proxy will
 drop those datagrams and reject those registrations.
@@ -417,7 +425,7 @@ temporarily buffer it (see {{Section 5 of CONNECT-UDP}}).
 ## Restricting IPs {#restricting-ips}
 
 If a client does not wish to receive datagrams from unknown senders, it can
-close the uncompressed registration (or not open it in the first place). In
+close the uncompressed Context ID (or not open it in the first place). In
 that scenario, the proxy effectively acts as a firewall against unwanted or
 unknown IPs.
 
@@ -431,13 +439,13 @@ benefit from reviewing the security considerations in {{Section 21 of
 Since unextended UDP proxying requests carry the target as part of the
 request, the proxy can protect unauthorized targets by rejecting requests
 before creating the tunnel, and communicate the rejection reason in response
-header fields. The uncompressed context allows transporting datagrams to and
-from any target. Clients that keep the uncompressed context open need to be
-able to receive from all targets. If the UDP proxy were to reject unextended
-UDP proxying requests to some targets (as recommended in {{Section 7 of
-CONNECT-UDP}}), then for bound UDP proxying requests where the uncompressed
-context is open, the UDP proxy needs to perform checks on the target of each
-uncompressed context datagram it receives.
+header fields. The uncompressed Context ID allows transporting datagrams to
+and from any target. Clients that keep the uncompressed Context ID open need
+to be able to receive from all targets. If the UDP proxy were to reject
+unextended UDP proxying requests to some targets (as recommended in
+{{Section 7 of CONNECT-UDP}}), then for bound UDP proxying requests where
+the uncompressed Context ID is open, the UDP proxy needs to perform checks
+on the target of each uncompressed Context ID datagram it receives.
 
 Note that if the compression response (COMPRESSION_ACK OR COMPRESSION_CLOSE)
 cannot be immediately sent due to flow or congestion control, an upper limit
@@ -447,7 +455,7 @@ this limit is reached.
 
 # Operational Considerations
 
-When moving traffic between uncompressed and compressed contexts, the
+When moving traffic between uncompressed and compressed Context IDs, the
 effective MTU will change. This can hinder Datagram Packetization Layer PMTU
 Discovery (DPLPMTUD) between the client and the target
 {{?DPLPMTUD=RFC8899}}. To avoid that, if an endpoint intends to use
@@ -553,7 +561,7 @@ communication with only 203.0.113.11:4321 and no other UDP target.
                         Type = COMPRESSION_ACK
                         Context ID = 2
 
-// Target talks to Client using the uncompressed context.
+// Target talks to Client using the uncompressed Context ID.
 
             <--------  DATAGRAM
                          Quarter Stream ID = 11
@@ -563,7 +571,7 @@ communication with only 203.0.113.11:4321 and no other UDP target.
                          UDP Port = 1234
                          UDP Payload = Encapsulated UDP Payload
 
-// Client responds on the same uncompressed context.
+// Client responds on the same uncompressed Context ID.
 
  DATAGRAM                       -------->
    Quarter Stream ID = 11
@@ -573,7 +581,7 @@ communication with only 203.0.113.11:4321 and no other UDP target.
    UDP Port = 1234
    UDP Payload = Encapsulated UDP Payload
 
-// Another target talks to Client using the uncompressed context.
+// Another target talks to Client using the uncompressed Context ID.
 
             <--------  DATAGRAM
                          Quarter Stream ID = 11
@@ -583,7 +591,7 @@ communication with only 203.0.113.11:4321 and no other UDP target.
                          UDP Port = 4321
                          UDP Payload = Encapsulated UDP Payload
 
-// Client responds on the same uncompressed context.
+// Client responds on the same uncompressed Context ID.
 
  DATAGRAM                       -------->
    Quarter Stream ID = 11
@@ -621,7 +629,7 @@ communication with only 203.0.113.11:4321 and no other UDP target.
                         UDP Payload = Encapsulated UDP Payload
 
 // Request packets without a corresponding compressed Context
-// to be dropped by closing the uncompressed Context.
+// to be dropped by closing the uncompressed Context ID.
 
  CAPSULE                       -------->
    Type = COMPRESSION_CLOSE
