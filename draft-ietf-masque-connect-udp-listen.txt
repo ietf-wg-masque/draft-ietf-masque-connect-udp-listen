@@ -517,8 +517,8 @@ Table of Contents
 11.1.  HTTP Fields
 
    This document requests IANA to register the following new items in
-   the "HTTP Field Name" registry maintained at
-   <https://www.iana.org/assignments/http-fields>:
+   the "Hypertext Transfer Protocol (HTTP) Field Name Registry" registry
+   maintained at <https://www.iana.org/assignments/http-fields>:
 
                 +======================+=================+
                 | Field Name           | Structured Type |
