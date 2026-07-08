@@ -270,6 +270,9 @@ COMPRESSION_CLOSE Capsule {
 
 Once an endpoint has either sent or received a COMPRESSION_CLOSE for a given
 Context ID, it MUST NOT send any further datagrams with that Context ID.
+(Note that, due to reordering, an endpoint can receive datagrams with a
+Context ID that has previously been closed; these MUST be discarded silently.)
+
 Since the value 0 was reserved by unextended UDP proxying, a
 COMPRESSION_CLOSE capsule with Context ID set to zero is malformed.
 
