@@ -477,8 +477,8 @@ compression, it SHOULD request it as early as possible.
 ## HTTP Fields {#iana-fields}
 
 This document requests IANA to register the following new items in the
-"HTTP Field Name" registry maintained at
-<[](https://www.iana.org/assignments/http-fields)>:
+"Hypertext Transfer Protocol (HTTP) Field Name Registry" registry
+maintained at <[](https://www.iana.org/assignments/http-fields)>:
 
 |      Field Name      | Structured Type |
 |:---------------------|:----------------|
