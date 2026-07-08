@@ -1509,16 +1509,18 @@ COMPRESSION_CLOSE Capsule {
 </div>
 <p id="section-3.3-3">Once an endpoint has either sent or received a COMPRESSION_CLOSE for a given
 Context ID, it <span class="bcp14">MUST NOT</span> send any further datagrams with that Context ID.
-Since the value 0 was reserved by unextended UDP proxying, a
-COMPRESSION_CLOSE capsule with Context ID set to zero is malformed.<a href="#section-3.3-3" class="pilcrow">¶</a></p>
-<p id="section-3.3-4">Endpoints <span class="bcp14">MAY</span> close any Context ID regardless of which endpoint registered
+(Note that, due to reordering, an endpoint can receive datagrams with a
+Context ID that has previously been closed; these <span class="bcp14">MUST</span> be discarded silently.)<a href="#section-3.3-3" class="pilcrow">¶</a></p>
+<p id="section-3.3-4">Since the value 0 was reserved by unextended UDP proxying, a
+COMPRESSION_CLOSE capsule with Context ID set to zero is malformed.<a href="#section-3.3-4" class="pilcrow">¶</a></p>
+<p id="section-3.3-5">Endpoints <span class="bcp14">MAY</span> close any Context ID regardless of which endpoint registered
 it. This is useful for example, when a mapping is unused for a long time.
-Another potential use is restricting some targets (see <a href="#restricting-ips" class="auto internal xref">Section 8.1</a>).<a href="#section-3.3-4" class="pilcrow">¶</a></p>
-<p id="section-3.3-5">Once a registration is closed, endpoints can instead use an uncompressed
+Another potential use is restricting some targets (see <a href="#restricting-ips" class="auto internal xref">Section 8.1</a>).<a href="#section-3.3-5" class="pilcrow">¶</a></p>
+<p id="section-3.3-6">Once a registration is closed, endpoints can instead use an uncompressed
 Context ID to exchange UDP payloads for the given target, if such a Context
-has been registered (see <a href="#uncompressed" class="auto internal xref">Section 4</a>).<a href="#section-3.3-5" class="pilcrow">¶</a></p>
-<p id="section-3.3-6">Once a Context ID has been closed, that ID cannot be reused; see
-<span><a href="https://rfc-editor.org/rfc/rfc9298#section-4" class="relref">Section 4</a> of [<a href="#CONNECT-UDP" class="cite xref">CONNECT-UDP</a>]</span>.<a href="#section-3.3-6" class="pilcrow">¶</a></p>
+has been registered (see <a href="#uncompressed" class="auto internal xref">Section 4</a>).<a href="#section-3.3-6" class="pilcrow">¶</a></p>
+<p id="section-3.3-7">Once a Context ID has been closed, that ID cannot be reused; see
+<span><a href="https://rfc-editor.org/rfc/rfc9298#section-4" class="relref">Section 4</a> of [<a href="#CONNECT-UDP" class="cite xref">CONNECT-UDP</a>]</span>.<a href="#section-3.3-7" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
