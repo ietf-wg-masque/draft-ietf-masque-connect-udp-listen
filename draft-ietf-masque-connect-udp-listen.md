@@ -131,10 +131,10 @@ of the new Context ID to their peer. This process is known as registering
 the Context ID.
 
 Each Context ID can have either compressed or uncompressed semantics. The
-uncompressed variant encodes the target IP and port into each HTTP Datagram.
-Conversely, the compressed variant exchanges the target IP and port once in
-the capsule during registration, and then relies on shared state to map from
-the Context ID to the IP and port.
+uncompressed variant encodes the target IP address and port into each HTTP
+Datagram. Conversely, the compressed variant exchanges the target IP address
+and port once in the capsule during registration, and then relies on shared
+state to map from the Context ID to the IP address and port.
 
 Context ID 0 was reserved by unextended UDP proxying to represent UDP
 payloads sent to and from the "target_host" and "target_port" from the URI
@@ -217,7 +217,7 @@ IP restriction described in {{restricting-ips}}. Note that compressed
 Context IDs that were established prior to the closing of the
 uncompressed Context ID are not impacted.
 
-Only one Context ID can be used per IP-port tuple. Endpoints MUST NOT
+Only one Context ID can be used per (IP address, port) tuple. Endpoints MUST NOT
 register a Context ID for a tuple for which there is already an existing
 Context ID. This can however happen if both endpoints register Context IDs
 simultaneously for the same tuple before learning that the peer also
@@ -340,7 +340,7 @@ as malformed.
 
 # Compressed Operation {#compressed-operation}
 
-Endpoints MAY choose to compress the IP and port information per datagram
+Endpoints MAY choose to compress the IP address and port information per datagram
 for a given target using Context IDs. This is accomplished by registering a
 compressed Context ID using the COMPRESSION_ASSIGN capsule (see
 {{fmt-capsule-assign}}).
@@ -382,7 +382,7 @@ Upon accepting the request, the proxy MUST select at least one public IP
 address to bind. The proxy MAY assign more addresses. For each selected
 address, it MUST select an open port to bind to this request. From then and
 until the tunnel is closed, the proxy SHALL send packets received on these
-IP-port tuples to the client. The proxy MUST communicate the selected
+(IP address, port) tuples to the client. The proxy MUST communicate the selected
 addresses and ports to the client using the "Proxy-Public-Address" header
 field. The header field is a List. Each member of the List is a String,
 comprised of the ip-port tuple. The format of the String is defined using
@@ -393,8 +393,8 @@ ip-port-tuple = DQUOTE ( IP-literal / IPv4address ) ":" port DQUOTE
 ~~~
 {: #target-format title="Proxy Address Format"}
 
-When a single IP-Port tuple is provided in the Proxy-Public-Address field,
-the proxy MUST use the same public IP and Port for the lifetime of the
+When a single (IP address, port) tuple is provided in the Proxy-Public-Address field,
+the proxy MUST use the same public IP address and port for the lifetime of the
 tunnel. When multiple tuples are provided, maintaining address stability
 per address family for the duration of the tunnel is RECOMMENDED.
 
@@ -625,7 +625,7 @@ communication with only 203.0.113.11:60000 and no other UDP target.
                         Type = COMPRESSION_ACK
                         Context ID = 4
 
-// Omit IP and Port for future packets intended for
+// Omit IP address and port for future packets intended for
 // 203.0.113.11:60000 hereon.
 
  DATAGRAM                       -------->
