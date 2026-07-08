@@ -41,7 +41,7 @@ UDP proxying in HTTP that enables such use-cases.
     pycountry 24.6.1
     PyYAML 6.0.3
     requests 2.33.1
-    wcwidth 0.8.1
+    wcwidth 0.8.2
 -->
 <link href="draft-ietf-masque-connect-udp-listen.xml" rel="alternate" type="application/rfc+xml">
 <link href="#copyright" rel="license">
@@ -1060,11 +1060,11 @@ svg {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">CONNECT-UDP Bind</td>
-<td class="right">June 2026</td>
+<td class="right">July 2026</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Schinazi &amp; Singh</td>
-<td class="center">Expires 1 January 2027</td>
+<td class="center">Expires 9 January 2027</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1077,12 +1077,12 @@ svg {
 <dd class="internet-draft">draft-ietf-masque-connect-udp-listen-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2026-06-30" class="published">30 June 2026</time>
+<time datetime="2026-07-08" class="published">8 July 2026</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2027-01-01">1 January 2027</time></dd>
+<dd class="expires"><time datetime="2027-01-09">9 January 2027</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1140,7 +1140,7 @@ UDP proxying in HTTP that enables such use-cases.<a href="#section-abstract-1" c
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 1 January 2027.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 9 January 2027.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1341,10 +1341,10 @@ COMPRESSION_ASSIGN capsule (see <a href="#capsule-assign" class="auto internal x
 of the new Context ID to their peer. This process is known as registering
 the Context ID.<a href="#section-3-1" class="pilcrow">¶</a></p>
 <p id="section-3-2">Each Context ID can have either compressed or uncompressed semantics. The
-uncompressed variant encodes the target IP and port into each HTTP Datagram.
-Conversely, the compressed variant exchanges the target IP and port once in
-the capsule during registration, and then relies on shared state to map from
-the Context ID to the IP and port.<a href="#section-3-2" class="pilcrow">¶</a></p>
+uncompressed variant encodes the target IP address and port into each HTTP
+Datagram. Conversely, the compressed variant exchanges the target IP address
+and port once in the capsule during registration, and then relies on shared
+state to map from the Context ID to the IP address and port.<a href="#section-3-2" class="pilcrow">¶</a></p>
 <p id="section-3-3">Context ID 0 was reserved by unextended UDP proxying to represent UDP
 payloads sent to and from the "target_host" and "target_port" from the URI
 template. When the mechanism from this document is in use:<a href="#section-3-3" class="pilcrow">¶</a></p>
@@ -1439,7 +1439,7 @@ traffic from source tuples not selected by the client, defeating the
 IP restriction described in <a href="#restricting-ips" class="auto internal xref">Section 8.1</a>. Note that compressed
 Context IDs that were established prior to the closing of the
 uncompressed Context ID are not impacted.<a href="#section-3.1-9" class="pilcrow">¶</a></p>
-<p id="section-3.1-10">Only one Context ID can be used per IP-port tuple. Endpoints <span class="bcp14">MUST NOT</span>
+<p id="section-3.1-10">Only one Context ID can be used per (IP address, port) tuple. Endpoints <span class="bcp14">MUST NOT</span>
 register a Context ID for a tuple for which there is already an existing
 Context ID. This can however happen if both endpoints register Context IDs
 simultaneously for the same tuple before learning that the peer also
@@ -1596,7 +1596,7 @@ as malformed.<a href="#section-4-5" class="pilcrow">¶</a></p>
       <h2 id="name-compressed-operation">
 <a href="#section-5" class="section-number selfRef">5. </a><a href="#name-compressed-operation" class="section-name selfRef">Compressed Operation</a>
       </h2>
-<p id="section-5-1">Endpoints <span class="bcp14">MAY</span> choose to compress the IP and port information per datagram
+<p id="section-5-1">Endpoints <span class="bcp14">MAY</span> choose to compress the IP address and port information per datagram
 for a given target using Context IDs. This is accomplished by registering a
 compressed Context ID using the COMPRESSION_ASSIGN capsule (see
 <a href="#fmt-capsule-assign" class="auto internal xref">Figure 1</a>).<a href="#section-5-1" class="pilcrow">¶</a></p>
@@ -1653,7 +1653,7 @@ parameters. Receivers <span class="bcp14">MUST</span> ignore unknown parameters.
 address to bind. The proxy <span class="bcp14">MAY</span> assign more addresses. For each selected
 address, it <span class="bcp14">MUST</span> select an open port to bind to this request. From then and
 until the tunnel is closed, the proxy <span class="bcp14">SHALL</span> send packets received on these
-IP-port tuples to the client. The proxy <span class="bcp14">MUST</span> communicate the selected
+(IP address, port) tuples to the client. The proxy <span class="bcp14">MUST</span> communicate the selected
 addresses and ports to the client using the "Proxy-Public-Address" header
 field. The header field is a List. Each member of the List is a String,
 comprised of the ip-port tuple. The format of the String is defined using
@@ -1669,8 +1669,8 @@ ip-port-tuple = DQUOTE ( IP-literal / IPv4address ) ":" port DQUOTE
 <a href="#name-proxy-address-format" class="selfRef">Proxy Address Format</a>
         </figcaption></figure>
 </div>
-<p id="section-7-3">When a single IP-Port tuple is provided in the Proxy-Public-Address field,
-the proxy <span class="bcp14">MUST</span> use the same public IP and Port for the lifetime of the
+<p id="section-7-3">When a single (IP address, port) tuple is provided in the Proxy-Public-Address field,
+the proxy <span class="bcp14">MUST</span> use the same public IP address and port for the lifetime of the
 tunnel. When multiple tuples are provided, maintaining address stability
 per address family for the duration of the tunnel is <span class="bcp14">RECOMMENDED</span>.<a href="#section-7-3" class="pilcrow">¶</a></p>
 <p id="section-7-4">Note that since the addresses are conveyed in HTTP response headers, a
@@ -1929,7 +1929,7 @@ compression, it <span class="bcp14">SHOULD</span> request it as early as possibl
 <dd class="break"></dd>
 <dt id="UDP">[UDP]</dt>
         <dd>
-<span class="refAuthor">Postel, J.</span>, <span class="refTitle">"User Datagram Protocol"</span>, <span class="seriesInfo">STD 6</span>, <span class="seriesInfo">RFC 768</span>, <span class="seriesInfo">DOI 10.17487/RFC0768</span>, <time datetime="1980-08" class="refDate">August 1980</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc768">https://www.rfc-editor.org/rfc/rfc768</a>&gt;</span>. </dd>
+<span class="refAuthor">Postel, J.</span>, <span class="refTitle">"User Datagram Protocol"</span>, <span class="seriesInfo">STD 6</span>, <span class="seriesInfo">RFC 768</span>, <span class="seriesInfo">DOI 10.17487/RFC768</span>, <time datetime="1980-08" class="refDate">August 1980</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc768">https://www.rfc-editor.org/rfc/rfc768</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="URI">[URI]</dt>
       <dd>
@@ -2069,7 +2069,7 @@ communication with only 203.0.113.11:60000 and no other UDP target.<a href="#app
                         Type = COMPRESSION_ACK
                         Context ID = 4
 
-// Omit IP and Port for future packets intended for
+// Omit IP address and port for future packets intended for
 // 203.0.113.11:60000 hereon.
 
  DATAGRAM                       --------&gt;

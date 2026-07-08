@@ -5,7 +5,7 @@
 MASQUE                                                       D. Schinazi
 Internet-Draft                                                  A. Singh
 Intended status: Standards Track                              Google LLC
-Expires: 1 January 2027                                     30 June 2026
+Expires: 9 January 2027                                      8 July 2026
 
 
                        Proxying Bound UDP in HTTP
@@ -54,7 +54,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 1 January 2027.
+   This Internet-Draft will expire on 9 January 2027.
 
 Copyright Notice
 
@@ -174,10 +174,11 @@ Table of Contents
    registering the Context ID.
 
    Each Context ID can have either compressed or uncompressed semantics.
-   The uncompressed variant encodes the target IP and port into each
-   HTTP Datagram.  Conversely, the compressed variant exchanges the
-   target IP and port once in the capsule during registration, and then
-   relies on shared state to map from the Context ID to the IP and port.
+   The uncompressed variant encodes the target IP address and port into
+   each HTTP Datagram.  Conversely, the compressed variant exchanges the
+   target IP address and port once in the capsule during registration,
+   and then relies on shared state to map from the Context ID to the IP
+   address and port.
 
    Context ID 0 was reserved by unextended UDP proxying to represent UDP
    payloads sent to and from the "target_host" and "target_port" from
@@ -254,16 +255,16 @@ Table of Contents
    Context IDs that were established prior to the closing of the
    uncompressed Context ID are not impacted.
 
-   Only one Context ID can be used per IP-port tuple.  Endpoints MUST
-   NOT register a Context ID for a tuple for which there is already an
-   existing Context ID.  This can however happen if both endpoints
-   register Context IDs simultaneously for the same tuple before
-   learning that the peer also opened one.  If an endpoint detects that
-   both it and its peer have opened a Context ID for the same tuple, the
-   endpoint MUST close the Context ID that was opened by the proxy.  If
-   an endpoint receives a COMPRESSION_ASSIGN capsule whose tuple matches
-   another open Context ID that was opened by its peer, it MUST treat
-   the capsule as malformed.
+   Only one Context ID can be used per (IP address, port) tuple.
+   Endpoints MUST NOT register a Context ID for a tuple for which there
+   is already an existing Context ID.  This can however happen if both
+   endpoints register Context IDs simultaneously for the same tuple
+   before learning that the peer also opened one.  If an endpoint
+   detects that both it and its peer have opened a Context ID for the
+   same tuple, the endpoint MUST close the Context ID that was opened by
+   the proxy.  If an endpoint receives a COMPRESSION_ASSIGN capsule
+   whose tuple matches another open Context ID that was opened by its
+   peer, it MUST treat the capsule as malformed.
 
    Endpoints MAY pre-emptively use Context IDs not yet acknowledged by
    the peer via COMPRESSION_ACK, knowing that those HTTP Datagrams can
@@ -374,10 +375,10 @@ Table of Contents
 
 5.  Compressed Operation
 
-   Endpoints MAY choose to compress the IP and port information per
-   datagram for a given target using Context IDs.  This is accomplished
-   by registering a compressed Context ID using the COMPRESSION_ASSIGN
-   capsule (see Figure 1).
+   Endpoints MAY choose to compress the IP address and port information
+   per datagram for a given target using Context IDs.  This is
+   accomplished by registering a compressed Context ID using the
+   COMPRESSION_ASSIGN capsule (see Figure 1).
 
    If the Context ID in an HTTP Datagram matches one previously
    registered for compressed operation, the rest of the HTTP Datagram
@@ -414,22 +415,22 @@ Table of Contents
    IP address to bind.  The proxy MAY assign more addresses.  For each
    selected address, it MUST select an open port to bind to this
    request.  From then and until the tunnel is closed, the proxy SHALL
-   send packets received on these IP-port tuples to the client.  The
-   proxy MUST communicate the selected addresses and ports to the client
-   using the "Proxy-Public-Address" header field.  The header field is a
-   List.  Each member of the List is a String, comprised of the ip-port
-   tuple.  The format of the String is defined using IP-literal,
-   IPv4address, and port from Section 3.2 of [URI].
+   send packets received on these (IP address, port) tuples to the
+   client.  The proxy MUST communicate the selected addresses and ports
+   to the client using the "Proxy-Public-Address" header field.  The
+   header field is a List.  Each member of the List is a String,
+   comprised of the ip-port tuple.  The format of the String is defined
+   using IP-literal, IPv4address, and port from Section 3.2 of [URI].
 
    ip-port-tuple = DQUOTE ( IP-literal / IPv4address ) ":" port DQUOTE
 
                        Figure 6: Proxy Address Format
 
-   When a single IP-Port tuple is provided in the Proxy-Public-Address
-   field, the proxy MUST use the same public IP and Port for the
-   lifetime of the tunnel.  When multiple tuples are provided,
-   maintaining address stability per address family for the duration of
-   the tunnel is RECOMMENDED.
+   When a single (IP address, port) tuple is provided in the Proxy-
+   Public-Address field, the proxy MUST use the same public IP address
+   and port for the lifetime of the tunnel.  When multiple tuples are
+   provided, maintaining address stability per address family for the
+   duration of the tunnel is RECOMMENDED.
 
    Note that since the addresses are conveyed in HTTP response headers,
    a subsequent change of addresses on the proxy cannot be conveyed to
@@ -608,7 +609,7 @@ Table of Contents
               <https://www.rfc-editor.org/rfc/rfc6570>.
 
    [UDP]      Postel, J., "User Datagram Protocol", STD 6, RFC 768,
-              DOI 10.17487/RFC0768, August 1980,
+              DOI 10.17487/RFC768, August 1980,
               <https://www.rfc-editor.org/rfc/rfc768>.
 
    [URI]      Berners-Lee, T., Fielding, R., and L. Masinter, "Uniform
@@ -741,7 +742,7 @@ Appendix A.  Example
                           Type = COMPRESSION_ACK
                           Context ID = 4
 
-  // Omit IP and Port for future packets intended for
+  // Omit IP address and port for future packets intended for
   // 203.0.113.11:60000 hereon.
 
    DATAGRAM                       -------->
