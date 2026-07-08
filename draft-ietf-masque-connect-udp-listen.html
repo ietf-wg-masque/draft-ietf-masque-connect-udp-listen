@@ -1439,8 +1439,7 @@ traffic from source tuples not selected by the client, defeating the
 IP restriction described in <a href="#restricting-ips" class="auto internal xref">Section 8.1</a>. Note that compressed
 Context IDs that were established prior to the closing of the
 uncompressed Context ID are not impacted.<a href="#section-3.1-9" class="pilcrow">¶</a></p>
-<p id="section-3.1-10">Only one Context ID can be used per (IP address, port) tuple. Endpoints <span class="bcp14">MUST NOT</span>
-register a Context ID for a tuple for which there is already an existing
+<p id="section-3.1-10">Only one Context ID can be used per (IP address, port) tuple. Endpoints <span class="bcp14">MUST NOT</span> register a Context ID for a tuple for which there is already an existing
 Context ID. This can however happen if both endpoints register Context IDs
 simultaneously for the same tuple before learning that the peer also
 opened one. If an endpoint detects that both it and its peer have opened a
@@ -1479,8 +1478,8 @@ COMPRESSION_ACK Capsule {
 </div>
 <p id="section-3.2-3">An endpoint can only send a COMPRESSION_ACK capsule if it received a
 COMPRESSION_ASSIGN capsule with the same Context ID. If an endpoint receives
-a COMPRESSION_ACK capsule for a Context ID it did not attempt to register via
-COMPRESSION_ASSIGN, that capsule is considered malformed.<a href="#section-3.2-3" class="pilcrow">¶</a></p>
+a COMPRESSION_ACK capsule for a Context ID it did not attempt to register
+via COMPRESSION_ASSIGN, that capsule is considered malformed.<a href="#section-3.2-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="capsule-close">
@@ -1490,8 +1489,8 @@ COMPRESSION_ASSIGN, that capsule is considered malformed.<a href="#section-3.2-3
         </h3>
 <p id="section-3.3-1">The Compression Close capsule (capsule type 0x13) serves two purposes. It
 can be sent as a direct response to a received COMPRESSION_ASSIGN capsule,
-to indicate that the registration was rejected. It can also be sent later to
-indicate the closure of a previously assigned registration.<a href="#section-3.3-1" class="pilcrow">¶</a></p>
+to indicate that the registration was rejected. It can also be sent later
+to indicate the closure of a previously assigned registration.<a href="#section-3.3-1" class="pilcrow">¶</a></p>
 <span id="name-compression-close-capsule-f"></span><div id="fmt-capsule-close">
 <figure id="figure-3">
           <div class="alignLeft art-text artwork" id="section-3.3-2.1">
@@ -1510,7 +1509,8 @@ COMPRESSION_CLOSE Capsule {
 <p id="section-3.3-3">Once an endpoint has either sent or received a COMPRESSION_CLOSE for a given
 Context ID, it <span class="bcp14">MUST NOT</span> send any further datagrams with that Context ID.
 (Note that, due to reordering, an endpoint can receive datagrams with a
-Context ID that has previously been closed; these <span class="bcp14">MUST</span> be discarded silently.)<a href="#section-3.3-3" class="pilcrow">¶</a></p>
+Context ID that has previously been closed; these <span class="bcp14">MUST</span> be discarded
+silently.)<a href="#section-3.3-3" class="pilcrow">¶</a></p>
 <p id="section-3.3-4">Since the value 0 was reserved by unextended UDP proxying, a
 COMPRESSION_CLOSE capsule with Context ID set to zero is malformed.<a href="#section-3.3-4" class="pilcrow">¶</a></p>
 <p id="section-3.3-5">Endpoints <span class="bcp14">MAY</span> close any Context ID regardless of which endpoint registered
@@ -1531,10 +1531,10 @@ has been registered (see <a href="#uncompressed" class="auto internal xref">Sect
 <a href="#section-4" class="section-number selfRef">4. </a><a href="#name-uncompressed-operation" class="section-name selfRef">Uncompressed Operation</a>
       </h2>
 <p id="section-4-1">If the client wishes to send or receive uncompressed datagrams, it <span class="bcp14">MUST</span>
-first send a COMPRESSION_ASSIGN capsule (see <a href="#fmt-capsule-assign" class="auto internal xref">Figure 1</a>) to the
-proxy with the IP Version set to zero. This registers the Context ID as
-having uncompressed semantics: all HTTP Datagrams with this Context ID have
-the following format:<a href="#section-4-1" class="pilcrow">¶</a></p>
+first send a COMPRESSION_ASSIGN capsule (see <a href="#fmt-capsule-assign" class="auto internal xref">Figure 1</a>) to
+the proxy with the IP Version set to zero. This registers the Context ID
+as having uncompressed semantics: all HTTP Datagrams with this Context ID
+have the following format:<a href="#section-4-1" class="pilcrow">¶</a></p>
 <span id="name-uncompressed-bound-udp-prox"></span><div id="fmt-dgram-uncomp">
 <figure id="figure-4">
         <div class="alignLeft art-text artwork" id="section-4-2.1">
@@ -1571,8 +1571,8 @@ corresponding IP Version field value is 4, and 128 when the IP Version is 6.<a h
         <dd style="margin-left: 1.5em" id="section-4-4.6">
           <p id="section-4-4.6.1">The UDP Port of this proxied UDP packet in network byte order. When sent
 from client to proxy, this is the target port to which the proxy will send
-this UDP payload. When sent from proxy to client, this represents the source
-UDP port of the UDP packet received by the proxy.<a href="#section-4-4.6.1" class="pilcrow">¶</a></p>
+this UDP payload. When sent from proxy to client, this represents the
+source UDP port of the UDP packet received by the proxy.<a href="#section-4-4.6.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
 <dt id="section-4-4.7">UDP Payload:</dt>
@@ -1582,8 +1582,8 @@ UDP port of the UDP packet received by the proxy.<a href="#section-4-4.6.1" clas
 </dd>
       <dd class="break"></dd>
 </dl>
-<p id="section-4-5">A client <span class="bcp14">MUST NOT</span> open an uncompressed Context ID if one is already open. If
-a server receives a request to open an uncompressed Context ID and it
+<p id="section-4-5">A client <span class="bcp14">MUST NOT</span> open an uncompressed Context ID if one is already open.
+If a server receives a request to open an uncompressed Context ID and it
 already has one open, then the server <span class="bcp14">MUST</span> treat the second capsule as
 malformed. Note that it's possible for the client to close the uncompressed
 Context ID and reopen it later with a different Context ID, as long as there
@@ -1598,10 +1598,10 @@ as malformed.<a href="#section-4-5" class="pilcrow">¶</a></p>
       <h2 id="name-compressed-operation">
 <a href="#section-5" class="section-number selfRef">5. </a><a href="#name-compressed-operation" class="section-name selfRef">Compressed Operation</a>
       </h2>
-<p id="section-5-1">Endpoints <span class="bcp14">MAY</span> choose to compress the IP address and port information per datagram
-for a given target using Context IDs. This is accomplished by registering a
-compressed Context ID using the COMPRESSION_ASSIGN capsule (see
-<a href="#fmt-capsule-assign" class="auto internal xref">Figure 1</a>).<a href="#section-5-1" class="pilcrow">¶</a></p>
+<p id="section-5-1">Endpoints <span class="bcp14">MAY</span> choose to compress the IP address and port information per
+datagram for a given target using Context IDs. This is accomplished by
+registering a compressed Context ID using the COMPRESSION_ASSIGN capsule
+(see <a href="#fmt-capsule-assign" class="auto internal xref">Figure 1</a>).<a href="#section-5-1" class="pilcrow">¶</a></p>
 <p id="section-5-2">If the Context ID in an HTTP Datagram matches one previously registered for
 compressed operation, the rest of the HTTP Datagram represents the UDP
 payload:<a href="#section-5-2" class="pilcrow">¶</a></p>
@@ -1655,11 +1655,12 @@ parameters. Receivers <span class="bcp14">MUST</span> ignore unknown parameters.
 address to bind. The proxy <span class="bcp14">MAY</span> assign more addresses. For each selected
 address, it <span class="bcp14">MUST</span> select an open port to bind to this request. From then and
 until the tunnel is closed, the proxy <span class="bcp14">SHALL</span> send packets received on these
-(IP address, port) tuples to the client. The proxy <span class="bcp14">MUST</span> communicate the selected
-addresses and ports to the client using the "Proxy-Public-Address" header
-field. The header field is a List. Each member of the List is a String,
-comprised of the ip-port tuple. The format of the String is defined using
-IP-literal, IPv4address, and port from <span><a href="https://rfc-editor.org/rfc/rfc3986#section-3.2" class="relref">Section 3.2</a> of [<a href="#URI" class="cite xref">URI</a>]</span>.<a href="#section-7-1" class="pilcrow">¶</a></p>
+(IP address, port) tuples to the client. The proxy <span class="bcp14">MUST</span> communicate the
+selected addresses and ports to the client using the "Proxy-Public-Address"
+header field. The header field is a List. Each member of the List is a
+String, comprised of the ip-port tuple. The format of the String is defined
+using IP-literal, IPv4address, and port from
+<span><a href="https://rfc-editor.org/rfc/rfc3986#section-3.2" class="relref">Section 3.2</a> of [<a href="#URI" class="cite xref">URI</a>]</span>.<a href="#section-7-1" class="pilcrow">¶</a></p>
 <span id="name-proxy-address-format"></span><div id="target-format">
 <figure id="figure-6">
         <div class="alignLeft art-text artwork" id="section-7-2.1">
@@ -1671,18 +1672,20 @@ ip-port-tuple = DQUOTE ( IP-literal / IPv4address ) ":" port DQUOTE
 <a href="#name-proxy-address-format" class="selfRef">Proxy Address Format</a>
         </figcaption></figure>
 </div>
-<p id="section-7-3">When a single (IP address, port) tuple is provided in the Proxy-Public-Address field,
-the proxy <span class="bcp14">MUST</span> use the same public IP address and port for the lifetime of the
-tunnel. When multiple tuples are provided, maintaining address stability
-per address family for the duration of the tunnel is <span class="bcp14">RECOMMENDED</span>.<a href="#section-7-3" class="pilcrow">¶</a></p>
+<p id="section-7-3">When a single (IP address, port) tuple is provided in the
+Proxy-Public-Address field, the proxy <span class="bcp14">MUST</span> use the same public IP address
+and port for the lifetime of the tunnel. When multiple tuples are provided,
+maintaining address stability per address family for the duration of the
+tunnel is <span class="bcp14">RECOMMENDED</span>.<a href="#section-7-3" class="pilcrow">¶</a></p>
 <p id="section-7-4">Note that since the addresses are conveyed in HTTP response headers, a
-subsequent change of addresses on the proxy cannot be conveyed to the client.<a href="#section-7-4" class="pilcrow">¶</a></p>
+subsequent change of addresses on the proxy cannot be conveyed to the
+client.<a href="#section-7-4" class="pilcrow">¶</a></p>
 <p id="section-7-5">If the proxy only shares IP addresses from a single address family, that
 indicates that the proxy only supports that family. The client <span class="bcp14">SHOULD NOT</span>
 attempt to register compressed Context IDs or send uncompressed datagrams
-intended for targets whose IP address families were not indicated via the IP
-addresses listed in the Proxy-Public-Address header field, as the proxy will
-drop those datagrams and reject those registrations.<a href="#section-7-5" class="pilcrow">¶</a></p>
+intended for targets whose IP address families were not indicated via the
+IP addresses listed in the Proxy-Public-Address header field, as the proxy
+will drop those datagrams and reject those registrations.<a href="#section-7-5" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="behavior">
@@ -1751,8 +1754,8 @@ this limit is reached.<a href="#section-9-4" class="pilcrow">¶</a></p>
 <a href="#section-10" class="section-number selfRef">10. </a><a href="#name-operational-considerations" class="section-name selfRef">Operational Considerations</a>
       </h2>
 <p id="section-10-1">When moving traffic between uncompressed and compressed Context IDs, the
-effective MTU will change. This can hinder Datagram Packetization Layer PMTU
-Discovery (DPLPMTUD) between the client and the target
+effective MTU will change. This can hinder Datagram Packetization Layer
+PMTU Discovery (DPLPMTUD) between the client and the target
 <span>[<a href="#DPLPMTUD" class="cite xref">DPLPMTUD</a>]</span>. To avoid that, if an endpoint intends to use
 compression, it <span class="bcp14">SHOULD</span> request it as early as possible.<a href="#section-10-1" class="pilcrow">¶</a></p>
 </section>
