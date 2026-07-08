@@ -287,9 +287,9 @@ Table of Contents
 
    An endpoint can only send a COMPRESSION_ACK capsule if it received a
    COMPRESSION_ASSIGN capsule with the same Context ID.  If an endpoint
-   receives COMPRESSION_ACK capsule for a Context ID it did not attempt
-   to register via COMPRESSION_ASSIGN, that capsule is considered
-   malformed.
+   receives a COMPRESSION_ACK capsule for a Context ID it did not
+   attempt to register via COMPRESSION_ASSIGN, that capsule is
+   considered malformed.
 
 3.3.  The COMPRESSION_CLOSE capsule
 
