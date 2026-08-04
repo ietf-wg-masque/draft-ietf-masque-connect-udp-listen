@@ -479,6 +479,9 @@ PMTU Discovery (DPLPMTUD) between the client and the target
 {{?DPLPMTUD=RFC8899}}. To avoid that, if an endpoint intends to use
 compression, it SHOULD request it as early as possible.
 
+Since this mechanism effectively allows clients to share the IP address
+of the proxy, implementers may wish to review {{?IP-SHARING=RFC6269}}.
+
 # IANA Considerations
 
 ## HTTP Fields {#iana-fields}
