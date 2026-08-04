@@ -136,10 +136,13 @@ Table of Contents
 
 2.  Bound UDP Proxying Mechanism
 
-   In unextended UDP proxying requests, the target host is encoded in
-   the HTTP request path or query.  For bound UDP proxying, the target
-   is either conveyed in each HTTP Datagram (see Section 4), or
-   registered via capsules and then compressed (see Sections 3 and 5).
+   In unextended UDP proxying requests (i.e., requests that use the
+   mechanism defined in [CONNECT-UDP] without the extension defined in
+   this document), the target host is encoded in the HTTP request path
+   or query.  For bound UDP proxying (i.e., the mechanism defined in
+   this document), the target is either conveyed in each HTTP Datagram
+   (see Section 4), or registered via capsules and then compressed (see
+   Sections 3 and 5).
 
    When performing URI Template Expansion of the UDP proxying template
    (see Section 3 of [CONNECT-UDP]), the client follows the same
