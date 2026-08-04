@@ -67,16 +67,16 @@ tunnels for communicating UDP payloads {{!UDP=RFC0768}} to a fixed host and
 port; this enables proxying of HTTP/3 connections, since they run over UDP.
 Similarly, the HTTP CONNECT method (see {{Section 9.3.6 of !HTTP=RFC9110}})
 allows proxying HTTP/1.x and HTTP/2, which run over TCP. Combining both
-allows proxying the majority of a Web browser's HTTP traffic. However, WebRTC
-{{WebRTC}} relies on Interactive Connectivity Establishment (ICE; see
-{{?ICE=RFC8445}}) to provide connectivity between
-two Web browsers, and ICE relies on the ability to send and receive UDP
-packets to multiple hosts. While in theory it might be possible to
-accomplish this using multiple UDP proxying HTTP requests, HTTP semantics
-{{HTTP}} do not guarantee that distinct requests will be handled by the same
-server. This can lead to the UDP packets being sent from distinct IP
-addresses, thereby preventing ICE from operating correctly. Consequently,
-UDP proxying requests cannot enable WebRTC connectivity between peers.
+allows proxying the majority of a Web browser's HTTP traffic. However,
+WebRTC {{WebRTC}} relies on Interactive Connectivity Establishment (ICE;
+see {{?ICE=RFC8445}}) to provide connectivity between two Web browsers, and
+ICE relies on the ability to send and receive UDP packets to multiple hosts.
+While in theory it might be possible to accomplish this using multiple UDP
+proxying HTTP requests, HTTP semantics {{HTTP}} do not guarantee that
+distinct requests will be handled by the same server. This can lead to the
+UDP packets being sent from distinct IP addresses, thereby preventing ICE
+from operating correctly. Consequently, UDP proxying requests cannot enable
+WebRTC connectivity between peers.
 
 This document describes an extension to UDP Proxying in HTTP that allows
 sending and receiving UDP payloads to multiple hosts within the scope of a
