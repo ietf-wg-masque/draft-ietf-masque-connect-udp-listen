@@ -443,9 +443,9 @@ unknown IPs.
 # Security Considerations
 
 The security considerations described in {{Section 7 of CONNECT-UDP}} also
-apply here. Since TURN can be run over this mechanism, implementors will
-benefit from reviewing the security considerations in {{Section 21 of
-?TURN=RFC8656}}.
+apply here. Since Traversal Using Relays around NAT (TURN) can be run over
+this mechanism, implementors will benefit from reviewing the security
+considerations in {{Section 21 of ?TURN=RFC8656}}.
 
 Since unextended UDP proxying requests carry the target as part of the
 request, the proxy can protect against unauthorized targets by rejecting
