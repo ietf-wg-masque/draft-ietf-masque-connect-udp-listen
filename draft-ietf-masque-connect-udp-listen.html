@@ -1266,7 +1266,8 @@ port; this enables proxying of HTTP/3 connections, since they run over UDP.
 Similarly, the HTTP CONNECT method (see <span><a href="https://rfc-editor.org/rfc/rfc9110#section-9.3.6" class="relref">Section 9.3.6</a> of [<a href="#HTTP" class="cite xref">HTTP</a>]</span>)
 allows proxying HTTP/1.x and HTTP/2, which run over TCP. Combining both
 allows proxying the majority of a Web browser's HTTP traffic. However, WebRTC
-<span>[<a href="#WebRTC" class="cite xref">WebRTC</a>]</span> relies on ICE <span>[<a href="#ICE" class="cite xref">ICE</a>]</span> to provide connectivity between
+<span>[<a href="#WebRTC" class="cite xref">WebRTC</a>]</span> relies on Interactive Connectivity Establishment (ICE; see
+<span>[<a href="#ICE" class="cite xref">ICE</a>]</span>) to provide connectivity between
 two Web browsers, and ICE relies on the ability to send and receive UDP
 packets to multiple hosts. While in theory it might be possible to
 accomplish this using multiple UDP proxying HTTP requests, HTTP semantics
