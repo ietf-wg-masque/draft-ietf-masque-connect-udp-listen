@@ -1314,7 +1314,8 @@ variables to one of its targets. It adds the Connect-UDP-Bind header field
 as specified in <a href="#hdr" class="auto internal xref">Section 6</a> to request bind. If the proxy supports bound UDP
 proxying, it returns the Connect-UDP-Bind response header field value set to
 true.<a href="#section-2-2" class="pilcrow">¶</a></p>
-<p id="section-2-3">When "target_host" and "target_port" are set to a valid target, the client
+<p id="section-2-3">When "target_host" and "target_port" are set to a valid target (i.e., they
+follow the requirements in <span><a href="https://rfc-editor.org/rfc/rfc9298#section-3" class="relref">Section 3</a> of [<a href="#CONNECT-UDP" class="cite xref">CONNECT-UDP</a>]</span>), the client
 is requesting bound UDP proxying but would accept fallback to unextended UDP
 proxying to that target. If the client does not have a specific target, or if
 it wants bound UDP proxying without fallback, it sets both the "target_host"
