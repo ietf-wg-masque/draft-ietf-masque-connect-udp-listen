@@ -52,11 +52,11 @@ informative:
 
 --- abstract
 
-The mechanism defined in "Proxying UDP in HTTP" (RFC 9298) only allows each UDP proxying request to
-transmit to a specific host and port. This is well suited for UDP
-client-server protocols such as HTTP/3, but is not sufficient for some UDP
-peer-to-peer protocols like WebRTC. This document defines an extension to
-UDP proxying in HTTP that enables such use cases.
+The mechanism defined in "Proxying UDP in HTTP" (RFC 9298) only allows each
+UDP proxying request to transmit to a specific host and port. This is well
+suited for UDP client-server protocols such as HTTP/3, but is not sufficient
+for some UDP peer-to-peer protocols like WebRTC. This document defines an
+extension to that mechanism that enables such use cases.
 
 --- middle
 
