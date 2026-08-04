@@ -52,11 +52,11 @@ informative:
 
 --- abstract
 
-The mechanism to proxy UDP in HTTP only allows each UDP proxying request to
+The mechanism defined in "Proxying UDP in HTTP" (RFC 9298) only allows each UDP proxying request to
 transmit to a specific host and port. This is well suited for UDP
 client-server protocols such as HTTP/3, but is not sufficient for some UDP
 peer-to-peer protocols like WebRTC. This document defines an extension to
-UDP proxying in HTTP that enables such use-cases.
+UDP proxying in HTTP that enables such use cases.
 
 --- middle
 
@@ -88,7 +88,7 @@ single UDP proxying HTTP request.
 This document uses terminology from {{CONNECT-UDP}} and notational
 conventions from {{!QUIC=RFC9000}}. This document uses the terms Boolean,
 List, and String from {{Section 3 of !STRUCTURED-FIELDS=RFC9651}} to specify
-syntax and parsing. This document uses Augmented Backus-Naur Form and
+syntax and parsing. This document uses Augmented Backus-Naur Form (ABNF) and
 parsing/serialization behaviors from {{!ABNF=RFC5234}}.
 
 # Bound UDP Proxying Mechanism {#mechanism}
