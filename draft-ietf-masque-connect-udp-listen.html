@@ -7,13 +7,13 @@
 <title>Proxying Bound UDP in HTTP</title>
 <meta content="David Schinazi" name="author">
 <meta content="Abhi Singh" name="author">
-<meta content="
-       The mechanism to proxy UDP in HTTP only allows each UDP proxying request to
+<meta content='
+       The mechanism defined in "Proxying UDP in HTTP" (RFC 9298) only allows each UDP proxying request to
 transmit to a specific host and port. This is well suited for UDP
 client-server protocols such as HTTP/3, but is not sufficient for some UDP
 peer-to-peer protocols like WebRTC. This document defines an extension to
-UDP proxying in HTTP that enables such use-cases. 
-    " name="description">
+UDP proxying in HTTP that enables such use cases. 
+    ' name="description">
 <meta content="xml2rfc 3.34.0" name="generator">
 <meta content="quic" name="keyword">
 <meta content="http" name="keyword">
@@ -37,7 +37,7 @@ UDP proxying in HTTP that enables such use-cases.
     Jinja2 3.1.6
     lxml 6.1.1
     natsort 8.4.0
-    platformdirs 4.10.0
+    platformdirs 4.11.0
     pycountry 24.6.1
     PyYAML 6.0.3
     requests 2.33.1
@@ -77,7 +77,6 @@ UDP proxying in HTTP that enables such use-cases.
   src: local('Lora Italic'), local('Lora-Italic'), url('https://martinthomson.github.io/rfc-css/fonts/lora-italic-latin-ext.woff2') format('woff2');
   unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
 }
-
 @font-face {
   font-family: 'Lora';
   font-style: italic;
@@ -126,7 +125,6 @@ UDP proxying in HTTP that enables such use-cases.
   src: local('Lora Regular'), local('Lora-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/lora-regular-latin.woff2') format('woff2');
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
-
 @font-face {
   font-family: 'Lora';
   font-style: normal;
@@ -191,7 +189,6 @@ UDP proxying in HTTP that enables such use-cases.
   font-display: swap;
   src: local('Oxygen Mono'), local('OxygenMono-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/oxygenmono-regular-latin.woff2') format('woff2');
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
 }
 
 @font-face {
@@ -1060,11 +1057,11 @@ svg {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">CONNECT-UDP Bind</td>
-<td class="right">July 2026</td>
+<td class="right">August 2026</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Schinazi &amp; Singh</td>
-<td class="center">Expires 9 January 2027</td>
+<td class="center">Expires 5 February 2027</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1077,12 +1074,12 @@ svg {
 <dd class="internet-draft">draft-ietf-masque-connect-udp-listen-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2026-07-08" class="published">8 July 2026</time>
+<time datetime="2026-08-04" class="published">4 August 2026</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2027-01-09">9 January 2027</time></dd>
+<dd class="expires"><time datetime="2027-02-05">5 February 2027</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1099,11 +1096,11 @@ svg {
 <h1 id="title">Proxying Bound UDP in HTTP</h1>
 <section id="section-abstract">
       <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
-<p id="section-abstract-1">The mechanism to proxy UDP in HTTP only allows each UDP proxying request to
+<p id="section-abstract-1">The mechanism defined in "Proxying UDP in HTTP" (RFC 9298) only allows each UDP proxying request to
 transmit to a specific host and port. This is well suited for UDP
 client-server protocols such as HTTP/3, but is not sufficient for some UDP
 peer-to-peer protocols like WebRTC. This document defines an extension to
-UDP proxying in HTTP that enables such use-cases.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
+UDP proxying in HTTP that enables such use cases.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
 </section>
 <section class="note rfcEditorRemove" id="section-note.1">
       <h2 id="name-about-this-document">
@@ -1140,7 +1137,7 @@ UDP proxying in HTTP that enables such use-cases.<a href="#section-abstract-1" c
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 9 January 2027.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 5 February 2027.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1292,7 +1289,7 @@ appear in all capitals, as shown here.<a href="#section-1.1-1" class="pilcrow">�
 <p id="section-1.1-2">This document uses terminology from <span>[<a href="#CONNECT-UDP" class="cite xref">CONNECT-UDP</a>]</span> and notational
 conventions from <span>[<a href="#QUIC" class="cite xref">QUIC</a>]</span>. This document uses the terms Boolean,
 List, and String from <span><a href="https://rfc-editor.org/rfc/rfc9651#section-3" class="relref">Section 3</a> of [<a href="#STRUCTURED-FIELDS" class="cite xref">STRUCTURED-FIELDS</a>]</span> to specify
-syntax and parsing. This document uses Augmented Backus-Naur Form and
+syntax and parsing. This document uses Augmented Backus-Naur Form (ABNF) and
 parsing/serialization behaviors from <span>[<a href="#ABNF" class="cite xref">ABNF</a>]</span>.<a href="#section-1.1-2" class="pilcrow">¶</a></p>
 </section>
 </div>
