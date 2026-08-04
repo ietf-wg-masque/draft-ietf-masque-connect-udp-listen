@@ -1265,16 +1265,16 @@ tunnels for communicating UDP payloads <span>[<a href="#UDP" class="cite xref">U
 port; this enables proxying of HTTP/3 connections, since they run over UDP.
 Similarly, the HTTP CONNECT method (see <span><a href="https://rfc-editor.org/rfc/rfc9110#section-9.3.6" class="relref">Section 9.3.6</a> of [<a href="#HTTP" class="cite xref">HTTP</a>]</span>)
 allows proxying HTTP/1.x and HTTP/2, which run over TCP. Combining both
-allows proxying the majority of a Web browser's HTTP traffic. However, WebRTC
-<span>[<a href="#WebRTC" class="cite xref">WebRTC</a>]</span> relies on Interactive Connectivity Establishment (ICE; see
-<span>[<a href="#ICE" class="cite xref">ICE</a>]</span>) to provide connectivity between
-two Web browsers, and ICE relies on the ability to send and receive UDP
-packets to multiple hosts. While in theory it might be possible to
-accomplish this using multiple UDP proxying HTTP requests, HTTP semantics
-<span>[<a href="#HTTP" class="cite xref">HTTP</a>]</span> do not guarantee that distinct requests will be handled by the same
-server. This can lead to the UDP packets being sent from distinct IP
-addresses, thereby preventing ICE from operating correctly. Consequently,
-UDP proxying requests cannot enable WebRTC connectivity between peers.<a href="#section-1-1" class="pilcrow">¶</a></p>
+allows proxying the majority of a Web browser's HTTP traffic. However,
+WebRTC <span>[<a href="#WebRTC" class="cite xref">WebRTC</a>]</span> relies on Interactive Connectivity Establishment (ICE;
+see <span>[<a href="#ICE" class="cite xref">ICE</a>]</span>) to provide connectivity between two Web browsers, and
+ICE relies on the ability to send and receive UDP packets to multiple hosts.
+While in theory it might be possible to accomplish this using multiple UDP
+proxying HTTP requests, HTTP semantics <span>[<a href="#HTTP" class="cite xref">HTTP</a>]</span> do not guarantee that
+distinct requests will be handled by the same server. This can lead to the
+UDP packets being sent from distinct IP addresses, thereby preventing ICE
+from operating correctly. Consequently, UDP proxying requests cannot enable
+WebRTC connectivity between peers.<a href="#section-1-1" class="pilcrow">¶</a></p>
 <p id="section-1-2">This document describes an extension to UDP Proxying in HTTP that allows
 sending and receiving UDP payloads to multiple hosts within the scope of a
 single UDP proxying HTTP request.<a href="#section-1-2" class="pilcrow">¶</a></p>
