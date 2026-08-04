@@ -1758,6 +1758,8 @@ effective MTU will change. This can hinder Datagram Packetization Layer
 PMTU Discovery (DPLPMTUD) between the client and the target
 <span>[<a href="#DPLPMTUD" class="cite xref">DPLPMTUD</a>]</span>. To avoid that, if an endpoint intends to use
 compression, it <span class="bcp14">SHOULD</span> request it as early as possible.<a href="#section-10-1" class="pilcrow">¶</a></p>
+<p id="section-10-2">Since this mechanism effectively allows clients to share the IP address
+of the proxy, implementers may wish to review <span>[<a href="#IP-SHARING" class="cite xref">IP-SHARING</a>]</span>.<a href="#section-10-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="iana-considerations">
@@ -1960,6 +1962,10 @@ maintained at &lt;<span><a href="https://www.iana.org/assignments/http-fields">h
 <dt id="ICE">[ICE]</dt>
         <dd>
 <span class="refAuthor">Keranen, A.</span>, <span class="refAuthor">Holmberg, C.</span>, and <span class="refAuthor">J. Rosenberg</span>, <span class="refTitle">"Interactive Connectivity Establishment (ICE): A Protocol for Network Address Translator (NAT) Traversal"</span>, <span class="seriesInfo">RFC 8445</span>, <span class="seriesInfo">DOI 10.17487/RFC8445</span>, <time datetime="2018-07" class="refDate">July 2018</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8445">https://www.rfc-editor.org/rfc/rfc8445</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="IP-SHARING">[IP-SHARING]</dt>
+        <dd>
+<span class="refAuthor">Ford, M., Ed.</span>, <span class="refAuthor">Boucadair, M.</span>, <span class="refAuthor">Durand, A.</span>, <span class="refAuthor">Levis, P.</span>, and <span class="refAuthor">P. Roberts</span>, <span class="refTitle">"Issues with IP Address Sharing"</span>, <span class="seriesInfo">RFC 6269</span>, <span class="seriesInfo">DOI 10.17487/RFC6269</span>, <time datetime="2011-06" class="refDate">June 2011</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc6269">https://www.rfc-editor.org/rfc/rfc6269</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="TURN">[TURN]</dt>
         <dd>

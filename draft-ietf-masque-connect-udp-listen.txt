@@ -516,6 +516,9 @@ Table of Contents
    the target [DPLPMTUD].  To avoid that, if an endpoint intends to use
    compression, it SHOULD request it as early as possible.
 
+   Since this mechanism effectively allows clients to share the IP
+   address of the proxy, implementers may wish to review [IP-SHARING].
+
 11.  IANA Considerations
 
 11.1.  HTTP Fields
@@ -642,6 +645,12 @@ Table of Contents
               Address Translator (NAT) Traversal", RFC 8445,
               DOI 10.17487/RFC8445, July 2018,
               <https://www.rfc-editor.org/rfc/rfc8445>.
+
+   [IP-SHARING]
+              Ford, M., Ed., Boucadair, M., Durand, A., Levis, P., and
+              P. Roberts, "Issues with IP Address Sharing", RFC 6269,
+              DOI 10.17487/RFC6269, June 2011,
+              <https://www.rfc-editor.org/rfc/rfc6269>.
 
    [TURN]     Reddy, T., Ed., Johnston, A., Ed., Matthews, P., and J.
               Rosenberg, "Traversal Using Relays around NAT (TURN):
