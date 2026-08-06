@@ -5,7 +5,7 @@
 MASQUE                                                       D. Schinazi
 Internet-Draft                                                  A. Singh
 Intended status: Standards Track                              Google LLC
-Expires: 5 February 2027                                   4 August 2026
+Expires: 7 February 2027                                   6 August 2026
 
 
                        Proxying Bound UDP in HTTP
@@ -54,7 +54,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 5 February 2027.
+   This Internet-Draft will expire on 7 February 2027.
 
 Copyright Notice
 
@@ -165,8 +165,8 @@ Table of Contents
 
    If only one of the "target_host" and the "target_port" variables is
    set to the '*' character, the request is malformed.  The recipient of
-   such a malformed request MUST respond with an error and SHOULD use
-   the 400 (Bad Request) status code.
+   such a malformed request MUST respond with a 4xx (Client Error)
+   status code and SHOULD use the 400 (Bad Request) status code.
 
 3.  Context Identifiers
 
