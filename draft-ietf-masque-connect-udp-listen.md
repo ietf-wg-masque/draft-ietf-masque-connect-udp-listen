@@ -121,8 +121,8 @@ per {{Section 3.2.2 of !TEMPLATE=RFC6570}}.
 
 If only one of the "target_host" and the "target_port" variables is set to
 the '`*`' character, the request is malformed. The recipient of such a
-malformed request MUST respond with an error and SHOULD use the 400
-(Bad Request) status code.
+malformed request MUST respond with a 4xx (Client Error) status code and
+SHOULD use the 400 (Bad Request) status code.
 
 # Context Identifiers {#contextid}
 
