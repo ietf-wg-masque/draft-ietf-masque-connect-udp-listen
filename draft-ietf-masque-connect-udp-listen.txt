@@ -5,7 +5,7 @@
 MASQUE                                                       D. Schinazi
 Internet-Draft                                                  A. Singh
 Intended status: Standards Track                              Google LLC
-Expires: 7 February 2027                                   6 August 2026
+Expires: 25 February 2027                                 24 August 2026
 
 
                        Proxying Bound UDP in HTTP
@@ -54,7 +54,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 7 February 2027.
+   This Internet-Draft will expire on 25 February 2027.
 
 Copyright Notice
 
@@ -473,7 +473,7 @@ Table of Contents
    If a client does not wish to receive datagrams from unknown senders,
    it can close the uncompressed Context ID (or not open it in the first
    place).  In that scenario, the proxy effectively acts as a firewall
-   against unwanted or unknown IPs.
+   against unwanted or unknown senders.
 
 9.  Security Considerations
 
