@@ -438,7 +438,7 @@ temporarily buffer it (see {{Section 5 of CONNECT-UDP}}).
 If a client does not wish to receive datagrams from unknown senders, it can
 close the uncompressed Context ID (or not open it in the first place). In
 that scenario, the proxy effectively acts as a firewall against unwanted or
-unknown IPs.
+unknown senders.
 
 # Security Considerations
 
